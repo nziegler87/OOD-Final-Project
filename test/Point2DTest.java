@@ -58,19 +58,19 @@ public class Point2DTest {
   // test toString - negative
   @Test
   public void toStringNegative() {
-    assertEquals("x cord: -3.23 | y cord: -4.68", negativePointer.toString());
+    assertEquals("(-3.2,-4.7)", negativePointer.toString());
   }
 
   // test toString - zero
   @Test
   public void toStringZero() {
-    assertEquals("x cord: 0.00 | y cord: 0.00", zeroPointer.toString());
+    assertEquals("(0.0,0.0)", zeroPointer.toString());
   }
 
   // test toString - positive
   @Test
   public void toStringPositive() {
-    assertEquals("x cord: 3.47 | y cord: 2.98", positivePointer.toString());
+    assertEquals("(3.5,3.0)", positivePointer.toString());
 
   }
 

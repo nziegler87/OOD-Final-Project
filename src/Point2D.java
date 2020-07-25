@@ -14,8 +14,18 @@ public class Point2D implements IPoint2D {
   public Point2D(double x, double y) {
     this.x = x;
     this.y = y;
-
   }
+
+  // TODO: Danielle, do we need this?
+  /**
+   * A constructor to make a copy of the object.
+   *
+   * @param point2D a Point2D object
+   */
+  public Point2D(IPoint2D point2D) {
+    this(point2D.getX(), point2D.getY());
+  }
+
   /**
    * Return the x value of the Point2D object.
    *
@@ -38,6 +48,6 @@ public class Point2D implements IPoint2D {
 
   @Override
   public String toString() {
-    return String.format("x cord: %.2f | y cord: %.2f", this.x, this.y);
+    return String.format("(%.1f,%.1f)", this.x, this.y);
   }
 }
