@@ -3,7 +3,7 @@ package Model.Commands;
 import java.awt.*;
 import java.util.Stack;
 
-import Model.Point2D.Point2D;
+import Model.Point2D.IPoint2D;
 import Model.Shape.IShape;
 
 public class CommandList implements ICommandList {
@@ -11,7 +11,7 @@ public class CommandList implements ICommandList {
   Stack<String> stack;
 
   public CommandList() {
-    stack = new Stack<String>();
+    stack = new Stack<>();
   }
 
   /**
@@ -54,7 +54,7 @@ public class CommandList implements ICommandList {
    * @param shape the shape whose details we will pull from
    */
   @Override
-  public void moveShape(IShape shape, Point2D coordinates, Point2D newCoordinates) {
+  public void moveShape(IShape shape, IPoint2D coordinates, IPoint2D newCoordinates) {
     stack.push(String.format("Move %s from %s to %s\n",
             shape.getLabel(), coordinates, newCoordinates));
   }
@@ -77,7 +77,21 @@ public class CommandList implements ICommandList {
    */
   @Override
   public void changeShape(IShape shape, IShape newShape) {
-    stack.push(String.format("Move %s from %s to %s\n",
+    stack.push(String.format("%s changes from %s to %s\n",
             shape.getLabel(), shape.getType(), newShape.getType()));
+  }
+
+  /**
+   * Returns a declarative animation summary.
+   *
+   * @return String a summary of the list of commands
+   */
+  @Override
+  public String toString() {
+    StringBuilder str = new StringBuilder();
+    for (String strings : stack) {
+      str.append(strings);
+    }
+    return str.toString();
   }
 }
