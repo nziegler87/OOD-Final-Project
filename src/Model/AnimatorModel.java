@@ -1,4 +1,8 @@
+package Model;
+
 import java.awt.*;
+
+import Model.Shape.IShape;
 
 public interface AnimatorModel {
 

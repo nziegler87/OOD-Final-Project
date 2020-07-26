@@ -1,3 +1,5 @@
+package Model.Point2D;
+
 /**
  * Interface that contains all the methods that Point2D classes should support.
  */

@@ -3,6 +3,10 @@ import org.junit.Test;
 
 import java.awt.Color;
 
+import Model.Shape.IShape;
+import Model.Shape.Oval;
+import Model.Point2D.Point2D;
+
 
 public class OvalTest {
   IShape nateOval;

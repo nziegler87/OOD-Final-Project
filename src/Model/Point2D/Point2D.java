@@ -1,3 +1,5 @@
+package Model.Point2D;
+
 /**
  * A class that represents a 2D point. This point is denoted with x and y coordinates.
  */

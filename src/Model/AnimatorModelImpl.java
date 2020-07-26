@@ -1,5 +1,9 @@
+package Model;
+
 import java.awt.*;
 import java.util.ArrayList;
+
+import Model.Shape.IShape;
 
 public class AnimatorModelImpl implements AnimatorModel {
 

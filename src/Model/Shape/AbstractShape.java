@@ -1,5 +1,10 @@
+package Model.Shape;
+
 import java.awt.Color;
 import java.util.Objects;
+
+import Model.Point2D.IPoint2D;
+import Model.Point2D.Point2D;
 
 /**
  * An abstract class that contains all common fields and methods objects that implement IShape.

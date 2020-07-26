@@ -3,6 +3,10 @@ import org.junit.Test;
 
 import java.awt.Color;
 
+import Model.Shape.IShape;
+import Model.Point2D.Point2D;
+import Model.Shape.Rectangle;
+
 
 public class RectangleTest {
   IShape danielleRectangle;

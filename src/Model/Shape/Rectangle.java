@@ -1,4 +1,8 @@
+package Model.Shape;
+
 import java.awt.Color;
+
+import Model.Point2D.IPoint2D;
 
 /**
  * A class that represents a rectangle object. The coordinates of a rectangle represent the

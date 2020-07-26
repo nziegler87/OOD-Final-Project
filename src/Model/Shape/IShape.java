@@ -1,4 +1,8 @@
+package Model.Shape;
+
 import java.awt.*;
+
+import Model.Point2D.IPoint2D;
 
 /**
  * A class that contains the methods that all shapes should support.

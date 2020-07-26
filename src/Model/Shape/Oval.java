@@ -1,4 +1,8 @@
+package Model.Shape;
+
 import java.awt.Color;
+
+import Model.Point2D.IPoint2D;
 
 /**
  * A class that represents an Oval object. The coordinates of an oval represent the object's center
