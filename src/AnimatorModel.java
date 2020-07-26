@@ -5,10 +5,9 @@ public interface AnimatorModel {
   /**
    * Adds a shape to the model inventory list.
    *
-   * @param label the label associated with the shape
    * @param shape the shape that will be added to the list
    */
-  void addShape(String label, IShape shape);
+  void addShape(IShape shape);
 
   /**
    * Removes a shape from the model inventory list.
