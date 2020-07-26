@@ -1,7 +1,9 @@
 package Model.Commands;
 
+import java.awt.*;
 import java.util.Stack;
 
+import Model.Point2D.IPoint2D;
 import Model.Shape.IShape;
 
 public interface ICommandList {
@@ -33,19 +35,26 @@ public interface ICommandList {
    *
    * @param shape the shape whose details we will pull from
    */
-  void moveShape(IShape shape);
+  void moveShape(IShape shape, IPoint2D coordinates, IPoint2D newCoordinates);
 
   /**
    * Pushes the instructions for changing a shape's color to the stack.
    *
    * @param shape the shape whose details we will pull from
    */
-  void changeColor(IShape shape);
+  void changeColor(IShape shape, Color color, Color newColor);
 
   /**
    * Pushes the instructions for changing a respective shape to the stack.
    *
    * @param shape the shape whose details we will pull from
    */
-  void changeShape(IShape shape);
+  void changeShape(IShape shape, IShape newShape);
+
+  /**
+   * Returns a declarative animation summary.
+   *
+   * @return String a summary of the list of commands
+   */
+  String toString();
 }

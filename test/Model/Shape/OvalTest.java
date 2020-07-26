@@ -1,3 +1,5 @@
+package Model.Shape;
+
 import org.junit.Before;
 import org.junit.Test;
 

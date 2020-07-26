@@ -4,18 +4,21 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.Stack;
 
+import Model.Commands.CommandList;
+import Model.Commands.ICommandList;
+import Model.Point2D.IPoint2D;
+import Model.Point2D.Point2D;
 import Model.Shape.IShape;
 
 public class AnimatorModelImpl implements AnimatorModel {
 
   protected HashMap<String, IShape> inventory;
-  protected Stack<String> stack;
+  protected ICommandList commands;
 
-
-  public void AnimatorModelImpl() {
-    inventory = new HashMap<String, IShape>();
+  public AnimatorModelImpl() {
+    inventory = new HashMap<>();
+    commands = new CommandList();
   }
 
   /**
@@ -30,6 +33,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     if (inventory.get(label).equals(shape)) {
       throw new IllegalArgumentException("This object has already been added.");
     }
+    commands.addShape(shape);
     inventory.put(label, shape);
   }
 
@@ -46,6 +50,7 @@ public class AnimatorModelImpl implements AnimatorModel {
       throw new IllegalArgumentException("Cannot remove object that does not exist.");
     }
     IShape shape = inventory.get(label);
+    commands.removeShape(shape);
     inventory.remove(label);
   }
 
@@ -75,6 +80,10 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public void moveShape(String label, double x, double y) {
     Objects.requireNonNull(label);
+    IShape shape = inventory.get(label);
+    IPoint2D newCoords = new Point2D(x,y);
+    commands.moveShape(shape, shape.getCoordinates(), newCoords);
+    // TODO: there might be an error in how I thought through this logic
     getShape(label).setCoordinates(x, y);
   }
 
@@ -87,6 +96,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public void changeColor(String label, Color color) {
     Objects.requireNonNull(label);
+    IShape shape = inventory.get(label);
+    commands.changeColor(shape, shape.getColor(), color);
     getShape(label).setColor(color);
   }
 
@@ -100,7 +111,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void changeShape(String label, IShape shape) {
     Objects.requireNonNull(label);
     Objects.requireNonNull(shape);
-
+    IShape OGShape = inventory.get(label);
+    commands.changeShape(OGShape, shape);
     inventory.put(label, shape);
   }
 
@@ -121,8 +133,7 @@ public class AnimatorModelImpl implements AnimatorModel {
       status.append(shape.toString());
     }
 
-    // we need to create the list of instructions
-
+    status.append("\n").append(commands.toString());
     return status.substring(0, status.length());
   }
 }
