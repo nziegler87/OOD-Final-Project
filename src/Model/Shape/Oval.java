@@ -9,7 +9,7 @@ import Model.Point2D.IPoint2D;
  * point. In addition to the common parameters of AbstractShape, an oval also has xRadius and
  * yRadius parameters, both doubles.
  */
-public class Oval extends AbstractShape {
+public class Oval extends AbstractShape implements IOval {
   private double xRadius;
   private double yRadius;
 
@@ -42,6 +42,7 @@ public class Oval extends AbstractShape {
    *
    * @return the xRadius of the object, a double.
    */
+  @Override
   public double getXRadius() {
     return this.xRadius;
   }
