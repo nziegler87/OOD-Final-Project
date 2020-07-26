@@ -1,6 +1,6 @@
 package Model.Shape;
 
-import java.awt.*;
+import java.awt.Color;
 
 import Model.Point2D.IPoint2D;
 
@@ -53,7 +53,7 @@ public interface IShape {
   /**
    * Returns the color of the object.
    *
-   * @return the color of the object, a Color ENUM value.
+   * @return the color of the object, a Color object.
    */
   Color getColor();
 

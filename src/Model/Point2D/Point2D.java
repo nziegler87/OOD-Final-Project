@@ -1,5 +1,7 @@
 package Model.Point2D;
 
+import java.util.Objects;
+
 /**
  * A class that represents a 2D point. This point is denoted with x and y coordinates.
  */
@@ -48,6 +50,42 @@ public class Point2D implements IPoint2D {
     return this.y;
   }
 
+  /**
+   * Compares a Point2D object to another Point2D object to see if they are equal.
+   *
+   * @param other another IPoint2D object
+   * @return true if the objects are the same, otherwise false
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (this == other) {
+      return true;
+    }
+
+    if (!(other instanceof Point2D)) {
+      return false;
+    }
+
+    Point2D otherPoint = (Point2D) other;
+
+    return (this.x == otherPoint.x) && (this.y == otherPoint.y);
+  }
+
+  /**
+   * Returns the hash code of a Point2D object using the x and y coordinates.
+   *
+   * @return the hash code of a Point2D object
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.x, this.y);
+  }
+
+  /**
+   * Return a string representation of a Point2D object as (x, y).
+   *
+   * @return return a string representation of a Point2D object
+   */
   @Override
   public String toString() {
     return String.format("(%.1f,%.1f)", this.x, this.y);
