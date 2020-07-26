@@ -31,6 +31,7 @@ public class OvalTest {
   @Test
   public void testGetLabel() {
     assertEquals("Nate", nateOval.getLabel());
+    nateOval.getXRadius();
   }
 
   // test getType

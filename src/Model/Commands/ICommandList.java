@@ -1,6 +1,6 @@
 package Model.Commands;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Stack;
 
 import Model.Point2D.IPoint2D;

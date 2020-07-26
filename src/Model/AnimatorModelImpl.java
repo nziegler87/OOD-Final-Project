@@ -1,6 +1,6 @@
 package Model;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
@@ -20,6 +20,8 @@ public class AnimatorModelImpl implements AnimatorModel {
     inventory = new HashMap<>();
     commands = new CommandList();
   }
+
+  //TODO: Should Objects.requireNonNull be in try/catch?
 
   /**
    * Adds a shape to the model inventory list.
@@ -101,6 +103,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     getShape(label).setColor(color);
   }
 
+  // TODO: Needed?
   /**
    * Changes a shape to a new shape type.
    *
