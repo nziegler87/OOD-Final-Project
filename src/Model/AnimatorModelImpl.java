@@ -16,8 +16,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   protected HashMap<String, IShape> inventory;
   protected ICommandList commands;
 
-  public void AnimatorModelImpl() {
-    inventory = new HashMap<String, IShape>();
+  public AnimatorModelImpl() {
+    inventory = new HashMap<>();
     commands = new CommandList();
   }
 
@@ -111,8 +111,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void changeShape(String label, IShape shape) {
     Objects.requireNonNull(label);
     Objects.requireNonNull(shape);
-    IShape OGshape = inventory.get(label);
-    commands.changeShape(OGshape, shape);
+    IShape OGShape = inventory.get(label);
+    commands.changeShape(OGShape, shape);
     inventory.put(label, shape);
   }
 
@@ -133,8 +133,7 @@ public class AnimatorModelImpl implements AnimatorModel {
       status.append(shape.toString());
     }
 
-    // we need to create the list of instructions
-
+    status.append("\n").append(commands.toString());
     return status.substring(0, status.length());
   }
 }

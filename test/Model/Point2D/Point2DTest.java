@@ -1,3 +1,5 @@
+package Model.Point2D;
+
 import org.junit.Before;
 import org.junit.Test;
 
