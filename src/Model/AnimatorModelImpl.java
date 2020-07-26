@@ -1,46 +1,52 @@
 package Model;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Stack;
 
 import Model.Shape.IShape;
 
 public class AnimatorModelImpl implements AnimatorModel {
 
-  protected ArrayList<IShape> inventory;
+  protected HashMap<String, IShape> inventory;
+  protected Stack<String> stack;
+
 
   public void AnimatorModelImpl() {
-    inventory = new ArrayList<>();
+    inventory = new HashMap<String, IShape>();
   }
 
   /**
    * Adds a shape to the model inventory list.
    *
    * @param shape the shape that will be added to the list
+   * @throws IllegalArgumentException if the shape already exists
    */
   @Override
-  public void addShape(IShape shape) {
-    inventory.add(shape);
+  public void addShape(String label, IShape shape) throws IllegalArgumentException {
+    Objects.requireNonNull(shape);
+    if (inventory.get(label).equals(shape)) {
+      throw new IllegalArgumentException("This object has already been added.");
+    }
+    inventory.put(label, shape);
   }
 
   /**
    * Removes a shape from the model inventory list.
    *
    * @param label the label associated with the shape
+   * @throws IllegalArgumentException when the shape is not found
    */
   @Override
-  public void removeShape(String label) {
-    inventory.remove(getShape(label));
-  }
-
-  /**
-   * Removes a shape from the model inventory list.
-   *
-   * @param position the position in the list that will be removed
-   */
-  @Override
-  public void removeShape(int position) {
-    inventory.remove(position);
+  public void removeShape(String label) throws IllegalArgumentException {
+    Objects.requireNonNull(label);
+    if (!inventory.containsKey(label)) {
+      throw new IllegalArgumentException("Cannot remove object that does not exist.");
+    }
+    IShape shape = inventory.get(label);
+    inventory.remove(label);
   }
 
   /**
@@ -48,26 +54,15 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param label the label associated with the shape
    * @return the shape being searched for
+   * @throws IllegalArgumentException when the shape is not found
    */
   @Override
   public IShape getShape(String label) {
-    for (IShape shape : inventory) {
-      if (shape.getLabel().equals(label)) {
-        return shape;
-      }
+    Objects.requireNonNull(label);
+    if (!inventory.containsKey(label)) {
+      throw new IllegalArgumentException("Cannot get object that does not exist.");
     }
-    return null;
-  }
-
-  /**
-   * Finds and returns the shape using the label of the shape.
-   *
-   * @param position the position of the shape in the list
-   * @return the shape being searched for
-   */
-  @Override
-  public IShape getShape(int position) {
-    return inventory.get(position);
+    return inventory.get(label);
   }
 
   /**
@@ -79,6 +74,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    */
   @Override
   public void moveShape(String label, double x, double y) {
+    Objects.requireNonNull(label);
     getShape(label).setCoordinates(x, y);
   }
 
@@ -90,6 +86,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    */
   @Override
   public void changeColor(String label, Color color) {
+    Objects.requireNonNull(label);
     getShape(label).setColor(color);
   }
 
@@ -101,8 +98,10 @@ public class AnimatorModelImpl implements AnimatorModel {
    */
   @Override
   public void changeShape(String label, IShape shape) {
-    removeShape(label);
-    addShape(shape);
+    Objects.requireNonNull(label);
+    Objects.requireNonNull(shape);
+
+    inventory.put(label, shape);
   }
 
   /**
@@ -114,11 +113,16 @@ public class AnimatorModelImpl implements AnimatorModel {
   public String getAnimationStatus() {
     StringBuilder status = new StringBuilder();
     status.append("Shapes:\n");
-    for (IShape shape : inventory) {
+
+    // to iterate through the hashmap
+    Iterator keySetItr = inventory.keySet().iterator();
+    while (keySetItr.hasNext()) {
+      IShape shape = (IShape) keySetItr.next();
       status.append(shape.toString());
-      // TODO: here I think we also might want to consider OODing out the time/animation stuff for this assignment.
     }
-    // TODO: Once we get the above comment sorted, I will create a summary of the animation queues
+
+    // we need to create the list of instructions
+
     return status.substring(0, status.length());
   }
 }
