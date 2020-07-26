@@ -12,20 +12,11 @@ public class AnimatorModelImpl implements AnimatorModel {
   /**
    * Adds a shape to the model inventory list.
    *
-   * @param label the label associated with the shape
    * @param shape the shape that will be added to the list
    */
   @Override
-  public void addShape(String label, IShape shape) {
-    // TODO: since we know that this will be a form of sorts,
-    //  I think we might want to consider setting the values of the shape after it's created.
-    //  I would like to hear your thoughts on this.
-    // Color color = getColor
-    // IPoint2D coordinates = new Point2D(x, y);
-    // IShape shape = new ..... ( >> this will look like the parser
-    // inventory.add(shape);
-    // TODO: I think here we might want to consider a way to check for valid shapes,
-    //  but not sure how we can OOD this out.
+  public void addShape(IShape shape) {
+    inventory.add(shape);
   }
 
   /**
@@ -106,12 +97,8 @@ public class AnimatorModelImpl implements AnimatorModel {
    */
   @Override
   public void changeShape(String label, IShape shape) {
-    IPoint2D coordinates = getShape(label).getCoordinates();
-    Color color = getShape(label).getColor();
     removeShape(label);
-    // IShape newShape = new AbstractShape(label, coordinates, color);
-    // TODO: create a function that returns the correct type like in hw8
-    // addShape(newShape);
+    addShape(shape);
   }
 
   /**
