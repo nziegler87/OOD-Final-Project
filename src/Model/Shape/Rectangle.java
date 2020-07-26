@@ -9,7 +9,7 @@ import Model.Point2D.IPoint2D;
  * lower-left corner of the object. In addition to the common parameters of AbstractShape, a
  * rectangle also has width and height parameters, both doubles.
  */
-public class Rectangle extends AbstractShape implements IRectangle {
+public class Rectangle extends AbstractShape {
   private double width;
   private double height;
 

@@ -9,7 +9,7 @@ import Model.Point2D.IPoint2D;
  * point. In addition to the common parameters of AbstractShape, an oval also has xRadius and
  * yRadius parameters, both doubles.
  */
-public class Oval extends AbstractShape implements IOval {
+public class Oval extends AbstractShape {
   private double xRadius;
   private double yRadius;
 
@@ -43,7 +43,7 @@ public class Oval extends AbstractShape implements IOval {
    * @return the xRadius of the object, a double.
    */
   @Override
-  public double getXRadius() {
+  public double getWidth() {
     return this.xRadius;
   }
 
@@ -52,7 +52,7 @@ public class Oval extends AbstractShape implements IOval {
    *
    * @return the yRadius of the object, a double.
    */
-  public double getYRadius() {
+  public double getHeight() {
     return this.yRadius;
   }
 
@@ -63,7 +63,7 @@ public class Oval extends AbstractShape implements IOval {
    *
    * @throws IllegalArgumentException if xRadius is not greater than 0
    */
-  public void setXRadius(double xRadius) throws IllegalArgumentException {
+  public void setWidth(double xRadius) throws IllegalArgumentException {
     if (xRadius <= 0) {
       throw new IllegalArgumentException("Width cannot be less than 0.");
     }
@@ -78,7 +78,7 @@ public class Oval extends AbstractShape implements IOval {
    *
    * @throws IllegalArgumentException if yRadius is not greater than 0
    */
-  public void setYRadius(double yRadius) throws IllegalArgumentException {
+  public void setHeight(double yRadius) throws IllegalArgumentException {
     if (yRadius <= 0) {
       throw new IllegalArgumentException("Height cannot be less than 0.");
     }

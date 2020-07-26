@@ -13,8 +13,9 @@ import Model.Point2D.Point2D;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
-//TODO: Make a Hex code and RGB
-
+/**
+ * A JUnit test class for the Oval class.
+ */
 public class OvalTest {
   IShape nateOval;
   IShape ovalFromHomework;
@@ -31,7 +32,6 @@ public class OvalTest {
   @Test
   public void testGetLabel() {
     assertEquals("Nate", nateOval.getLabel());
-    nateOval.getXRadius();
   }
 
   // test getType
@@ -79,7 +79,6 @@ public class OvalTest {
     nateOval.scale(0);
   }
 
-  // test scale works TODO: WORK ON THIS
   @Test
   public void testScale() {
     assertEquals("Name: Nate\n"
@@ -105,10 +104,6 @@ public class OvalTest {
     assertEquals("java.awt.Color[r=255,g=0,b=233]", color.toString());
   }
 
-  // test getXRadius
-  @Test
-  public void testGetXRadius() {
-  }
 
   // test setColor()
   @Test
@@ -141,5 +136,51 @@ public class OvalTest {
             nateOval.toString());
   }
 
-  // TODO: Test X radius and Y radius getters and setters
+  // test getWidth()
+  @Test
+  public void testGetWidth() {
+    assertEquals(12.238, nateOval.getWidth(),.01);
+  }
+
+  // test getHeight()
+  @Test
+  public void testGetHeight() {
+    assertEquals(14.233, nateOval.getHeight(), .01);
+  }
+
+  // test setWidth
+  @Test
+  public void testSetWidth() {
+    assertEquals(12.238, nateOval.getWidth(),.01);
+
+    nateOval.setWidth(10.0);
+
+    assertEquals(10.0, nateOval.getWidth(),.01);
+  }
+
+  // test setWidth IllegalArg
+  @Test (expected = IllegalArgumentException.class)
+  public void testSetWidthIllegalArg() {
+    assertEquals(12.238, nateOval.getWidth(),.01);
+
+    nateOval.setWidth(0);
+  }
+
+  // test setHeight
+  @Test
+  public void testSetHeight() {
+    assertEquals(14.233, nateOval.getHeight(),.01);
+
+    nateOval.setHeight(10.0);
+
+    assertEquals(10.0, nateOval.getHeight(),.01);
+  }
+
+  // test setHeight IllegalArg
+  @Test (expected = IllegalArgumentException.class)
+  public void testSetHeightIllegalArg() {
+    assertEquals(14.233, nateOval.getHeight(),.01);
+
+    nateOval.setHeight(0);
+  }
 }
