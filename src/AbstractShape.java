@@ -7,6 +7,8 @@ import java.util.Objects;
 public abstract class AbstractShape implements IShape {
   protected final String label;
   protected String type;
+  protected int width;
+  protected int height;
   protected IPoint2D coordinates;
   public Color color;
 
@@ -18,7 +20,7 @@ public abstract class AbstractShape implements IShape {
    * @param color the color of the object, a Color object
    * @throws IllegalArgumentException if either coordinates or color are null
    */
-  public AbstractShape(String label, IPoint2D coordinates, Color color)
+  public AbstractShape(String label, int width, int height, IPoint2D coordinates, Color color)
           throws IllegalArgumentException{
 
     try {
@@ -29,6 +31,8 @@ public abstract class AbstractShape implements IShape {
     }
 
     this.label = label;
+    this.width = width;
+    this.height = height;
     this.coordinates = coordinates;
     this.color = color;
   }
@@ -102,5 +106,19 @@ public abstract class AbstractShape implements IShape {
     }
 
     this.color = color;
+  }
+
+  private String dimensions() {
+    return ", Width: " + this.width + ", Height: " + this.height;
+  }
+
+  public String toString() {
+    StringBuilder details = new StringBuilder();
+    details.append("Name: ").append(getLabel()).append("\n")
+            .append("Type: ").append(getType()).append("\n")
+            .append("Min corner: (").append(getCoordinates().getX()).append(", ")
+            .append(getCoordinates().getY()).append(dimensions()).append(", Color: ")
+            .append(getColor()).append("\n");
+  return details.substring(0,details.length());
   }
 }
