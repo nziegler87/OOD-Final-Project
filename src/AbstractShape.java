@@ -53,7 +53,6 @@ public abstract class AbstractShape implements IShape {
     return this.type;
   }
 
-  // TODO: Danielle, is this correct? Yes
   /**
    * Returns the x, y coordinates of the object as a Point2D object.
    *

@@ -34,13 +34,14 @@ public interface IShape {
    */
   void setCoordinates(double x, double y);
 
-  //TODO: Do we need to ensure that factor is a positive number greater than zero?
   /**
    * Create and return a shape of the same kind as this one, just resized using the provided factor.
    *
    * @param factor a factor used in resizing, a double
    *
    * @return a shape of the same kind as this one, just resized using the provided factor.
+   *
+   * @throws IllegalArgumentException if factor is not greater than zero
    */
   IShape scale(double factor);
 

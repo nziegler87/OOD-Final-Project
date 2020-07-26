@@ -85,9 +85,14 @@ public class Rectangle extends AbstractShape {
    * @param factor a factor used in resizing, a double
    *
    * @return a shape of the same kind as this one, just resized using the provided factor.
+   *
+   * @throws IllegalArgumentException if factor is not greater than zero
    */
   @Override
-  public IShape scale(double factor) {
+  public IShape scale(double factor) throws IllegalArgumentException {
+    if (factor <= 0) {
+      throw new IllegalArgumentException("Factor must be greater than zero");
+    }
     double sqrtFactor = Math.sqrt(factor);
     return new Rectangle(this.label, this.coordinates, this.color, this.width * sqrtFactor,
             this.height * sqrtFactor);
@@ -102,7 +107,7 @@ public class Rectangle extends AbstractShape {
   @Override
   public String toString() {
     return String.format("Name: %s\nType: %s\nMin corner: %s, Width: %.1f, Height: %.1f, Color: "
-                    + "(%d.0, %d.0, %d.0)", this.label, this.type, this.coordinates.toString(),
+                    + "(%d, %d, %d)", this.label, this.type, this.coordinates.toString(),
             this.width, this.height,
             this.color.getRed(), this.color.getGreen(), this.color.getBlue());
   }

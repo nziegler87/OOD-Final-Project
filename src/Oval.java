@@ -9,7 +9,6 @@ public class Oval extends AbstractShape {
   private double xRadius;
   private double yRadius;
 
-  // TODO: Confirm that radii requirements are correct. Also check setters below.
   /**
    * Create an Oval object when passed object label, coordinates, color, xRadius, and yRadius.
    *
@@ -52,7 +51,6 @@ public class Oval extends AbstractShape {
     return this.yRadius;
   }
 
-  //TODO: Do we need setters or should we rely on more high-level methods such as scale, skew, etc.
   /**
    * Method to set the xRadius of the object when passed a xRadius value.
    *
@@ -90,16 +88,19 @@ public class Oval extends AbstractShape {
    * @param factor a factor used in resizing, a double
    *
    * @return a shape of the same kind as this one, just resized using the provided factor.
+   *
+   * @throws IllegalArgumentException if factor is not greater than zero
    */
   @Override
-  public IShape scale(double factor) {
+  public IShape scale(double factor) throws IllegalArgumentException {
+    if (factor <= 0) {
+      throw new IllegalArgumentException("Factor must be greater than zero");
+    }
     double sqrtFactor = Math.sqrt(factor);
     return new Oval(this.label, this.coordinates, this.color, this.xRadius * sqrtFactor,
             this.yRadius * sqrtFactor);
   }
 
-  // TODO: The Color class only returns R G B as int, so have to force decimals below
-  // TODO: Should this also store the time it is displayed on the screen?
   /**
    * Returns a string representation of the object that includes its name, type, min corner
    * coordinates, xRadius, yRadius, and color as RGB.
@@ -109,7 +110,7 @@ public class Oval extends AbstractShape {
   @Override
   public String toString() {
     return String.format("Name: %s\nType: %s\nCenter: %s, X radius: %.1f, Y radius: %.1f, Color: "
-                    + "(%d.0, %d.0, %d.0)", this.label, this.type, this.coordinates.toString(),
+                    + "(%d, %d, %d)", this.label, this.type, this.coordinates.toString(),
             this.xRadius, this.yRadius,
             this.color.getRed(), this.color.getGreen(), this.color.getBlue());
   }
