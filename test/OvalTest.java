@@ -138,4 +138,5 @@ public class OvalTest {
             nateOval.toString());
   }
 
+  // TODO: Test X radius and Y radius getters and setters
 }
