@@ -30,6 +30,7 @@ public interface IShape {
    */
   IPoint2D getCoordinates();
 
+  // TODO: I think we can get rid of this now that we have the one at the bottom with the IPoint2D
   /**
    * Set the x, y coordinates of the object.
    *
@@ -97,4 +98,13 @@ public interface IShape {
    * @throws IllegalArgumentException if height is not greater than 0
    */
   void setHeight(double height) throws IllegalArgumentException;
+
+  /**
+   * Method to set the new coordinates of the object when passed a IPoint2D class.
+   *
+   * @param IPoint2d endCords the new coordinates of the object
+   *
+   * @throws IllegalArgumentException if endCords is null
+   */
+  void setCoordinates(IPoint2D endCords);
 }

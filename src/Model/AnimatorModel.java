@@ -2,6 +2,7 @@ package Model;
 
 import java.awt.*;
 
+import Model.Commands.ICommand;
 import Model.Shape.IShape;
 
 public interface AnimatorModel {
@@ -13,49 +14,35 @@ public interface AnimatorModel {
    * @param shape the shape that will be added to the map
    * @throws IllegalArgumentException if the shape already exists
    */
-  void addShape(String label, IShape shape) throws IllegalArgumentException;
+  void addShape(String label, IShape shape) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Removes a shape from the model inventory map.
    *
    * @param label the label associated with the shape
+   * @throws NullPointerException when either the command or the label are null
    * @throws IllegalArgumentException when the shape is not found
    */
-  void removeShape(String label);
+  void removeShape(String label) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Finds and returns the shape using the label of the shape.
    *
    * @param label the label associated with the shape
    * @return the shape being searched for
+   * @throws NullPointerException when either the command or the label are null
    * @throws IllegalArgumentException when the shape is not found
    */
-  IShape getShape(String label);
+  IShape getShape(String label) throws NullPointerException, IllegalArgumentException;
 
   /**
-   * Moves the shape to a new set of coordinates.
+   * Implements a command class on a shape.
    *
+   * @param command the command class being passed in and executed on
    * @param label the label associated with the shape
-   * @param x the new x coordinate for the shape
-   * @param y the new y coordinate for the shape
+   * @throws NullPointerException when either the command or the label are null
    */
-  void moveShape(String label, double x, double y);
-
-  /**
-   * Changes the color of the shape.
-   *
-   * @param label the label associated with the shape
-   * @param color the new color for the shape
-   */
-  void changeColor(String label, Color color);
-
-  /**
-   * Changes a shape to a new shape type.
-   *
-   * @param label the label associated with the shape
-   * @param newShape the new shape to change to
-   */
-  void changeShape(String label, IShape newShape);
+  void commandOnShape(ICommand command, String label) throws NullPointerException;
 
   /**
    * Returns a summary of the animation, including the shapes in the list and the animation steps.

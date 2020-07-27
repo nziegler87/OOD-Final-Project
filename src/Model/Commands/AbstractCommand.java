@@ -22,4 +22,8 @@ public abstract class AbstractCommand implements ICommand {
     this.startTime = startTime;
     this.endTime = endTime;
   }
+
+  public void execute(IShape shape) {
+    // nothing here
+  }
 }

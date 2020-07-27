@@ -28,6 +28,16 @@ public class Move extends AbstractCommand {
 
   @Override
   public void execute() {
-    // TODO: Add code here.
+    shape.setCoordinates(endCords);
+  }
+
+  /**
+   * Returns the command details as a string.
+   *
+   * @return str the declarative animation details of the command
+   */
+  public String toString() {
+    return String.format("%s moves from %s to %s from time t=%f to t=%f\n",
+            shape.getLabel(), startCords.toString(), endCords.toString(), startTime, endTime);
   }
 }

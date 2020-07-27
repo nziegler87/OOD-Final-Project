@@ -1,15 +1,11 @@
 package Model;
 
-import java.awt.Color;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Objects;
 
-import Model.Commands.ChangeColor;
 import Model.Commands.CommandList;
+import Model.Commands.ICommand;
 import Model.Commands.ICommandList;
-import Model.Point2D.IPoint2D;
-import Model.Point2D.Point2D;
 import Model.Shape.IShape;
 
 public class AnimatorModelImpl implements AnimatorModel {
@@ -22,38 +18,46 @@ public class AnimatorModelImpl implements AnimatorModel {
     commands = new CommandList();
   }
 
-  //TODO: Should Objects.requireNonNull be in try/catch?
-
   /**
-   * Adds a shape to the model inventory list.
+   * Adds a shape to the model inventory hashmap.
    *
-   * @param shape the shape that will be added to the list
+   * @param label the the label associated with the shape
+   * @param shape the shape that will be added to the map
    * @throws IllegalArgumentException if the shape already exists
    */
   @Override
-  public void addShape(String label, IShape shape) throws IllegalArgumentException {
-    Objects.requireNonNull(shape);
+  public void addShape(String label, IShape shape) throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(label, "Label must not be null.");
+    Objects.requireNonNull(shape, "Shape must not be null.");
     if (inventory.get(label).equals(shape)) {
       throw new IllegalArgumentException("This object has already been added.");
     }
+
+    // adds the details of the shape addition to the text list of commands
     commands.addShape(shape);
+    // puts the shape in the inventory map
     inventory.put(label, shape);
   }
 
   /**
-   * Removes a shape from the model inventory list.
+   * Removes a shape from the model inventory map.
    *
    * @param label the label associated with the shape
+   * @throws NullPointerException when either the command or the label are null
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
-  public void removeShape(String label) throws IllegalArgumentException {
-    Objects.requireNonNull(label);
+  public void removeShape(String label) throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(label, "Label must not be null.");
     if (!inventory.containsKey(label)) {
       throw new IllegalArgumentException("Cannot remove object that does not exist.");
     }
+
+    // get the shape from the map of shapes
     IShape shape = inventory.get(label);
+    // adds the details of the shape removal to the text list of commands
     commands.removeShape(shape);
+    // removes the shape from the inventory map
     inventory.remove(label);
   }
 
@@ -62,65 +66,42 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param label the label associated with the shape
    * @return the shape being searched for
+   * @throws NullPointerException when either the command or the label are null
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
-  public IShape getShape(String label) {
-    Objects.requireNonNull(label);
+  public IShape getShape(String label) throws NullPointerException, IllegalArgumentException{
+    Objects.requireNonNull(label, "Label must not be null.");
     if (!inventory.containsKey(label)) {
       throw new IllegalArgumentException("Cannot get object that does not exist.");
     }
+
+    // get the shape from the map of shapes
     return inventory.get(label);
   }
 
+
   /**
-   * Moves the shape to a new set of coordinates.
+   * Implements a command class on a shape.
    *
+   * @param command the command class being passed in and executed on
    * @param label the label associated with the shape
-   * @param x     the new x coordinate for the shape
-   * @param y     the new y coordinate for the shape
+   * @throws NullPointerException when either the command or the label are null
    */
   @Override
-  public void moveShape(String label, double x, double y) {
-    Objects.requireNonNull(label);
+  public void commandOnShape(ICommand command, String label) throws NullPointerException {
+    // check for nulls
+      Objects.requireNonNull(command, "Command must not be null.");
+      Objects.requireNonNull(label, "Label must not be null.");
+
+    // get the shape from the map of shapes
     IShape shape = inventory.get(label);
-    IPoint2D newCoords = new Point2D(x,y);
-    commands.moveShape(shape, shape.getCoordinates(), newCoords);
-    // TODO: there might be an error in how I thought through this logic
-    getShape(label).setCoordinates(x, y);
+    // add the command toString output to the descriptive animation list
+    commands.addToStack(command.toString());
+    // execute the command on the shape
+    command.execute(shape);
   }
 
-  /**
-   * Changes the color of the shape.
-   *
-   * @param label the label associated with the shape
-   * @param color the new color for the shape
-   */
-  @Override
-  public void changeColor(String label, Color color) {
-    Objects.requireNonNull(label);
-    Objects.requireNonNull(color);
-
-    ChangeColor change = new ChangeColor(); // TODO: this needs to be updated for time
-    IShape shape = inventory.get(label);
-    commands.addToStack(change.toString());
-  }
-
-  // TODO: Needed? >> is this not one of the requirements? if not, toss it!
-  /**
-   * Changes a shape to a new shape type.
-   *
-   * @param label the label associated with the shape
-   * @param shape the new shape to change to
-   */
-  @Override
-  public void changeShape(String label, IShape shape) {
-    Objects.requireNonNull(label);
-    Objects.requireNonNull(shape);
-    IShape OGShape = inventory.get(label);
-    commands.changeShape(OGShape, shape);
-    inventory.put(label, shape);
-  }
 
   /**
    * Returns a summary of the animation, including the shapes in the list and the animation steps.
@@ -130,16 +111,21 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public String getAnimationStatus() {
     StringBuilder status = new StringBuilder();
+
+    // the top of the string description
     status.append("Shapes:\n");
 
     // to iterate through the hashmap
-    Iterator keySetItr = inventory.keySet().iterator();
-    while (keySetItr.hasNext()) {
-      IShape shape = (IShape) keySetItr.next();
+    for (String s : inventory.keySet()) {
+      IShape shape = inventory.get(s);
+      // add the shape and it's details to the string
       status.append(shape.toString());
     }
 
-    status.append("\n").append(commands.toString());
-    return status.substring(0, status.length());
+    // adds the list of commands to the string
+    status.append("\n").append(commands.getCommandList());
+
+    // returns the full string
+    return status.toString();
   }
 }
