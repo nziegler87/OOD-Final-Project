@@ -6,8 +6,10 @@ import Model.Shape.IShape;
  * Create an object that will be used to resize an IShape object.
  */
 public class Scale extends AbstractCommand {
-  private final double widthChange;
-  private final double heightChange;
+  private final double endWidth;
+  private final double endHeight;
+  private final double tickTracker;
+
 
   /**
    * Creates an object that will resize an IShape object.
@@ -15,39 +17,50 @@ public class Scale extends AbstractCommand {
    * @param shape        a shape on which to perform the action
    * @param startTime    start time for when animation should start
    * @param endTime      end time for when animation should end
-   * @param widthChange  factor by which to change width
-   * @param heightChange factor by which to change height
+   * @param endWidth     end width of the object
+   * @param endHeight    end height of the object
+   * @throws IllegalArgumentException if animation time is 0
    */
-  public Scale(IShape shape, double startTime, double endTime, double widthChange,
-               double heightChange) {
+  public Scale(IShape shape, double startTime, double endTime, double endWidth,
+               double endHeight) throws IllegalArgumentException {
     super(shape, startTime, endTime);
-    this.widthChange = widthChange;
-    this.heightChange = heightChange;
+    this.endWidth = endWidth;
+    this.endHeight = endHeight;
+    this.tickTracker = endTime - startTime;
   }
 
   @Override
-  public void execute(IShape shape) {
-    if (widthChange > 0 && heightChange > 0) {
-      shape.setWidth(widthChange);
-      shape.setHeight(heightChange);
-    } else if (widthChange < 0) {
-      shape.setWidth(widthChange);
-    } else {
-      shape.setHeight(heightChange);
+  public void execute(IShape shape, double tick) {
+    // if the timing is not right, don't do anything
+    if (tick < startTime || tick > endTime) {
+      return;
     }
+
+    // find the difference of the x and y based on start and end coordinates
+    double widthDelta = this.endWidth - this.shape.getWidth();
+    double heightDelta = this.endHeight - this.shape.getHeight();
+
+    // multiply them by the point in time we are at
+    double widthAtTick = widthDelta * this.tickTracker;
+    double heightAtTick = heightDelta * this.tickTracker;
+
+    shape.setWidth(widthAtTick);
+    shape.setHeight(heightAtTick);
+
+
   }
 
   @Override
   public String toString() {
-    if (widthChange > 0 && heightChange > 0) {
+    if (endWidth > 0 && endHeight > 0) {
       return String.format("%s changes width from %f to %f and height from %f to %f from time t=%f to t=%f\n",
-              shape.getLabel(), shape.getWidth(), widthChange, shape.getHeight(), heightChange, startTime, endTime);
-    } else if (widthChange < 0) {
+              shape.getLabel(), shape.getWidth(), endWidth, shape.getHeight(), endHeight, startTime, endTime);
+    } else if (endWidth < 0) {
       return String.format("%s changes width from %f to %f from time t=%f to t=%f\n",
-              shape.getLabel(), shape.getWidth(), widthChange, startTime, endTime);
+              shape.getLabel(), shape.getWidth(), endWidth, startTime, endTime);
     } else {
       return String.format("%s changes height from %f to %f from time t=%f to t=%f\n",
-              shape.getLabel(), shape.getHeight(), heightChange, startTime, endTime);
+              shape.getLabel(), shape.getHeight(), endHeight, startTime, endTime);
     }
   }
 }
