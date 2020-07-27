@@ -1,6 +1,7 @@
 package Model.Commands;
 
 import java.awt.Color;
+import java.util.Objects;
 
 import Model.Shape.IShape;
 
@@ -27,8 +28,21 @@ public class ChangeColor extends AbstractCommand {
     this.endColor = endColor;
   }
 
+  /**
+   * Method to execute the class.
+   */
   @Override
   public void execute() {
-    // TODO: Add code here.
+    shape.setColor(endColor);
+  }
+
+  /**
+   * Returns the command details as a string.
+   *
+   * @return str the declarative animation details of the command
+   */
+  public String toString() {
+    return String.format("%s changes from %s to %s from time t=%f to t=%f\n",
+            shape.getLabel(), startColor, endColor, startTime, endTime);
   }
 }

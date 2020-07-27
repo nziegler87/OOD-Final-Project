@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
+import Model.Commands.ChangeColor;
 import Model.Commands.CommandList;
 import Model.Commands.ICommandList;
 import Model.Point2D.IPoint2D;
@@ -98,12 +99,14 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public void changeColor(String label, Color color) {
     Objects.requireNonNull(label);
+    Objects.requireNonNull(color);
+
+    ChangeColor change = new ChangeColor(); // TODO: this needs to be updated for time
     IShape shape = inventory.get(label);
-    commands.changeColor(shape, shape.getColor(), color);
-    getShape(label).setColor(color);
+    commands.addToStack(change.toString());
   }
 
-  // TODO: Needed?
+  // TODO: Needed? >> is this not one of the requirements? if not, toss it!
   /**
    * Changes a shape to a new shape type.
    *

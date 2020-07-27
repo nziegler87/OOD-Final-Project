@@ -9,4 +9,11 @@ public interface ICommand {
    * Method to execute the class.
    */
   void execute();
+
+  /**
+   * Returns the command details as a string.
+   *
+   * @return str the declarative animation details of the command
+   */
+  String toString();
 }

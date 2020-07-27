@@ -29,4 +29,9 @@ public class Scale extends AbstractCommand {
   public void execute() {
     // TODO: Add code here.
   }
+
+  @Override
+  public String toString() {
+
+  }
 }

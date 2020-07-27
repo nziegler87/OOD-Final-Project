@@ -1,9 +1,7 @@
 package Model.Commands;
 
-import java.awt.Color;
 import java.util.Stack;
 
-import Model.Point2D.IPoint2D;
 import Model.Shape.IShape;
 
 public interface ICommandList {
@@ -14,6 +12,13 @@ public interface ICommandList {
    * @return Stack<String> the commandList
    */
   Stack<String> getCommandList();
+
+  /**
+   * Pushes the declarative animation instructions to the stack.
+   *
+   * @param str the details we will add to the list
+   */
+  void addToStack(String str);
 
   /**
    * Pushes the instructions for adding a shape to the stack.
@@ -28,28 +33,6 @@ public interface ICommandList {
    * @param shape the shape whose details we will pull from
    */
   void removeShape(IShape shape);
-
-
-  /**
-   * Pushes the instructions for moving a shape to the stack.
-   *
-   * @param shape the shape whose details we will pull from
-   */
-  void moveShape(IShape shape, IPoint2D coordinates, IPoint2D newCoordinates);
-
-  /**
-   * Pushes the instructions for changing a shape's color to the stack.
-   *
-   * @param shape the shape whose details we will pull from
-   */
-  void changeColor(IShape shape, Color color, Color newColor);
-
-  /**
-   * Pushes the instructions for changing a respective shape to the stack.
-   *
-   * @param shape the shape whose details we will pull from
-   */
-  void changeShape(IShape shape, IShape newShape);
 
   /**
    * Returns a declarative animation summary.
