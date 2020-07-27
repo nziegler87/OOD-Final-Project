@@ -70,7 +70,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
-  public IShape getShape(String label) throws NullPointerException, IllegalArgumentException{
+  public IShape getShape(String label) throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(label, "Label must not be null.");
     if (!inventory.containsKey(label)) {
       throw new IllegalArgumentException("Cannot get object that does not exist.");
@@ -80,26 +80,47 @@ public class AnimatorModelImpl implements AnimatorModel {
     return inventory.get(label);
   }
 
+  /**
+   * Finds and returns the shape using the label of the shape.
+   *
+   * @param label the label associated with the shape
+   * @return the shape being searched for
+   * @throws NullPointerException when either the command or the label are null
+   * @throws IllegalArgumentException when the shape is not found
+   */
+  @Override
+  public IShape copyShape(String label) throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(label, "Label must not be null.");
+    if (!inventory.containsKey(label)) {
+      throw new IllegalArgumentException("Cannot get object that does not exist.");
+    }
+
+    // get the shape from the map of shapes and return a copy
+    return inventory.get(label).copy();
+  }
+
 
   /**
    * Implements a command class on a shape.
    *
    * @param command the command class being passed in and executed on
    * @param label the label associated with the shape
+   * @param tick the time considered when running the command
    * @throws NullPointerException when either the command or the label are null
    */
   @Override
-  public void commandOnShape(ICommand command, String label) throws NullPointerException {
+  public void commandOnShape(ICommand command, String label, double tick)
+          throws NullPointerException {
     // check for nulls
       Objects.requireNonNull(command, "Command must not be null.");
       Objects.requireNonNull(label, "Label must not be null.");
 
     // get the shape from the map of shapes
-    IShape shape = inventory.get(label);
+    IShape shape = copyShape(label);
     // add the command toString output to the descriptive animation list
     commands.addToStack(command.toString());
     // execute the command on the shape
-    command.execute(shape);
+    command.execute(shape, tick);
   }
 
 

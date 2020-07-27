@@ -18,13 +18,13 @@ public abstract class AbstractShape implements IShape {
   /**
    * Create an abstract shape object when passed object label, coordinates, and color.
    *
-   * @param label a label for the object, a string.
+   * @param label       a label for the object, a string.
    * @param coordinates the coordinates for the object, a IPoint2D object
-   * @param color the color of the object, a Color object
+   * @param color       the color of the object, a Color object
    * @throws IllegalArgumentException if either coordinates or color are null
    */
   public AbstractShape(String label, IPoint2D coordinates, Color color)
-          throws IllegalArgumentException{
+          throws IllegalArgumentException {
 
     try {
       Objects.requireNonNull(coordinates);
@@ -80,6 +80,17 @@ public abstract class AbstractShape implements IShape {
   }
 
   /**
+   * Method to set the new coordinates of the object when passed a IPoint2D class.
+   *
+   * @param endCords the new coordinates of the object
+   * @throws IllegalArgumentException if endCords is null
+   */
+  @Override
+  public void setCoordinates(IPoint2D endCords) {
+    this.coordinates = endCords;
+  }
+
+  /**
    * Returns the color of the object.
    *
    * @return the color of the object, a Color object
@@ -100,8 +111,7 @@ public abstract class AbstractShape implements IShape {
 
     try {
       Objects.requireNonNull(color);
-    }
-    catch (NullPointerException npe) {
+    } catch (NullPointerException npe) {
       throw new IllegalArgumentException("Color cannot be null.");
     }
 

@@ -119,4 +119,12 @@ public class Oval extends AbstractShape {
             this.xRadius, this.yRadius,
             this.color.getRed(), this.color.getGreen(), this.color.getBlue());
   }
+
+  /**
+   * Method to create a copy of the object with the same attributes.
+   */
+  @Override
+  public IShape copy() {
+    return new Rectangle(this.label, this.coordinates, this.color, this.xRadius, this.yRadius);
+  }
 }

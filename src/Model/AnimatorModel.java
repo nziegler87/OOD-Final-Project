@@ -1,7 +1,5 @@
 package Model;
 
-import java.awt.*;
-
 import Model.Commands.ICommand;
 import Model.Shape.IShape;
 
@@ -11,8 +9,8 @@ public interface AnimatorModel {
    * Adds a shape to the model inventory hashmap.
    *
    * @param label the the label associated with the shape
-   * @param shape the shape that will be added to the map
-   * @throws IllegalArgumentException if the shape already exists
+   * @throws NullPointerException when either the label or tick are null
+   * @throws IllegalArgumentException when the shape is not found
    */
   void addShape(String label, IShape shape) throws NullPointerException, IllegalArgumentException;
 
@@ -20,7 +18,7 @@ public interface AnimatorModel {
    * Removes a shape from the model inventory map.
    *
    * @param label the label associated with the shape
-   * @throws NullPointerException when either the command or the label are null
+   * @throws NullPointerException when the label is null
    * @throws IllegalArgumentException when the shape is not found
    */
   void removeShape(String label) throws NullPointerException, IllegalArgumentException;
@@ -30,19 +28,30 @@ public interface AnimatorModel {
    *
    * @param label the label associated with the shape
    * @return the shape being searched for
-   * @throws NullPointerException when either the command or the label are null
+   * @throws NullPointerException when the label is null
    * @throws IllegalArgumentException when the shape is not found
    */
   IShape getShape(String label) throws NullPointerException, IllegalArgumentException;
+
+  /**
+   * Finds and copies the shape.
+   *
+   * @param label the label associated with the shape
+   * @return the shape being searched for
+   * @throws NullPointerException when the label is null
+   * @throws IllegalArgumentException when the shape is not found
+   */
+  IShape copyShape(String label) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Implements a command class on a shape.
    *
    * @param command the command class being passed in and executed on
    * @param label the label associated with the shape
-   * @throws NullPointerException when either the command or the label are null
+   * @param tick the time considered when running the command
+   * @throws NullPointerException when either the command, label or tick are null
    */
-  void commandOnShape(ICommand command, String label) throws NullPointerException;
+  void commandOnShape(ICommand command, String label, double tick) throws NullPointerException;
 
   /**
    * Returns a summary of the animation, including the shapes in the list and the animation steps.

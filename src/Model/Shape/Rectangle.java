@@ -13,7 +13,6 @@ public class Rectangle extends AbstractShape {
   private double width;
   private double height;
 
-  // TODO: confirm that width/height requirements are correct. Also check setters below.
   /**
    * Create a rectangle shape object when passed object label, coordinates, color, width,
    * and height.
@@ -114,6 +113,14 @@ public class Rectangle extends AbstractShape {
                     + "(%d, %d, %d)", this.label, this.type, this.coordinates.toString(),
             this.width, this.height,
             this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+  }
+
+  /**
+   * Method to create a copy of the object with the same attributes.
+   */
+  @Override
+  public IShape copy() {
+    return new Rectangle(this.label, this.coordinates, this.color, this.width, this.height);
   }
 }
 

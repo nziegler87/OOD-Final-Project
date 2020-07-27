@@ -31,6 +31,7 @@ public interface IShape {
   IPoint2D getCoordinates();
 
   // TODO: I think we can get rid of this now that we have the one at the bottom with the IPoint2D
+
   /**
    * Set the x, y coordinates of the object.
    *
@@ -40,12 +41,11 @@ public interface IShape {
   void setCoordinates(double x, double y);
 
   /**
-   * Create and return a shape of the same kind as this one, just resized using the provided factor.
+   * Create and return a shape of the same kind as this one, just resized using the provided
+   * factor.
    *
    * @param factor a factor used in resizing, a double
-   *
    * @return a shape of the same kind as this one, just resized using the provided factor.
-   *
    * @throws IllegalArgumentException if factor is not greater than zero
    */
   IShape scale(double factor);
@@ -62,7 +62,6 @@ public interface IShape {
    * Sets the color of the object.
    *
    * @param color the color of the object, a Color ENUM value
-   *
    * @throws IllegalArgumentException if the passed color is null
    */
   void setColor(Color color) throws IllegalArgumentException;
@@ -78,7 +77,6 @@ public interface IShape {
    * Method to set the width of the object when passed a width value.
    *
    * @param width the width of the object, a double.
-   *
    * @throws IllegalArgumentException if width is not greater than 0
    */
   void setWidth(double width) throws IllegalArgumentException;
@@ -94,7 +92,6 @@ public interface IShape {
    * Method to set the height of the object when passed a height value.
    *
    * @param height the height of the object, a double.
-   *
    * @throws IllegalArgumentException if height is not greater than 0
    */
   void setHeight(double height) throws IllegalArgumentException;
@@ -102,9 +99,13 @@ public interface IShape {
   /**
    * Method to set the new coordinates of the object when passed a IPoint2D class.
    *
-   * @param IPoint2d endCords the new coordinates of the object
-   *
+   * @param endCords the new coordinates of the object
    * @throws IllegalArgumentException if endCords is null
    */
   void setCoordinates(IPoint2D endCords);
+
+  /**
+   * Method to create a copy of the object with the same attributes.
+   */
+  IShape copy();
 }
