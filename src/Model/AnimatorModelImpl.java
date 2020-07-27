@@ -3,9 +3,9 @@ package Model;
 import java.util.HashMap;
 import java.util.Objects;
 
-import Model.Commands.CommandList;
+import Model.CommandList.CommandList;
 import Model.Commands.ICommand;
-import Model.Commands.ICommandList;
+import Model.CommandList.ICommandList;
 import Model.Shape.IShape;
 
 public class AnimatorModelImpl implements AnimatorModel {

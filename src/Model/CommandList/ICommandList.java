@@ -1,4 +1,4 @@
-package Model.Commands;
+package Model.CommandList;
 
 import java.util.Stack;
 
