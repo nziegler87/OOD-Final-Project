@@ -36,18 +36,29 @@ public class Scale extends AbstractCommand {
       return;
     }
 
-    // find the difference of the x and y based on start and end coordinates
-    double widthDelta = this.endWidth - this.shape.getWidth();
-    double heightDelta = this.endHeight - this.shape.getHeight();
+    double widthDelta = 1;
+    double heightDelta = 1;
+    double widthAtTick = 0;
+    double heightAtTick = 0;
 
-    // multiply them by the point in time we are at
-    double widthAtTick = widthDelta * this.tickTracker;
-    double heightAtTick = heightDelta * this.tickTracker;
+    if (endWidth > 0 && endHeight > 0) {
+      // find the difference of the x and y based on start and end coordinates
+      widthDelta = this.endWidth - this.shape.getWidth();
+      heightDelta = this.endHeight - this.shape.getHeight();
+      // multiply them by the point in time we are at
+      widthAtTick = widthDelta * this.tickTracker;
+      heightAtTick = heightDelta * this.tickTracker;
+    } else if (endWidth > 0) {
+      widthDelta = this.endWidth - this.shape.getWidth();
+      widthAtTick = widthDelta * this.tickTracker;
+    } else {
+      widthDelta = this.endWidth - this.shape.getWidth();
+      widthAtTick = widthDelta * this.tickTracker;
+    }
 
+    // reassign the widths of the cloned shape
     shape.setWidth(widthAtTick);
     shape.setHeight(heightAtTick);
-
-
   }
 
   @Override
@@ -55,7 +66,7 @@ public class Scale extends AbstractCommand {
     if (endWidth > 0 && endHeight > 0) {
       return String.format("%s changes width from %f to %f and height from %f to %f from time t=%f to t=%f\n",
               shape.getLabel(), shape.getWidth(), endWidth, shape.getHeight(), endHeight, startTime, endTime);
-    } else if (endWidth < 0) {
+    } else if (endWidth > 0) {
       return String.format("%s changes width from %f to %f from time t=%f to t=%f\n",
               shape.getLabel(), shape.getWidth(), endWidth, startTime, endTime);
     } else {

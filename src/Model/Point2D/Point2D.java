@@ -20,7 +20,7 @@ public class Point2D implements IPoint2D {
     this.y = y;
   }
 
-  // TODO: Danielle, do we need this?
+  // TODO: Danielle, do we need this? >> leaving this in until later
   /**
    * A constructor to make a copy of the object.
    *

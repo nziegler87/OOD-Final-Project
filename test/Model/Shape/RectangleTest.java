@@ -6,9 +6,7 @@ import org.junit.Test;
 import java.awt.Color;
 
 import Model.Point2D.IPoint2D;
-import Model.Shape.IShape;
 import Model.Point2D.Point2D;
-import Model.Shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
@@ -50,7 +48,6 @@ public class RectangleTest {
 
     // test that the two point2D are the same
     assertEquals(originalPoint2D, returnedPoint2D);
-
     // test that they are different objects
     assertNotSame(originalPoint2D, returnedPoint2D);
   }
@@ -66,20 +63,20 @@ public class RectangleTest {
             testShape.toString());
 
     testShape.setCoordinates(24.2, 56.6);
-
     assertEquals("Name: r\n"
                     + "Type: rectangle\n"
                     + "Min corner: (24.2,56.6), Width: 60.0, Height: 30.0, Color: (0, 0, 1)",
             testShape.toString());
   }
 
-  // TODO: Should scale throw an IllegalArg? What if someone wanted to decrease the size?
+  // TODO: Should scale throw an IllegalArg? What if someone wanted to decrease the size? >> remove if you're OK?
   // test scale throws IllegalArg if factor is 0
   @Test (expected = IllegalArgumentException.class)
   public void testScaleIllegalArg() {
     danielleRectangle.scale(0);
   }
 
+  // test scale()
   @Test
   public void testScale() {
     assertEquals("Name: Danielle\n"
@@ -103,7 +100,6 @@ public class RectangleTest {
     Color color = danielleRectangle.getColor();
     assertEquals("java.awt.Color[r=29,g=255,b=229]", color.toString());
   }
-
 
   // test setColor()
   @Test
@@ -183,5 +179,4 @@ public class RectangleTest {
 
     danielleRectangle.setHeight(0);
   }
-
 }

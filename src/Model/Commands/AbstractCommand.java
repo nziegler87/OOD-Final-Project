@@ -10,8 +10,6 @@ public abstract class AbstractCommand implements ICommand {
   protected double startTime;
   protected double endTime;
 
-  // TODO: Confirm that IllegalArgumentException for time input is okay
-
   /**
    * Creates an AbstractCommand object.
    *
@@ -24,7 +22,7 @@ public abstract class AbstractCommand implements ICommand {
           throws IllegalArgumentException {
 
     // check to make sure that time entry is valid
-    if (endTime - startTime == 0 || startTime > endTime) {
+    if (endTime == startTime || startTime > endTime) {
       throw new IllegalArgumentException("Invalid time entry.");
     }
 
@@ -33,7 +31,7 @@ public abstract class AbstractCommand implements ICommand {
     this.endTime = endTime;
   }
 
-  public void execute(IShape shape) {
+  public void execute(IShape shape, double tick) {
     // to be implemented in concrete classes
   }
 }

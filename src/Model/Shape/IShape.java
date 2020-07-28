@@ -30,8 +30,6 @@ public interface IShape {
    */
   IPoint2D getCoordinates();
 
-  // TODO: I think we can get rid of this now that we have the one at the bottom with the IPoint2D
-
   /**
    * Set the x, y coordinates of the object.
    *
@@ -49,7 +47,6 @@ public interface IShape {
    * @throws IllegalArgumentException if factor is not greater than zero
    */
   IShape scale(double factor);
-
 
   /**
    * Returns the color of the object.

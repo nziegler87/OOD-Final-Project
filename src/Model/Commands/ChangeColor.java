@@ -14,7 +14,7 @@ public class ChangeColor extends AbstractCommand {
   private final double tickTracker;
 
   // TODO: Do we need to add in the start color or should that just get it from the shape?
-  // TODO: Depending on what we decide here, we may need to update Scale.
+  // TODO: Depending on what we decide here, we may need to update Scale. I prefer it getting from the shape
 
   /**
    * Creates an object that will change the color of an IShape object.
@@ -22,14 +22,13 @@ public class ChangeColor extends AbstractCommand {
    * @param shape       a shape on which to perform the action
    * @param startTime   start time for when animation should start
    * @param endTime     end time for when animation should end
-   * @param startColor  starting color of the object
    * @param endColor    ending color of the object
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
-  public ChangeColor(IShape shape, double startTime, double endTime, Color startColor,
+  public ChangeColor(IShape shape, double startTime, double endTime,
                      Color endColor) throws IllegalArgumentException {
     super(shape, startTime, endTime);
-    this.startColor = startColor;
+    this.startColor = shape.getColor();
     this.endColor = endColor;
     this.tickTracker = endTime - startTime;
   }
@@ -57,7 +56,7 @@ public class ChangeColor extends AbstractCommand {
     // create color object at this point in time
     Color currentColor = new Color(redAtTick, greenAtTick, blueAtTick);
 
-    // TODO: Aren't we just modifying the object? Nolan recommended not modifying the actual object
+    // reassign the color of the cloned shape
     shape.setColor(currentColor);
   }
 

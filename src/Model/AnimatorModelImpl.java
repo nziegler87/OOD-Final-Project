@@ -26,7 +26,8 @@ public class AnimatorModelImpl implements AnimatorModel {
    * @throws IllegalArgumentException if the shape already exists     // TODO: IllegalArg or NullPointer
    */
   @Override
-  public void addShape(String label, IShape shape) throws NullPointerException, IllegalArgumentException {
+  public void addShape(String label, IShape shape)
+          throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(label, "Label must not be null.");
     Objects.requireNonNull(shape, "Shape must not be null.");
 
@@ -37,7 +38,6 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     // adds the details of the shape addition to the text list of commands
     commands.addShape(shape);
-
     // puts the shape in the inventory map
     inventory.put(label, shape);
   }
@@ -146,7 +146,6 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     // adds the list of commands to the string
     status.append("\n").append(commands.getCommandList());
-
     // returns the full string
     return status.toString();
   }

@@ -23,7 +23,7 @@ public class Disappear extends AbstractCommand {
    */
   @Override
   public void execute(IShape shape, double tick) {
-    // this command returns nothing
+      // this command returns nothing
   }
 
   /**
