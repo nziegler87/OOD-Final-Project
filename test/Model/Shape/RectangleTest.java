@@ -21,9 +21,9 @@ public class RectangleTest {
   @Before
   public void setUp() {
     danielleRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
-            new Color(29, 255, 229), 20, 50);
+            new Color(29, 255, 229), 20, 50, 10 ,20);
     rectangleFromHomework = new Rectangle("c", new Point2D(200.0, 200.0),
-            new Color(1, 0 ,0), 50.0, 100.0);
+            new Color(1, 0 ,0), 50.0, 100.0, 30, 50);
   }
 
   // test getLabel
@@ -43,7 +43,7 @@ public class RectangleTest {
   public void testGetCoordinates() {
     IPoint2D originalPoint2D = new Point2D(10.345, 10.345);
     IShape testShape = new Rectangle("Test Rectangle", originalPoint2D,
-            new Color(40, 40, 40), 30, 30);
+            new Color(40, 40, 40), 30, 30, 10, 20);
     IPoint2D returnedPoint2D = testShape.getCoordinates();
 
     // test that the two point2D are the same
@@ -56,16 +56,18 @@ public class RectangleTest {
   @Test
   public void testSetCoordinates() {
     IShape testShape = new Rectangle("r", new Point2D(500.0, 100.0),
-            new Color(0, 0, 1), 60.0, 30.0);
+            new Color(0, 0, 1), 60.0, 30.0, 10, 20);
     assertEquals("Name: r\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (500.0,100.0), Width: 60.0, Height: 30.0, Color: (0, 0, 1)",
+                    + "Min corner: (500.0,100.0), Width: 60.0, Height: 30.0, Color: (0, 0, 1)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             testShape.toString());
 
     testShape.setCoordinates(24.2, 56.6);
     assertEquals("Name: r\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (24.2,56.6), Width: 60.0, Height: 30.0, Color: (0, 0, 1)",
+                    + "Min corner: (24.2,56.6), Width: 60.0, Height: 30.0, Color: (0, 0, 1)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             testShape.toString());
   }
 
@@ -81,14 +83,16 @@ public class RectangleTest {
   public void testScale() {
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)",
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             danielleRectangle.toString());
 
     IShape scaledRectangle = danielleRectangle.scale(4);
 
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 40.0, Height: 100.0, Color: (29, 255, 229)",
+                    + "Min corner: (11.2,12.1), Width: 40.0, Height: 100.0, Color: (29, 255, 229)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             scaledRectangle.toString());
 
     assertNotSame(danielleRectangle, scaledRectangle);
@@ -106,14 +110,16 @@ public class RectangleTest {
   public void testSetColor() {
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)",
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             danielleRectangle.toString());
 
     danielleRectangle.setColor(new Color(147, 24, 24));
 
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (147, 24, 24)",
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (147, 24, 24)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             danielleRectangle.toString());
   }
 
@@ -128,7 +134,8 @@ public class RectangleTest {
   public void testToString() {
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)",
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             danielleRectangle.toString());
   }
 

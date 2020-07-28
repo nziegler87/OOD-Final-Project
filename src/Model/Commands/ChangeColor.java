@@ -13,8 +13,7 @@ public class ChangeColor extends AbstractCommand {
   private final Color endColor;
   private final double tickTracker;
 
-  // TODO: Do we need to add in the start color or should that just get it from the shape?
-  // TODO: Depending on what we decide here, we may need to update Scale. I prefer it getting from the shape
+  //TODO: Update with Danielle's fancy math
 
   /**
    * Creates an object that will change the color of an IShape object.

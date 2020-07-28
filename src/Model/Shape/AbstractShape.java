@@ -6,7 +6,6 @@ import java.util.Objects;
 import Model.Point2D.IPoint2D;
 import Model.Point2D.Point2D;
 
-//TODO: Add appear and disappear time
 
 /**
  * An abstract class that contains all common fields and methods objects that implement IShape.
@@ -15,18 +14,22 @@ public abstract class AbstractShape implements IShape {
   protected final String label;
   protected String type;
   protected IPoint2D coordinates;
-  public Color color;
+  protected Color color;
+  protected double appearTime;
+  protected double disappearTime;
 
   /**
    * Create an abstract shape object when passed object label, coordinates, and color.
    *
-   * @param label       a label for the object, a string.
-   * @param coordinates the coordinates for the object, a IPoint2D object
-   * @param color       the color of the object, a Color object
+   * @param label         a label for the object, a string.
+   * @param coordinates   the coordinates for the object, a IPoint2D object
+   * @param color         the color of the object, a Color object
+   * @param appearTime    the time after which the object is visible on the screen
+   * @param disappearTime The time after which the object is no longer visible on the screen
    * @throws IllegalArgumentException if either coordinates or color are null
    */
-  public AbstractShape(String label, IPoint2D coordinates, Color color)
-          throws IllegalArgumentException {
+  public AbstractShape(String label, IPoint2D coordinates, Color color,
+                       double appearTime, double disappearTime) throws IllegalArgumentException {
 
     try {
       Objects.requireNonNull(coordinates);
@@ -38,6 +41,8 @@ public abstract class AbstractShape implements IShape {
     this.label = label;
     this.coordinates = coordinates;
     this.color = color;
+    this.appearTime = appearTime;
+    this.disappearTime = disappearTime;
   }
 
   /**
@@ -90,6 +95,48 @@ public abstract class AbstractShape implements IShape {
   @Override
   public void setCoordinates(IPoint2D endCords) {
     this.coordinates = endCords;
+  }
+
+  //TODO: Add tests for appear and disappear time
+
+  /**
+   * Method to set the start time of the shape object.
+   *
+   * @param appearTime the time after which the object should appear on the screen, a double
+   */
+  @Override
+  public void setAppearTime(double appearTime) {
+    this.appearTime = appearTime;
+  }
+
+  /**
+   * Method to set the end time of the shape object.
+   *
+   * @param disappearTime the time after which the object should disappear on the screen, a double
+   */
+  @Override
+  public void setDisappearTime(double disappearTime) {
+    this.disappearTime = disappearTime;
+  }
+
+  /**
+   * Returns the time after which an object should appear on the screen, a double.
+   *
+   * @return the time after which an object should appear on the screen, a double.
+   */
+  @Override
+  public double getAppearTime() {
+    return this.appearTime;
+  }
+
+  /**
+   * Returns the time after which an object should not appear on the screen, a double.
+   *
+   * @return the time after which an object should not appear on the screen, a double.
+   */
+  @Override
+  public double getDisappearTime() {
+    return this.disappearTime;
   }
 
   /**

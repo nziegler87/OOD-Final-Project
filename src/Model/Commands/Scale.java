@@ -29,6 +29,7 @@ public class Scale extends AbstractCommand {
     this.tickTracker = endTime - startTime;
   }
 
+  //TODO: Update with Danielle's fancy math
   @Override
   public void execute(IShape shape, double tick) {
     // if the timing is not right, don't do anything

@@ -105,4 +105,32 @@ public interface IShape {
    * Method to create a copy of the object with the same attributes.
    */
   IShape copy();
+
+  /**
+   * Method to set the start time of the shape object.
+   *
+   * @param appearTime the time after which the object should appear on the screen, a double
+   */
+  void setAppearTime(double appearTime);
+
+  /**
+   * Method to set the end time of the shape object.
+   *
+   * @param disappearTime the time after which the object should disappear on the screen, a double
+   */
+  void setDisappearTime(double disappearTime);
+
+  /**
+   * Returns the time after which an object should appear on the screen, a double.
+   *
+   * @return the time after which an object should appear on the screen, a double.
+   */
+  double getAppearTime();
+
+  /**
+   * Returns the time after which an object should not appear on the screen, a double.
+   *
+   * @return the time after which an object should not appear on the screen, a double.
+   */
+  double getDisappearTime();
 }

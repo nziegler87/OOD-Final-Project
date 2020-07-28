@@ -34,10 +34,10 @@ public class AnimatorModelImplTest {
     coords2 = new Point2D(50, 50);
     coords3 = new Point2D(25, 25);
 
-    rex = new Rectangle("rex", coords1, Color.white, 50, 50);
-    opal = new Oval("opal", coords1, Color.white, 50, 50);
-    bob = new Oval("bob", coords1, Color.white, 50, 50);
-    pearl = new Rectangle("pearl", coords1, Color.white, 50, 50);
+    rex = new Rectangle("rex", coords1, Color.white, 50, 50, 10, 20);
+    opal = new Oval("opal", coords1, Color.white, 50, 50, 10, 20);
+    bob = new Oval("bob", coords1, Color.white, 50, 50, 10, 20);
+    pearl = new Rectangle("pearl", coords1, Color.white, 50, 50, 10 ,20);
 
 //    model1.addShape("Rex", rex);
 //    model1.addShape("Pearl", pearl);

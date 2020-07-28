@@ -19,15 +19,16 @@ public class Rectangle extends AbstractShape {
    *
    * @param label       a label for the object, a string.
    * @param coordinates the coordinates for the object, a IPoint2D object
-   * @param color       the color of the object, a Color ENUM
+   * @param color       the color of the object, a Color object
    * @param width       the width of the object, a double
    * @param height      the height of the object, a double
    *
    * @throws IllegalArgumentException if either coordinates or color objects are null or if either
    *                                  width or height are not greater than 0
    */
-  public Rectangle(String label, IPoint2D coordinates, Color color, double width, double height) {
-    super(label, coordinates, color);
+  public Rectangle(String label, IPoint2D coordinates, Color color, double width, double height,
+                   double appearTime, double disappearTime) {
+    super(label, coordinates, color, appearTime, disappearTime);
     this.type = "rectangle";
     this.width = width;
     this.height = height;
@@ -98,29 +99,32 @@ public class Rectangle extends AbstractShape {
     }
     double sqrtFactor = Math.sqrt(factor);
     return new Rectangle(this.label, this.coordinates, this.color, this.width * sqrtFactor,
-            this.height * sqrtFactor);
+            this.height * sqrtFactor, this.appearTime, this.disappearTime);
   }
 
   /**
    * Returns a string representation of the object that includes its name, type, min corner
-   * coordinates, height, width, and color as RGB.
+   * coordinates, height, width, color as RGB, appearTime, and disappearTime.
    *
    * @return a string representation of the object including the information outlined above
    */
   @Override
   public String toString() {
     return String.format("Name: %s\nType: %s\nMin corner: %s, Width: %.1f, Height: %.1f, Color: "
-                    + "(%d, %d, %d)", this.label, this.type, this.coordinates.toString(),
-            this.width, this.height,
-            this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+                    + "(%d, %d, %d)\nAppears at t=%.0f\nDisappears at t=%.0f", this.label,
+            this.type, this.coordinates.toString(), this.width, this.height,
+            this.color.getRed(), this.color.getGreen(), this.color.getBlue(),
+            this.appearTime, this.disappearTime);
   }
 
+  // TODO: Add in a test for copy
   /**
    * Method to create a copy of the object with the same attributes.
    */
   @Override
   public IShape copy() {
-    return new Rectangle(this.label, this.coordinates, this.color, this.width, this.height);
+    return new Rectangle(this.label, this.coordinates, this.color, this.width, this.height,
+            this.appearTime, this.disappearTime);
   }
 }
 

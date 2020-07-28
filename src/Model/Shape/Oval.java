@@ -25,8 +25,9 @@ public class Oval extends AbstractShape {
    * @throws IllegalArgumentException if either coordinates or color objects are null or if either
    *                                  xRadius or yRadius are not greater than 0
    */
-  public Oval(String label, IPoint2D coordinates, Color color, double xRadius, double yRadius) {
-    super(label, coordinates, color);
+  public Oval(String label, IPoint2D coordinates, Color color, double xRadius, double yRadius,
+              double appearTime, double disappearTime) {
+    super(label, coordinates, color, appearTime, disappearTime);
 
     if (xRadius <= 0 || yRadius <= 0) {
       throw new IllegalArgumentException("xRadius or yRadius must be greater than 0.");
@@ -103,28 +104,31 @@ public class Oval extends AbstractShape {
     }
     double sqrtFactor = Math.sqrt(factor);
     return new Oval(this.label, this.coordinates, this.color, this.xRadius * sqrtFactor,
-            this.yRadius * sqrtFactor);
+            this.yRadius * sqrtFactor, this.appearTime, this.disappearTime);
   }
 
   /**
    * Returns a string representation of the object that includes its name, type, min corner
-   * coordinates, xRadius, yRadius, and color as RGB.
+   * coordinates, xRadius, yRadius, color as RGB, appearTime, and disappearTime.
    *
    * @return a string representation of the object including the information outlined above
    */
   @Override
   public String toString() {
     return String.format("Name: %s\nType: %s\nCenter: %s, X radius: %.1f, Y radius: %.1f, Color: "
-                    + "(%d, %d, %d)", this.label, this.type, this.coordinates.toString(),
-            this.xRadius, this.yRadius,
-            this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+                    + "(%d, %d, %d)\nAppears at t=%.0f\nDisappears at t=%.0f", this.label, this.type,
+            this.coordinates.toString(), this.xRadius, this.yRadius,
+            this.color.getRed(), this.color.getGreen(), this.color.getBlue(),
+            this.appearTime, this.disappearTime);
   }
 
+  //TODO: Add copy tests
   /**
    * Method to create a copy of the object with the same attributes.
    */
   @Override
   public IShape copy() {
-    return new Rectangle(this.label, this.coordinates, this.color, this.xRadius, this.yRadius);
+    return new Rectangle(this.label, this.coordinates, this.color, this.xRadius, this.yRadius,
+            this.appearTime, this.disappearTime);
   }
 }

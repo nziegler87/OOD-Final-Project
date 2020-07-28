@@ -40,9 +40,11 @@ public class Move extends AbstractCommand {
     // find the difference of the x and y based on start and end coordinates
     double xDelta = this.endCords.getX() - this.startCords.getX();
     double yDelta = this.endCords.getY() - this.startCords.getY();
+
     // multiply them by the point in time we are at
     double xAtTick = xDelta * ((tick - startTime) / tickTracker) + shape.getCoordinates().getX();
     double yAtTick = yDelta * ((tick - startTime) / tickTracker) + shape.getCoordinates().getY();
+
     // create a new Point2D with the updated coordinates
     IPoint2D newCoords = new Point2D(xAtTick, yAtTick);
     // assign the shape the new coordinates

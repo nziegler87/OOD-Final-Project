@@ -23,9 +23,9 @@ public class OvalTest {
   @Before
   public void setUp() {
     nateOval = new Oval("Nate", new Point2D(10.345, -5.232),
-            new Color(255, 0, 233), 12.238, 14.233);
+            new Color(255, 0, 233), 12.238, 14.233, 10, 20);
     ovalFromHomework = new Oval("c", new Point2D(500.0, 100.0),
-            new Color(0, 0, 1), 60.0, 30.0);
+            new Color(0, 0, 1), 60.0, 30.0, 30, 50);
   }
 
   // test getLabel
@@ -45,7 +45,7 @@ public class OvalTest {
   public void testGetCoordinates() {
     IPoint2D originalPoint2D = new Point2D(10.345, 10.345);
     IShape testShape = new Oval("Test Oval", originalPoint2D,
-            new Color(40, 40, 40), 30, 30);
+            new Color(40, 40, 40), 30, 30, 10, 20);
     IPoint2D returnedPoint2D = testShape.getCoordinates();
 
     // test that the two point2D are the same
@@ -59,17 +59,19 @@ public class OvalTest {
   @Test
   public void testSetCoordinates() {
     IShape testShape = new Oval("c", new Point2D(500.0, 100.0),
-            new Color(0, 0, 1), 60.0, 30.0);
+            new Color(0, 0, 1), 60.0, 30.0, 10, 20);
     assertEquals("Name: c\n"
-            + "Type: oval\n"
-            + "Center: (500.0,100.0), X radius: 60.0, Y radius: 30.0, Color: (0, 0, 1)",
+                    + "Type: oval\n"
+                    + "Center: (500.0,100.0), X radius: 60.0, Y radius: 30.0, Color: (0, 0, 1)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             testShape.toString());
 
     testShape.setCoordinates(24.2, 56.6);
 
     assertEquals("Name: c\n"
                     + "Type: oval\n"
-                    + "Center: (24.2,56.6), X radius: 60.0, Y radius: 30.0, Color: (0, 0, 1)",
+                    + "Center: (24.2,56.6), X radius: 60.0, Y radius: 30.0, Color: (0, 0, 1)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             testShape.toString());
   }
 
@@ -83,14 +85,16 @@ public class OvalTest {
   public void testScale() {
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)",
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             nateOval.toString());
 
     IShape scaledOval = nateOval.scale(4);
 
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 24.5, Y radius: 28.5, Color: (255, 0, 233)",
+                    + "Center: (10.3,-5.2), X radius: 24.5, Y radius: 28.5, Color: (255, 0, 233)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             scaledOval.toString());
 
     assertNotSame(nateOval, scaledOval);
@@ -110,14 +114,16 @@ public class OvalTest {
   public void testSetColor() {
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)",
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             nateOval.toString());
 
     nateOval.setColor(new Color(147, 24, 24));
 
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (147, 24, 24)",
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (147, 24, 24)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             nateOval.toString());
   }
 
@@ -131,8 +137,9 @@ public class OvalTest {
   @Test
   public void testToString() {
     assertEquals("Name: Nate\n"
-            + "Type: oval\n"
-            + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)",
+                    + "Type: oval\n"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=10\nDisappears at t=20",
             nateOval.toString());
   }
 

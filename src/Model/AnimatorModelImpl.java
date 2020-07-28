@@ -38,7 +38,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     }
 
     // adds the details of the shape addition to the text list of commands
-    commands.addShape(shape);
+    //commands.addShape(shape);
     // puts the shape in the inventory map
     inventory.put(label, shape);
   }
@@ -60,7 +60,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     // get the shape from the map of shapes
     IShape shape = inventory.get(label);
     // adds the details of the shape removal to the text list of commands
-    commands.removeShape(shape);
+    //commands.removeShape(shape);
     // removes the shape from the inventory map
     inventory.remove(label);
   }
@@ -124,8 +124,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     commands.addToStack(command.toString());
     // execute the command on the shape
     command.execute(shape, tick);
-
-    System.out.println(shape.toString());
   }
 
   /**
@@ -140,13 +138,17 @@ public class AnimatorModelImpl implements AnimatorModel {
     // the top of the string description
     status.append("Shapes:\n");
 
-    // to iterate through the hashmap
-    for (String s : inventory.keySet()) {
-      IShape shape = inventory.get(s);
-      // add the shape and it's details to the string
-      status.append(shape.toString());
+    if (!(inventory.size() == 0)) {
+      // to iterate through the hashmap
+      for (String s : inventory.keySet()) {
+        IShape shape = inventory.get(s);
+        // add the shape and it's details to the string
+        status.append(shape.toString());
+        status.append("\n\n");
+      }
     }
 
+    // TODO: need something here so it doesn't print emtpy [] when list is blank
     // adds the list of commands to the string
     status.append("\n\n").append(commands.getCommandList());
     // returns the full string
