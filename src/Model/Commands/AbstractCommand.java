@@ -9,6 +9,7 @@ public abstract class AbstractCommand implements ICommand {
   protected IShape shape;
   protected double startTime;
   protected double endTime;
+  protected String commandType;
   protected double tickTracker;
 
   /**
@@ -33,7 +34,38 @@ public abstract class AbstractCommand implements ICommand {
     this.tickTracker = endTime - startTime;
   }
 
-  public void execute(IShape shape, double tick) {
-    // to be implemented in concrete classes
+  @Override
+  public String getCommandType() {
+    return this.commandType;
+  }
+
+  /**
+   * Returns the start time of the animation object.
+   *
+   * @return the start time of the animation object, a double.
+   */
+  @Override
+  public double getStartTime() {
+    return this.startTime;
+  }
+
+  /**
+   * Return the end time of the animation object.
+   *
+   * @return the end time of the animation object, a double.
+   */
+  @Override
+  public double getEndTime() {
+    return this.endTime;
+  }
+
+  /**
+   * Returns a copy of the shape object stored in the command object.
+   *
+   * @return a copy of the shape object stored in the command object.
+   */
+  @Override
+  public IShape getShape() {
+    return this.shape.copy();
   }
 }

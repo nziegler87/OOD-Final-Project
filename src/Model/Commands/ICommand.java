@@ -9,10 +9,40 @@ public interface ICommand {
 
   /**
    * Method to execute the class.
-   * @param shape the shape to by modified
    * @param tick the time considered when running the command
+   *
+   * @return  an IShape that with the state of the object during this command at the
+   *          designated tick
    */
-  void execute(IShape shape, double tick);
+  IShape execute(double tick);
+
+  /**
+   * Returns the command type
+   *
+   * @return the type of command, as a string
+   */
+  String getCommandType();
+
+  /**
+   * Returns a copy of the shape object stored in the command object.
+   *
+   * @return a copy of the shape object stored in the command object.
+   */
+  IShape getShape();
+
+  /**
+   * Returns the start time of the animation object.
+   *
+   * @return the start time of the animation object, a double.
+   */
+  double getStartTime();
+
+  /**
+   * Return the end time of the animation object.
+   *
+   * @return the end time of the animation object, a double.
+   */
+  double getEndTime();
 
   /**
    * Returns the command details as a string.
