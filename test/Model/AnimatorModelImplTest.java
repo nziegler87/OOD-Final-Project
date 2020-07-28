@@ -28,7 +28,7 @@ public class AnimatorModelImplTest {
 
   @Before
   public void setUp() {
-    model1 = new AnimatorModelImpl();
+    model1 = new AnimatorModelImpl(10.0);
     coords1 = new Point2D(100, 100);
     coords4 = new Point2D(75, 75);
     coords2 = new Point2D(50, 50);

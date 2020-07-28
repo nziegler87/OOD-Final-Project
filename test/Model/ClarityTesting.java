@@ -20,7 +20,7 @@ public class ClarityTesting {
 
   @Before
   public void setUp(){
-    model = new AnimatorModelImpl();
+    model = new AnimatorModelImpl(10.0);
 
     rectangleFromHomework = new Rectangle("R", new Point2D(200.0, 200.0),
             new Color(1, 0 ,0), 50.0, 100.0, 1, 100);

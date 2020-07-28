@@ -8,7 +8,6 @@ import Model.Shape.IShape;
 public class Scale extends AbstractCommand {
   private final double endWidth;
   private final double endHeight;
-  private final double tickTracker;
 
 
   /**
@@ -26,10 +25,8 @@ public class Scale extends AbstractCommand {
     super(shape, startTime, endTime);
     this.endWidth = endWidth;
     this.endHeight = endHeight;
-    this.tickTracker = endTime - startTime;
   }
 
-  //TODO: Update with Danielle's fancy math
   @Override
   public void execute(IShape shape, double tick) {
     // if the timing is not right, don't do anything
@@ -37,24 +34,20 @@ public class Scale extends AbstractCommand {
       return;
     }
 
-    double widthDelta = 1;
-    double heightDelta = 1;
-    double widthAtTick = 0;
-    double heightAtTick = 0;
+    // find the mathematical adjustment
+    double adjustment = (tick - startTime) / tickTracker;
 
+    double widthAtTick = shape.getWidth();
+    double heightAtTick = shape.getHeight();
+
+    // find the right condition to follow based on inputs size
     if (endWidth > 0 && endHeight > 0) {
-      // find the difference of the x and y based on start and end coordinates
-      widthDelta = this.endWidth - this.shape.getWidth();
-      heightDelta = this.endHeight - this.shape.getHeight();
-      // multiply them by the point in time we are at
-      widthAtTick = widthDelta * this.tickTracker;
-      heightAtTick = heightDelta * this.tickTracker;
+      widthAtTick = (this.endWidth - this.shape.getWidth() * adjustment) + shape.getWidth();
+      heightAtTick = (this.endHeight - this.shape.getHeight() * adjustment) + shape.getHeight();
     } else if (endWidth > 0) {
-      widthDelta = this.endWidth - this.shape.getWidth();
-      widthAtTick = widthDelta * this.tickTracker;
+      widthAtTick = (this.endWidth - this.shape.getWidth() * adjustment) + shape.getWidth();
     } else {
-      widthDelta = this.endWidth - this.shape.getWidth();
-      widthAtTick = widthDelta * this.tickTracker;
+      heightAtTick = (this.endWidth - this.shape.getWidth() * adjustment) + shape.getHeight();
     }
 
     // reassign the widths of the cloned shape

@@ -11,7 +11,6 @@ import Model.Shape.IShape;
 public class ChangeColor extends AbstractCommand {
   private final Color startColor;
   private final Color endColor;
-  private final double tickTracker;
 
   //TODO: Update with Danielle's fancy math
 
@@ -29,7 +28,6 @@ public class ChangeColor extends AbstractCommand {
     super(shape, startTime, endTime);
     this.startColor = shape.getColor();
     this.endColor = endColor;
-    this.tickTracker = endTime - startTime;
   }
 
   /**
@@ -42,21 +40,24 @@ public class ChangeColor extends AbstractCommand {
       return;
     }
 
+    // find the mathematical adjustment
+    double adjustment = (tick - startTime) / tickTracker;
+
     // calculate color deltas
     int blueDelta = endColor.getBlue() - startColor.getBlue();
     int greenDelta = endColor.getGreen() - startColor.getGreen();
     int redDelta = endColor.getRed() - startColor.getRed();
 
     // calculate color values at this point in time
-    int blueAtTick = (int) (blueDelta * tickTracker);
-    int greenAtTick = (int) (greenDelta * tickTracker);
-    int redAtTick = (int) (redDelta * tickTracker);
+    int blueAtTick = (int) (blueDelta * adjustment) + shape.getColor().getBlue();
+    int greenAtTick = (int) (greenDelta * adjustment) + shape.getColor().getGreen();
+    int redAtTick = (int) (redDelta * adjustment) + shape.getColor().getRed();
 
     // create color object at this point in time
-    Color currentColor = new Color(redAtTick, greenAtTick, blueAtTick);
+    Color newColor = new Color(redAtTick, greenAtTick, blueAtTick);
 
     // reassign the color of the cloned shape
-    shape.setColor(currentColor);
+    shape.setColor(newColor);
   }
 
   /**

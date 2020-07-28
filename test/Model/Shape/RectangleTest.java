@@ -71,12 +71,7 @@ public class RectangleTest {
             testShape.toString());
   }
 
-  // TODO: Should scale throw an IllegalArg? What if someone wanted to decrease the size? >> remove if you're OK?
-  // test scale throws IllegalArg if factor is 0
-  @Test (expected = IllegalArgumentException.class)
-  public void testScaleIllegalArg() {
-    danielleRectangle.scale(0);
-  }
+  //TODO: we need to update these tests to match the new criteria where we add / subtract from width/height
 
   // test scale()
   @Test
@@ -185,5 +180,11 @@ public class RectangleTest {
     assertEquals(50.0, danielleRectangle.getHeight(),.01);
 
     danielleRectangle.setHeight(0);
+  }
+
+  @Test
+  public void testCopy() {
+    IShape newRect = danielleRectangle.copy();
+    assertEquals(danielleRectangle.toString(), newRect.toString());
   }
 }

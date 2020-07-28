@@ -10,7 +10,6 @@ import Model.Shape.IShape;
 public class Move extends AbstractCommand {
   private final IPoint2D startCords;
   private final IPoint2D endCords;
-  private final double tickTracker;
 
   /**
    * Creates an object that will move an IShape object across the screen.
@@ -27,7 +26,6 @@ public class Move extends AbstractCommand {
     super(shape, startTime, endTime);
     this.startCords = shape.getCoordinates();
     this.endCords = endCords;
-    this.tickTracker = endTime - startTime;
   }
 
   @Override
@@ -37,13 +35,16 @@ public class Move extends AbstractCommand {
       return;
     }
 
+    // find the mathematical adjustment
+    double adjustment = (tick - startTime) / tickTracker;
+
     // find the difference of the x and y based on start and end coordinates
     double xDelta = this.endCords.getX() - this.startCords.getX();
     double yDelta = this.endCords.getY() - this.startCords.getY();
 
     // multiply them by the point in time we are at
-    double xAtTick = xDelta * ((tick - startTime) / tickTracker) + shape.getCoordinates().getX();
-    double yAtTick = yDelta * ((tick - startTime) / tickTracker) + shape.getCoordinates().getY();
+    double xAtTick = (xDelta * adjustment) + shape.getCoordinates().getX();
+    double yAtTick = (yDelta * adjustment) + shape.getCoordinates().getY();
 
     // create a new Point2D with the updated coordinates
     IPoint2D newCoords = new Point2D(xAtTick, yAtTick);
