@@ -25,10 +25,11 @@ public class Scale extends AbstractCommand {
     super(shape, startTime, endTime);
     this.endWidth = endWidth;
     this.endHeight = endHeight;
+    this.commandType = "scale";
   }
 
   @Override
-  public void execute(IShape shape, double tick) {
+  public IShape execute(IShape shape, double tick) {
     // if the timing is not right, don't do anything
     if (tick < startTime || tick > endTime) {
       return;

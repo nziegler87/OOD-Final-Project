@@ -26,14 +26,17 @@ public class Move extends AbstractCommand {
     super(shape, startTime, endTime);
     this.startCords = shape.getCoordinates();
     this.endCords = endCords;
+    this.commandType = "move";
   }
 
   @Override
-  public void execute(IShape shape, double tick) {
-    // if the timing is not right, don't do anything
-    if (tick < startTime || tick > endTime) {
-      return;
-    }
+  public IShape execute(IShape shape, double tick) {
+
+    // TODO: Move this logic to the get game state
+//    // if the timing is not right, don't do anything
+//    if (tick < startTime || tick > endTime) {
+//      throw new IllegalArgumentException("")
+//    }
 
     // find the mathematical adjustment
     double adjustment = (tick - startTime) / tickTracker;
