@@ -43,7 +43,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    * Removes a shape from the model inventory map.
    *
    * @param label the label associated with the shape
-   * @throws NullPointerException when either the command or the label are null
+   * @throws NullPointerException     when either the command or the label are null
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
@@ -66,7 +66,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param label the label associated with the shape
    * @return the shape being searched for
-   * @throws NullPointerException when either the command or the label are null
+   * @throws NullPointerException     when either the command or the label are null
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
@@ -85,7 +85,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param label the label associated with the shape
    * @return the shape being searched for
-   * @throws NullPointerException when either the command or the label are null
+   * @throws NullPointerException     when either the command or the label are null
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
@@ -99,21 +99,20 @@ public class AnimatorModelImpl implements AnimatorModel {
     return inventory.get(label).copy();
   }
 
-
   /**
    * Implements a command class on a shape.
    *
    * @param command the command class being passed in and executed on
-   * @param label the label associated with the shape
-   * @param tick the time considered when running the command
+   * @param label   the label associated with the shape
+   * @param tick    the time considered when running the command
    * @throws NullPointerException when either the command or the label are null
    */
   @Override
   public void commandOnShape(ICommand command, String label, double tick)
           throws NullPointerException {
     // check for nulls
-      Objects.requireNonNull(command, "Command must not be null.");
-      Objects.requireNonNull(label, "Label must not be null.");
+    Objects.requireNonNull(command, "Command must not be null.");
+    Objects.requireNonNull(label, "Label must not be null.");
 
     // get the shape from the map of shapes
     IShape shape = copyShape(label);
@@ -122,7 +121,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     // execute the command on the shape
     command.execute(shape, tick);
   }
-
 
   /**
    * Returns a summary of the animation, including the shapes in the list and the animation steps.
