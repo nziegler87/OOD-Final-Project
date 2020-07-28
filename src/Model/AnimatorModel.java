@@ -49,25 +49,4 @@ public interface AnimatorModel {
    * @param command
    */
   void addAnimation(ICommand command);
-
-  /**
-   * Finds and copies the shape.
-   *
-   * @param shape the shape being copied
-   * @return the shape being searched for
-   * @throws NullPointerException when the shape is null
-   * @throws IllegalArgumentException when the shape is not found
-   */
-  IShape copyShape(IShape shape) throws NullPointerException, IllegalArgumentException;
-
-//  /**
-//   * Implements a command class on a shape.
-//   *
-//   * @param command the command class being passed in and executed on
-//   * @return the shape being searched for
-//   * @param tick the time considered when running the command
-//   * @throws NullPointerException when the shape is null
-//   */
-//  void commandOnShape(ICommand command, IShape shape, double tick) throws NullPointerException;
-
 }

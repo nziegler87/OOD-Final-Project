@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-//import Model.CommandList.CommandList;
 import Model.Commands.ICommand;
 import Model.Shape.IShape;
 
@@ -13,20 +12,10 @@ public class AnimatorModelImpl implements AnimatorModel {
   private final HashMap<String, IShape> inventory;
   private final ArrayList<ICommand> commandHistory;
 
-//  private final ArrayList<IShape> snapshot;
-//  protected ICommandList commands;
-
-
-
   public AnimatorModelImpl() {
     this.inventory = new HashMap<>();
-//    this.commands = new CommandList();
-//    this.snapshot = new ArrayList<>();
     this.commandHistory = new ArrayList<>();
   }
-
-  // TODO: I noticed yesterday the label stored in the list can be different than the label for
-  //  the obj, so I recommend we rework this so it pulls the label from the shape.getLabel() function
 
   /**
    * Adds a shape to the model inventory hashmap.
@@ -44,10 +33,6 @@ public class AnimatorModelImpl implements AnimatorModel {
       throw new IllegalArgumentException("This object has already been added.");
     }
 
-//    // adds the details of the shape addition to the text list of commands
-//    this.commands.addShape(shape); // TODO: don't we need this? These are different than appear/disappear...NZ: I think we can remove them because time one screen is now store in our shapes?
-    // puts the shape in the inventory map
-
     this.inventory.put(shape.getLabel(), shape);
   }
 
@@ -64,34 +49,10 @@ public class AnimatorModelImpl implements AnimatorModel {
     if (!this.inventory.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("Cannot remove object that does not exist.");
     }
-//    // adds the details of the shape removal to the text list of commands
-//    this.commands.removeShape(shape); // TODO: don't we need this? These are different than appear/disappear...NZ: Same as above
-    // removes the shape from the inventory map
     this.inventory.remove(shape.getLabel());
   }
 
-  //TODO: I don't think this is returning a copy? Is it needed?
-  /**
-   * Finds and returns the shape using the label of the shape.
-   *
-   * @param shape the shape being copied
-   * @return the shape being searched for
-   * @throws NullPointerException     when the shape is null
-   * @throws IllegalArgumentException when the shape is not found
-   */
-  @Override
-  public IShape copyShape(IShape shape) throws NullPointerException, IllegalArgumentException {
-    Objects.requireNonNull(shape, "Shape must not be null.");
-    if (!this.inventory.containsKey(shape.getLabel())) {
-      throw new IllegalArgumentException("Cannot get object that does not exist.");
-    }
-
-    // get the shape from the map of shapes and return a copy
-    return this.inventory.get(shape.getLabel()).copy();
-  }
-
-  //TODO: Should we pass in shape name or shape object?
-  //TODO: If this works, add to interface and test
+  //TODO: If this works, need to test
   public void addAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException{
 
@@ -118,8 +79,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     this.commandHistory.add(command);
 
   }
-
-  // TODO: added in this bit to get the list of states
 
   /**
    * Returns a list of all of the shapes and their state based on the tick input.
@@ -170,29 +129,4 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     return status.toString();
   }
-
-
-  //  /**
-//   * Implements a command class on a shape.
-//   *
-//   * @param command the command class being passed in and executed on
-//   * @param shape   the shape being modified
-//   * @param tick    the time considered when running the command
-//   * @throws NullPointerException when either the command or the label are null
-//   */
-//  @Override
-//  public void commandOnShape(ICommand command, IShape shape, double tick)
-//          throws NullPointerException {
-//    // check for nulls
-//    Objects.requireNonNull(command, "Command must not be null.");
-//    Objects.requireNonNull(shape, "Shape must not be null.");
-//
-//    // get the shape from the map of shapes
-//    IShape copiedShape = copyShape(shape);
-//    // add the command toString output to the descriptive animation list
-//    this.commands.addToStack(command.toString());
-//    // execute the command on the shape
-//    command.execute(copiedShape, tick);
-//  }
-
 }

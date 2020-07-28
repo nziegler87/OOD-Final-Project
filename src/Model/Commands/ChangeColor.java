@@ -64,7 +64,8 @@ public class ChangeColor extends AbstractCommand {
    * @return str the declarative animation details of the command
    */
   public String toString() {
-    return String.format("%s changes from (%d, %d, %d) to (%d, %d, %d) from time t=%.0f to t=%.0f\n",
+    return String.format("%s changes color from (%d, %d, %d) to (%d, %d, %d) from "
+                    + "time t=%.0f to t=%.0f\n",
             shape.getLabel(), startColor.getRed(), startColor.getGreen(), startColor.getBlue(),
             endColor.getRed(), endColor.getGreen(), endColor.getBlue(), startTime, endTime);
   }

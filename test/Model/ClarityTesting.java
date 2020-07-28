@@ -28,8 +28,8 @@ public class ClarityTesting {
     rectangleFromHomework = new Rectangle("R", new Point2D(200.0, 200.0),
             new Color(1, 0 ,0), 50.0, 100.0, 1, 100);
 
-    ovalFromHomework = new Oval("C", new Point2D(500.0, 100.0),
-            new Color(0, 0, 1), 60.0, 30.0, 6, 100);
+    ovalFromHomework = new Oval("C", new Point2D(200, 200.0),
+            new Color(0, 0, 1), 60.0, 30.0, 0, 100);
   }
 
   @Test
@@ -47,10 +47,10 @@ public class ClarityTesting {
     model.addAnimation(moveCommand);
 
     //TODO: Do we check to make sure an object is visible before we apply an animation?
-    model.addAnimation(new Scale(ovalFromHomework, 4, 23, 400, 400));
-    model.addAnimation(new ChangeColor(rectangleFromHomework, 4, 23, new Color(48, 134, 156)));
+    model.addAnimation(new Scale(ovalFromHomework, 0, 100, 400, 400));
+//    model.addAnimation(new ChangeColor(rectangleFromHomework, 4, 23, new Color(48, 134, 156)));
 
-    List<IShape> snapshotList = model.getSnapshot(6);
+    List<IShape> snapshotList = model.getSnapshot(50);
 
     System.out.println(model.getAnimationStatus());
 
