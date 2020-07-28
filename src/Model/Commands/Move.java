@@ -30,7 +30,7 @@ public class Move extends AbstractCommand {
   }
 
   @Override
-  public IShape execute(IShape shape, double tick) {
+  public IShape execute(double tick) {
 
     // TODO: Move this logic to the get game state
 //    // if the timing is not right, don't do anything
@@ -51,8 +51,12 @@ public class Move extends AbstractCommand {
 
     // create a new Point2D with the updated coordinates
     IPoint2D newCoords = new Point2D(xAtTick, yAtTick);
-    // assign the shape the new coordinates
-    shape.setCoordinates(newCoords);
+
+    // return a copy of the cloned shape
+    IShape shapeSnapshot = this.shape.copy();
+    shapeSnapshot.setCoordinates(newCoords);
+    return shapeSnapshot;
+
   }
 
   /**
@@ -61,7 +65,7 @@ public class Move extends AbstractCommand {
    * @return str the declarative animation details of the command
    */
   public String toString() {
-    return String.format("%s moves from %s to %s from time t=%f to t=%f\n",
+    return String.format("%s moves from %s to %s from time t=%.0f to t=%.0f\n",
             shape.getLabel(), startCords.toString(), endCords.toString(), startTime, endTime);
   }
 }

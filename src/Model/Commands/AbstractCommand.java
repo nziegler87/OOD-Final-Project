@@ -38,4 +38,34 @@ public abstract class AbstractCommand implements ICommand {
   public String getCommandType() {
     return this.commandType;
   }
+
+  /**
+   * Returns the start time of the animation object.
+   *
+   * @return the start time of the animation object, a double.
+   */
+  @Override
+  public double getStartTime() {
+    return this.startTime;
+  }
+
+  /**
+   * Return the end time of the animation object.
+   *
+   * @return the end time of the animation object, a double.
+   */
+  @Override
+  public double getEndTime() {
+    return this.endTime;
+  }
+
+  /**
+   * Returns a copy of the shape object stored in the command object.
+   *
+   * @return a copy of the shape object stored in the command object.
+   */
+  @Override
+  public IShape getShape() {
+    return this.shape.copy();
+  }
 }

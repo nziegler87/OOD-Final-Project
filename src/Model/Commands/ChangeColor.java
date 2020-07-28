@@ -11,7 +11,7 @@ public class ChangeColor extends AbstractCommand {
   private final Color startColor;
   private final Color endColor;
 
-  //TODO: Update with Danielle's fancy math
+  //TODO: Add in IllegalArg if same type of animation is being already done on a shape...across all three
 
   /**
    * Creates an object that will change the color of an IShape object.
@@ -34,11 +34,7 @@ public class ChangeColor extends AbstractCommand {
    * Method to execute the class.
    */
   @Override
-  public void execute(IShape shape, double tick) {
-    // if the timing is not right, don't do anything
-    if (tick < startTime || tick > endTime) {
-      return;
-    }
+  public IShape execute(double tick) {
 
     // find the mathematical adjustment
     double adjustment = (tick - startTime) / tickTracker;
@@ -56,8 +52,10 @@ public class ChangeColor extends AbstractCommand {
     // create color object at this point in time
     Color newColor = new Color(redAtTick, greenAtTick, blueAtTick);
 
-    // reassign the color of the cloned shape
-    shape.setColor(newColor);
+    // return a copy of the cloned shape
+    IShape shapeSnapshot = this.shape.copy();
+    shapeSnapshot.setColor(newColor);
+    return shapeSnapshot;
   }
 
   /**
@@ -66,7 +64,8 @@ public class ChangeColor extends AbstractCommand {
    * @return str the declarative animation details of the command
    */
   public String toString() {
-    return String.format("%s changes from %s to %s from time t=%f to t=%f\n",
-            shape.getLabel(), startColor, endColor, startTime, endTime);
+    return String.format("%s changes from (%d, %d, %d) to (%d, %d, %d) from time t=%.0f to t=%.0f\n",
+            shape.getLabel(), startColor.getRed(), startColor.getGreen(), startColor.getBlue(),
+            endColor.getRed(), endColor.getGreen(), endColor.getBlue(), startTime, endTime);
   }
 }

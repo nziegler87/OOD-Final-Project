@@ -29,11 +29,7 @@ public class Scale extends AbstractCommand {
   }
 
   @Override
-  public IShape execute(IShape shape, double tick) {
-    // if the timing is not right, don't do anything
-    if (tick < startTime || tick > endTime) {
-      return;
-    }
+  public IShape execute(double tick) {
 
     // find the mathematical adjustment
     double adjustment = (tick - startTime) / tickTracker;
@@ -51,21 +47,30 @@ public class Scale extends AbstractCommand {
       heightAtTick = (this.endWidth - this.shape.getWidth() * adjustment) + shape.getHeight();
     }
 
+
     // reassign the widths of the cloned shape
     shape.setWidth(widthAtTick);
     shape.setHeight(heightAtTick);
+
+    // return a copy of the cloned shape
+    IShape shapeSnapshot = this.shape.copy();
+
+    shapeSnapshot.setWidth(widthAtTick);
+    shapeSnapshot.setHeight(heightAtTick);
+
+    return shapeSnapshot;
   }
 
   @Override
   public String toString() {
     if (endWidth > 0 && endHeight > 0) {
-      return String.format("%s changes width from %f to %f and height from %f to %f from time t=%f to t=%f\n",
+      return String.format("%s changes width from %.1f to %.1f and height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
               shape.getLabel(), shape.getWidth(), endWidth, shape.getHeight(), endHeight, startTime, endTime);
     } else if (endWidth > 0) {
-      return String.format("%s changes width from %f to %f from time t=%f to t=%f\n",
+      return String.format("%s changes width from %.1f to %.1f from time t=%.0f to t=%.0f\n",
               shape.getLabel(), shape.getWidth(), endWidth, startTime, endTime);
     } else {
-      return String.format("%s changes height from %f to %f from time t=%f to t=%f\n",
+      return String.format("%s changes height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
               shape.getLabel(), shape.getHeight(), endHeight, startTime, endTime);
     }
   }
