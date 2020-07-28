@@ -57,6 +57,7 @@ public class ChangeColor extends AbstractCommand {
     // create color object at this point in time
     Color currentColor = new Color(redAtTick, greenAtTick, blueAtTick);
 
+    // TODO: Aren't we just modifying the object? Nolan recommended not modifying the actual object
     shape.setColor(currentColor);
   }
 

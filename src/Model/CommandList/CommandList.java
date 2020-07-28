@@ -32,6 +32,8 @@ public class CommandList implements ICommandList {
     stack.push(str);
   }
 
+  // TODO: Color doesn't print correctly because color object toString() isn't pretty.
+  //  Can we just use the shape.toString() method for this?
   /**
    * Pushes the instructions for adding a shape to the stack.
    *
@@ -39,8 +41,8 @@ public class CommandList implements ICommandList {
    */
   @Override
   public void addShape(IShape shape) {
-    stack.push(String.format("Create %s %s %s with corner at (%d,%d), width %d and height %d\n",
-            shape.getColor(), shape.getType(), shape.getLabel(), shape.getCoordinates(),
+    stack.push(String.format("Create %s %s %s with corner at %s, width %f.1 and height %f.1\n",
+            shape.getColor(), shape.getType(), shape.getLabel(), shape.getCoordinates().toString(),
             shape.getWidth(), shape.getHeight()));
   }
 

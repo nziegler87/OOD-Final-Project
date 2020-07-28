@@ -10,7 +10,7 @@ public abstract class AbstractCommand implements ICommand {
   protected double startTime;
   protected double endTime;
 
-  // TODO: Confirm that IllegalArgumentException is okay
+  // TODO: Confirm that IllegalArgumentException for time input is okay
 
   /**
    * Creates an AbstractCommand object.

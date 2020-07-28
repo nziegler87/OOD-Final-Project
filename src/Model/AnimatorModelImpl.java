@@ -23,18 +23,21 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param label the the label associated with the shape
    * @param shape the shape that will be added to the map
-   * @throws IllegalArgumentException if the shape already exists
+   * @throws IllegalArgumentException if the shape already exists     // TODO: IllegalArg or NullPointer
    */
   @Override
   public void addShape(String label, IShape shape) throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(label, "Label must not be null.");
     Objects.requireNonNull(shape, "Shape must not be null.");
+
+    // TODO: This seems to be throwing a NullPointerException
     if (inventory.get(label).equals(shape)) {
       throw new IllegalArgumentException("This object has already been added.");
     }
 
     // adds the details of the shape addition to the text list of commands
     commands.addShape(shape);
+
     // puts the shape in the inventory map
     inventory.put(label, shape);
   }

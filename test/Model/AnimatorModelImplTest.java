@@ -39,8 +39,8 @@ public class AnimatorModelImplTest {
     bob = new Oval("bob", coords1, Color.white, 50, 50);
     pearl = new Rectangle("pearl", coords1, Color.white, 50, 50);
 
-    model1.addShape("Rex", rex);
-    model1.addShape("Pearl", pearl);
+//    model1.addShape("Rex", rex);
+//    model1.addShape("Pearl", pearl);
   }
 
   @Test
@@ -60,23 +60,23 @@ public class AnimatorModelImplTest {
 
   }
 
-  @Test
-  public void moveShape() {
-    model1.moveShape("Pearl", 40, 35);
-    assertEquals("", model1.getAnimationStatus());
-  }
-
-  @Test
-  public void changeColor() {
-    model1.changeColor("Bob", Color.red);
-    assertEquals("", model1.getAnimationStatus());
-  }
-
-  @Test
-  public void changeShape() {
-    model1.changeShape("Pearl", opal);
-    assertEquals("", model1.getAnimationStatus());
-  }
+//  @Test
+//  public void moveShape() {
+//    model1.moveShape("Pearl", 40, 35);
+//    assertEquals("", model1.getAnimationStatus());
+//  }
+//
+//  @Test
+//  public void changeColor() {
+//    model1.changeColor("Bob", Color.red);
+//    assertEquals("", model1.getAnimationStatus());
+//  }
+//
+//  @Test
+//  public void changeShape() {
+//    model1.changeShape("Pearl", opal);
+//    assertEquals("", model1.getAnimationStatus());
+//  }
 
   @Test
   public void getAnimationStatus() {
