@@ -117,7 +117,6 @@ public class Rectangle extends AbstractShape {
             this.appearTime, this.disappearTime);
   }
 
-  // TODO: Add in a test for copy
   /**
    * Method to create a copy of the object with the same attributes.
    */

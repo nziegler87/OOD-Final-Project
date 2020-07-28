@@ -10,6 +10,7 @@ public abstract class AbstractCommand implements ICommand {
   protected double startTime;
   protected double endTime;
   protected String commandType;
+  protected double tickTracker;
 
   /**
    * Creates an AbstractCommand object.
@@ -30,6 +31,7 @@ public abstract class AbstractCommand implements ICommand {
     this.shape = shape;
     this.startTime = startTime;
     this.endTime = endTime;
+    this.tickTracker = endTime - startTime;
   }
 
   @Override

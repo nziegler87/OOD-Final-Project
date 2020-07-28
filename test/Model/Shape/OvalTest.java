@@ -190,4 +190,10 @@ public class OvalTest {
 
     nateOval.setHeight(0);
   }
+
+  @Test
+  public void testCopy() {
+    IShape newOval = nateOval.copy();
+    assertEquals(nateOval.toString(), newOval.toString());
+  }
 }
