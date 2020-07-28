@@ -35,6 +35,8 @@ public class CommandList implements ICommandList {
   // TODO: Color doesn't print correctly because color object toString() isn't pretty.
   //  Can we just use the shape.toString() method for this?
   //  problem with this is that all these messages are different...
+
+  // TODO: Nate to look into making this say BLUE, RED, GREEN
   /**
    * Pushes the instructions for adding a shape to the stack.
    *

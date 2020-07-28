@@ -6,6 +6,8 @@ import java.util.Objects;
 import Model.Point2D.IPoint2D;
 import Model.Point2D.Point2D;
 
+//TODO: Add appear and disappear time
+
 /**
  * An abstract class that contains all common fields and methods objects that implement IShape.
  */

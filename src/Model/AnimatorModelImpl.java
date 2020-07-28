@@ -18,6 +18,8 @@ public class AnimatorModelImpl implements AnimatorModel {
     commands = new CommandList();
   }
 
+  //TODO: Add tick?
+
   /**
    * Adds a shape to the model inventory hashmap.
    *
@@ -31,8 +33,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     Objects.requireNonNull(label, "Label must not be null.");
     Objects.requireNonNull(shape, "Shape must not be null.");
 
-    // TODO: This seems to be throwing a NullPointerException
-    if (inventory.get(label).equals(shape)) {
+    if (inventory.containsKey(label)) {
       throw new IllegalArgumentException("This object has already been added.");
     }
 
@@ -123,6 +124,8 @@ public class AnimatorModelImpl implements AnimatorModel {
     commands.addToStack(command.toString());
     // execute the command on the shape
     command.execute(shape, tick);
+
+    System.out.println(shape.toString());
   }
 
   /**
@@ -145,7 +148,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     }
 
     // adds the list of commands to the string
-    status.append("\n").append(commands.getCommandList());
+    status.append("\n\n").append(commands.getCommandList());
     // returns the full string
     return status.toString();
   }
