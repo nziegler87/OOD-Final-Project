@@ -1,7 +1,6 @@
 package Model.Commands;
 
 import java.awt.Color;
-import java.util.Objects;
 
 import Model.Shape.IShape;
 
@@ -30,6 +29,7 @@ public class ChangeColor extends AbstractCommand {
     this.startColor = shape.getColor();
     this.endColor = endColor;
     this.tickTracker = endTime - startTime;
+    this.commandType = "changeColor";
   }
 
   /**

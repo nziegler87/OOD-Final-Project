@@ -27,11 +27,12 @@ public class Scale extends AbstractCommand {
     this.endWidth = endWidth;
     this.endHeight = endHeight;
     this.tickTracker = endTime - startTime;
+    this.commandType = "scale";
   }
 
   //TODO: Update with Danielle's fancy math
   @Override
-  public void execute(IShape shape, double tick) {
+  public IShape execute(IShape shape, double tick) {
     // if the timing is not right, don't do anything
     if (tick < startTime || tick > endTime) {
       return;

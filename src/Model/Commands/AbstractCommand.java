@@ -9,6 +9,7 @@ public abstract class AbstractCommand implements ICommand {
   protected IShape shape;
   protected double startTime;
   protected double endTime;
+  protected String commandType;
 
   /**
    * Creates an AbstractCommand object.
@@ -31,7 +32,8 @@ public abstract class AbstractCommand implements ICommand {
     this.endTime = endTime;
   }
 
-  public void execute(IShape shape, double tick) {
-    // to be implemented in concrete classes
+  @Override
+  public String getCommandType() {
+    return this.commandType;
   }
 }
