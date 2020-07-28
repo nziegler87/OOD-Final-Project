@@ -18,16 +18,14 @@ public class Move extends AbstractCommand {
    * @param shape       a shape on which to perform the action
    * @param startTime   start time for when animation should start
    * @param endTime     end time for when animation should end
-   * @param startCords  starting coordinates for the move
    * @param endCords    ending coordinates for the move
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
 
-  //TODO: Remove startCords
-  public Move(IShape shape, double startTime, double endTime, IPoint2D startCords,
-              IPoint2D endCords) throws IllegalArgumentException {
+  public Move(IShape shape, double startTime, double endTime, IPoint2D endCords)
+          throws IllegalArgumentException {
     super(shape, startTime, endTime);
-    this.startCords = startCords;
+    this.startCords = shape.getCoordinates();
     this.endCords = endCords;
     this.tickTracker = endTime - startTime;
   }
