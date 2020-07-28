@@ -22,7 +22,7 @@ public class Appear extends AbstractCommand {
    * Method to execute the class.
    */
   @Override
-  public void execute(IShape shape) {
+  public void execute(IShape shape, double tick) {
     // this command returns nothing
   }
 
