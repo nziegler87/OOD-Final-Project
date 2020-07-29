@@ -13,11 +13,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   private final HashMap<String, IShape> inventory;
   private final ArrayList<ICommand> commandHistory;
 
-  /*
-  TODO: We need to order our commandHistory by start time. - DONE NZ
-        We also need a way to get the last state of the object.
-   */
-
   public AnimatorModelImpl() {
     this.inventory = new HashMap<>();
     this.commandHistory = new ArrayList<>();
@@ -34,11 +29,11 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void addShape(IShape shape)
           throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(shape, "Shape must not be null.");
-
+    // if the object is already in the inventory list, throw exception
     if (this.inventory.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("This object has already been added.");
     }
-
+    // otherwise add the object to the inventory list
     this.inventory.put(shape.getLabel(), shape);
   }
 
@@ -50,11 +45,14 @@ public class AnimatorModelImpl implements AnimatorModel {
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
-  public void removeShape(IShape shape) throws NullPointerException, IllegalArgumentException {
+  public void removeShape(IShape shape)
+          throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(shape, "Shape must not be null.");
+    // if the object is not in the inventory list, throw exception
     if (!this.inventory.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("Cannot remove object that does not exist.");
     }
+    // otherwise remove the object from the inventory list
     this.inventory.remove(shape.getLabel());
   }
 
@@ -80,6 +78,12 @@ public class AnimatorModelImpl implements AnimatorModel {
             && secondCommand.getStartTime() < firstCommand.getEndTime()));
   }
 
+  /**
+   * A static comparator class to sort the objects by start time.
+   */
+  private static final Comparator<ICommand> commandComparator = (o1, o2) ->
+          (int) (o1.getStartTime() - o2.getStartTime());
+
   //TODO: If this works, need to test
   public void addAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException {
@@ -90,23 +94,17 @@ public class AnimatorModelImpl implements AnimatorModel {
       throw new IllegalArgumentException("Shape object must be stored in model "
               + "in order to add command");
     }
+    // look through all of the commands for a conflict; if so, throw exception
     for (ICommand historicalCommand : this.commandHistory) {
       if (commandConflict(historicalCommand, command)) {
         throw new IllegalArgumentException("Cannot assign the same animation to happen on " +
                 "the same object at the same time");
       }
     }
-
-    // if none of the above arguments are thrown, add new command to commandHistory and sort
+    // if no arguments are thrown, add new command to commandHistory and sort
     this.commandHistory.add(command);
     commandHistory.sort(commandComparator);
-
   }
-
-  /*
-  TODO: For this one, we need to queue up multiple commands that may occur on the same object
-   and execute them in order, passing the modified object to the new command each time.
-   */
 
   /**
    * Returns a list of all of the shapes and their state based on the tick input.
@@ -145,11 +143,6 @@ public class AnimatorModelImpl implements AnimatorModel {
         status.append("\n\n");
       }
 
-      //TODO: Do we sort a copy of the command history or is it okay to sort it as is?
-
-      // sort list of commands
-      commandHistory.sort(commandComparator);
-
       if (!(this.commandHistory.size() == 0)) {
         for (ICommand command : this.commandHistory) {
           status.append(command.toString());
@@ -160,11 +153,4 @@ public class AnimatorModelImpl implements AnimatorModel {
     }
     return status.toString();
   }
-
-  /**
-   * A static comparator class to sort the objects by start time.
-   */
-  public static Comparator<ICommand> commandComparator = (o1, o2) ->
-          (int) (o1.getStartTime() - o2.getStartTime());
-  //TODO: intellij made it all fancy and lambda
 }
