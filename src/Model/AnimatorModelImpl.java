@@ -81,8 +81,10 @@ public class AnimatorModelImpl implements AnimatorModel {
       }
     }
 
-    // if none of the above arguments are thrown, add new command to commandHistory
+    // if none of the above arguments are thrown, add new command to commandHistory and sort
     this.commandHistory.add(command);
+    commandHistory.sort(commandComparator);
+
 
   }
 
@@ -125,11 +127,6 @@ public class AnimatorModelImpl implements AnimatorModel {
         status.append(shape.toString());
         status.append("\n\n");
       }
-
-      // sort list of commands
-      //TODO: Do we sort a copy of the command history or is it okay to sort it as is?
-
-      commandHistory.sort(commandComparator);
 
       // adds the list of commands to the string
       if (!(this.commandHistory.size() == 0)) {
