@@ -96,8 +96,11 @@ public class AnimatorModelImpl implements AnimatorModel {
                 "the same object at the same time");
       }
     }
-    // if none of the above arguments are thrown, add new command to commandHistory
+
+    // if none of the above arguments are thrown, add new command to commandHistory and sort
     this.commandHistory.add(command);
+    commandHistory.sort(commandComparator);
+
   }
 
   /*
@@ -147,7 +150,6 @@ public class AnimatorModelImpl implements AnimatorModel {
       // sort list of commands
       commandHistory.sort(commandComparator);
 
-      // adds the list of commands to the sring
       if (!(this.commandHistory.size() == 0)) {
         for (ICommand command : this.commandHistory) {
           status.append(command.toString());
