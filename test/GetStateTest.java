@@ -19,7 +19,7 @@ public class GetStateTest {
   public void setUp() {
     model = new AnimatorModelImpl();
 
-    basicRectangle = new Rectangle("nate", new Point2D(0, 0), new Color(0,0,0), 10, 10, 5, 100);
+    basicRectangle = new Rectangle("nate", new Point2D(0, 0), new Color(0,0,0), 10, 10, 5, 47);
     model.addShape(basicRectangle);
     model.addAnimation(new Move(basicRectangle, 30, 40, new Point2D(20, 20), new Point2D(30, 30)));
     model.addAnimation(new Move(basicRectangle, 10, 20, new Point2D(10, 10), new Point2D(20, 20)));
@@ -30,7 +30,7 @@ public class GetStateTest {
   @Test
   public void testState() {
 //    System.out.println(model.getAnimationStatus());
-    for (int i = 0 ; i < 45 ; i++) {
+    for (int i = 0 ; i < 50 ; i++) {
       System.out.println("Snapshot at tick " + i + ":\n" + model.getSnapshot(i) + "\n");
     }
   }

@@ -126,7 +126,7 @@ public class AnimatorModelImpl implements AnimatorModel {
       //TODO: Does this logic make sense?
 
       // if the shape is on the screen, use animation commands to get its current state
-      if (shape.getAppearTime() < tick && shape.getDisappearTime() >= tick) {
+      if (shape.getAppearTime() <= tick && shape.getDisappearTime() >= tick) {
 
         // create a temporary shape on which to create state
         IShape temporaryShape = shape.copy();
