@@ -58,37 +58,53 @@ public class AnimatorModelImpl implements AnimatorModel {
     this.inventory.remove(shape.getLabel());
   }
 
+  /**
+   * Helper method to find if there's a conflict between two commands
+   *
+   * @param firstCommand the first command under consideration
+   * @param secondCommand the second command under consideration
+   * @return boolean (T/F)
+   */
+  private boolean commandConflict(ICommand firstCommand, ICommand secondCommand) {
+    Objects.requireNonNull(firstCommand, "First command cannot be null.");
+    Objects.requireNonNull(secondCommand, "Second command cannot be null.");
+    // return true if same type of command
+    return (firstCommand.getCommandType().equals(secondCommand.getCommandType())
+            // and same object being modified (by label)
+            && firstCommand.getShape().getLabel().equals(secondCommand.getShape().getLabel())
+            // and either the start for the first command is within the second command time frame
+            && (firstCommand.getStartTime() > secondCommand.getStartTime()
+            && firstCommand.getStartTime() < secondCommand.getEndTime())
+            // or the start for the second command is within the first command time frame
+            || (secondCommand.getStartTime() > firstCommand.getStartTime()
+            && secondCommand.getStartTime() < firstCommand.getEndTime()));
+  }
+
   //TODO: If this works, need to test
   public void addAnimation(ICommand command)
-          throws NullPointerException, IllegalArgumentException{
-
+          throws NullPointerException, IllegalArgumentException {
     // check to make sure objects are not null
     Objects.requireNonNull(command, "Command object cannot be null");
-
     // check to make sure shape is in inventory
     if (!this.inventory.containsKey(command.getShape().getLabel())) {
       throw new IllegalArgumentException("Shape object must be stored in model "
               + "in order to add command");
     }
-
-    //TODO: Add logic to make sure animations don't overlap
-    // check to make sure the same action is not already being performed on it
     for (ICommand historicalCommand : this.commandHistory) {
-      if (historicalCommand.getCommandType() == command.getCommandType()
-              && historicalCommand.getShape().getLabel().equals(command.getShape().getLabel())) {
+      if (commandConflict(historicalCommand, command)) {
         throw new IllegalArgumentException("Cannot assign the same animation to happen on " +
                 "the same object at the same time");
       }
     }
-
     // if none of the above arguments are thrown, add new command to commandHistory
     this.commandHistory.add(command);
-
   }
 
   /*
-  TODO: For this one, we need to queue up multiple commands that may occur on the same object and execute them in order, passing the modified object to the new command each time.
+  TODO: For this one, we need to queue up multiple commands that may occur on the same object
+   and execute them in order, passing the modified object to the new command each time.
    */
+
   /**
    * Returns a list of all of the shapes and their state based on the tick input.
    *
@@ -126,12 +142,12 @@ public class AnimatorModelImpl implements AnimatorModel {
         status.append("\n\n");
       }
 
-      // sort list of commands
       //TODO: Do we sort a copy of the command history or is it okay to sort it as is?
 
+      // sort list of commands
       commandHistory.sort(commandComparator);
 
-      // adds the list of commands to the string
+      // adds the list of commands to the sring
       if (!(this.commandHistory.size() == 0)) {
         for (ICommand command : this.commandHistory) {
           status.append(command.toString());
@@ -140,22 +156,13 @@ public class AnimatorModelImpl implements AnimatorModel {
         status.append("Command list is empty.");
       }
     }
-
     return status.toString();
   }
 
   /**
    * A static comparator class to sort the objects by start time.
    */
-  public static Comparator<ICommand> commandComparator = new Comparator<ICommand>() {
-
-    @Override
-    public int compare(ICommand o1, ICommand o2) {
-      double commandOneStart = o1.getStartTime();
-      double commandTwoStart = o2.getStartTime();
-
-      return (int) (commandOneStart - commandTwoStart);
-
-    }
-  };
+  public static Comparator<ICommand> commandComparator = (o1, o2) ->
+          (int) (o1.getStartTime() - o2.getStartTime());
+  //TODO: intellij made it all fancy and lambda
 }

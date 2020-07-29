@@ -26,6 +26,19 @@ public class RectangleTest {
             new Color(1, 0 ,0), 50.0, 100.0, 30, 50);
   }
 
+  @Test
+  public void getAppearTime() {
+    assertEquals(10, danielleRectangle.getAppearTime(), 0.01);
+    assertEquals(30, rectangleFromHomework.getAppearTime(), 0.01);
+  }
+
+  @Test
+  public void getDisappearTime() {
+    assertEquals(20, danielleRectangle.getDisappearTime(), 0.01);
+    assertEquals(50, rectangleFromHomework.getDisappearTime(), 0.01);
+  }
+
+
   // test getLabel
   @Test
   public void testGetLabel() {
@@ -71,27 +84,6 @@ public class RectangleTest {
             testShape.toString());
   }
 
-  //TODO: we need to update these tests to match the new criteria where we add / subtract from width/height
-
-  // test scale()
-  @Test
-  public void testScale() {
-    assertEquals("Name: Danielle\n"
-                    + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
-                    + "\nAppears at t=10\nDisappears at t=20",
-            danielleRectangle.toString());
-
-    IShape scaledRectangle = danielleRectangle.scale(4);
-
-    assertEquals("Name: Danielle\n"
-                    + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 40.0, Height: 100.0, Color: (29, 255, 229)"
-                    + "\nAppears at t=10\nDisappears at t=20",
-            scaledRectangle.toString());
-
-    assertNotSame(danielleRectangle, scaledRectangle);
-  }
 
   // test getColor()
   @Test

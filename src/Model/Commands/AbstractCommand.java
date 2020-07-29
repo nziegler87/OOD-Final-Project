@@ -12,9 +12,6 @@ public abstract class AbstractCommand implements ICommand {
   protected String commandType;
   protected double tickTracker;
 
-  /*
-  TODO: Add in start params.
-   */
   /**
    * Creates an AbstractCommand object.
    *
@@ -25,18 +22,21 @@ public abstract class AbstractCommand implements ICommand {
    */
   public AbstractCommand(IShape shape, double startTime, double endTime)
           throws IllegalArgumentException {
-
     // check to make sure that time entry is valid
     if (endTime == startTime || startTime > endTime) {
       throw new IllegalArgumentException("Invalid time entry.");
     }
-
     this.shape = shape;
     this.startTime = startTime;
     this.endTime = endTime;
     this.tickTracker = endTime - startTime;
   }
 
+  /**
+   * Returns the command type of the animation object.
+   *
+   * @return the command type of the animation object, a double.
+   */
   @Override
   public String getCommandType() {
     return this.commandType;

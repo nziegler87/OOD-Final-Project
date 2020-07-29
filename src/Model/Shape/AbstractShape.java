@@ -97,8 +97,6 @@ public abstract class AbstractShape implements IShape {
     this.coordinates = endCords;
   }
 
-  //TODO: Add tests for appear and disappear time
-
   /**
    * Method to set the start time of the shape object.
    *

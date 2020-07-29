@@ -28,6 +28,18 @@ public class OvalTest {
             new Color(0, 0, 1), 60.0, 30.0, 30, 50);
   }
 
+  @Test
+  public void getAppearTime() {
+    assertEquals(10, nateOval.getAppearTime(), 0.01);
+    assertEquals(30, ovalFromHomework.getAppearTime(), 0.01);
+  }
+
+  @Test
+  public void getDisappearTime() {
+    assertEquals(20, nateOval.getDisappearTime(), 0.01);
+    assertEquals(50, ovalFromHomework.getDisappearTime(), 0.01);
+  }
+
   // test getLabel
   @Test
   public void testGetLabel() {
@@ -81,25 +93,6 @@ public class OvalTest {
     nateOval.scale(0);
   }
 
-  @Test
-  public void testScale() {
-    assertEquals("Name: Nate\n"
-                    + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
-                    + "\nAppears at t=10\nDisappears at t=20",
-            nateOval.toString());
-
-    IShape scaledOval = nateOval.scale(4);
-
-    assertEquals("Name: Nate\n"
-                    + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 24.5, Y radius: 28.5, Color: (255, 0, 233)"
-                    + "\nAppears at t=10\nDisappears at t=20",
-            scaledOval.toString());
-
-    assertNotSame(nateOval, scaledOval);
-
-  }
 
   // test getColor()
   @Test
