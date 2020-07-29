@@ -1,11 +1,9 @@
 package Model;
 
-import java.util.List;
-
 import Model.Commands.ICommand;
 import Model.Shape.IShape;
 
-public interface AnimatorModel {
+public interface AnimatorModel extends AnimatorModelViewOnly {
 
   /**
    * Adds a shape to the model inventory hashmap.
@@ -24,24 +22,6 @@ public interface AnimatorModel {
    * @throws IllegalArgumentException when the shape is not found
    */
   void removeShape(IShape shape) throws NullPointerException, IllegalArgumentException;
-
-  /**
-   * Returns a list of all of the shapes and their state based on the tick input.
-   *
-   * @param tick  a tick in the animation where you want to return the state of all objects
-   *              visible on the screen
-   *
-   * @return List<IShape> with the summary of shapes and their state
-   */
-  List<IShape> getSnapshot(double tick);
-
-  /**
-   * Returns a summary of the animation, including the shapes in the list and the animation steps.
-   *
-   * @return a string of the summary
-   */
-  String getAnimationStatus();
-
 
   /**
    * Adds an animation to the animation history list.

@@ -9,11 +9,13 @@ import Model.Commands.Move;
 import Model.Commands.Scale;
 import Model.Point2D.Point2D;
 import Model.Shape.IShape;
+import Model.Shape.Oval;
 import Model.Shape.Rectangle;
 
 public class GetStateTest {
   IShape basicRectangle;
   AnimatorModel model2;
+  AnimatorModel model;
 
   @Before
   public void setUp() {
@@ -28,9 +30,9 @@ public class GetStateTest {
 
   @Test
   public void testState() {
-//    System.out.println(model.getAnimationStatus());
-    for (int i = 0 ; i < 45 ; i++) {
-      System.out.println("Snapshot at tick " + i + ":\n" + model2.getSnapshot(i) + "\n");
+    System.out.println(model.getAnimationStatus() + "\n\n");
+    for (int i = 0 ; i < 100 ; i++) {
+      System.out.println("Snapshot at tick " + i + ":\n" + model.getSnapshot(i) + "\n");
     }
   }
 }
