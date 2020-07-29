@@ -25,11 +25,10 @@ public class ClarityTesting {
   public void setUp(){
     model = new AnimatorModelImpl();
 
-    rectangleFromHomework = new Rectangle("R", new Point2D(200.0, 200.0),
-            new Color(1, 0 ,0), 50.0, 100.0, 1, 100);
-
+    rectangleFromHomework = new Rectangle("R", new Point2D(100.0, 100.0),
+            new Color(0, 0 ,0), 10.0, 10.0, 1, 100);
     ovalFromHomework = new Oval("C", new Point2D(200, 200.0),
-            new Color(0, 0, 1), 60.0, 30.0, 0, 100);
+            new Color(0, 0, 0), 50.0, 50.0, 1, 100);
   }
 
   @Test
@@ -42,19 +41,17 @@ public class ClarityTesting {
   public void testMoveShape() {
     model.addShape(ovalFromHomework);
     model.addShape(rectangleFromHomework);
-    IPoint2D newCoordinates = new Point2D(400.0, 400.0);
-    ICommand moveCommand = new Move(rectangleFromHomework, 10, 50, newCoordinates);
-    model.addAnimation(moveCommand);
 
     //TODO: Do we check to make sure an object is visible before we apply an animation?
-    model.addAnimation(new Scale(ovalFromHomework, 0, 100, 400, 400));
-//    model.addAnimation(new ChangeColor(rectangleFromHomework, 4, 23, new Color(48, 134, 156)));
+    model.addAnimation(new Move(rectangleFromHomework,
+            10, 50, new Point2D(400.0, 400.0)));
+    model.addAnimation(new Scale(ovalFromHomework,
+            10, 50, 150, 150));
+    model.addAnimation(new ChangeColor(rectangleFromHomework,
+            10, 50, new Color(50, 50, 50)));
 
-    List<IShape> snapshotList = model.getSnapshot(50);
-
+    List<IShape> snapshotList = model.getSnapshot(30); // this is half way thru animation time
     System.out.println(model.getAnimationStatus());
-
     System.out.println(snapshotList.toString());
   }
-
 }

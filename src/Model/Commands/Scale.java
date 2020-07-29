@@ -37,27 +37,24 @@ public class Scale extends AbstractCommand {
     double widthAtTick = shape.getWidth();
     double heightAtTick = shape.getHeight();
 
+    // calculate color deltas
+    double widthDelta = this.endWidth - shape.getWidth();
+    double heightDelta = this.endHeight - shape.getHeight();
+
     // find the right condition to follow based on inputs size
     if (endWidth > 0 && endHeight > 0) {
-      widthAtTick = (this.endWidth - this.shape.getWidth() * adjustment) + shape.getWidth();
-      heightAtTick = (this.endHeight - this.shape.getHeight() * adjustment) + shape.getHeight();
+      widthAtTick = (widthDelta * adjustment) + shape.getWidth();
+      heightAtTick = (heightDelta * adjustment) + shape.getHeight();
     } else if (endWidth > 0) {
-      widthAtTick = (this.endWidth - this.shape.getWidth() * adjustment) + shape.getWidth();
+      widthAtTick = (widthDelta * adjustment) + shape.getWidth();
     } else {
-      heightAtTick = (this.endWidth - this.shape.getWidth() * adjustment) + shape.getHeight();
+      heightAtTick = (heightDelta * adjustment) + shape.getHeight();
     }
-
-
-    // reassign the widths of the cloned shape
-    shape.setWidth(widthAtTick);
-    shape.setHeight(heightAtTick);
 
     // return a copy of the cloned shape
     IShape shapeSnapshot = this.shape.copy();
-
     shapeSnapshot.setWidth(widthAtTick);
     shapeSnapshot.setHeight(heightAtTick);
-
     return shapeSnapshot;
   }
 
