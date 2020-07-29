@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -77,19 +76,11 @@ public class AnimatorModelImpl implements AnimatorModel {
   }
 
   /**
-   * A static comparator class to sort the objects by start time.
-   */
-  private static final Comparator<ICommand> commandComparator = (o1, o2) ->
-          (int) (o1.getStartTime() - o2.getStartTime());
-
-  //TODO: If this works, need to test
-
-  /**
-   * TODO: FILL THIS OUT
+   * Adds a command to the animation list.
    *
-   * @param command
-   * @throws NullPointerException
-   * @throws IllegalArgumentException
+   * @param command the command being passed through
+   * @throws NullPointerException if the command being passed through is null
+   * @throws IllegalArgumentException if the command has conflict with another command in the list
    */
   public void addAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException {
@@ -109,7 +100,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     }
     // if no arguments are thrown, add new command to commandHistory and sort
     this.commandHistory.add(command);
-    commandHistory.sort(commandComparator);
+    commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
   }
 
   /**
@@ -123,10 +114,8 @@ public class AnimatorModelImpl implements AnimatorModel {
     // go through each shape in the inventory and see what commands are associated with the shape
     for (IShape shape : this.inventory.values()) {
 
-      //TODO: Does this logic make sense?
-
       // if the shape is on the screen, use animation commands to get its current state
-      if (shape.getAppearTime() < tick && shape.getDisappearTime() >= tick) {
+      if (shape.getAppearTime() <= tick && shape.getDisappearTime() >= tick) {
 
         // create a temporary shape on which to create state
         IShape temporaryShape = shape.copy();
@@ -166,6 +155,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public String getAnimationStatus() {
 
+    // if the inventory is empty, send a message about it
     if (this.inventory.size() == 0) {
       return "No shapes have been added to the inventory, so no animations can be displayed";
     }
@@ -183,11 +173,13 @@ public class AnimatorModelImpl implements AnimatorModel {
         status.append("\n\n");
       }
 
+      // if the command history has stuff in it, add it to the bottom of the string
       if (!(this.commandHistory.size() == 0)) {
         for (ICommand command : this.commandHistory) {
           status.append(command.toString());
         }
       } else {
+        // otherwise state that it is empty
         status.append("Command list is empty.");
       }
     }

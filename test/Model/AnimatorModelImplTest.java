@@ -1,84 +1,73 @@
-//package Model;
-//
-//import org.junit.Before;
-//import org.junit.Test;
-//
-//import java.awt.Color;
-//
-//import Model.Point2D.IPoint2D;
-//import Model.Point2D.Point2D;
-//import Model.Shape.IShape;
-//import Model.Shape.Oval;
-//import Model.Shape.Rectangle;
-//
-//import static org.junit.Assert.*;
-//
-//public class AnimatorModelImplTest {
-//
-//  AnimatorModel model1;
-//  IShape rex;
-//  IShape opal;
-//  IShape bob;
-//  IShape pearl;
-//  IPoint2D coords1;
-//  IPoint2D coords2;
-//  IPoint2D coords3;
-//  IPoint2D coords4;
-//
-//
-//  @Before
-//  public void setUp() {
-//    model1 = new AnimatorModelImpl(10.0);
-//    coords1 = new Point2D(100, 100);
-//    coords4 = new Point2D(75, 75);
-//    coords2 = new Point2D(50, 50);
-//    coords3 = new Point2D(25, 25);
-//
-//    rex = new Rectangle("rex", coords1, Color.white, 50, 50, 10, 20);
-//    opal = new Oval("opal", coords1, Color.white, 50, 50, 10, 20);
-//    bob = new Oval("bob", coords1, Color.white, 50, 50, 10, 20);
-//    pearl = new Rectangle("pearl", coords1, Color.white, 50, 50, 10 ,20);
-//
-////    model1.addShape("Rex", rex);
-////    model1.addShape("Pearl", pearl);
-//  }
-//
-//  @Test
-//  public void addShape() {
-//    model1.addShape("Bob", bob);
-//    assertEquals("", model1.getAnimationStatus());
-//  }
-//
-//  @Test
-//  public void removeShape() {
-//    model1.removeShape("Rex");
-//    assertEquals("", model1.getAnimationStatus());
-//  }
-//
-//  @Test
-//  public void getShape() {
-//
-//  }
-//
-////  @Test
-////  public void moveShape() {
-////    model1.moveShape("Pearl", 40, 35);
-////    assertEquals("", model1.getAnimationStatus());
-////  }
-////
-////  @Test
-////  public void changeColor() {
-////    model1.changeColor("Bob", Color.red);
-////    assertEquals("", model1.getAnimationStatus());
-////  }
-////
-////  @Test
-////  public void changeShape() {
-////    model1.changeShape("Pearl", opal);
-////    assertEquals("", model1.getAnimationStatus());
-////  }
-//
-//  @Test
-//  public void getAnimationStatus() {
-//  }
-//}
+package Model;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import java.awt.Color;
+import java.util.List;
+
+import Model.Commands.ChangeColor;
+import Model.Commands.Move;
+import Model.Commands.Scale;
+import Model.Point2D.Point2D;
+import Model.Shape.IShape;
+import Model.Shape.Oval;
+import Model.Shape.Rectangle;
+
+public class AnimatorModelImplTest {
+  AnimatorModel model;
+  AnimatorModel model2;
+
+  IShape penguin;
+  IShape trashPanda;
+  IShape doggo;
+  IShape chairmanMeow;
+
+  @Before
+  public void setUp() {
+    model = new AnimatorModelImpl();
+    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0), new Color(0, 0, 0), 10.0, 10.0, 1, 100);
+    doggo = new Oval("doggo", new Point2D(200, 200.0), new Color(0, 0, 0), 50.0, 50.0, 1, 100);
+    chairmanMeow = new Oval("chairman-meow", new Point2D(200, 200.0), new Color(Color.green.getRGB()), 50.0, 50.0, 1, 100);
+    penguin = new Rectangle("penguin", new Point2D(0, 0), new Color(0, 0, 0), 10, 10, 5, 100);
+
+  }
+
+  @Test
+  public void testAddShape() {
+    model.addShape(trashPanda);
+    System.out.println(model.getAnimationStatus());
+  }
+
+  @Test
+  public void testMoveShape() {
+    model.addShape(doggo);
+    model.addShape(trashPanda);
+
+    model.addAnimation(new Move(trashPanda,
+            20, 50, new Point2D(200, 200), new Point2D(400.0, 400.0)));
+    model.addAnimation(new Scale(doggo,
+            10, 50, 50, 50, 150, 150));
+    model.addAnimation(new ChangeColor(trashPanda,
+            10, 50, new Color(100, 100, 100),
+            new Color(50, 50, 50)));
+    model.addAnimation(new ChangeColor(doggo, 15, 30, new Color(Color.red.getRGB()), new Color(Color.yellow.getRGB())));
+
+    List<IShape> snapshotList = model.getSnapshot(30); // this is half way thru animation time
+    System.out.println(model.getAnimationStatus());
+  }
+
+  @Test
+  public void testGetState() {
+    model2 = new AnimatorModelImpl();
+
+    model2.addShape(penguin);
+    model2.addAnimation(new Move(penguin, 30, 40, new Point2D(20, 20), new Point2D(30, 30)));
+    model2.addAnimation(new Move(penguin, 10, 20, new Point2D(10, 10), new Point2D(20, 20)));
+    model2.addAnimation(new Scale(penguin, 15, 25, 10, 10, 20, 20));
+
+    for (int i = 0; i < 45; i++) {
+      System.out.println("Snapshot at tick " + i + ":\n" + model2.getSnapshot(i) + "\n");
+    }
+  }
+}

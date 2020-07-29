@@ -13,25 +13,24 @@ import Model.Shape.Rectangle;
 
 public class GetStateTest {
   IShape basicRectangle;
-  AnimatorModel model;
+  AnimatorModel model2;
 
   @Before
   public void setUp() {
-    model = new AnimatorModelImpl();
+    model2 = new AnimatorModelImpl();
 
     basicRectangle = new Rectangle("nate", new Point2D(0, 0), new Color(0,0,0), 10, 10, 5, 100);
-    model.addShape(basicRectangle);
-    model.addAnimation(new Move(basicRectangle, 30, 40, new Point2D(20, 20), new Point2D(30, 30)));
-    model.addAnimation(new Move(basicRectangle, 10, 20, new Point2D(10, 10), new Point2D(20, 20)));
-    model.addAnimation(new Scale(basicRectangle, 15, 25, 10, 10, 20, 20));
-
+    model2.addShape(basicRectangle);
+    model2.addAnimation(new Move(basicRectangle, 30, 40, new Point2D(20, 20), new Point2D(30, 30)));
+    model2.addAnimation(new Move(basicRectangle, 10, 20, new Point2D(10, 10), new Point2D(20, 20)));
+    model2.addAnimation(new Scale(basicRectangle, 15, 25, 10, 10, 20, 20));
   }
 
   @Test
   public void testState() {
 //    System.out.println(model.getAnimationStatus());
     for (int i = 0 ; i < 45 ; i++) {
-      System.out.println("Snapshot at tick " + i + ":\n" + model.getSnapshot(i) + "\n");
+      System.out.println("Snapshot at tick " + i + ":\n" + model2.getSnapshot(i) + "\n");
     }
   }
 }
