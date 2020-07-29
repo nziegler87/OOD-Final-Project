@@ -70,10 +70,10 @@ public class AnimatorModelImpl implements AnimatorModel {
             && firstCommand.getShape().getLabel().equals(secondCommand.getShape().getLabel())
             // and either the start for the first command is within the second command time frame
             && (firstCommand.getStartTime() > secondCommand.getStartTime()
-            && firstCommand.getStartTime() < secondCommand.getEndTime())
+            && firstCommand.getEndTime() < secondCommand.getEndTime())
             // or the start for the second command is within the first command time frame
             || (secondCommand.getStartTime() > firstCommand.getStartTime()
-            && secondCommand.getStartTime() < firstCommand.getEndTime()));
+            && secondCommand.getEndTime() < firstCommand.getEndTime()));
   }
 
   /**
