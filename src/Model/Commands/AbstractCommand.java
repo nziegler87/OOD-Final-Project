@@ -12,6 +12,9 @@ public abstract class AbstractCommand implements ICommand {
   protected String commandType;
   protected double tickTracker;
 
+  /*
+  TODO: Add in start params.
+   */
   /**
    * Creates an AbstractCommand object.
    *

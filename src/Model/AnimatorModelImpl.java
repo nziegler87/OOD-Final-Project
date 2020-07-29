@@ -12,6 +12,10 @@ public class AnimatorModelImpl implements AnimatorModel {
   private final HashMap<String, IShape> inventory;
   private final ArrayList<ICommand> commandHistory;
 
+  /*
+  TODO: We need to order our commandHistory by start time. We also need a way to get the last state of the object.
+   */
+
   public AnimatorModelImpl() {
     this.inventory = new HashMap<>();
     this.commandHistory = new ArrayList<>();
@@ -80,6 +84,9 @@ public class AnimatorModelImpl implements AnimatorModel {
 
   }
 
+  /*
+  TODO: For this one, we need to queue up multiple commands that may occur on the same object and execute them in order, passing the modified object to the new command each time.
+   */
   /**
    * Returns a list of all of the shapes and their state based on the tick input.
    *

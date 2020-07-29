@@ -69,3 +69,5 @@ public class Move extends AbstractCommand {
             shape.getLabel(), startCords.toString(), endCords.toString(), startTime, endTime);
   }
 }
+
+
