@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +14,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   private final ArrayList<ICommand> commandHistory;
 
   /*
-  TODO: We need to order our commandHistory by start time. We also need a way to get the last state of the object.
+  TODO: We need to order our commandHistory by start time. - DONE NZ
+        We also need a way to get the last state of the object.
    */
 
   public AnimatorModelImpl() {
@@ -124,6 +126,11 @@ public class AnimatorModelImpl implements AnimatorModel {
         status.append("\n\n");
       }
 
+      // sort list of commands
+      //TODO: Do we sort a copy of the command history or is it okay to sort it as is?
+
+      commandHistory.sort(commandComparator);
+
       // adds the list of commands to the string
       if (!(this.commandHistory.size() == 0)) {
         for (ICommand command : this.commandHistory) {
@@ -136,4 +143,19 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     return status.toString();
   }
+
+  /**
+   * A static comparator class to sort the objects by start time.
+   */
+  public static Comparator<ICommand> commandComparator = new Comparator<ICommand>() {
+
+    @Override
+    public int compare(ICommand o1, ICommand o2) {
+      double commandOneStart = o1.getStartTime();
+      double commandTwoStart = o2.getStartTime();
+
+      return (int) (commandOneStart - commandTwoStart);
+
+    }
+  };
 }

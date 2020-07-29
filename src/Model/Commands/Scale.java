@@ -6,6 +6,8 @@ import Model.Shape.IShape;
  * Create an object that will be used to resize an IShape object.
  */
 public class Scale extends AbstractCommand {
+  private final double startWidth;
+  private final double startHeight;
   private final double endWidth;
   private final double endHeight;
 
@@ -16,13 +18,18 @@ public class Scale extends AbstractCommand {
    * @param shape        a shape on which to perform the action
    * @param startTime    start time for when animation should start
    * @param endTime      end time for when animation should end
+   * @param startWidth   start width of the object
+   * @param startHeight  start height of the object
    * @param endWidth     end width of the object
    * @param endHeight    end height of the object
    * @throws IllegalArgumentException if animation time is 0
    */
-  public Scale(IShape shape, double startTime, double endTime, double endWidth,
-               double endHeight) throws IllegalArgumentException {
+  public Scale(IShape shape, double startTime, double endTime, double startWidth,
+               double startHeight, double endWidth, double endHeight)
+          throws IllegalArgumentException {
     super(shape, startTime, endTime);
+    this.startWidth = startWidth;
+    this.startHeight = startHeight;
     this.endWidth = endWidth;
     this.endHeight = endHeight;
     this.commandType = "scale";
@@ -34,21 +41,21 @@ public class Scale extends AbstractCommand {
     // find the mathematical adjustment
     double adjustment = (tick - startTime) / tickTracker;
 
-    double widthAtTick = shape.getWidth();
-    double heightAtTick = shape.getHeight();
+    double widthAtTick = this.startWidth;
+    double heightAtTick = this.startHeight;
 
-    // calculate color deltas
-    double widthDelta = this.endWidth - shape.getWidth();
-    double heightDelta = this.endHeight - shape.getHeight();
+    // calculate deltas
+    double widthDelta = this.endWidth - this.startWidth;
+    double heightDelta = this.endHeight - this.startHeight;
 
     // find the right condition to follow based on inputs size
     if (endWidth > 0 && endHeight > 0) {
-      widthAtTick = (widthDelta * adjustment) + shape.getWidth();
-      heightAtTick = (heightDelta * adjustment) + shape.getHeight();
+      widthAtTick = (widthDelta * adjustment) + this.startWidth;
+      heightAtTick = (heightDelta * adjustment) + this.startHeight;
     } else if (endWidth > 0) {
-      widthAtTick = (widthDelta * adjustment) + shape.getWidth();
+      widthAtTick = (widthDelta * adjustment) + this.startWidth;
     } else {
-      heightAtTick = (heightDelta * adjustment) + shape.getHeight();
+      heightAtTick = (heightDelta * adjustment) + this.startHeight;
     }
 
     // return a copy of the cloned shape
@@ -62,13 +69,13 @@ public class Scale extends AbstractCommand {
   public String toString() {
     if (endWidth > 0 && endHeight > 0) {
       return String.format("%s changes width from %.1f to %.1f and height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
-              shape.getLabel(), shape.getWidth(), endWidth, shape.getHeight(), endHeight, startTime, endTime);
+              shape.getLabel(), this.startWidth, endWidth, this.startHeight, endHeight, startTime, endTime);
     } else if (endWidth > 0) {
       return String.format("%s changes width from %.1f to %.1f from time t=%.0f to t=%.0f\n",
-              shape.getLabel(), shape.getWidth(), endWidth, startTime, endTime);
+              shape.getLabel(), this.startWidth, endWidth, startTime, endTime);
     } else {
       return String.format("%s changes height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
-              shape.getLabel(), shape.getHeight(), endHeight, startTime, endTime);
+              shape.getLabel(), this.startHeight, endHeight, startTime, endTime);
     }
   }
 }

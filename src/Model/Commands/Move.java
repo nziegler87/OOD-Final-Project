@@ -17,14 +17,16 @@ public class Move extends AbstractCommand {
    * @param shape       a shape on which to perform the action
    * @param startTime   start time for when animation should start
    * @param endTime     end time for when animation should end
+   * @param startCords  starting coordinates for the move
    * @param endCords    ending coordinates for the move
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
 
-  public Move(IShape shape, double startTime, double endTime, IPoint2D endCords)
+  public Move(IShape shape, double startTime, double endTime, IPoint2D startCords,
+              IPoint2D endCords)
           throws IllegalArgumentException {
     super(shape, startTime, endTime);
-    this.startCords = shape.getCoordinates();
+    this.startCords = startCords;
     this.endCords = endCords;
     this.commandType = "move";
   }
@@ -46,8 +48,8 @@ public class Move extends AbstractCommand {
     double yDelta = this.endCords.getY() - this.startCords.getY();
 
     // multiply them by the point in time we are at
-    double xAtTick = (xDelta * adjustment) + shape.getCoordinates().getX();
-    double yAtTick = (yDelta * adjustment) + shape.getCoordinates().getY();
+    double xAtTick = (xDelta * adjustment) + startCords.getX();
+    double yAtTick = (yDelta * adjustment) + startCords.getY();
 
     // create a new Point2D with the updated coordinates
     IPoint2D newCoords = new Point2D(xAtTick, yAtTick);

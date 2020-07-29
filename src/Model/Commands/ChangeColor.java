@@ -19,13 +19,14 @@ public class ChangeColor extends AbstractCommand {
    * @param shape       a shape on which to perform the action
    * @param startTime   start time for when animation should start
    * @param endTime     end time for when animation should end
+   * @param startColor  starting color of the object
    * @param endColor    ending color of the object
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
-  public ChangeColor(IShape shape, double startTime, double endTime,
+  public ChangeColor(IShape shape, double startTime, double endTime, Color startColor,
                      Color endColor) throws IllegalArgumentException {
     super(shape, startTime, endTime);
-    this.startColor = shape.getColor();
+    this.startColor = startColor;
     this.endColor = endColor;
     this.commandType = "changeColor";
   }
@@ -45,9 +46,9 @@ public class ChangeColor extends AbstractCommand {
     int redDelta = endColor.getRed() - startColor.getRed();
 
     // calculate color values at this point in time
-    int blueAtTick = (int) (blueDelta * adjustment) + shape.getColor().getBlue();
-    int greenAtTick = (int) (greenDelta * adjustment) + shape.getColor().getGreen();
-    int redAtTick = (int) (redDelta * adjustment) + shape.getColor().getRed();
+    int blueAtTick = (int) (blueDelta * adjustment) + startColor.getBlue();
+    int greenAtTick = (int) (greenDelta * adjustment) + startColor.getGreen();
+    int redAtTick = (int) (redDelta * adjustment) + startColor.getRed();
 
     // create color object at this point in time
     Color newColor = new Color(redAtTick, greenAtTick, blueAtTick);
