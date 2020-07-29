@@ -31,14 +31,20 @@ public class Move extends AbstractCommand {
     this.commandType = "move";
   }
 
+  /**
+   * Method to execute the class.
+   *
+   * @throws IllegalArgumentException if tick is before or after end time
+   *
+   * @return a modified IShape object with animation applied at this tick in time
+   */
   @Override
-  public IShape execute(double tick) {
+  public IShape execute(IShape shape, double tick) throws IllegalArgumentException {
 
-    // TODO: Move this logic to the get game state
-//    // if the timing is not right, don't do anything
-//    if (tick < startTime || tick > endTime) {
-//      throw new IllegalArgumentException("")
-//    }
+    // if the timing is not correct, don't do anything
+    if (tick < startTime || tick > endTime) {
+      throw new IllegalArgumentException("Tick is before start time or after end time.");
+    }
 
     // find the mathematical adjustment
     double adjustment = (tick - startTime) / tickTracker;
@@ -55,7 +61,7 @@ public class Move extends AbstractCommand {
     IPoint2D newCoords = new Point2D(xAtTick, yAtTick);
 
     // return a copy of the cloned shape
-    IShape shapeSnapshot = this.shape.copy();
+    IShape shapeSnapshot = shape.copy();
     shapeSnapshot.setCoordinates(newCoords);
     return shapeSnapshot;
 

@@ -35,8 +35,20 @@ public class Scale extends AbstractCommand {
     this.commandType = "scale";
   }
 
+  /**
+   * Method to execute the class.
+   *
+   * @throws IllegalArgumentException if tick is before or after end time
+   *
+   * @return a modified IShape object with animation applied at this tick in time
+   */
   @Override
-  public IShape execute(double tick) {
+  public IShape execute(IShape shape, double tick) throws IllegalArgumentException {
+
+    // if the timing is not correct, don't do anything
+    if (tick < startTime || tick > endTime) {
+      throw new IllegalArgumentException("Tick is before start time or after end time.");
+    }
 
     // find the mathematical adjustment
     double adjustment = (tick - startTime) / tickTracker;
@@ -59,7 +71,7 @@ public class Scale extends AbstractCommand {
     }
 
     // return a copy of the cloned shape
-    IShape shapeSnapshot = this.shape.copy();
+    IShape shapeSnapshot = shape.copy();
     shapeSnapshot.setWidth(widthAtTick);
     shapeSnapshot.setHeight(heightAtTick);
     return shapeSnapshot;

@@ -8,13 +8,15 @@ import Model.Shape.IShape;
 public interface ICommand {
 
   /**
-   * Method to execute the class.
+   * Method to execute the animation at a given tick in time.
+   *
+   * @param shape a shape on which to perform the animation
    * @param tick the time considered when running the command
    *
    * @return  an IShape that with the state of the object during this command at the
    *          designated tick
    */
-  IShape execute(double tick);
+  IShape execute(IShape shape, double tick);
 
   /**
    * Returns the command type

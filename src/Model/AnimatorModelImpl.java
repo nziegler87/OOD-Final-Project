@@ -29,11 +29,11 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void addShape(IShape shape)
           throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(shape, "Shape must not be null.");
-    // if the object is already in the inventory list, throw exception
+
     if (this.inventory.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("This object has already been added.");
     }
-    // otherwise add the object to the inventory list
+
     this.inventory.put(shape.getLabel(), shape);
   }
 
@@ -48,11 +48,9 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void removeShape(IShape shape)
           throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(shape, "Shape must not be null.");
-    // if the object is not in the inventory list, throw exception
     if (!this.inventory.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("Cannot remove object that does not exist.");
     }
-    // otherwise remove the object from the inventory list
     this.inventory.remove(shape.getLabel());
   }
 
@@ -85,6 +83,14 @@ public class AnimatorModelImpl implements AnimatorModel {
           (int) (o1.getStartTime() - o2.getStartTime());
 
   //TODO: If this works, need to test
+
+  /**
+   * TODO: FILL THIS OUT
+   *
+   * @param command
+   * @throws NullPointerException
+   * @throws IllegalArgumentException
+   */
   public void addAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException {
     // check to make sure objects are not null
@@ -114,10 +120,39 @@ public class AnimatorModelImpl implements AnimatorModel {
   public List<IShape> getSnapshot(double tick) {
     List<IShape> snapshotList = new ArrayList<>();
 
-    for (ICommand command : this.commandHistory) {
-      if (tick > command.getShape().getAppearTime()
-              && tick < command.getShape().getDisappearTime()) {
-        snapshotList.add(command.execute(tick));
+    // go through each shape in the inventory and see what commands are associated with the shape
+    for (IShape shape : this.inventory.values()) {
+
+      //TODO: Does this logic make sense?
+
+      // if the shape is on the screen, use animation commands to get its current state
+      if (shape.getAppearTime() < tick && shape.getDisappearTime() >= tick) {
+
+        // create a temporary shape on which to create state
+        IShape temporaryShape = shape.copy();
+
+        // iterate through commands
+        for (ICommand command : this.commandHistory) {
+
+          // if command is associated with shape
+          if ((command.getShape().getLabel().equals(shape.getLabel()))
+                  && (tick >= command.getShape().getAppearTime())) {
+            if (tick >= command.getStartTime())
+
+              // try to execute command
+              try {
+                temporaryShape = command.execute(temporaryShape, tick);
+
+                /*
+                If tick is past command time, it will throw an exception, so get the state of the
+                objects at the end of the command
+                 */
+              } catch (IllegalArgumentException iae) {
+                temporaryShape = command.execute(temporaryShape, command.getEndTime());
+              }
+          }
+        }
+        snapshotList.add(temporaryShape);
       }
     }
     return snapshotList;
@@ -130,6 +165,11 @@ public class AnimatorModelImpl implements AnimatorModel {
    */
   @Override
   public String getAnimationStatus() {
+
+    if (this.inventory.size() == 0) {
+      return "No shapes have been added to the inventory, so no animations can be displayed";
+    }
+
     StringBuilder status = new StringBuilder();
 
     // the top of the string description
