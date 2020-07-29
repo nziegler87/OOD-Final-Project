@@ -9,10 +9,12 @@ import Model.Commands.Move;
 import Model.Commands.Scale;
 import Model.Point2D.Point2D;
 import Model.Shape.IShape;
+import Model.Shape.Oval;
 import Model.Shape.Rectangle;
 
 public class GetStateTest {
   IShape basicRectangle;
+  IShape basicOval;
   AnimatorModel model;
 
   @Before
@@ -25,12 +27,14 @@ public class GetStateTest {
     model.addAnimation(new Move(basicRectangle, 10, 20, new Point2D(10, 10), new Point2D(20, 20)));
     model.addAnimation(new Scale(basicRectangle, 15, 25, 10, 10, 20, 20));
 
+    basicOval = new Oval("Danielle", new Point2D(5,5), new Color(0, 0, 0), 5 , 5, 60, 80);
+    model.addShape(basicOval);
   }
 
   @Test
   public void testState() {
-//    System.out.println(model.getAnimationStatus());
-    for (int i = 0 ; i < 50 ; i++) {
+    System.out.println(model.getAnimationStatus() + "\n\n");
+    for (int i = 0 ; i < 100 ; i++) {
       System.out.println("Snapshot at tick " + i + ":\n" + model.getSnapshot(i) + "\n");
     }
   }
