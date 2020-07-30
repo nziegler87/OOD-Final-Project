@@ -234,6 +234,80 @@ public class AnimatorModelImplTest {
             model.getAnimationStatus());
   }
 
+  // removing a null animation
+  @Test(expected = NullPointerException.class)
+  public void testRemoveAnimationNull() {
+    model.removeAnimation(null);
+  }
+
+  // removing animation from a shape that is not in the list
+  @Test(expected = IllegalArgumentException.class)
+  public void testRemoveAnimationNotInList() {
+    ICommand move = new Move(chairmanMeow, 10, 50,
+            new Point2D(40, 50), new Point2D(100, 100));
+    model.removeAnimation(move);
+  }
+
+  // removing an animation
+  @Test
+  public void testRemoveAnimation() {
+    model.addShape(chairmanMeow);
+    model.addShape(trashPanda);
+
+    ICommand colorMeow = new ChangeColor(chairmanMeow, 55, 80, Color.MAGENTA, Color.BLUE);
+    ICommand scaleTrashPanda = new Scale(trashPanda, 10, 25, 70, 35, 40, 50);
+
+    model.addAnimation(colorMeow);
+    model.addAnimation(scaleTrashPanda);
+
+    assertEquals("Shapes:\n" +
+                    "Name: doggo\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "Name: trash-panda\n" +
+                    "Type: rectangle\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "Name: chairman-meow\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n" +
+                    "chairman-meow changes color from (255, 0, 255) to (0, 0, 255) from time t=55 to t=80\n",
+            model.getAnimationStatus());
+
+    model.removeAnimation(colorMeow);
+
+    assertEquals("Shapes:\n" +
+                    "Name: doggo\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "Name: trash-panda\n" +
+                    "Type: rectangle\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "Name: chairman-meow\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n",
+            model.getAnimationStatus());
+  }
+
   @Test
   public void testGetAnimationState() {
     model2 = new AnimatorModelImpl();
@@ -545,6 +619,7 @@ public class AnimatorModelImplTest {
             "Disappears at t=100]\n\n", str);
   }
 
+  // TODO: why not working???
   @Test
   public void testGetSnapshot() {
     AnimatorModel modelSnapshot = new AnimatorModelImpl();
