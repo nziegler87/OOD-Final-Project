@@ -5,7 +5,9 @@ import Model.Point2D.IPoint2D;
 import Model.Point2D.Point2D;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * A JUnit test class for Point2D.
@@ -76,4 +78,32 @@ public class Point2DTest {
     assertEquals("(3.5,3.0)", positivePointer.toString());
   }
 
+  // test equals
+  @Test
+  public void testEqualsIdenticalObjects() {
+    IPoint2D samePoint1 = new Point2D(24.44, 28.79);
+    IPoint2D samePoint2 = new Point2D(24.44, 28.79);
+
+    assertEquals(samePoint1, samePoint2);
+    assertEquals(samePoint2, samePoint1);
+  }
+
+  // test equals
+  @Test
+  public void testEqualsSameReference() {
+    IPoint2D samePoint1 = new Point2D(24.44, 28.79);
+    IPoint2D samePoint2 = samePoint1;
+
+    assertEquals(samePoint1, samePoint2);
+    assertEquals(samePoint2, samePoint1);
+  }
+
+  // test equals
+  @Test
+  public void testEqualsNotIdenticalObjects() {
+    IPoint2D samePoint1 = new Point2D(24.44, 28.79);
+    IPoint2D samePoint2 = new Point2D(24.45, 28.79);
+    assertNotEquals(samePoint1, samePoint2);
+    assertNotEquals(samePoint2, samePoint1);
+  }
 }
