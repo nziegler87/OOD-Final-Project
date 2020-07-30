@@ -43,24 +43,7 @@ public class CommandTest {
             10, 20, 20 ,10);
   }
 
-  @Test
-  public void testChangeColor() {
-    assertEquals("bob changes color from (255, 0, 255) to (255, 175, 175) "
-            + "from time t=10 to t=50\n", changeColor.toString());
-  }
-
-  @Test
-  public void testMove() {
-    assertEquals("pearl moves from (100.0,100.0) to (50.0,50.0) "
-            + "from time t=0 to t=15\n", move.toString());
-  }
-
-  @Test
-  public void testScale() {
-    assertEquals("bob changes width from 10.0 to 20.0 and height from 20.0 to 10.0 "
-            + "from time t=40 to t=60\n", scale.toString());
-  }
-
+  // getting the command type for the commands
   @Test
   public void getCommandType() {
     assertEquals("changeColor", changeColor.getCommandType());
@@ -68,6 +51,7 @@ public class CommandTest {
     assertEquals("scale", scale.getCommandType());
   }
 
+  // getting the start time for commands
   @Test
   public void getStartTime() {
     assertEquals(10, changeColor.getStartTime(), 0.01);
@@ -75,6 +59,7 @@ public class CommandTest {
     assertEquals(40, scale.getStartTime(), 0.01);
   }
 
+  // getting the end time for commands
   @Test
   public void getEndTime() {
     assertEquals(50, changeColor.getEndTime(), 0.01);
@@ -82,10 +67,22 @@ public class CommandTest {
     assertEquals(60, scale.getEndTime(), 0.01);
   }
 
+  // getting the shape from the command
   @Test
   public void getShape() {
     assertEquals(bob.toString(), changeColor.getShape().toString());
     assertEquals(pearl.toString(), move.getShape().toString());
     assertEquals(bob.toString(), scale.getShape().toString());
+  }
+
+  // string output for commands
+  @Test
+  public void testToString() {
+    assertEquals("bob changes color from (255, 0, 255) to (255, 175, 175) "
+            + "from time t=10 to t=50\n", changeColor.toString());
+    assertEquals("pearl moves from (100.0,100.0) to (50.0,50.0) "
+            + "from time t=0 to t=15\n", move.toString());
+    assertEquals("bob changes width from 10.0 to 20.0 and height from 20.0 to 10.0 "
+            + "from time t=40 to t=60\n", scale.toString());
   }
 }

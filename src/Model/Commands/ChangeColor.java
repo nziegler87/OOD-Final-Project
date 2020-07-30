@@ -12,15 +12,16 @@ public class ChangeColor extends AbstractCommand {
   private final Color endColor;
 
   //TODO: Add in IllegalArg if same type of animation is being already done on a shape...across all three
+  // TODO: I think we did this in the model already. Delete if so.
 
   /**
    * Creates an object that will change the color of an IShape object.
    *
-   * @param shape       a shape on which to perform the action
-   * @param startTime   start time for when animation should start
-   * @param endTime     end time for when animation should end
-   * @param startColor  starting color of the object
-   * @param endColor    ending color of the object
+   * @param shape      a shape on which to perform the action
+   * @param startTime  start time for when animation should start
+   * @param endTime    end time for when animation should end
+   * @param startColor starting color of the object
+   * @param endColor   ending color of the object
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
   public ChangeColor(IShape shape, double startTime, double endTime, Color startColor,
@@ -34,9 +35,8 @@ public class ChangeColor extends AbstractCommand {
   /**
    * Method to execute the class.
    *
-   * @throws IllegalArgumentException if tick is before or after end time
-   *
    * @return a modified IShape object with animation applied at this tick in time
+   * @throws IllegalArgumentException if tick is before or after end time
    */
   @Override
   public IShape execute(IShape shape, double tick) throws IllegalArgumentException {
