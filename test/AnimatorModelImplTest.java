@@ -619,7 +619,6 @@ public class AnimatorModelImplTest {
             "Disappears at t=100]\n\n", str);
   }
 
-  // TODO: why not working???
   @Test
   public void testGetSnapshot() {
     AnimatorModel modelSnapshot = new AnimatorModelImpl();
@@ -651,7 +650,6 @@ public class AnimatorModelImplTest {
     testSnapshotList.add(trashPandaCopy);
     testSnapshotList.add(meowCopy);
 
-    System.out.println(modelSnapshot.getSnapshot(30));
     assertEquals(testSnapshotList.toString(),modelSnapshot.getSnapshot(30).toString());
   }
 }
