@@ -1,5 +1,8 @@
 package Model.Commands;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import Model.Shape.IShape;
 
 /**
@@ -77,6 +80,11 @@ public class Scale extends AbstractCommand {
     return shapeSnapshot;
   }
 
+  /**
+   * Returns the command details as a string.
+   *
+   * @return str the declarative animation details of the command
+   */
   @Override
   public String toString() {
     if (endWidth > 0 && endHeight > 0) {
@@ -89,5 +97,46 @@ public class Scale extends AbstractCommand {
       return String.format("%s changes height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
               shape.getLabel(), this.startHeight, endHeight, startTime, endTime);
     }
+  }
+
+  /**
+   * Indicates whether some other object is "equal to" this one.
+   *
+   * @param other the reference object with which to compare.
+   * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (this == other) {
+      return true;
+    }
+
+    if (!(other instanceof Scale)) {
+      return false;
+    }
+
+    Scale otherS = (Scale) other;
+
+    return (this.shape.equals(otherS.shape))
+            && (this.startTime == otherS.startTime)
+            && (this.endTime == otherS.endTime)
+            && (this.startWidth == otherS.startWidth)
+            && (this.startHeight == otherS.startHeight)
+            && (this.endWidth == otherS.endWidth)
+            && (this.commandType.equals(otherS.commandType));
+  }
+
+  /**
+   * Returns a hash code value for the object.
+   *
+   * @return a hash code value for this object.
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(shape,
+            startTime, endTime,
+            startWidth, startHeight,
+            startWidth, endWidth,
+            commandType);
   }
 }

@@ -1,7 +1,9 @@
 package Model.Shape;
 
 import java.awt.Color;
+import java.util.Objects;
 
+import Model.Commands.ChangeColor;
 import Model.Point2D.IPoint2D;
 
 /**
@@ -130,4 +132,59 @@ public class Oval extends AbstractShape {
     return new Oval(this.label, this.coordinates, this.color, this.xRadius, this.yRadius,
             this.appearTime, this.disappearTime);
   }
+
+  /**
+   * Indicates whether some object is an oval.
+   *
+   * @param other an object to check.
+   * @return true if the object is an oval, otherwise false
+   */
+  @Override
+  protected boolean equalsOval(Oval other) {
+    return (this.label.equals(other.label)) && (this.coordinates.equals(other.coordinates))
+            && this.color.equals(other.color) && (this.xRadius == other.xRadius)
+            && (this.yRadius == other.yRadius) && (this.appearTime == other.appearTime)
+            && (this.disappearTime == other.disappearTime);
+  }
+
+//  /**
+//   * Allows one to compare any shape to another shape and see if they are equal.
+//   *
+//   * @param other a shape to compare
+//   * @return true if they are equal, otherwise false.
+//   */
+//  @Override
+//  public boolean equalsShape(IShape other) {
+//    if (other instanceof AbstractShape) {
+//      AbstractShape aShape = (AbstractShape) other;
+//      return aShape.equalsOval(this);
+//    }
+//    return false;
+//  }
+
+  /**
+   * Indicates whether some other object is "equal to" this one.
+   *
+   * @param other the reference object with which to compare.
+   * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof AbstractShape) {
+      AbstractShape aShape = (AbstractShape) other;
+      return aShape.equalsOval(this);
+    }
+    return false;
+  }
+
+  /**
+   * Returns a hash code value for the object.
+   *
+   * @return a hash code value for this object.
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(label, coordinates, color, xRadius, yRadius, appearTime, disappearTime);
+  }
 }
+

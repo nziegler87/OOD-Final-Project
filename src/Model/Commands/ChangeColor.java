@@ -1,6 +1,7 @@
 package Model.Commands;
 
 import java.awt.Color;
+import java.util.Objects;
 
 import Model.Shape.IShape;
 
@@ -73,10 +74,51 @@ public class ChangeColor extends AbstractCommand {
    *
    * @return str the declarative animation details of the command
    */
+  @Override
   public String toString() {
     return String.format("%s changes color from (%d, %d, %d) to (%d, %d, %d) from "
                     + "time t=%.0f to t=%.0f\n",
             shape.getLabel(), startColor.getRed(), startColor.getGreen(), startColor.getBlue(),
             endColor.getRed(), endColor.getGreen(), endColor.getBlue(), startTime, endTime);
   }
+
+  /**
+   * Indicates whether some other object is "equal to" this one.
+   *
+   * @param other the reference object with which to compare.
+   * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (this == other) {
+      return true;
+    }
+
+    if (!(other instanceof ChangeColor)) {
+      return false;
+    }
+
+    ChangeColor otherS = (ChangeColor) other;
+
+    return (this.shape.equals(otherS.shape))
+            && (this.startTime == otherS.startTime)
+            && (this.endTime == otherS.endTime)
+            && (this.startColor.equals(otherS.startColor))
+            && (this.endColor.equals(otherS.endColor))
+            && (this.commandType.equals(otherS.commandType));
+  }
+
+  /**
+   * Returns a hash code value for the object.
+   *
+   * @return a hash code value for this object.
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(shape,
+            startTime, endTime,
+            startColor, endColor,
+            commandType);
+  }
+
 }

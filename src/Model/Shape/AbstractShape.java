@@ -164,4 +164,25 @@ public abstract class AbstractShape implements IShape {
 
     this.color = color;
   }
-}
+
+  /**
+   * Indicates whether some object is an oval.
+   *
+   * @param other an object to check.
+   *
+   * @return true if the object is an oval, otherwise false
+   */
+  protected boolean equalsOval(Oval other) {
+    return false;
+  }
+
+  /**
+   * Indicates whether some object is a rectangle.
+   *
+   * @param other an object to check
+   *
+   * @return true if the object is a rectangle, otherwise false
+   */
+  protected boolean equalsRectangle(Rectangle other) {
+    return false;
+  }}
