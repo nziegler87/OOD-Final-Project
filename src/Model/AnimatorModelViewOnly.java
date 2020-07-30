@@ -11,19 +11,17 @@ import Model.Shape.IShape;
 
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from
- * shapes. This interface is for the model of the program. It contains only commands that read
- * data from any object that implements the interface.
+ * shapes. This interface is for the model of the program. It contains only commands that read data
+ * from any object that implements the interface.
  */
 public interface AnimatorModelViewOnly {
 
   /**
    * Returns a list of all of the shapes and their current state based at a given tick of time.
    *
-   * @param tick  a tick in the animation where you want to return the state of all objects
-   *              visible on the screen
-   *
+   * @param tick a tick in the animation where you want to return the state of all objects visible
+   *             on the screen
    * @return List<IShape> with the summary of shapes and their state
-   *
    * @throws IllegalArgumentException if tick is not greater or equal to 0
    */
   List<IShape> getSnapshot(double tick) throws IllegalArgumentException;
