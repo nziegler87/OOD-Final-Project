@@ -139,6 +139,68 @@ public class AnimatorModelImplTest {
   }
 
   // adding in an animation with a conflict with another
+  @Test(expected = IllegalArgumentException.class)
+  public void testSequentialAnimationSameShapeWithConflict() {
+    model.addShape(chairmanMeow);
+
+    ICommand moveFirst = new Move(chairmanMeow, 10, 50,
+            new Point2D(40, 50), new Point2D(100, 100));
+    ICommand moveSecond = new Move(chairmanMeow, 10, 50,
+            new Point2D(100, 100), new Point2D(150, 150));
+
+    model.addAnimation(moveFirst);
+    model.addAnimation(moveSecond);
+
+    assertEquals("Shapes:\n" +
+            "Name: doggo\n" +
+            "Type: oval\n" +
+            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+            "Appears at t=1\n" +
+            "Disappears at t=100\n" +
+            "\n" +
+            "Name: chairman-meow\n" +
+            "Type: oval\n" +
+            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+            "Appears at t=1\n" +
+            "Disappears at t=100\n" +
+            "\n" +
+            "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=10 to t=50\n" +
+            "chairman-meow changes color from (255, 175, 175) to (0, 0, 255) from time t=10 to t=50\n" +
+            "chairman-meow changes width from 10.0 to 50.0 and height from 10.0 to 50.0 from time t=10 to t=50\n", model.getAnimationStatus());
+  }
+
+  // adding in an animation with a conflict with another
+  @Test
+  public void testSequentialAnimationSameShape() {
+    model.addShape(chairmanMeow);
+
+    ICommand moveFirst = new Move(chairmanMeow, 10, 50,
+            new Point2D(40, 50), new Point2D(100, 100));
+    ICommand moveSecond = new Move(chairmanMeow, 50, 75,
+            new Point2D(100, 100), new Point2D(150, 150));
+
+    model.addAnimation(moveFirst);
+    model.addAnimation(moveSecond);
+
+    assertEquals("Shapes:\n" +
+                    "Name: doggo\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "Name: chairman-meow\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=10 to t=50\n" +
+                    "chairman-meow moves from (100.0,100.0) to (150.0,150.0) from time t=50 to t=75\n",
+            model.getAnimationStatus());
+  }
+
+  // adding in an animation with a conflict with another
   @Test
   public void testAddAnimationSameShapeAllCommandsNoConflict() {
     model.addShape(chairmanMeow);
@@ -656,5 +718,41 @@ public class AnimatorModelImplTest {
     testSnapshotList.add(meowCopy);
 
     assertEquals(testSnapshotList.toString(), modelSnapshot.getSnapshot(30).toString());
+  }
+
+  // getting the snapshot at tick 35 where both shapes don't overlap
+  @Test
+  public void testGetSnapshotNotSameTime() {
+    AnimatorModel modelSnapshot = new AnimatorModelImpl();
+
+    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0),
+            new Color(0, 0, 0), 10.0, 10.0, 70,
+            100);
+
+    doggo = new Oval("doggo", new Point2D(200, 200.0),
+            new Color(0, 0, 0), 50.0, 50.0, 10,
+            50);
+
+    modelSnapshot.addShape(doggo);
+    modelSnapshot.addShape(trashPanda);
+
+    ICommand colorDoggo = new ChangeColor(doggo, 20, 35, Color.YELLOW, Color.RED);
+    ICommand scaleTrashPanda = new Scale(trashPanda, 10, 40, 10, 10, 40, 40);
+
+    modelSnapshot.addAnimation(colorDoggo);
+    modelSnapshot.addAnimation(scaleTrashPanda);
+
+    List<IShape> testSnapshotList = new ArrayList<>();
+
+    IShape doggoCopy = doggo.copy();
+    doggoCopy.setColor(Color.RED);
+
+    IShape trashPandaCopy = trashPanda.copy();
+    trashPandaCopy.setHeight(30);
+    trashPandaCopy.setWidth(30);
+
+    testSnapshotList.add(doggoCopy);
+
+    assertEquals(testSnapshotList.toString(), modelSnapshot.getSnapshot(35).toString());
   }
 }
