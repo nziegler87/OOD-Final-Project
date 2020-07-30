@@ -26,21 +26,21 @@ public abstract class AbstractShape implements IShape {
    * @param color         the color of the object, a Color object
    * @param appearTime    the time after which the object is visible on the screen
    * @param disappearTime The time after which the object is no longer visible on the screen
-   * @throws IllegalArgumentException if either coordinates or color are null
+   * @throws NullPointerException     if the coordinates or color are null
+   * @throws IllegalArgumentException if the appear time or disappear time is negative or if the
+   *                                  appear time comes after or equal to the disappear time
    */
   public AbstractShape(String label, IPoint2D coordinates, Color color,
-                       double appearTime, double disappearTime) throws IllegalArgumentException {
-
-    try {
-      Objects.requireNonNull(coordinates);
-      Objects.requireNonNull(color);
-    } catch (NullPointerException npe) {
-      throw new IllegalArgumentException("Coordinates and color cannot be null.");
-    }
-
+                       double appearTime, double disappearTime) throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(coordinates, "Coordinates cannot be null.");
+    Objects.requireNonNull(color, "Color cannot be null.");
     this.label = label;
     this.coordinates = coordinates;
     this.color = color;
+    if (appearTime < 0 || disappearTime < 0 || appearTime <= disappearTime) {
+      throw new IllegalArgumentException("Time cannot be negative, and appear time must come " +
+              "before disappear time.");
+    }
     this.appearTime = appearTime;
     this.disappearTime = disappearTime;
   }
@@ -90,10 +90,11 @@ public abstract class AbstractShape implements IShape {
    * Method to set the new coordinates of the object when passed a IPoint2D class.
    *
    * @param endCords the new coordinates of the object
-   * @throws IllegalArgumentException if endCords is null
+   * @throws NullPointerException if the endCords are null
    */
   @Override
-  public void setCoordinates(IPoint2D endCords) {
+  public void setCoordinates(IPoint2D endCords) throws NullPointerException {
+    Objects.requireNonNull(endCords, "End coordinates cannot be null.");
     this.coordinates = endCords;
   }
 
@@ -101,9 +102,13 @@ public abstract class AbstractShape implements IShape {
    * Method to set the start time of the shape object.
    *
    * @param appearTime the time after which the object should appear on the screen, a double
+   * @throws IllegalArgumentException when time is negative
    */
   @Override
-  public void setAppearTime(double appearTime) {
+  public void setAppearTime(double appearTime) throws IllegalArgumentException {
+    if (appearTime < 0) {
+      throw new IllegalArgumentException("Time must be positive.");
+    }
     this.appearTime = appearTime;
   }
 
@@ -111,9 +116,13 @@ public abstract class AbstractShape implements IShape {
    * Method to set the end time of the shape object.
    *
    * @param disappearTime the time after which the object should disappear on the screen, a double
+   * @throws IllegalArgumentException when time is negative or less than appear time
    */
   @Override
-  public void setDisappearTime(double disappearTime) {
+  public void setDisappearTime(double disappearTime) throws IllegalArgumentException {
+    if (disappearTime < 0 || disappearTime <= appearTime) {
+      throw new IllegalArgumentException("Time must be positive and greater than appear time.");
+    }
     this.disappearTime = disappearTime;
   }
 
@@ -151,15 +160,11 @@ public abstract class AbstractShape implements IShape {
    * Sets the color of the object.
    *
    * @param color the color of the object, a Color object
-   * @throws IllegalArgumentException if the passed color is null
+   * @throws NullPointerException if the color is null
    */
   @Override
-  public void setColor(Color color) throws IllegalArgumentException {
-    try {
-      Objects.requireNonNull(color);
-    } catch (NullPointerException npe) {
-      throw new IllegalArgumentException("Color cannot be null.");
-    }
+  public void setColor(Color color) throws NullPointerException {
+    Objects.requireNonNull(color, "Color cannot be null.");
     this.color = color;
   }
 
@@ -167,7 +172,6 @@ public abstract class AbstractShape implements IShape {
    * Indicates whether some object is an oval.
    *
    * @param other an object to check.
-   *
    * @return true if the object is an oval, otherwise false
    */
   protected boolean equalsOval(Oval other) {
@@ -178,9 +182,9 @@ public abstract class AbstractShape implements IShape {
    * Indicates whether some object is a rectangle.
    *
    * @param other an object to check
-   *
    * @return true if the object is a rectangle, otherwise false
    */
   protected boolean equalsRectangle(Rectangle other) {
     return false;
-  }}
+  }
+}

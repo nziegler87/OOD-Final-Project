@@ -1,6 +1,5 @@
 package Model.Commands;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 import Model.Shape.IShape;
@@ -14,7 +13,6 @@ public class Scale extends AbstractCommand {
   private final double endWidth;
   private final double endHeight;
 
-
   /**
    * Creates an object that will resize an IShape object.
    *
@@ -25,7 +23,7 @@ public class Scale extends AbstractCommand {
    * @param startHeight start height of the object
    * @param endWidth    end width of the object
    * @param endHeight   end height of the object
-   * @throws NullPointerException if shape is null
+   * @throws NullPointerException     if shape is null
    * @throws IllegalArgumentException if animation time is 0
    */
   public Scale(IShape shape, double startTime, double endTime, double startWidth,
@@ -44,12 +42,12 @@ public class Scale extends AbstractCommand {
    *
    * @return a modified IShape object with animation applied at this tick in time
    * @throws IllegalArgumentException if tick is before or after end time
-   * @throws NullPointerException if shape is null
+   * @throws NullPointerException     if shape is null
    */
   @Override
-  public IShape execute(IShape shape, double tick) throws NullPointerException,
-          IllegalArgumentException {
-    Objects.requireNonNull(shape, "Shape object cannot be null" );
+  public IShape execute(IShape shape, double tick)
+          throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(shape, "Shape object cannot be null");
 
     // if the timing is not correct, don't do anything
     if (tick < startTime || tick > endTime) {

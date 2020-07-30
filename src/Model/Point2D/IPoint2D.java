@@ -10,12 +10,12 @@ public interface IPoint2D {
    *
    * @return the x value of the Point2D object.
    */
-  public double getX();
+  double getX();
 
   /**
    * Return the y value of the Point2D object.
    *
    * @return the y value of the Point2D object.
    */
-  public double getY();
+  double getY();
 }

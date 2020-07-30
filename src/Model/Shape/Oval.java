@@ -3,7 +3,6 @@ package Model.Shape;
 import java.awt.Color;
 import java.util.Objects;
 
-import Model.Commands.ChangeColor;
 import Model.Point2D.IPoint2D;
 
 /**
@@ -23,17 +22,17 @@ public class Oval extends AbstractShape {
    * @param color       the color of the object, a Color object
    * @param xRadius     the xRadius of the object, a double
    * @param yRadius     the yRadius of the object, a double
+   * @throws NullPointerException if the coordinates or color are null
    * @throws IllegalArgumentException if either coordinates or color objects are null or if either
    *                                  xRadius or yRadius are not greater than 0
    */
   public Oval(String label, IPoint2D coordinates, Color color, double xRadius, double yRadius,
-              double appearTime, double disappearTime) {
+              double appearTime, double disappearTime)
+          throws NullPointerException, IllegalArgumentException{
     super(label, coordinates, color, appearTime, disappearTime);
-
     if (xRadius <= 0 || yRadius <= 0) {
       throw new IllegalArgumentException("xRadius or yRadius must be greater than 0.");
     }
-
     this.type = "oval";
     this.xRadius = xRadius;
     this.yRadius = yRadius;
@@ -82,7 +81,6 @@ public class Oval extends AbstractShape {
     if (yRadius <= 0) {
       throw new IllegalArgumentException("Height cannot be less than 0.");
     }
-
     this.yRadius = yRadius;
   }
 
@@ -92,13 +90,9 @@ public class Oval extends AbstractShape {
    *
    * @param factor a factor used in resizing, a double
    * @return a shape of the same kind as this one, just resized using the provided factor.
-   * @throws IllegalArgumentException if factor is not greater than zero
    */
   @Override
-  public IShape scale(double factor) throws IllegalArgumentException {
-    if (factor <= 0) {
-      throw new IllegalArgumentException("Factor must be greater than zero");
-    }
+  public IShape scale(double factor) {
     double sqrtFactor = Math.sqrt(factor);
     return new Oval(this.label, this.coordinates, this.color, this.xRadius * sqrtFactor,
             this.yRadius * sqrtFactor, this.appearTime, this.disappearTime);

@@ -23,15 +23,20 @@ public class Rectangle extends AbstractShape {
    * @param color       the color of the object, a Color object
    * @param width       the width of the object, a double
    * @param height      the height of the object, a double
+   * @throws NullPointerException if the coordinates or color are null
    * @throws IllegalArgumentException if either coordinates or color objects are null or if either
    *                                  width or height are not greater than 0
    */
   public Rectangle(String label, IPoint2D coordinates, Color color, double width, double height,
-                   double appearTime, double disappearTime) {
+                   double appearTime, double disappearTime)
+          throws NullPointerException, IllegalArgumentException {
     super(label, coordinates, color, appearTime, disappearTime);
     this.type = "rectangle";
     this.width = width;
     this.height = height;
+    if (this.width <= 0 || this.height <= 0) {
+      throw new IllegalArgumentException("Width and height must be greater than 0.");
+    }
   }
 
   /**
@@ -53,7 +58,6 @@ public class Rectangle extends AbstractShape {
     if (width <= 0) {
       throw new IllegalArgumentException("Width cannot be less than 0.");
     }
-
     this.width = width;
   }
 
@@ -76,7 +80,6 @@ public class Rectangle extends AbstractShape {
     if (height <= 0) {
       throw new IllegalArgumentException("Height cannot be less than 0.");
     }
-
     this.height = height;
   }
 
@@ -86,13 +89,9 @@ public class Rectangle extends AbstractShape {
    *
    * @param factor a factor used in resizing, a double
    * @return a shape of the same kind as this one, just resized using the provided factor.
-   * @throws IllegalArgumentException if factor is not greater than zero
    */
   @Override
-  public IShape scale(double factor) throws IllegalArgumentException {
-    if (factor <= 0) {
-      throw new IllegalArgumentException("Factor must be greater than zero");
-    }
+  public IShape scale(double factor) {
     double sqrtFactor = Math.sqrt(factor);
     return new Rectangle(this.label, this.coordinates, this.color, this.width * sqrtFactor,
             this.height * sqrtFactor, this.appearTime, this.disappearTime);

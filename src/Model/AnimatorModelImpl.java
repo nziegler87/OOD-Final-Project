@@ -143,6 +143,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    * @return List<IShape> with the summary of shapes and their state
    * @throws IllegalArgumentException if tick is not greater or equal to 0
    */
+  @Override
   public List<IShape> getSnapshot(double tick) throws IllegalArgumentException {
     if (tick < 0) {
       throw new IllegalArgumentException("Tick must be greater or equal to 0");

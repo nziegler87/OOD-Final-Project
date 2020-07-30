@@ -14,7 +14,7 @@ public interface ICommand {
    * @param shape a shape on which to perform the animation
    * @param tick  the time considered when running the command
    * @return an IShape that with the state of the object during this command at the designated tick
-   * @throws NullPointerException     if the shape object is null
+   * @throws NullPointerException if shape is null
    * @throws IllegalArgumentException if the command has issues executing the function
    */
   IShape execute(IShape shape, double tick) throws NullPointerException, IllegalArgumentException;

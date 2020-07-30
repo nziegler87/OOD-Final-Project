@@ -3,10 +3,6 @@ package Model;
 import Model.Commands.ICommand;
 import Model.Shape.IShape;
 
-// TODO:
-//    - Do we add a addShape(IShape... shapes);
-//    - Do we add a addAnimation(ICommmand... comnmands);
-
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from
  * shapes. This interface is for the model of the program. It contains all commands that directly

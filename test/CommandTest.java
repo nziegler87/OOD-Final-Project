@@ -50,27 +50,27 @@ public class CommandTest {
             coords2, coords1);
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void corruptMove() {
     new Move(bob, 50, 20, coords1, coords2);
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void corruptScale() {
     new Scale(bob, 50, 20, 50, 50, 100, 100);
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void corruptScaleZeroHeight() {
     new Scale(bob, 50, 20, 50, 50, 0, 100);
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void corruptScaleZeroWidth() {
     new Scale(bob, 50, 20, 50, 50, 100, 0);
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void corruptChangeColor() {
     new ChangeColor(bob, 50, 20, Color.RED, Color.BLUE);
   }

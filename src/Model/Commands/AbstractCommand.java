@@ -8,11 +8,11 @@ import Model.Shape.IShape;
  * Abstract class for classes that implement ICommand.
  */
 public abstract class AbstractCommand implements ICommand {
-  protected IShape shape;
-  protected double startTime;
-  protected double endTime;
+  protected final IShape shape;
+  protected final double startTime;
+  protected final double endTime;
   protected String commandType;
-  protected double tickTracker;
+  protected final double tickTracker;
 
   /**
    * Creates an AbstractCommand object.
@@ -47,6 +47,16 @@ public abstract class AbstractCommand implements ICommand {
   }
 
   /**
+   * Returns a copy of the shape object stored in the command object.
+   *
+   * @return a copy of the shape object stored in the command object.
+   */
+  @Override
+  public IShape getShape() {
+    return this.shape.copy();
+  }
+
+  /**
    * Returns the start time of the animation object.
    *
    * @return the start time of the animation object, a double.
@@ -64,15 +74,5 @@ public abstract class AbstractCommand implements ICommand {
   @Override
   public double getEndTime() {
     return this.endTime;
-  }
-
-  /**
-   * Returns a copy of the shape object stored in the command object.
-   *
-   * @return a copy of the shape object stored in the command object.
-   */
-  @Override
-  public IShape getShape() {
-    return this.shape.copy();
   }
 }

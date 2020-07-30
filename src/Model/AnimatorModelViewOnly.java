@@ -4,11 +4,6 @@ import java.util.List;
 
 import Model.Shape.IShape;
 
-//TODO:
-//  - Do we add a get shapes/make get shapes public?
-//  - Do we add a get commands?
-
-
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from
  * shapes. This interface is for the model of the program. It contains only commands that read data

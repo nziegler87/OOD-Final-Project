@@ -65,7 +65,6 @@ public class Move extends AbstractCommand {
     IShape shapeSnapshot = shape.copy();
     shapeSnapshot.setCoordinates(new Point2D(xAtTick, yAtTick));
     return shapeSnapshot;
-
   }
 
   /**
@@ -117,7 +116,6 @@ public class Move extends AbstractCommand {
             startCords, endCords,
             commandType);
   }
-
 }
 
 

@@ -44,24 +44,8 @@ public interface IShape {
    *
    * @param factor a factor used in resizing, a double
    * @return a shape of the same kind as this one, just resized using the provided factor.
-   * @throws IllegalArgumentException if factor is not greater than zero
    */
   IShape scale(double factor);
-
-  /**
-   * Returns the color of the object.
-   *
-   * @return the color of the object, a Color object.
-   */
-  Color getColor();
-
-  /**
-   * Sets the color of the object.
-   *
-   * @param color the color of the object, a Color ENUM value
-   * @throws IllegalArgumentException if the passed color is null
-   */
-  void setColor(Color color) throws IllegalArgumentException;
 
   /**
    * Returns the width of the object.
@@ -106,19 +90,22 @@ public interface IShape {
    */
   IShape copy();
 
+  //TODO: make a test for these
   /**
    * Method to set the start time of the shape object.
    *
    * @param appearTime the time after which the object should appear on the screen, a double
+   * @throws IllegalArgumentException when time is negative
    */
-  void setAppearTime(double appearTime);
+  void setAppearTime(double appearTime) throws IllegalArgumentException;
 
   /**
    * Method to set the end time of the shape object.
    *
    * @param disappearTime the time after which the object should disappear on the screen, a double
+   * @throws IllegalArgumentException when time is negative or less than appear time
    */
-  void setDisappearTime(double disappearTime);
+  void setDisappearTime(double disappearTime) throws IllegalArgumentException;
 
   /**
    * Returns the time after which an object should appear on the screen, a double.
@@ -134,12 +121,18 @@ public interface IShape {
    */
   double getDisappearTime();
 
-//  /**
-//   * Allows one to compare any shape to another shape and see if they are equal.
-//   *
-//   * @param other a shape to compare
-//   *
-//   * @return true if they are equal, otherwise false.
-//   */
-//  public boolean equalsShape(IShape other);
+  /**
+   * Returns the color of the object.
+   *
+   * @return the color of the object, a Color object.
+   */
+  Color getColor();
+
+  /**
+   * Sets the color of the object.
+   *
+   * @param color the color of the object, a Color ENUM value
+   * @throws NullPointerException if the color is null
+   */
+  void setColor(Color color) throws NullPointerException;
 }

@@ -12,9 +12,6 @@ public class ChangeColor extends AbstractCommand {
   private final Color startColor;
   private final Color endColor;
 
-  //TODO: Add in IllegalArg if same type of animation is being already done on a shape...across all three
-  // TODO: I think we did this in the model already. Delete if so.
-
   /**
    * Creates an object that will change the color of an IShape object.
    *
@@ -40,11 +37,12 @@ public class ChangeColor extends AbstractCommand {
    * Method to execute the class.
    *
    * @return a modified IShape object with animation applied at this tick in time
-   * @throws IllegalArgumentException if tick is before or after end time
    * @throws NullPointerException if shape is null
+   * @throws IllegalArgumentException if tick is before or after end time
    */
   @Override
-  public IShape execute(IShape shape, double tick) throws IllegalArgumentException {
+  public IShape execute(IShape shape, double tick)
+          throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(shape, "Shape object cannot be null" );
 
     // if the timing is not correct, don't do anything
