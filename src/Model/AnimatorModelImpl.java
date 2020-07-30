@@ -118,7 +118,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void removeAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(command, "Command object cannot be null");
-    if (!this.inventory.containsKey(command.getShape().getLabel())) {     //TODO: Do we need this check for this method?
+    if (!this.inventory.containsKey(command.getShape().getLabel())) {
       throw new IllegalArgumentException("Shape object must be stored in model "
               + "in order to remove command");
     }
@@ -126,8 +126,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     this.commandHistory.remove(command);
     commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
   }
-
-  //TODO: Review addition of an IllegalArg for tick >> did I add this?
 
   /**
    * Returns a list of all of the shapes and their current state based at a given tick of time.
