@@ -43,9 +43,12 @@ public class Scale extends AbstractCommand {
    *
    * @return a modified IShape object with animation applied at this tick in time
    * @throws IllegalArgumentException if tick is before or after end time
+   * @throws NullPointerException if shape is null
    */
   @Override
-  public IShape execute(IShape shape, double tick) throws IllegalArgumentException {
+  public IShape execute(IShape shape, double tick) throws NullPointerException,
+          IllegalArgumentException {
+    Objects.requireNonNull(shape, "Shape object cannot be null" );
 
     // if the timing is not correct, don't do anything
     if (tick < startTime || tick > endTime) {

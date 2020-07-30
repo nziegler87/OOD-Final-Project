@@ -28,6 +28,8 @@ public class Move extends AbstractCommand {
               IPoint2D endCords)
           throws IllegalArgumentException {
     super(shape, startTime, endTime);
+    Objects.requireNonNull(startCords, "Start cord object cannot be null.");
+    Objects.requireNonNull(endCords, "End cord object cannot be null.");
     this.startCords = startCords;
     this.endCords = endCords;
     this.commandType = "move";

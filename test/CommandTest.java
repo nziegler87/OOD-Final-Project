@@ -28,6 +28,8 @@ public class CommandTest {
   private ICommand changeColor;
   private ICommand move;
   private ICommand scale;
+  private ICommand move2;
+  private ICommand scale2;
 
   @Before
   public void setUp() {
@@ -44,6 +46,8 @@ public class CommandTest {
             coords1, coords2);
     scale = new Scale(bob, 40, 60,
             10, 20, 20, 10);
+    move2 = new Move(pearl, 0, 15,
+            coords2, coords1);
   }
 
   // getting the command type for the commands
@@ -87,6 +91,8 @@ public class CommandTest {
             + "from time t=0 to t=15\n", move.toString());
     assertEquals("bob changes width from 10.0 to 20.0 and height from 20.0 to 10.0 "
             + "from time t=40 to t=60\n", scale.toString());
+    assertEquals("pearl moves from (50.0,50.0) to (100.0,100.0) "
+            + "from time t=0 to t=15\n", move2.toString());
   }
 
   // test equals
