@@ -21,12 +21,11 @@ public class Move extends AbstractCommand {
    * @param endTime    end time for when animation should end
    * @param startCords starting coordinates for the move
    * @param endCords   ending coordinates for the move
+   * @throws NullPointerException     if shape, startCoords or endCoords is null
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
-
   public Move(IShape shape, double startTime, double endTime, IPoint2D startCords,
-              IPoint2D endCords)
-          throws IllegalArgumentException {
+              IPoint2D endCords) throws NullPointerException, IllegalArgumentException {
     super(shape, startTime, endTime);
     this.startCords = startCords;
     this.endCords = endCords;
@@ -37,11 +36,13 @@ public class Move extends AbstractCommand {
    * Method to execute the class.
    *
    * @return a modified IShape object with animation applied at this tick in time
+   * @throws NullPointerException     if shape is null
    * @throws IllegalArgumentException if tick is before or after end time
    */
   @Override
-  public IShape execute(IShape shape, double tick) throws IllegalArgumentException {
-
+  public IShape execute(IShape shape, double tick)
+          throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(shape);
     // if the timing is not correct, don't do anything
     if (tick < startTime || tick > endTime) {
       throw new IllegalArgumentException("Tick is before start time or after end time.");

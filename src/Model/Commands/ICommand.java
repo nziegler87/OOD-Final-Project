@@ -12,12 +12,12 @@ public interface ICommand {
    * appear during the animation at the given time state, or tick.
    *
    * @param shape a shape on which to perform the animation
-   * @param tick the time considered when running the command
-   *
-   * @return  an IShape that with the state of the object during this command at the
-   *          designated tick
+   * @param tick  the time considered when running the command
+   * @return an IShape that with the state of the object during this command at the designated tick
+   * @throws NullPointerException     if the shape object is null
+   * @throws IllegalArgumentException if the command has issues executing the function
    */
-  IShape execute(IShape shape, double tick) throws IllegalArgumentException;
+  IShape execute(IShape shape, double tick) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Returns the command type

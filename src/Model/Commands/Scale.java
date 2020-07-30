@@ -25,11 +25,12 @@ public class Scale extends AbstractCommand {
    * @param startHeight start height of the object
    * @param endWidth    end width of the object
    * @param endHeight   end height of the object
+   * @throws NullPointerException if shape is null
    * @throws IllegalArgumentException if animation time is 0
    */
   public Scale(IShape shape, double startTime, double endTime, double startWidth,
                double startHeight, double endWidth, double endHeight)
-          throws IllegalArgumentException {
+          throws NullPointerException, IllegalArgumentException {
     super(shape, startTime, endTime);
     this.startWidth = startWidth;
     this.startHeight = startHeight;

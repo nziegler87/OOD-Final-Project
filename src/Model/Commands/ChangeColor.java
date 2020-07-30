@@ -23,11 +23,14 @@ public class ChangeColor extends AbstractCommand {
    * @param endTime    end time for when animation should end
    * @param startColor starting color of the object
    * @param endColor   ending color of the object
+   * @throws NullPointerException if shape, startColor or endColor is null
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
   public ChangeColor(IShape shape, double startTime, double endTime, Color startColor,
-                     Color endColor) throws IllegalArgumentException {
+                     Color endColor) throws NullPointerException, IllegalArgumentException {
     super(shape, startTime, endTime);
+    Objects.requireNonNull(startColor);
+    Objects.requireNonNull(endColor);
     this.startColor = startColor;
     this.endColor = endColor;
     this.commandType = "changeColor";

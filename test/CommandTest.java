@@ -16,7 +16,6 @@ import Model.Shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotSame;
 
 /**
  * A JUnit test class for Command types.
@@ -28,6 +27,8 @@ public class CommandTest {
   private ICommand changeColor;
   private ICommand move;
   private ICommand scale;
+  private IPoint2D coords1;
+  private IPoint2D coords2;
 
   @Before
   public void setUp() {
@@ -45,6 +46,32 @@ public class CommandTest {
     scale = new Scale(bob, 40, 60,
             10, 20, 20, 10);
   }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void corruptMove() {
+    new Move(bob, 50, 20, coords1, coords2);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void corruptScale() {
+    new Scale(bob, 50, 20, 50, 50, 100, 100);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void corruptScaleZeroHeight() {
+    new Scale(bob, 50, 20, 50, 50, 0, 100);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void corruptScaleZeroWidth() {
+    new Scale(bob, 50, 20, 50, 50, 100, 0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void corruptChangeColor() {
+    new ChangeColor(bob, 50, 20, Color.RED, Color.BLUE);
+  }
+
 
   // getting the command type for the commands
   @Test
@@ -80,7 +107,7 @@ public class CommandTest {
 
   // string output for commands
   @Test
-  public void testToString () {
+  public void testToString() {
     assertEquals("bob changes color from (255, 0, 255) to (255, 175, 175) "
             + "from time t=10 to t=50\n", changeColor.toString());
     assertEquals("pearl moves from (100.0,100.0) to (50.0,50.0) "
