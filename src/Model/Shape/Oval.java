@@ -23,7 +23,6 @@ public class Oval extends AbstractShape {
    * @param color       the color of the object, a Color object
    * @param xRadius     the xRadius of the object, a double
    * @param yRadius     the yRadius of the object, a double
-   *
    * @throws IllegalArgumentException if either coordinates or color objects are null or if either
    *                                  xRadius or yRadius are not greater than 0
    */
@@ -63,7 +62,6 @@ public class Oval extends AbstractShape {
    * Method to set the xRadius of the object when passed a xRadius value.
    *
    * @param xRadius the xRadius of the object, a double.
-   *
    * @throws IllegalArgumentException if xRadius is not greater than 0
    */
   public void setWidth(double xRadius) throws IllegalArgumentException {
@@ -78,7 +76,6 @@ public class Oval extends AbstractShape {
    * Method to set the yRadius of the object when passed a yRadius value.
    *
    * @param yRadius the yRadius of the object, a double.
-   *
    * @throws IllegalArgumentException if yRadius is not greater than 0
    */
   public void setHeight(double yRadius) throws IllegalArgumentException {
@@ -94,9 +91,7 @@ public class Oval extends AbstractShape {
    * factor.
    *
    * @param factor a factor used in resizing, a double
-   *
    * @return a shape of the same kind as this one, just resized using the provided factor.
-   *
    * @throws IllegalArgumentException if factor is not greater than zero
    */
   @Override

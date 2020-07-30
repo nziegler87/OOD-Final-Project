@@ -18,13 +18,13 @@ public class Scale extends AbstractCommand {
   /**
    * Creates an object that will resize an IShape object.
    *
-   * @param shape        a shape on which to perform the action
-   * @param startTime    start time for when animation should start
-   * @param endTime      end time for when animation should end
-   * @param startWidth   start width of the object
-   * @param startHeight  start height of the object
-   * @param endWidth     end width of the object
-   * @param endHeight    end height of the object
+   * @param shape       a shape on which to perform the action
+   * @param startTime   start time for when animation should start
+   * @param endTime     end time for when animation should end
+   * @param startWidth  start width of the object
+   * @param startHeight start height of the object
+   * @param endWidth    end width of the object
+   * @param endHeight   end height of the object
    * @throws IllegalArgumentException if animation time is 0
    */
   public Scale(IShape shape, double startTime, double endTime, double startWidth,
@@ -41,9 +41,8 @@ public class Scale extends AbstractCommand {
   /**
    * Method to execute the class.
    *
-   * @throws IllegalArgumentException if tick is before or after end time
-   *
    * @return a modified IShape object with animation applied at this tick in time
+   * @throws IllegalArgumentException if tick is before or after end time
    */
   @Override
   public IShape execute(IShape shape, double tick) throws IllegalArgumentException {

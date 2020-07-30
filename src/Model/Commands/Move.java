@@ -16,11 +16,11 @@ public class Move extends AbstractCommand {
   /**
    * Creates an object that will move an IShape object across the screen.
    *
-   * @param shape       a shape on which to perform the action
-   * @param startTime   start time for when animation should start
-   * @param endTime     end time for when animation should end
-   * @param startCords  starting coordinates for the move
-   * @param endCords    ending coordinates for the move
+   * @param shape      a shape on which to perform the action
+   * @param startTime  start time for when animation should start
+   * @param endTime    end time for when animation should end
+   * @param startCords starting coordinates for the move
+   * @param endCords   ending coordinates for the move
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
 
@@ -36,9 +36,8 @@ public class Move extends AbstractCommand {
   /**
    * Method to execute the class.
    *
-   * @throws IllegalArgumentException if tick is before or after end time
-   *
    * @return a modified IShape object with animation applied at this tick in time
+   * @throws IllegalArgumentException if tick is before or after end time
    */
   @Override
   public IShape execute(IShape shape, double tick) throws IllegalArgumentException {
@@ -59,12 +58,9 @@ public class Move extends AbstractCommand {
     double xAtTick = (xDelta * adjustment) + startCords.getX();
     double yAtTick = (yDelta * adjustment) + startCords.getY();
 
-    // create a new Point2D with the updated coordinates
-    IPoint2D newCoords = new Point2D(xAtTick, yAtTick);
-
-    // return a copy of the cloned shape
+    // return a copy of the cloned shape & new coords
     IShape shapeSnapshot = shape.copy();
-    shapeSnapshot.setCoordinates(newCoords);
+    shapeSnapshot.setCoordinates(new Point2D(xAtTick, yAtTick));
     return shapeSnapshot;
 
   }

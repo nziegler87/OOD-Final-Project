@@ -60,12 +60,9 @@ public class ChangeColor extends AbstractCommand {
     int greenAtTick = (int) (greenDelta * adjustment) + startColor.getGreen();
     int redAtTick = (int) (redDelta * adjustment) + startColor.getRed();
 
-    // create color object at this point in time
-    Color newColor = new Color(redAtTick, greenAtTick, blueAtTick);
-
-    // return a copy of the cloned shape
+    // return a copy of the cloned shape and new color
     IShape shapeSnapshot = shape.copy();
-    shapeSnapshot.setColor(newColor);
+    shapeSnapshot.setColor(new Color(redAtTick, greenAtTick, blueAtTick));
     return shapeSnapshot;
   }
 
@@ -120,5 +117,4 @@ public class ChangeColor extends AbstractCommand {
             startColor, endColor,
             commandType);
   }
-
 }

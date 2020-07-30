@@ -15,15 +15,14 @@ public class Rectangle extends AbstractShape {
   private double height;
 
   /**
-   * Create a rectangle shape object when passed object label, coordinates, color, width,
-   * and height.
+   * Create a rectangle shape object when passed object label, coordinates, color, width, and
+   * height.
    *
    * @param label       a label for the object, a string.
    * @param coordinates the coordinates for the object, a IPoint2D object
    * @param color       the color of the object, a Color object
    * @param width       the width of the object, a double
    * @param height      the height of the object, a double
-   *
    * @throws IllegalArgumentException if either coordinates or color objects are null or if either
    *                                  width or height are not greater than 0
    */
@@ -48,7 +47,6 @@ public class Rectangle extends AbstractShape {
    * Method to set the width of the object when passed a width value.
    *
    * @param width the width of the object, a double.
-   *
    * @throws IllegalArgumentException if width is not greater than 0
    */
   public void setWidth(double width) throws IllegalArgumentException {
@@ -72,7 +70,6 @@ public class Rectangle extends AbstractShape {
    * Method to set the height of the object when passed a height value.
    *
    * @param height the height of the object, a double.
-   *
    * @throws IllegalArgumentException if height is not greater than 0
    */
   public void setHeight(double height) throws IllegalArgumentException {
@@ -88,9 +85,7 @@ public class Rectangle extends AbstractShape {
    * factor.
    *
    * @param factor a factor used in resizing, a double
-   *
    * @return a shape of the same kind as this one, just resized using the provided factor.
-   *
    * @throws IllegalArgumentException if factor is not greater than zero
    */
   @Override

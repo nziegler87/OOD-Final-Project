@@ -203,33 +203,33 @@ public class AnimatorModelImplTest {
     model.addAnimation(scaleTrashPanda);
 
     assertEquals("Shapes:\n" +
-            "Name: doggo\n" +
-            "Type: oval\n" +
-            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
-            "Appears at t=1\n" +
-            "Disappears at t=100\n" +
-            "\n" +
-            "Name: trash-panda\n" +
-            "Type: rectangle\n" +
-            "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
-            "Appears at t=1\n" +
-            "Disappears at t=100\n" +
-            "\n" +
-            "Name: chairman-meow\n" +
-            "Type: oval\n" +
-            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
-            "Appears at t=1\n" +
-            "Disappears at t=100\n" +
-            "\n" +
-            "doggo moves from (40.0,50.0) to (300.0,200.0) from time t=5 to t=50\n" +
-            "trash-panda moves from (40.0,50.0) to (200.0,400.0) from time t=10 to t=40\n" +
-            "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n" +
-            "doggo changes width from 5.0 to 10.0 and height from 5.0 to 55.0 from time t=15 to t=75\n" +
-            "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=30 to t=50\n" +
-            "chairman-meow changes width from 50.0 to 100.0 and height from 50.0 to 100.0 from time t=30 to t=60\n" +
-            "chairman-meow changes color from (255, 0, 255) to (0, 0, 255) from time t=55 to t=80\n" +
-            "doggo changes color from (255, 255, 0) to (255, 0, 0) from time t=60 to t=100\n" +
-            "trash-panda changes color from (255, 175, 175) to (255, 200, 0) from time t=90 to t=100\n",
+                    "Name: doggo\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "Name: trash-panda\n" +
+                    "Type: rectangle\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "Name: chairman-meow\n" +
+                    "Type: oval\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Appears at t=1\n" +
+                    "Disappears at t=100\n" +
+                    "\n" +
+                    "doggo moves from (40.0,50.0) to (300.0,200.0) from time t=5 to t=50\n" +
+                    "trash-panda moves from (40.0,50.0) to (200.0,400.0) from time t=10 to t=40\n" +
+                    "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n" +
+                    "doggo changes width from 5.0 to 10.0 and height from 5.0 to 55.0 from time t=15 to t=75\n" +
+                    "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=30 to t=50\n" +
+                    "chairman-meow changes width from 50.0 to 100.0 and height from 50.0 to 100.0 from time t=30 to t=60\n" +
+                    "chairman-meow changes color from (255, 0, 255) to (0, 0, 255) from time t=55 to t=80\n" +
+                    "doggo changes color from (255, 255, 0) to (255, 0, 0) from time t=60 to t=100\n" +
+                    "trash-panda changes color from (255, 175, 175) to (255, 200, 0) from time t=90 to t=100\n",
             model.getAnimationStatus());
   }
 
@@ -313,14 +313,18 @@ public class AnimatorModelImplTest {
     model2 = new AnimatorModelImpl();
 
     model2.addShape(penguin);
-    model2.addAnimation(new Move(penguin, 30, 40, new Point2D(20, 20), new Point2D(30, 30)));
-    model2.addAnimation(new Move(penguin, 10, 20, new Point2D(10, 10), new Point2D(20, 20)));
-    model2.addAnimation(new Scale(penguin, 15, 25, 10, 10, 20, 20));
+    model2.addAnimation(new Move(penguin, 30, 40, new Point2D(20, 20),
+            new Point2D(30, 30)));
+    model2.addAnimation(new Move(penguin, 10, 20, new Point2D(10, 10),
+            new Point2D(20, 20)));
+    model2.addAnimation(new Scale(penguin, 15, 25, 10, 10,
+            20, 20));
 
-    String str = "";
+    StringBuilder str = new StringBuilder();
 
     for (int i = 0; i < 45; i++) {
-      str += "Snapshot at tick " + i + ":\n" + model2.getSnapshot(i) + "\n\n";
+      str.append("Snapshot at tick ").append(i).append(":\n").append(model2.getSnapshot(i))
+              .append("\n\n");
     }
 
     assertEquals("Snapshot at tick 0:\n" +
@@ -616,7 +620,7 @@ public class AnimatorModelImplTest {
             "Type: rectangle\n" +
             "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
             "Appears at t=5\n" +
-            "Disappears at t=100]\n\n", str);
+            "Disappears at t=100]\n\n", str.toString());
   }
 
   // getting the snapshot at tick 30
@@ -638,7 +642,7 @@ public class AnimatorModelImplTest {
     List<IShape> testSnapshotList = new ArrayList<>();
 
     IShape meowCopy = chairmanMeow.copy();
-    meowCopy.setCoordinates(new Point2D(75,75));
+    meowCopy.setCoordinates(new Point2D(75, 75));
 
     IShape doggoCopy = doggo.copy();
     doggoCopy.setColor(Color.RED);
@@ -651,6 +655,6 @@ public class AnimatorModelImplTest {
     testSnapshotList.add(trashPandaCopy);
     testSnapshotList.add(meowCopy);
 
-    assertEquals(testSnapshotList.toString(),modelSnapshot.getSnapshot(30).toString());
+    assertEquals(testSnapshotList.toString(), modelSnapshot.getSnapshot(30).toString());
   }
 }
