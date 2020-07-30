@@ -11,7 +11,6 @@ import Model.Commands.ChangeColor;
 import Model.Commands.ICommand;
 import Model.Commands.Move;
 import Model.Commands.Scale;
-import Model.Point2D.IPoint2D;
 import Model.Point2D.Point2D;
 import Model.Shape.IShape;
 import Model.Shape.Oval;
@@ -308,6 +307,7 @@ public class AnimatorModelImplTest {
             model.getAnimationStatus());
   }
 
+  // getting the animation status
   @Test
   public void testGetAnimationState() {
     model2 = new AnimatorModelImpl();
@@ -619,6 +619,7 @@ public class AnimatorModelImplTest {
             "Disappears at t=100]\n\n", str);
   }
 
+  // getting the snapshot at tick 30
   @Test
   public void testGetSnapshot() {
     AnimatorModel modelSnapshot = new AnimatorModelImpl();
