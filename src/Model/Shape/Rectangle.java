@@ -1,6 +1,7 @@
 package Model.Shape;
 
 import java.awt.Color;
+import java.util.Objects;
 
 import Model.Point2D.IPoint2D;
 
@@ -125,5 +126,61 @@ public class Rectangle extends AbstractShape {
     return new Rectangle(this.label, this.coordinates, this.color, this.width, this.height,
             this.appearTime, this.disappearTime);
   }
+
+  /**
+   * Allows one to compare any shape to another shape and see if they are equal.
+   *
+   * @param other a shape to compare
+   * @return true if they are equal, otherwise false.
+   */
+  @Override
+  public boolean equalsShape(IShape other) {
+    if (other instanceof AbstractShape) {
+      AbstractShape aShape = (AbstractShape) other;
+      return aShape.equalsRectangle(this);
+    }
+    return false;
+  }
+
+  /**
+   * Indicates whether some object is a rectangle.
+   *
+   * @param other an object to check
+   * @return true if the object is a rectangle, otherwise false
+   */
+  @Override
+  protected boolean equalsRectangle(Rectangle other) {
+    return (this.label.equals(other.label)) && (this.coordinates.equals(other.coordinates))
+            && this.color.equals(other.color) && (this.width == other.width)
+            && (this.height == other.height) && (this.appearTime == other.appearTime)
+            && (this.disappearTime == other.disappearTime);
+  }
+
+  /**
+   * Indicates whether some other object is "equal to" this one.
+   *
+   * @param other the reference object with which to compare.
+   * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof AbstractShape) {
+      AbstractShape aShape = (AbstractShape) other;
+      return aShape.equalsRectangle(this);
+    }
+    return false;
+  }
+
+  /**
+   * Returns a hash code value for the object.
+   *
+   * @return a hash code value for this object.
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(label, coordinates, color, width, height, appearTime, disappearTime);
+  }
+
 }
+
 

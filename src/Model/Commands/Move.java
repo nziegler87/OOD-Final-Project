@@ -1,5 +1,7 @@
 package Model.Commands;
 
+import java.util.Objects;
+
 import Model.Point2D.IPoint2D;
 import Model.Point2D.Point2D;
 import Model.Shape.IShape;
@@ -72,10 +74,51 @@ public class Move extends AbstractCommand {
    *
    * @return str the declarative animation details of the command
    */
+  @Override
   public String toString() {
     return String.format("%s moves from %s to %s from time t=%.0f to t=%.0f\n",
             shape.getLabel(), startCords.toString(), endCords.toString(), startTime, endTime);
   }
+
+  /**
+   * Indicates whether some other object is "equal to" this one.
+   *
+   * @param other the reference object with which to compare.
+   * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (this == other) {
+      return true;
+    }
+
+    if (!(other instanceof Move)) {
+      return false;
+    }
+
+    Move otherS = (Move) other;
+
+    return (this.shape.equals(otherS.shape))
+            && (this.startTime == otherS.startTime)
+            && (this.endTime == otherS.endTime)
+            && (this.startCords.equals(otherS.startCords))
+            && (this.endCords.equals(otherS.endCords))
+            && (this.commandType.equals(otherS.commandType));
+  }
+
+  /**
+   * Returns a hash code value for the object.
+   *
+   * @return a hash code value for this object.
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(shape,
+            startTime, endTime,
+            startCords, endCords,
+            commandType);
+  }
+
 }
 
 
