@@ -9,11 +9,11 @@ import Model.Commands.ICommand;
 import Model.Shape.IShape;
 
 /**
- * This class is the model (MVC architecture) in an application that helps one to create simple
- * but effective 2D animations from shapes. It includes operations to add and remove shapes
- * to the model inventory, add and remove animation commands to the shapes in the inventory, get
- * a summary of all stored shapes (sorted by appear time), and return a snapshot of all objects
- * at a given tick in time at the current animation state and visibility.
+ * This class is the model (MVC architecture) in an application that helps one to create simple but
+ * effective 2D animations from shapes. It includes operations to add and remove shapes to the model
+ * inventory, add and remove animation commands to the shapes in the inventory, get a summary of all
+ * stored shapes (sorted by appear time), and return a snapshot of all objects at a given tick in
+ * time at the current animation state and visibility.
  */
 public class AnimatorModelImpl implements AnimatorModel {
   private final HashMap<String, IShape> inventory;
@@ -35,7 +35,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void addShape(IShape shape)
           throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(shape, "Shape must not be null.");
-
     if (this.inventory.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("This object has already been added.");
     }
@@ -91,9 +90,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    */
   public void addAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException {
-    // check to make sure objects are not null
     Objects.requireNonNull(command, "Command object cannot be null");
-    // check to make sure shape is in inventory
     if (!this.inventory.containsKey(command.getShape().getLabel())) {
       throw new IllegalArgumentException("Shape object must be stored in model "
               + "in order to add command");
@@ -115,71 +112,61 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param command the command being removed
    * @throws NullPointerException     if the command being passed through is null
-   * @throws IllegalArgumentException if the shape associated with command does not exist
-   *                                  with in the model inventory
+   * @throws IllegalArgumentException if the shape associated with command does not exist within the
+   *                                  model inventory
    */
   public void removeAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException {
-    // check to make sure objects are not null
     Objects.requireNonNull(command, "Command object cannot be null");
-
-    //TODO: Do we need this check for this method?
-
-    // check to make sure shape is in inventory
-    if (!this.inventory.containsKey(command.getShape().getLabel())) {
+    if (!this.inventory.containsKey(command.getShape().getLabel())) {     //TODO: Do we need this check for this method?
       throw new IllegalArgumentException("Shape object must be stored in model "
-              + "in order to add command");
+              + "in order to remove command");
     }
     // if no arguments are thrown, add new command to commandHistory and sort
     this.commandHistory.remove(command);
     commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
   }
 
-  //TODO: Review addition of an IllegalArg for tick
+  //TODO: Review addition of an IllegalArg for tick >> did I add this?
+
   /**
    * Returns a list of all of the shapes and their current state based at a given tick of time.
    *
-   * @param tick  a tick in the animation where you want to return the state of all objects
-   *              visible on the screen
-   *
+   * @param tick a tick in the animation where you want to return the state of all objects visible
+   *             on the screen
    * @return List<IShape> with the summary of shapes and their state
-   *
+   * @throws NullPointerException     if tick is null
    * @throws IllegalArgumentException if tick is not greater or equal to 0
    */
-  public List<IShape> getSnapshot(double tick) throws IllegalArgumentException {
+  public List<IShape> getSnapshot(double tick) throws
+          NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(tick, "Tick must not be a null value.");
     if (tick < 0) {
       throw new IllegalArgumentException("Tick must be greater or equal to 0");
     }
+
     List<IShape> snapshotList = new ArrayList<>();
 
     // go through each shape in the inventory and see what commands are associated with the shape
     for (IShape shape : this.inventory.values()) {
-
       // if the shape is on the screen, use animation commands to get its current state
       if (shape.getAppearTime() <= tick && shape.getDisappearTime() >= tick) {
-
-        // create a temporary shape on which to create state
         IShape temporaryShape = shape.copy();
-
         // iterate through commands
         for (ICommand command : this.commandHistory) {
-
           // if command is associated with shape && tick is greater or equal to command start time,
-          if ((command.getShape().getLabel().equals(shape.getLabel()))
-                  && (tick >= command.getShape().getAppearTime())) {
-            if (tick >= command.getStartTime())
-
-              // try to execute command
-              try {
-                temporaryShape = command.execute(temporaryShape, tick);
-
+          if (command.getShape().getLabel().equals(shape.getLabel())
+                  && tick >= command.getShape().getAppearTime()
+                  && tick >= command.getStartTime()) {
+            try {
+              temporaryShape = command.execute(temporaryShape, tick);
                 /*
                 If tick is past command time, it will throw an exception, so get the state of the
                 objects at the end of the command
                  */
-              } catch (IllegalArgumentException iae) {
-                temporaryShape = command.execute(temporaryShape, command.getEndTime());
-              }
+            } catch (IllegalArgumentException iae) {
+              temporaryShape = command.execute(temporaryShape, command.getEndTime());
+            }
           }
         }
         snapshotList.add(temporaryShape);
@@ -197,35 +184,24 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public String getAnimationStatus() {
 
-    // if the inventory is empty, send a message about it
     if (this.inventory.size() == 0) {
       return "No shapes have been added to the inventory, so no animations can be displayed";
     }
 
     StringBuilder status = new StringBuilder();
-
-    // the top of the string description
     status.append("Shapes:\n");
 
-    // TODO: Because we return the above string if the inventory is 0, I think we can get rid of this
-    if (!(this.inventory.size() == 0)) {
-      // to iterate through the hashmap
-      List<IShape> sortedShapeList = this.getSortedShapeList();
-      for (IShape shape : sortedShapeList) {
-        // add the shape and it's details to the string
-        status.append(shape.toString());        //TODO: I think we can make this status.append(shape.toString()).append("\n\n");
-        status.append("\n\n");
-      }
+    List<IShape> sortedShapeList = this.getSortedShapeList();
+    for (IShape shape : sortedShapeList) {
+      status.append(shape.toString()).append("\n\n");
+    }
 
-      // if the command history has stuff in it, add it to the bottom of the string
-      if (!(this.commandHistory.size() == 0)) {
-        for (ICommand command : this.commandHistory) {
-          status.append(command.toString());
-        }
-      } else {
-        // otherwise state that it is empty
-        status.append("Command list is empty.");
+    if (!(this.commandHistory.size() == 0)) {
+      for (ICommand command : this.commandHistory) {
+        status.append(command.toString());
       }
+    } else {
+      status.append("Command list is empty.");
     }
     return status.toString();
   }
