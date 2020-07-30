@@ -155,13 +155,11 @@ public abstract class AbstractShape implements IShape {
    */
   @Override
   public void setColor(Color color) throws IllegalArgumentException {
-
     try {
       Objects.requireNonNull(color);
     } catch (NullPointerException npe) {
       throw new IllegalArgumentException("Color cannot be null.");
     }
-
     this.color = color;
   }
 

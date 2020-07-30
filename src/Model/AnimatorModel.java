@@ -21,7 +21,7 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws NullPointerException     when the shape is null
    * @throws IllegalArgumentException when the shape is not found
    */
-  void addShape(IShape shape) throws NullPointerException, IllegalArgumentException;
+  void addShape(IShape ... shape) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Removes a shape from the model inventory map.
@@ -30,7 +30,7 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws NullPointerException     when the shape is null
    * @throws IllegalArgumentException when the shape is not found
    */
-  void removeShape(IShape shape) throws NullPointerException, IllegalArgumentException;
+  void removeShape(IShape ... shape) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Adds a command to the animation list.
@@ -39,7 +39,7 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws NullPointerException     if the command being passed through is null
    * @throws IllegalArgumentException if the command has conflict with another command in the list
    */
-  void addAnimation(ICommand command) throws NullPointerException, IllegalArgumentException;
+  void addAnimation(ICommand ... command) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Removes a command from the animation list.
@@ -49,5 +49,5 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws IllegalArgumentException if the shape associated with command does not exist with in
    *                                  the model inventory
    */
-  void removeAnimation(ICommand command) throws NullPointerException, IllegalArgumentException;
+  void removeAnimation(ICommand ... command) throws NullPointerException, IllegalArgumentException;
 }
