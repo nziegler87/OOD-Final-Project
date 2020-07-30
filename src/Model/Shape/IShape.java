@@ -134,12 +134,12 @@ public interface IShape {
    */
   double getDisappearTime();
 
-  /**
-   * Allows one to compare any shape to another shape and see if they are equal.
-   *
-   * @param other a shape to compare
-   *
-   * @return true if they are equal, otherwise false.
-   */
-  public boolean equalsShape(IShape other);
+//  /**
+//   * Allows one to compare any shape to another shape and see if they are equal.
+//   *
+//   * @param other a shape to compare
+//   *
+//   * @return true if they are equal, otherwise false.
+//   */
+//  public boolean equalsShape(IShape other);
 }
