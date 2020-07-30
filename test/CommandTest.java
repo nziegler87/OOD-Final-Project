@@ -32,8 +32,8 @@ public class CommandTest {
 
   @Before
   public void setUp() {
-    IPoint2D coords1 = new Point2D(100, 100);
-    IPoint2D coords2 = new Point2D(50, 50);
+    coords1 = new Point2D(100, 100);
+    coords2 = new Point2D(50, 50);
     bob = new Oval("bob", coords1, Color.white,
             50, 50, 10, 20);
     pearl = new Rectangle("pearl", coords1, Color.white,
