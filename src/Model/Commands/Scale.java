@@ -123,6 +123,7 @@ public class Scale extends AbstractCommand {
             && (this.startWidth == otherS.startWidth)
             && (this.startHeight == otherS.startHeight)
             && (this.endWidth == otherS.endWidth)
+            && (this.endHeight == otherS.endHeight)
             && (this.commandType.equals(otherS.commandType));
   }
 
@@ -136,7 +137,7 @@ public class Scale extends AbstractCommand {
     return Objects.hash(shape,
             startTime, endTime,
             startWidth, startHeight,
-            startWidth, endWidth,
+            startHeight, endHeight,
             commandType);
   }
 }
