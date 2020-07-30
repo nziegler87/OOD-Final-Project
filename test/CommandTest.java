@@ -78,7 +78,16 @@ public class CommandTest {
     assertEquals(bob.toString(), scale.getShape().toString());
   }
 
-<<<<<<<HEAD
+  // string output for commands
+  @Test
+  public void testToString () {
+    assertEquals("bob changes color from (255, 0, 255) to (255, 175, 175) "
+            + "from time t=10 to t=50\n", changeColor.toString());
+    assertEquals("pearl moves from (100.0,100.0) to (50.0,50.0) "
+            + "from time t=0 to t=15\n", move.toString());
+    assertEquals("bob changes width from 10.0 to 20.0 and height from 20.0 to 10.0 "
+            + "from time t=40 to t=60\n", scale.toString());
+  }
 
   // test equals
   @Test
@@ -262,16 +271,4 @@ public class CommandTest {
     assertNotEquals(command1, command7);
     assertNotEquals(command7, command1);
   }
-
-  // string output for commands
-  @Test
-  public void testToString () {
-    assertEquals("bob changes color from (255, 0, 255) to (255, 175, 175) "
-            + "from time t=10 to t=50\n", changeColor.toString());
-    assertEquals("pearl moves from (100.0,100.0) to (50.0,50.0) "
-            + "from time t=0 to t=15\n", move.toString());
-    assertEquals("bob changes width from 10.0 to 20.0 and height from 20.0 to 10.0 "
-            + "from time t=40 to t=60\n", scale.toString());
-
-   }
 }
