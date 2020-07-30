@@ -5,6 +5,9 @@ import java.util.List;
 
 import Model.Shape.IShape;
 
+/**
+ * This interface makes our model read only.
+ */
 public interface AnimatorModelViewOnly {
 
   /**

@@ -32,7 +32,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     if (this.inventory.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("This object has already been added.");
     }
-
     this.inventory.put(shape.getLabel(), shape);
   }
 
@@ -56,11 +55,12 @@ public class AnimatorModelImpl implements AnimatorModel {
   /**
    * Helper method to find if there's a conflict between two commands
    *
-   * @param firstCommand the first command under consideration
+   * @param firstCommand  the first command under consideration
    * @param secondCommand the second command under consideration
    * @return boolean (T/F)
    */
-  private boolean commandConflict(ICommand firstCommand, ICommand secondCommand) {
+  private boolean commandConflict(ICommand firstCommand, ICommand secondCommand)
+          throws NullPointerException {
     Objects.requireNonNull(firstCommand, "First command cannot be null.");
     Objects.requireNonNull(secondCommand, "Second command cannot be null.");
     // return true if same type of command
@@ -69,17 +69,17 @@ public class AnimatorModelImpl implements AnimatorModel {
             && firstCommand.getShape().getLabel().equals(secondCommand.getShape().getLabel())
             // and either the start for the first command is within the second command time frame
             && (firstCommand.getStartTime() > secondCommand.getStartTime()
-            && firstCommand.getEndTime() < secondCommand.getEndTime())
+            && firstCommand.getEndTime() <= secondCommand.getEndTime()
             // or the start for the second command is within the first command time frame
-            || (secondCommand.getStartTime() > firstCommand.getStartTime()
-            && secondCommand.getEndTime() < firstCommand.getEndTime()));
+            || secondCommand.getStartTime() > firstCommand.getStartTime()
+            && secondCommand.getEndTime() <= firstCommand.getEndTime()));
   }
 
   /**
    * Adds a command to the animation list.
    *
    * @param command the command being passed through
-   * @throws NullPointerException if the command being passed through is null
+   * @throws NullPointerException     if the command being passed through is null
    * @throws IllegalArgumentException if the command has conflict with another command in the list
    */
   public void addAnimation(ICommand command)
