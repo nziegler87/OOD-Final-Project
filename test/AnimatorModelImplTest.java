@@ -574,8 +574,8 @@ public class AnimatorModelImplTest {
     trashPandaCopy.setWidth(30);
 
     testSnapshotList.add(doggoCopy);
-    testSnapshotList.add(meowCopy);
     testSnapshotList.add(trashPandaCopy);
+    testSnapshotList.add(meowCopy);
 
     assertEquals(testSnapshotList.toString(),modelSnapshot.getSnapshot(30).toString());
   }

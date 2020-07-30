@@ -74,7 +74,6 @@ public class Point2DTest {
   @Test
   public void toStringPositive() {
     assertEquals("(3.5,3.0)", positivePointer.toString());
-
   }
 
 }

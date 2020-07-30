@@ -27,7 +27,7 @@ public class CommandTest {
   private AbstractCommand scale;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     IPoint2D coords1 = new Point2D(100, 100);
     IPoint2D coords2 = new Point2D(50, 50);
     bob = new Oval("bob", coords1, Color.white,
@@ -42,7 +42,6 @@ public class CommandTest {
     scale = new Scale(bob, 40, 60,
             10, 20, 20 ,10);
   }
-
 
   @Test
   public void testChangeColor() {

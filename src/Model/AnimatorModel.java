@@ -26,7 +26,14 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
   /**
    * Adds an animation to the animation history list.
    *
-   * @param command
+   * @param command the command being added
    */
   void addAnimation(ICommand command);
+
+  /**
+   * Removes an animation to the animation history list.
+   *
+   * @param command the command being removed
+   */
+  void removeAnimation(ICommand command);
 }

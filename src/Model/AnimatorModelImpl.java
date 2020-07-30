@@ -104,6 +104,26 @@ public class AnimatorModelImpl implements AnimatorModel {
   }
 
   /**
+   * Removes a command from the animation list.
+   *
+   * @param command the command being removed
+   * @throws NullPointerException     if the command being passed through is null
+   */
+  public void removeAnimation(ICommand command)
+          throws NullPointerException, IllegalArgumentException {
+    // check to make sure objects are not null
+    Objects.requireNonNull(command, "Command object cannot be null");
+    // check to make sure shape is in inventory
+    if (!this.inventory.containsKey(command.getShape().getLabel())) {
+      throw new IllegalArgumentException("Shape object must be stored in model "
+              + "in order to add command");
+    }
+    // if no arguments are thrown, add new command to commandHistory and sort
+    this.commandHistory.remove(command);
+    commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
+  }
+
+  /**
    * Returns a list of all of the shapes and their state based on the tick input.
    *
    * @return List<IShape> with the summary of shapes and their state
