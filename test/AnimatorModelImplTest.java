@@ -639,7 +639,6 @@ public class AnimatorModelImplTest {
 
     IShape meowCopy = chairmanMeow.copy();
     meowCopy.setCoordinates(new Point2D(75,75));
-    testSnapshotList.add(meowCopy);
 
     IShape doggoCopy = doggo.copy();
     doggoCopy.setColor(Color.RED);
@@ -652,6 +651,7 @@ public class AnimatorModelImplTest {
     testSnapshotList.add(trashPandaCopy);
     testSnapshotList.add(meowCopy);
 
+    System.out.println(modelSnapshot.getSnapshot(30));
     assertEquals(testSnapshotList.toString(),modelSnapshot.getSnapshot(30).toString());
   }
 }
