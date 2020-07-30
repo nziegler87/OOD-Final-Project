@@ -1,5 +1,3 @@
-package Model.Shape;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,6 +5,9 @@ import java.awt.Color;
 
 import Model.Point2D.IPoint2D;
 import Model.Point2D.Point2D;
+import Model.Shape.IShape;
+import Model.Shape.Oval;
+import Model.Shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;

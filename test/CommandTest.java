@@ -1,10 +1,12 @@
-package Model.Commands;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.Color;
 
+import Model.Commands.AbstractCommand;
+import Model.Commands.ChangeColor;
+import Model.Commands.Move;
+import Model.Commands.Scale;
 import Model.Point2D.IPoint2D;
 import Model.Point2D.Point2D;
 import Model.Shape.IShape;
@@ -13,6 +15,9 @@ import Model.Shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * A JUnit test class for Command types.
+ */
 public class CommandTest {
 
   private IShape bob;
@@ -37,6 +42,7 @@ public class CommandTest {
     scale = new Scale(bob, 40, 60,
             10, 20, 20 ,10);
   }
+
 
   @Test
   public void testChangeColor() {
