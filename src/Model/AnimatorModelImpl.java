@@ -46,7 +46,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   /**
    * Removes a shape from the model inventory map.
    *
-   * @param shapes the shapes to be removed
+   * @param shapes the shape(s) that will be removed
    * @throws NullPointerException     when the shape is null
    * @throws IllegalArgumentException when the shape is not found
    */
@@ -88,7 +88,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   /**
    * Adds a command to the animation list.
    *
-   * @param command the command being passed through
+   * @param commands the command being passed through
    * @throws NullPointerException     if the command being passed through is null
    * @throws IllegalArgumentException if the command has conflict with another command in the list
    */
@@ -116,7 +116,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   /**
    * Removes a command from the animation list.
    *
-   * @param command the command being removed
+   * @param commands the command being removed
    * @throws NullPointerException     if the command being passed through is null
    * @throws IllegalArgumentException if the shape associated with command does not exist within the
    *                                  model inventory
