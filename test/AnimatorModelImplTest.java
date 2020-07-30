@@ -33,7 +33,7 @@ public class AnimatorModelImplTest {
   @Before
   public void setUp() {
     model = new AnimatorModelImpl();
-    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0),
+/*    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0),
             new Color(0, 0, 0), 10.0, 10.0, 1, 100);
     doggo = new Oval("doggo", new Point2D(200, 200.0),
             new Color(0, 0, 0), 50.0, 50.0, 1,
@@ -43,13 +43,19 @@ public class AnimatorModelImplTest {
             100);
     penguin = new Rectangle("penguin", new Point2D(0, 0),
             new Color(0, 0, 0), 10, 10, 5, 100);
-    model.addShape(doggo);
+    model.addShape(doggo);*/
   }
 
   // null shape in addShape
   @Test(expected = NullPointerException.class)
   public void testNullShape() {
     model.addShape(null);
+  }
+
+  // null shape in addShape
+  @Test(expected = NullPointerException.class)
+  public void testNullShapes() {
+    model.addShape(null, null, null);
   }
 
   // adding a shape that's already in the list

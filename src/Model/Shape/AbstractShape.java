@@ -37,7 +37,7 @@ public abstract class AbstractShape implements IShape {
     this.label = label;
     this.coordinates = coordinates;
     this.color = color;
-    if (appearTime < 0 || disappearTime < 0 || appearTime <= disappearTime) {
+    if (appearTime < 0 || disappearTime < 0 || appearTime >= disappearTime) {
       throw new IllegalArgumentException("Time cannot be negative, and appear time must come " +
               "before disappear time.");
     }
