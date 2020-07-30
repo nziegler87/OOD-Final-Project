@@ -1,5 +1,7 @@
 package Model.Commands;
 
+import java.util.Objects;
+
 import Model.Shape.IShape;
 
 /**
@@ -18,10 +20,12 @@ public abstract class AbstractCommand implements ICommand {
    * @param shape     a shape on which to perform the action
    * @param startTime start time for when animation should start
    * @param endTime   end time for when animation should end
+   * @throws NullPointerException if shape is null
    * @throws IllegalArgumentException if animation time is 0 or if start time is after end time
    */
   public AbstractCommand(IShape shape, double startTime, double endTime)
-          throws IllegalArgumentException {
+          throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(shape);
     // check to make sure that time entry is valid
     if (endTime == startTime || startTime > endTime) {
       throw new IllegalArgumentException("Invalid time entry.");
