@@ -136,7 +136,7 @@ public class Scale extends AbstractCommand {
     return Objects.hash(shape,
             startTime, endTime,
             startWidth, startHeight,
-            startHeight, endHeight,
+            endWidth, endHeight,
             commandType);
   }
 }

@@ -122,21 +122,6 @@ public class Rectangle extends AbstractShape {
             this.appearTime, this.disappearTime);
   }
 
-//  /**
-//   * Allows one to compare any shape to another shape and see if they are equal.
-//   *
-//   * @param other a shape to compare
-//   * @return true if they are equal, otherwise false.
-//   */
-//  @Override
-//  public boolean equalsShape(IShape other) {
-//    if (other instanceof AbstractShape) {
-//      AbstractShape aShape = (AbstractShape) other;
-//      return aShape.equalsRectangle(this);
-//    }
-//    return false;
-//  }
-
   /**
    * Indicates whether some object is a rectangle.
    *
@@ -175,7 +160,6 @@ public class Rectangle extends AbstractShape {
   public int hashCode() {
     return Objects.hash(label, coordinates, color, width, height, appearTime, disappearTime);
   }
-
 }
 
 
