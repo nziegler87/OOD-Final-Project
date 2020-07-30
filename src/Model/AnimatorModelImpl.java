@@ -185,9 +185,11 @@ public class AnimatorModelImpl implements AnimatorModel {
     // the top of the string description
     status.append("Shapes:\n");
 
+    // TODO: Because we return the above string if the inventory is 0, I think we can get rid of this
     if (!(this.inventory.size() == 0)) {
       // to iterate through the hashmap
-      for (IShape shape : this.inventory.values()) {
+      List<IShape> sortedShapeList = this.getSortedShapeList();
+      for (IShape shape : sortedShapeList) {
         // add the shape and it's details to the string
         status.append(shape.toString());
         status.append("\n\n");
@@ -204,5 +206,11 @@ public class AnimatorModelImpl implements AnimatorModel {
       }
     }
     return status.toString();
+  }
+
+  private List<IShape> getSortedShapeList() {
+    List<IShape> shapeList = new ArrayList<>(this.inventory.values());
+    shapeList.sort((o1, o2) -> (int) (o1.getAppearTime() - o2.getAppearTime()));
+    return shapeList;
   }
 }
