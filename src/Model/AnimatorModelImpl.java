@@ -8,6 +8,13 @@ import java.util.Objects;
 import Model.Commands.ICommand;
 import Model.Shape.IShape;
 
+/**
+ * This class is the model (MVC architecture) in an application that helps one to create simple
+ * but effective 2D animations from shapes. It includes operations to add and remove shapes
+ * to the model inventory, add and remove animation commands to the shapes in the inventory, get
+ * a summary of all stored shapes (sorted by appear time), and return a snapshot of all objects
+ * at a given tick in time at the current animation state and visibility.
+ */
 public class AnimatorModelImpl implements AnimatorModel {
   private final HashMap<String, IShape> inventory;
   private final ArrayList<ICommand> commandHistory;
@@ -53,7 +60,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   }
 
   /**
-   * Helper method to find if there's a conflict between two commands
+   * Helper method to find if there's a conflict between two commands.
    *
    * @param firstCommand  the first command under consideration
    * @param secondCommand the second command under consideration
@@ -108,11 +115,16 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param command the command being removed
    * @throws NullPointerException     if the command being passed through is null
+   * @throws IllegalArgumentException if the shape associated with command does not exist
+   *                                  with in the model inventory
    */
   public void removeAnimation(ICommand command)
           throws NullPointerException, IllegalArgumentException {
     // check to make sure objects are not null
     Objects.requireNonNull(command, "Command object cannot be null");
+
+    //TODO: Do we need this check for this method?
+
     // check to make sure shape is in inventory
     if (!this.inventory.containsKey(command.getShape().getLabel())) {
       throw new IllegalArgumentException("Shape object must be stored in model "
@@ -123,12 +135,21 @@ public class AnimatorModelImpl implements AnimatorModel {
     commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
   }
 
+  //TODO: Review addition of an IllegalArg for tick
   /**
-   * Returns a list of all of the shapes and their state based on the tick input.
+   * Returns a list of all of the shapes and their current state based at a given tick of time.
+   *
+   * @param tick  a tick in the animation where you want to return the state of all objects
+   *              visible on the screen
    *
    * @return List<IShape> with the summary of shapes and their state
+   *
+   * @throws IllegalArgumentException if tick is not greater or equal to 0
    */
-  public List<IShape> getSnapshot(double tick) {
+  public List<IShape> getSnapshot(double tick) throws IllegalArgumentException {
+    if (tick < 0) {
+      throw new IllegalArgumentException("Tick must be greater or equal to 0");
+    }
     List<IShape> snapshotList = new ArrayList<>();
 
     // go through each shape in the inventory and see what commands are associated with the shape
@@ -143,7 +164,7 @@ public class AnimatorModelImpl implements AnimatorModel {
         // iterate through commands
         for (ICommand command : this.commandHistory) {
 
-          // if command is associated with shape
+          // if command is associated with shape && tick is greater or equal to command start time,
           if ((command.getShape().getLabel().equals(shape.getLabel()))
                   && (tick >= command.getShape().getAppearTime())) {
             if (tick >= command.getStartTime())
@@ -169,6 +190,7 @@ public class AnimatorModelImpl implements AnimatorModel {
 
   /**
    * Returns a summary of the animation, including the shapes in the list and the animation steps.
+   * Shape list is sorted by appear time and animation steps are sorted by start time.
    *
    * @return a string of the summary
    */
@@ -191,7 +213,7 @@ public class AnimatorModelImpl implements AnimatorModel {
       List<IShape> sortedShapeList = this.getSortedShapeList();
       for (IShape shape : sortedShapeList) {
         // add the shape and it's details to the string
-        status.append(shape.toString());
+        status.append(shape.toString());        //TODO: I think we can make this status.append(shape.toString()).append("\n\n");
         status.append("\n\n");
       }
 
@@ -208,6 +230,11 @@ public class AnimatorModelImpl implements AnimatorModel {
     return status.toString();
   }
 
+  /**
+   * Method to return an array list of the shapes in the inventory sorted by appear time
+   *
+   * @return a sorted list of shapes, sorted by appear time
+   */
   private List<IShape> getSortedShapeList() {
     List<IShape> shapeList = new ArrayList<>(this.inventory.values());
     shapeList.sort((o1, o2) -> (int) (o1.getAppearTime() - o2.getAppearTime()));
