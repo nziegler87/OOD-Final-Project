@@ -27,35 +27,39 @@ public class AnimatorModelImpl implements AnimatorModel {
   /**
    * Adds a shape to the model inventory hashmap.
    *
-   * @param shape the shape that will be added to the map
+   * @param shapes the shape(s) that will be added to the map
    * @throws NullPointerException     when the shape is null
    * @throws IllegalArgumentException if the shape already exists
    */
   @Override
-  public void addShape(IShape shape)
+  public void addShape(IShape... shapes)
           throws NullPointerException, IllegalArgumentException {
-    Objects.requireNonNull(shape, "Shape must not be null.");
-    if (this.inventory.containsKey(shape.getLabel())) {
-      throw new IllegalArgumentException("This object has already been added.");
+    Objects.requireNonNull(shapes, "Shape must not be null.");
+    for (IShape shape : shapes) {
+      if (this.inventory.containsKey(shape.getLabel())) {
+        throw new IllegalArgumentException("This object has already been added.");
+      }
+      this.inventory.put(shape.getLabel(), shape);
     }
-    this.inventory.put(shape.getLabel(), shape);
   }
 
   /**
    * Removes a shape from the model inventory map.
    *
-   * @param shape the label associated with the shape
+   * @param shapes the shapes to be removed
    * @throws NullPointerException     when the shape is null
    * @throws IllegalArgumentException when the shape is not found
    */
   @Override
-  public void removeShape(IShape shape)
+  public void removeShape(IShape... shapes)
           throws NullPointerException, IllegalArgumentException {
-    Objects.requireNonNull(shape, "Shape must not be null.");
-    if (!this.inventory.containsKey(shape.getLabel())) {
-      throw new IllegalArgumentException("Cannot remove object that does not exist.");
+    Objects.requireNonNull(shapes, "Shape must not be null.");
+    for (IShape shape : shapes) {
+      if (!this.inventory.containsKey(shape.getLabel())) {
+        throw new IllegalArgumentException("Cannot remove object that does not exist.");
+      }
+      this.inventory.remove(shape.getLabel());
     }
-    this.inventory.remove(shape.getLabel());
   }
 
   /**
@@ -88,23 +92,25 @@ public class AnimatorModelImpl implements AnimatorModel {
    * @throws NullPointerException     if the command being passed through is null
    * @throws IllegalArgumentException if the command has conflict with another command in the list
    */
-  public void addAnimation(ICommand command)
+  public void addAnimation(ICommand... commands)
           throws NullPointerException, IllegalArgumentException {
-    Objects.requireNonNull(command, "Command object cannot be null");
-    if (!this.inventory.containsKey(command.getShape().getLabel())) {
-      throw new IllegalArgumentException("Shape object must be stored in model "
-              + "in order to add command");
-    }
-    // look through all of the commands for a conflict; if so, throw exception
-    for (ICommand historicalCommand : this.commandHistory) {
-      if (commandConflict(historicalCommand, command)) {
-        throw new IllegalArgumentException("Cannot assign the same animation to happen on " +
-                "the same object at the same time");
+    Objects.requireNonNull(commands, "Command object cannot be null");
+    for (ICommand command : commands) {
+      if (!this.inventory.containsKey(command.getShape().getLabel())) {
+        throw new IllegalArgumentException("Shape object must be stored in model "
+                + "in order to add command");
       }
+      // look through all of the commands for a conflict; if so, throw exception
+      for (ICommand historicalCommand : this.commandHistory) {
+        if (commandConflict(historicalCommand, command)) {
+          throw new IllegalArgumentException("Cannot assign the same animation to happen on " +
+                  "the same object at the same time");
+        }
+      }
+      // if no arguments are thrown, add new command to commandHistory and sort
+      this.commandHistory.add(command);
+      commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
     }
-    // if no arguments are thrown, add new command to commandHistory and sort
-    this.commandHistory.add(command);
-    commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
   }
 
   /**
@@ -115,16 +121,18 @@ public class AnimatorModelImpl implements AnimatorModel {
    * @throws IllegalArgumentException if the shape associated with command does not exist within the
    *                                  model inventory
    */
-  public void removeAnimation(ICommand command)
+  public void removeAnimation(ICommand... commands)
           throws NullPointerException, IllegalArgumentException {
-    Objects.requireNonNull(command, "Command object cannot be null");
-    if (!this.inventory.containsKey(command.getShape().getLabel())) {     //TODO: Do we need this check for this method?
-      throw new IllegalArgumentException("Shape object must be stored in model "
-              + "in order to remove command");
+    Objects.requireNonNull(commands, "Command object cannot be null");
+    for (ICommand command : commands) {
+      if (!this.inventory.containsKey(command.getShape().getLabel())) {     //TODO: Do we need this check for this method?
+        throw new IllegalArgumentException("Shape object must be stored in model "
+                + "in order to remove command");
+      }
+      // if no arguments are thrown, add new command to commandHistory and sort
+      this.commandHistory.remove(command);
+      commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
     }
-    // if no arguments are thrown, add new command to commandHistory and sort
-    this.commandHistory.remove(command);
-    commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
   }
 
   //TODO: Review addition of an IllegalArg for tick >> did I add this?
@@ -135,18 +143,14 @@ public class AnimatorModelImpl implements AnimatorModel {
    * @param tick a tick in the animation where you want to return the state of all objects visible
    *             on the screen
    * @return List<IShape> with the summary of shapes and their state
-   * @throws NullPointerException     if tick is null
    * @throws IllegalArgumentException if tick is not greater or equal to 0
    */
-  public List<IShape> getSnapshot(double tick) throws
-          NullPointerException, IllegalArgumentException {
-    Objects.requireNonNull(tick, "Tick must not be a null value.");
+  public List<IShape> getSnapshot(double tick) throws IllegalArgumentException {
     if (tick < 0) {
       throw new IllegalArgumentException("Tick must be greater or equal to 0");
     }
 
     List<IShape> snapshotList = new ArrayList<>();
-
     // go through each shape in the inventory and see what commands are associated with the shape
     for (IShape shape : this.inventory.values()) {
       // if the shape is on the screen, use animation commands to get its current state
