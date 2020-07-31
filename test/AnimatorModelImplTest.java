@@ -794,12 +794,15 @@ public class AnimatorModelImplTest {
     IShape oval = new Oval("C", new Point2D(500, 100),
             new Color(Color.BLUE.getRGB()), 60, 30, 6, 100);
 
+    model.addShape(rectangle, oval);
+    
     // add commands
     ICommand rCommand1 = new Move(rectangle, 10, 50, new Point2D(200, 200), new Point2D (300, 300));
-    ICommand oCommand1 = new Move(oval, 200, 70, new Point2D(500, 100), new Point2D (500, 400));
+    ICommand oCommand1 = new Move(oval, 20, 70, new Point2D(500, 100), new Point2D (500, 400));
     ICommand oCommmand2 = new ChangeColor(oval, 50, 80, new Color(Color.BLUE.getRGB()), new Color(Color.GREEN.getRGB()));
     ICommand rCommand2 = new Move(rectangle, 70, 100, new Point2D(300, 300), new Point2D (200, 200));
     ICommand rCommand3 = new Scale(rectangle, 51, 70, 50, 100, 25, 100);
+
 
     model.addAnimation(rCommand1, oCommand1, oCommmand2, rCommand2, rCommand3);
 
