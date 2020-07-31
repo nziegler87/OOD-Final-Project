@@ -12,6 +12,7 @@ import Model.Commands.ICommand;
 import Model.Commands.Move;
 import Model.Commands.Scale;
 import Model.Point2D.Point2D;
+import Model.Shape.AbstractShape;
 import Model.Shape.IShape;
 import Model.Shape.Oval;
 import Model.Shape.Rectangle;
@@ -781,5 +782,32 @@ public class AnimatorModelImplTest {
             "Disappears at t=100]\n\n", str.toString());
   }
 
+  // test to show that our model can input shapes and commands and
+  // return output that mimics the assignment instructions
+  @Test
+  public void testMimicInstructions() {
+    AnimatorModel model = new AnimatorModelImpl();
+
+    // add shapes
+    IShape rectangle = new Rectangle("R", new Point2D(200, 200),
+            new Color(Color.RED.getRGB()),50, 100, 1, 100);
+    IShape oval = new Oval("C", new Point2D(500, 100),
+            new Color(Color.BLUE.getRGB()), 60, 30, 6, 100);
+
+    // add commands
+    ICommand rCommand1 = new Move(rectangle, 10, 50, new Point2D(200, 200), new Point2D (300, 300));
+    ICommand oCommand1 = new Move(oval, 200, 70, new Point2D(500, 100), new Point2D (500, 400));
+    ICommand oCommmand2 = new ChangeColor(oval, 50, 80, new Color(Color.BLUE.getRGB()), new Color(Color.GREEN.getRGB()));
+    ICommand rCommand2 = new Move(rectangle, 70, 100, new Point2D(300, 300), new Point2D (200, 200));
+    ICommand rCommand3 = new Scale(rectangle, 51, 70, 50, 100, 25, 100);
+
+    model.addAnimation(rCommand1, oCommand1, oCommmand2, rCommand2, rCommand3);
+
+    System.out.println(model.getAnimationStatus());
+
+
+
+
+  }
 
 }

@@ -313,7 +313,7 @@ public class CommandTest {
             + "Appears at t=10\n"
             + "Disappears at t=20", shape.toString());
   }
-  
+
   // test equals
   @Test
   public void testEqualsIdenticalObjectsMove() {
