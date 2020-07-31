@@ -44,8 +44,9 @@ public interface IShape {
    *
    * @param factor a factor used in resizing, a double
    * @return a shape of the same kind as this one, just resized using the provided factor.
+   * @throws IllegalArgumentException if scale results in dimensions equal to or less than zero
    */
-  IShape scale(double factor);
+  IShape scale(double factor) throws IllegalArgumentException;
 
   /**
    * Returns the width of the object.
@@ -90,7 +91,6 @@ public interface IShape {
    */
   IShape copy();
 
-  //TODO: make a test for these
   /**
    * Method to set the start time of the shape object.
    *

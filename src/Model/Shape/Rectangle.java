@@ -24,7 +24,8 @@ public class Rectangle extends AbstractShape {
    * @param width       the width of the object, a double
    * @param height      the height of the object, a double
    * @throws NullPointerException if the coordinates or color are null
-   * @throws IllegalArgumentException if either coordinates or color objects are null or if either
+   * @throws IllegalArgumentException if the appear time or disappear time is negative, if the
+   *                                  appear time comes after or equal to the disappear time, or if
    *                                  width or height are not greater than 0
    */
   public Rectangle(String label, IPoint2D coordinates, Color color, double width, double height,
@@ -89,9 +90,10 @@ public class Rectangle extends AbstractShape {
    *
    * @param factor a factor used in resizing, a double
    * @return a shape of the same kind as this one, just resized using the provided factor.
+   * @throws IllegalArgumentException if scale results in dimensions equal to or less than zero
    */
   @Override
-  public IShape scale(double factor) {
+  public IShape scale(double factor) throws IllegalArgumentException {
     double sqrtFactor = Math.sqrt(factor);
     return new Rectangle(this.label, this.coordinates, this.color, this.width * sqrtFactor,
             this.height * sqrtFactor, this.appearTime, this.disappearTime);
