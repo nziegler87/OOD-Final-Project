@@ -72,17 +72,17 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
             "Name: doggo\n" +
             "Type: oval\n" +
-            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=1\n" +
             "Disappears at t=100\n" +
             "\n" +
             "Name: trash-panda\n" +
             "Type: rectangle\n" +
-            "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=1\n" +
             "Disappears at t=100\n" +
             "\n" +
-            "Command list is empty.", model.getAnimationStatus());
+            "Command list is empty", model.getAnimationStatus());
   }
 
   // removing a null shape
@@ -112,11 +112,11 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
             "Name: trash-panda\n" +
             "Type: rectangle\n" +
-            "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=1\n" +
             "Disappears at t=100\n" +
             "\n" +
-            "Command list is empty.", model.getAnimationStatus());
+            "Command list is empty", model.getAnimationStatus());
   }
 
   // remove a shape so there's no shapes left
@@ -205,18 +205,18 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
-                    "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=10 to t=50\n" +
-                    "chairman-meow moves from (100.0,100.0) to (150.0,150.0) from time t=50 to t=75\n",
+                    "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) from t=10 to t=50\n" +
+                    "Shape chairman-meow moves from (100.0,100.0) to (150.0,150.0) from t=50 to t=75",
             model.getAnimationStatus());
   }
 
@@ -239,19 +239,19 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
             "Name: doggo\n" +
             "Type: oval\n" +
-            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=1\n" +
             "Disappears at t=100\n" +
             "\n" +
             "Name: chairman-meow\n" +
             "Type: oval\n" +
-            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+            "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
             "Appears at t=1\n" +
             "Disappears at t=100\n" +
             "\n" +
-            "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=10 to t=50\n" +
-            "chairman-meow changes color from (255, 175, 175) to (0, 0, 255) from time t=10 to t=50\n" +
-            "chairman-meow changes width from 10.0 to 50.0 and height from 10.0 to 50.0 from time t=10 to t=50\n", model.getAnimationStatus());
+            "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) from t=10 to t=50\n" +
+            "Shape chairman-meow changes color from (1.0,0.7,0.7) to (0.0,0.0,1.0) from t=10 to t=50\n" +
+            "Shape chairman-meow scales from Width: 10.0, Height: 10.0 to Width: 50.0, Height: 50.0 from t=10 to t=50", model.getAnimationStatus());
   }
 
   // adding in multiple animations
@@ -287,31 +287,31 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: trash-panda\n" +
                     "Type: rectangle\n" +
-                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
-                    "doggo moves from (40.0,50.0) to (300.0,200.0) from time t=5 to t=50\n" +
-                    "trash-panda moves from (40.0,50.0) to (200.0,400.0) from time t=10 to t=40\n" +
-                    "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n" +
-                    "doggo changes width from 5.0 to 10.0 and height from 5.0 to 55.0 from time t=15 to t=75\n" +
-                    "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=30 to t=50\n" +
-                    "chairman-meow changes width from 50.0 to 100.0 and height from 50.0 to 100.0 from time t=30 to t=60\n" +
-                    "chairman-meow changes color from (255, 0, 255) to (0, 0, 255) from time t=55 to t=80\n" +
-                    "doggo changes color from (255, 255, 0) to (255, 0, 0) from time t=60 to t=100\n" +
-                    "trash-panda changes color from (255, 175, 175) to (255, 200, 0) from time t=90 to t=100\n",
+                    "Shape doggo moves from (40.0,50.0) to (300.0,200.0) from t=5 to t=50\n" +
+                    "Shape trash-panda moves from (40.0,50.0) to (200.0,400.0) from t=10 to t=40\n" +
+                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, Height: 50.0 from t=10 to t=25\n" +
+                    "Shape doggo scales from Width: 5.0, Height: 5.0 to Width: 10.0, Height: 55.0 from t=15 to t=75\n" +
+                    "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) from t=30 to t=50\n" +
+                    "Shape chairman-meow scales from Width: 50.0, Height: 50.0 to Width: 100.0, Height: 100.0 from t=30 to t=60\n" +
+                    "Shape chairman-meow changes color from (1.0,0.0,1.0) to (0.0,0.0,1.0) from t=55 to t=80\n" +
+                    "Shape doggo changes color from (1.0,1.0,0.0) to (1.0,0.0,0.0) from t=60 to t=100\n" +
+                    "Shape trash-panda changes color from (1.0,0.7,0.7) to (1.0,0.8,0.0) from t=90 to t=100",
             model.getAnimationStatus());
   }
 
@@ -350,24 +350,24 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: trash-panda\n" +
                     "Type: rectangle\n" +
-                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
-                    "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n" +
-                    "chairman-meow changes color from (255, 0, 255) to (0, 0, 255) from time t=55 to t=80\n",
+                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, Height: 50.0 from t=10 to t=25\n" +
+                    "Shape chairman-meow changes color from (1.0,0.0,1.0) to (0.0,0.0,1.0) from t=55 to t=80",
             model.getAnimationStatus());
 
     model.removeAnimation(colorMeow);
@@ -375,23 +375,23 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 0, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: trash-panda\n" +
                     "Type: rectangle\n" +
-                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0, 255, 0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
-                    "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n",
+                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, Height: 50.0 from t=10 to t=25",
             model.getAnimationStatus());
   }
 
@@ -504,280 +504,280 @@ public class AnimatorModelImplTest {
             "Snapshot at tick 5:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 6:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 7:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 8:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 9:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (0.0,0.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 10:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (10.0,10.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (10.0,10.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 11:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (11.0,11.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (11.0,11.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 12:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (12.0,12.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (12.0,12.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 13:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (13.0,13.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (13.0,13.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 14:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (14.0,14.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (14.0,14.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 15:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (15.0,15.0), Width: 10.0, Height: 10.0, Color: (0, 0, 0)\n" +
+            "Min corner: (15.0,15.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 16:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (16.0,16.0), Width: 11.0, Height: 11.0, Color: (0, 0, 0)\n" +
+            "Min corner: (16.0,16.0), Width: 11.0, Height: 11.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 17:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (17.0,17.0), Width: 12.0, Height: 12.0, Color: (0, 0, 0)\n" +
+            "Min corner: (17.0,17.0), Width: 12.0, Height: 12.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 18:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (18.0,18.0), Width: 13.0, Height: 13.0, Color: (0, 0, 0)\n" +
+            "Min corner: (18.0,18.0), Width: 13.0, Height: 13.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 19:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (19.0,19.0), Width: 14.0, Height: 14.0, Color: (0, 0, 0)\n" +
+            "Min corner: (19.0,19.0), Width: 14.0, Height: 14.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 20:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 15.0, Height: 15.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 15.0, Height: 15.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 21:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 16.0, Height: 16.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 16.0, Height: 16.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 22:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 17.0, Height: 17.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 17.0, Height: 17.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 23:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 18.0, Height: 18.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 18.0, Height: 18.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 24:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 19.0, Height: 19.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 19.0, Height: 19.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 25:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 26:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 27:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 28:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 29:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 30:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (20.0,20.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 31:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (21.0,21.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (21.0,21.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 32:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (22.0,22.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (22.0,22.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 33:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (23.0,23.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (23.0,23.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 34:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (24.0,24.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (24.0,24.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 35:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (25.0,25.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (25.0,25.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 36:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (26.0,26.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (26.0,26.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 37:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (27.0,27.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (27.0,27.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 38:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (28.0,28.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (28.0,28.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 39:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (29.0,29.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (29.0,29.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 40:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 41:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 42:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 43:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n" +
             "\n" +
             "Snapshot at tick 44:\n" +
             "[Name: penguin\n" +
             "Type: rectangle\n" +
-            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0, 0, 0)\n" +
+            "Min corner: (30.0,30.0), Width: 20.0, Height: 20.0, Color: (0.0,0.0,0.0)\n" +
             "Appears at t=5\n" +
             "Disappears at t=100]\n\n", str.toString());
   }

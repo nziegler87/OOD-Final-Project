@@ -189,14 +189,14 @@ public class CommandTest {
   // string output for commands
   @Test
   public void testToString() {
-    assertEquals("bob changes color from (255, 0, 255) to (255, 175, 175) "
-            + "from time t=10 to t=50\n", changeColor.toString());
-    assertEquals("pearl moves from (100.0,100.0) to (50.0,50.0) "
-            + "from time t=0 to t=15\n", move.toString());
-    assertEquals("bob changes width from 10.0 to 20.0 and height from 20.0 to 10.0 "
-            + "from time t=40 to t=60\n", scale.toString());
-    assertEquals("pearl moves from (50.0,50.0) to (100.0,100.0) "
-            + "from time t=0 to t=15\n", move2.toString());
+    assertEquals("Shape bob changes color from (1.0,0.0,1.0) to (1.0,0.7,0.7) "
+            + "from t=10 to t=50\n", changeColor.toString());
+    assertEquals("Shape pearl moves from (100.0,100.0) to (50.0,50.0) "
+            + "from t=0 to t=15\n", move.toString());
+    assertEquals("Shape bob scales from Width: 10.0, Height: 20.0 to Width: 20.0, " +
+            "Height: 10.0 from t=40 to t=60\n", scale.toString());
+    assertEquals("Shape pearl moves from (50.0,50.0) to (100.0,100.0) "
+            + "from t=0 to t=15\n", move2.toString());
   }
   
   // test that move throws IllegalArg if invalid time (Move)
@@ -239,7 +239,7 @@ public class CommandTest {
     System.out.println(shape.toString());
     assertEquals("Name: bob\n"
             + "Type: oval\n"
-            + "Center: (15.0,15.0), X radius: 50.0, Y radius: 50.0, Color: (255, 255, 255)\n"
+            + "Center: (15.0,15.0), X radius: 50.0, Y radius: 50.0, Color: (1.0,1.0,1.0)\n"
             + "Appears at t=10\n"
             + "Disappears at t=20", shape.toString());
   }
@@ -274,7 +274,7 @@ public class CommandTest {
     System.out.println(shape.toString());
     assertEquals("Name: bob\n"
             + "Type: oval\n"
-            + "Center: (100.0,100.0), X radius: 15.0, Y radius: 15.0, Color: (255, 255, 255)\n"
+            + "Center: (100.0,100.0), X radius: 15.0, Y radius: 15.0, Color: (1.0,1.0,1.0)\n"
             + "Appears at t=10\n"
             + "Disappears at t=20", shape.toString());
   }
@@ -309,7 +309,7 @@ public class CommandTest {
     System.out.println(shape.toString());
     assertEquals("Name: bob\n"
             + "Type: oval\n"
-            + "Center: (100.0,100.0), X radius: 50.0, Y radius: 50.0, Color: (5, 5, 5)\n"
+            + "Center: (100.0,100.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n"
             + "Appears at t=10\n"
             + "Disappears at t=20", shape.toString());
   }
