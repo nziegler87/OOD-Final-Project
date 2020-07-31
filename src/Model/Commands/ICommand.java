@@ -19,6 +19,7 @@ public interface ICommand {
    */
   IShape execute(IShape shape, double tick) throws NullPointerException, IllegalArgumentException;
 
+  // tested
   /**
    * Returns the command type
    *
@@ -26,6 +27,7 @@ public interface ICommand {
    */
   String getCommandType();
 
+  // tested
   /**
    * Returns a copy of the shape object stored in the command object.
    *
@@ -33,6 +35,7 @@ public interface ICommand {
    */
   IShape getShape();
 
+  // tested
   /**
    * Returns the start time of the animation object.
    *
@@ -40,6 +43,7 @@ public interface ICommand {
    */
   double getStartTime();
 
+  // tested
   /**
    * Return the end time of the animation object.
    *
@@ -47,6 +51,7 @@ public interface ICommand {
    */
   double getEndTime();
 
+  // tested
   /**
    * Returns the command details as a string.
    *

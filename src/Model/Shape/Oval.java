@@ -107,11 +107,16 @@ public class Oval extends AbstractShape {
    */
   @Override
   public String toString() {
+
+    // convert RGB to percentages
+    double red = (double) this.color.getRed() / 255;
+    double green = (double) this.color.getGreen() / 255;
+    double blue= (double) this.color.getBlue() / 255;
+
     return String.format("Name: %s\nType: %s\nCenter: %s, X radius: %.1f, Y radius: %.1f, Color: "
-                    + "(%d, %d, %d)\nAppears at t=%.0f\nDisappears at t=%.0f", this.label, this.type,
-            this.coordinates.toString(), this.xRadius, this.yRadius,
-            this.color.getRed(), this.color.getGreen(), this.color.getBlue(),
-            this.appearTime, this.disappearTime);
+                    + "(%.1f,%.1f,%.1f)\nAppears at t=%.0f\nDisappears at t=%.0f", this.label,
+            this.type, this.coordinates.toString(), this.xRadius, this.yRadius,
+            red, green, blue, this.appearTime, this.disappearTime);
   }
 
   /**

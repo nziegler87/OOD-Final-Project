@@ -87,7 +87,7 @@ public class ShapeTest {
             new Color(0, 0, 1), 60.0, 30.0, 10, 20);
     assertEquals("Name: c\n"
                     + "Type: oval\n"
-                    + "Center: (500.0,100.0), X radius: 60.0, Y radius: 30.0, Color: (0, 0, 1)"
+                    + "Center: (500.0,100.0), X radius: 60.0, Y radius: 30.0, Color: (0.0,0.0,0.0)"
                     + "\nAppears at t=10\nDisappears at t=20",
             testShapeOval.toString());
 
@@ -95,7 +95,7 @@ public class ShapeTest {
 
     assertEquals("Name: c\n"
                     + "Type: oval\n"
-                    + "Center: (24.2,56.6), X radius: 60.0, Y radius: 30.0, Color: (0, 0, 1)"
+                    + "Center: (24.2,56.6), X radius: 60.0, Y radius: 30.0, Color: (0.0,0.0,0.0)"
                     + "\nAppears at t=10\nDisappears at t=20",
             testShapeOval.toString());
 
@@ -103,14 +103,14 @@ public class ShapeTest {
             new Color(0, 0, 1), 60.0, 30.0, 10, 20);
     assertEquals("Name: r\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (500.0,100.0), Width: 60.0, Height: 30.0, Color: (0, 0, 1)"
+                    + "Min corner: (500.0,100.0), Width: 60.0, Height: 30.0, Color: (0.0,0.0,0.0)"
                     + "\nAppears at t=10\nDisappears at t=20",
             testShapeRectangle.toString());
 
     testShapeRectangle.setCoordinates(24.2, 56.6);
     assertEquals("Name: r\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (24.2,56.6), Width: 60.0, Height: 30.0, Color: (0, 0, 1)"
+                    + "Min corner: (24.2,56.6), Width: 60.0, Height: 30.0, Color: (0.0,0.0,0.0)"
                     + "\nAppears at t=10\nDisappears at t=20",
             testShapeRectangle.toString());
   }
@@ -130,13 +130,13 @@ public class ShapeTest {
 
     assertEquals("Name: Nate\n" +
             "Type: oval\n" +
-            "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)\n" +
+            "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (1.0,0.0,0.9)\n" +
             "Appears at t=10\n" +
             "Disappears at t=20", nateOval.toString());
 
     assertEquals("Name: Danielle\n" +
             "Type: rectangle\n" +
-            "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)\n" +
+            "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (0.1,1.0,0.9)\n" +
             "Appears at t=10\n" +
             "Disappears at t=20", danielleRectangle.toString());
   }
@@ -164,7 +164,7 @@ public class ShapeTest {
   public void testSetColor() {
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (1.0,0.0,0.9)"
                     + "\nAppears at t=10\nDisappears at t=20",
             nateOval.toString());
 
@@ -172,13 +172,13 @@ public class ShapeTest {
 
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (147, 24, 24)"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (0.6,0.1,0.1)"
                     + "\nAppears at t=10\nDisappears at t=20",
             nateOval.toString());
 
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (0.1,1.0,0.9)"
                     + "\nAppears at t=10\nDisappears at t=20",
             danielleRectangle.toString());
 
@@ -186,7 +186,7 @@ public class ShapeTest {
 
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (147, 24, 24)"
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (0.6,0.1,0.1)"
                     + "\nAppears at t=10\nDisappears at t=20",
             danielleRectangle.toString());
   }
@@ -209,12 +209,12 @@ public class ShapeTest {
   public void testToString() {
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (1.0,0.0,0.9)"
                     + "\nAppears at t=10\nDisappears at t=20",
             nateOval.toString());
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (0.1,1.0,0.9)"
                     + "\nAppears at t=10\nDisappears at t=20",
             danielleRectangle.toString());
   }
@@ -302,12 +302,12 @@ public class ShapeTest {
     danielleRectangle.setAppearTime((12));
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (1.0,0.0,0.9)"
                     + "\nAppears at t=20\nDisappears at t=20",
             nateOval.toString());
     assertEquals("Name: Danielle\n"
                     + "Type: rectangle\n"
-                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (0.1,1.0,0.9)"
                     + "\nAppears at t=12\nDisappears at t=20",
             danielleRectangle.toString());
   }
@@ -329,7 +329,7 @@ public class ShapeTest {
     nateOval.setDisappearTime(30);
     assertEquals("Name: Nate\n"
                     + "Type: oval\n"
-                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (1.0,0.0,0.9)"
                     + "\nAppears at t=10\nDisappears at t=30",
             nateOval.toString());
   }

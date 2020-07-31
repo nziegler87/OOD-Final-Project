@@ -24,12 +24,17 @@ public class Scale extends AbstractCommand {
    * @param endWidth    end width of the object
    * @param endHeight   end height of the object
    * @throws NullPointerException     if shape is null
-   * @throws IllegalArgumentException if animation time is 0
+   * @throws IllegalArgumentException if animation time is 0 or if start/end cords = 0
    */
   public Scale(IShape shape, double startTime, double endTime, double startWidth,
                double startHeight, double endWidth, double endHeight)
           throws NullPointerException, IllegalArgumentException {
     super(shape, startTime, endTime);
+
+    if (startHeight <= 0 || startWidth <= 0 || endWidth <= 0 || endHeight <= 0) {
+      throw new IllegalArgumentException("Starting and ending coords must be greater than 0");
+    }
+
     this.startWidth = startWidth;
     this.startHeight = startHeight;
     this.endWidth = endWidth;
@@ -89,13 +94,13 @@ public class Scale extends AbstractCommand {
   @Override
   public String toString() {
     if (endWidth > 0 && endHeight > 0) {
-      return String.format("%s changes width from %.1f to %.1f and height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
-              shape.getLabel(), this.startWidth, endWidth, this.startHeight, endHeight, startTime, endTime);
+      return String.format("Shape %s scales from Width: %.1f, Height: %.1f to Width: %.1f, Height: %.1f from t=%.0f to t=%.0f\n",
+              shape.getLabel(), this.startWidth, this.startHeight, this.endWidth, endHeight, startTime, endTime);
     } else if (endWidth > 0) {
-      return String.format("%s changes width from %.1f to %.1f from time t=%.0f to t=%.0f\n",
+      return String.format("Shape %s scales from Width: %.1f to Width: %.1f from t=%.0f to t=%.0f\n",
               shape.getLabel(), this.startWidth, endWidth, startTime, endTime);
     } else {
-      return String.format("%s changes height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
+      return String.format("Shape %s scales from Height: %.1f to Height: %.1f from t=%.0f to t=%.0f\n",
               shape.getLabel(), this.startHeight, endHeight, startTime, endTime);
     }
   }
