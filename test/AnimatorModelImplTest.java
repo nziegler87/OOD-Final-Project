@@ -33,7 +33,7 @@ public class AnimatorModelImplTest {
   @Before
   public void setUp() {
     model = new AnimatorModelImpl();
-/*    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0),
+    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0),
             new Color(0, 0, 0), 10.0, 10.0, 1, 100);
     doggo = new Oval("doggo", new Point2D(200, 200.0),
             new Color(0, 0, 0), 50.0, 50.0, 1,
@@ -43,18 +43,18 @@ public class AnimatorModelImplTest {
             100);
     penguin = new Rectangle("penguin", new Point2D(0, 0),
             new Color(0, 0, 0), 10, 10, 5, 100);
-    model.addShape(doggo);*/
+    model.addShape(doggo);
   }
 
-  // null shape in addShape
+  // adding a null shape
   @Test(expected = NullPointerException.class)
-  public void testNullShape() {
+  public void testAddNullShape() {
     model.addShape(null);
   }
 
-  // null shape in addShape
+  // adding null shapes
   @Test(expected = NullPointerException.class)
-  public void testNullShapes() {
+  public void testAddNullShapes() {
     model.addShape(null, null, null);
   }
 
@@ -66,7 +66,7 @@ public class AnimatorModelImplTest {
 
   // adding a shape to the model
   @Test
-  public void testAddShape() {
+  public void testAddShapeNormal() {
     model.addShape(trashPanda);
     assertEquals("Shapes:\n" +
             "Name: doggo\n" +
@@ -86,8 +86,15 @@ public class AnimatorModelImplTest {
 
   // removing a null shape
   @Test(expected = NullPointerException.class)
-  public void testRemoveShapeNull() {
+  public void testRemoveNullShape() {
     model.removeShape(null);
+  }
+
+
+  // removing null shapes
+  @Test(expected = NullPointerException.class)
+  public void testRemoveNullShapes() {
+    model.removeShape(null, null, null);
   }
 
   // removing a shape that's not in the list
@@ -119,10 +126,16 @@ public class AnimatorModelImplTest {
             "displayed", model.getAnimationStatus());
   }
 
-  // removing a shape that's not in the list
+  // removing a shape not in the list
   @Test(expected = NullPointerException.class)
   public void testAddAnimationNull() {
     model.addAnimation(null);
+  }
+
+  // removing shapes not in the list
+  @Test(expected = NullPointerException.class)
+  public void testAddAnimationNulls() {
+    model.addAnimation(null, null, null);
   }
 
   // adding animation to a shape that is not in the list
@@ -303,8 +316,14 @@ public class AnimatorModelImplTest {
 
   // removing a null animation
   @Test(expected = NullPointerException.class)
-  public void testRemoveAnimationNull() {
+  public void testRemoveNullAnimation() {
     model.removeAnimation(null);
+  }
+
+  // removing null animations
+  @Test(expected = NullPointerException.class)
+  public void testRemoveNullAnimations() {
+    model.removeAnimation(null, null, null);
   }
 
   // removing animation from a shape that is not in the list
@@ -373,6 +392,77 @@ public class AnimatorModelImplTest {
                     "\n" +
                     "trash-panda changes width from 70.0 to 40.0 and height from 35.0 to 50.0 from time t=10 to t=25\n",
             model.getAnimationStatus());
+  }
+
+  // getting the snapshot at tick 30
+  @Test
+  public void testGetSnapshot() {
+    AnimatorModel modelSnapshot = new AnimatorModelImpl();
+    modelSnapshot.addShape(doggo);
+    modelSnapshot.addShape(chairmanMeow);
+    modelSnapshot.addShape(trashPanda);
+
+    ICommand moveMeow = new Move(chairmanMeow, 10, 50, new Point2D(50, 50), new Point2D(100, 100));
+    ICommand colorDoggo = new ChangeColor(doggo, 20, 30, Color.YELLOW, Color.RED);
+    ICommand scaleTrashPanda = new Scale(trashPanda, 10, 40, 10, 10, 40, 40);
+
+    modelSnapshot.addAnimation(moveMeow);
+    modelSnapshot.addAnimation(colorDoggo);
+    modelSnapshot.addAnimation(scaleTrashPanda);
+
+    List<IShape> testSnapshotList = new ArrayList<>();
+
+    IShape meowCopy = chairmanMeow.copy();
+    meowCopy.setCoordinates(new Point2D(75, 75));
+
+    IShape doggoCopy = doggo.copy();
+    doggoCopy.setColor(Color.RED);
+
+    IShape trashPandaCopy = trashPanda.copy();
+    trashPandaCopy.setHeight(30);
+    trashPandaCopy.setWidth(30);
+
+    testSnapshotList.add(doggoCopy);
+    testSnapshotList.add(trashPandaCopy);
+    testSnapshotList.add(meowCopy);
+
+    assertEquals(testSnapshotList.toString(), modelSnapshot.getSnapshot(30).toString());
+  }
+
+  // getting the snapshot at tick 35 where both shapes don't overlap
+  @Test
+  public void testGetSnapshotNotSameTime() {
+    AnimatorModel modelSnapshot = new AnimatorModelImpl();
+
+    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0),
+            new Color(0, 0, 0), 10.0, 10.0, 70,
+            100);
+
+    doggo = new Oval("doggo", new Point2D(200, 200.0),
+            new Color(0, 0, 0), 50.0, 50.0, 10,
+            50);
+
+    modelSnapshot.addShape(doggo);
+    modelSnapshot.addShape(trashPanda);
+
+    ICommand colorDoggo = new ChangeColor(doggo, 20, 35, Color.YELLOW, Color.RED);
+    ICommand scaleTrashPanda = new Scale(trashPanda, 10, 40, 10, 10, 40, 40);
+
+    modelSnapshot.addAnimation(colorDoggo);
+    modelSnapshot.addAnimation(scaleTrashPanda);
+
+    List<IShape> testSnapshotList = new ArrayList<>();
+
+    IShape doggoCopy = doggo.copy();
+    doggoCopy.setColor(Color.RED);
+
+    IShape trashPandaCopy = trashPanda.copy();
+    trashPandaCopy.setHeight(30);
+    trashPandaCopy.setWidth(30);
+
+    testSnapshotList.add(doggoCopy);
+
+    assertEquals(testSnapshotList.toString(), modelSnapshot.getSnapshot(35).toString());
   }
 
   // getting the animation status
@@ -691,74 +781,5 @@ public class AnimatorModelImplTest {
             "Disappears at t=100]\n\n", str.toString());
   }
 
-  // getting the snapshot at tick 30
-  @Test
-  public void testGetSnapshot() {
-    AnimatorModel modelSnapshot = new AnimatorModelImpl();
-    modelSnapshot.addShape(doggo);
-    modelSnapshot.addShape(chairmanMeow);
-    modelSnapshot.addShape(trashPanda);
 
-    ICommand moveMeow = new Move(chairmanMeow, 10, 50, new Point2D(50, 50), new Point2D(100, 100));
-    ICommand colorDoggo = new ChangeColor(doggo, 20, 30, Color.YELLOW, Color.RED);
-    ICommand scaleTrashPanda = new Scale(trashPanda, 10, 40, 10, 10, 40, 40);
-
-    modelSnapshot.addAnimation(moveMeow);
-    modelSnapshot.addAnimation(colorDoggo);
-    modelSnapshot.addAnimation(scaleTrashPanda);
-
-    List<IShape> testSnapshotList = new ArrayList<>();
-
-    IShape meowCopy = chairmanMeow.copy();
-    meowCopy.setCoordinates(new Point2D(75, 75));
-
-    IShape doggoCopy = doggo.copy();
-    doggoCopy.setColor(Color.RED);
-
-    IShape trashPandaCopy = trashPanda.copy();
-    trashPandaCopy.setHeight(30);
-    trashPandaCopy.setWidth(30);
-
-    testSnapshotList.add(doggoCopy);
-    testSnapshotList.add(trashPandaCopy);
-    testSnapshotList.add(meowCopy);
-
-    assertEquals(testSnapshotList.toString(), modelSnapshot.getSnapshot(30).toString());
-  }
-
-  // getting the snapshot at tick 35 where both shapes don't overlap
-  @Test
-  public void testGetSnapshotNotSameTime() {
-    AnimatorModel modelSnapshot = new AnimatorModelImpl();
-
-    trashPanda = new Rectangle("trash-panda", new Point2D(100.0, 100.0),
-            new Color(0, 0, 0), 10.0, 10.0, 70,
-            100);
-
-    doggo = new Oval("doggo", new Point2D(200, 200.0),
-            new Color(0, 0, 0), 50.0, 50.0, 10,
-            50);
-
-    modelSnapshot.addShape(doggo);
-    modelSnapshot.addShape(trashPanda);
-
-    ICommand colorDoggo = new ChangeColor(doggo, 20, 35, Color.YELLOW, Color.RED);
-    ICommand scaleTrashPanda = new Scale(trashPanda, 10, 40, 10, 10, 40, 40);
-
-    modelSnapshot.addAnimation(colorDoggo);
-    modelSnapshot.addAnimation(scaleTrashPanda);
-
-    List<IShape> testSnapshotList = new ArrayList<>();
-
-    IShape doggoCopy = doggo.copy();
-    doggoCopy.setColor(Color.RED);
-
-    IShape trashPandaCopy = trashPanda.copy();
-    trashPandaCopy.setHeight(30);
-    trashPandaCopy.setWidth(30);
-
-    testSnapshotList.add(doggoCopy);
-
-    assertEquals(testSnapshotList.toString(), modelSnapshot.getSnapshot(35).toString());
-  }
 }
