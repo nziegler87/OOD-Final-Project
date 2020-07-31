@@ -72,5 +72,4 @@ abstract class to factor out any common functionality between concrete classes. 
     two coordinates.
     
 Below is a UML of our model:
-
-![alt text](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20Model%20UML.jpg)
+![UML Model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)
