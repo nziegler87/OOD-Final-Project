@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.Color;
+import java.awt.*;
 
 import Model.Commands.AbstractCommand;
 import Model.Commands.ChangeColor;
@@ -50,31 +50,109 @@ public class CommandTest {
             coords2, coords1);
   }
 
+  // test that null pointer is thrown when shape passed to constructor is null
+  @Test (expected = NullPointerException.class)
+  public void nullShapeMove() {
+    new Move(null, 50, 70, coords1, coords2);
+  }
+
+  // test that null pointer is thrown when shape passed to constructor is null
+  @Test (expected = NullPointerException.class)
+  public void nullShapeScale() {
+    new Scale(null, 50, 20, 50, 50, 100, 100);
+  }
+
+  // test that null pointer is thrown when shape passed to constructor is null
+  @Test (expected = NullPointerException.class)
+  public void nullShapeChangeColor() {
+    new ChangeColor(null, 50, 20, Color.RED, Color.BLUE);
+  }
+
+  // test where start time is past end time
   @Test(expected = IllegalArgumentException.class)
   public void corruptMove() {
     new Move(bob, 50, 20, coords1, coords2);
   }
 
+  // test where start time == end time
+  @Test(expected = IllegalArgumentException.class)
+  public void corruptMove2() {
+    new Move(bob, 20, 20, coords1, coords2);
+  }
+
+  // test where start time is past end time
   @Test(expected = IllegalArgumentException.class)
   public void corruptScale() {
     new Scale(bob, 50, 20, 50, 50, 100, 100);
   }
 
+  // test where start time == end time
+  @Test(expected = IllegalArgumentException.class)
+  public void corruptScale2 () {
+    new Scale(bob, 20, 20, 50, 50, 100, 100);
+  }
+
+  // test where scale is zero height
+  @Test(expected = IllegalArgumentException.class)
+  public void corruptScaleZeroHeight2() {
+    new Scale(bob, 10, 20, 0, 50, 100, 100);
+  }
+
+  // test where scale to zero width
+  @Test(expected = IllegalArgumentException.class)
+  public void corruptScaleZeroWidth2() {
+    new Scale(bob, 10, 20, 0, 50, 100, 100);
+  }
+  
+  // test where scale is zero height
   @Test(expected = IllegalArgumentException.class)
   public void corruptScaleZeroHeight() {
-    new Scale(bob, 50, 20, 50, 50, 0, 100);
+    new Scale(bob, 10, 20, 50, 50, 0, 100);
   }
 
+  // test where scale to zero width
   @Test(expected = IllegalArgumentException.class)
   public void corruptScaleZeroWidth() {
-    new Scale(bob, 50, 20, 50, 50, 100, 0);
+    new Scale(bob, 10, 20, 50, 50, 100, 0);
   }
 
+  // test where star time is past end time
   @Test(expected = IllegalArgumentException.class)
   public void corruptChangeColor() {
     new ChangeColor(bob, 50, 20, Color.RED, Color.BLUE);
   }
 
+  // test where star time == end time
+  @Test(expected = IllegalArgumentException.class)
+  public void corruptChangeColor2() {
+    new ChangeColor(bob, 20, 20, Color.RED, Color.BLUE);
+  }
+
+  // test where start color object is null
+  @Test(expected = NullPointerException.class)
+  public void corruptChangeColor3() {
+    new ChangeColor(bob, 20, 30, null, Color.BLUE);
+  }
+
+  // test where end color object is null
+  @Test(expected = NullPointerException.class)
+  public void corruptChangeColor4() {
+    new ChangeColor(bob, 20, 30, Color.RED, null);
+  }
+
+  // test where start cord is null
+  @Test (expected = NullPointerException.class)
+  public void nullShapeMove2() {
+    new Move(bob, 50, 70, null, coords2);
+  }
+
+  // test where end cord is null
+  @Test (expected = NullPointerException.class)
+  public void nullShapeMove3() {
+    new Move(bob, 50, 70, coords1, null);
+  }
+
+  // test where end cord is null
 
   // getting the command type for the commands
   @Test
@@ -120,7 +198,122 @@ public class CommandTest {
     assertEquals("pearl moves from (50.0,50.0) to (100.0,100.0) "
             + "from time t=0 to t=15\n", move2.toString());
   }
+  
+  // test that move throws IllegalArg if invalid time (Move)
+  @Test (expected = IllegalArgumentException.class)
+  public void testInvalidTimeMove() {
+    ICommand command = new Move(bob, -10, 20, new Point2D(10, 10),
+            new Point2D(20, 20));
+  }
 
+  // test that execute throws IllegalArg if invalid time (Move)
+  @Test (expected = IllegalArgumentException.class)
+  public void testInvalidTimeMove2() {
+    ICommand command = new Move(bob, 10, 20, new Point2D(10, 10),
+            new Point2D(20, 20));
+    command.execute(bob, 8);
+  }
+
+  // test that execute throws IllegalArg if invalid time (Move)
+  @Test (expected = IllegalArgumentException.class)
+  public void testInvalidTimeMove3() {
+    ICommand command = new Move(bob, 10, 20, new Point2D(10, 10),
+            new Point2D(20, 20));
+    command.execute(bob, 21);
+  }
+  
+  // test that execute throws NullPointer if shape is null (Move)
+  @Test (expected = NullPointerException.class)
+  public void testNullPointerMove() {
+    ICommand command = new Move(bob, 10, 20, new Point2D(10, 10),
+            new Point2D(20, 20));
+    command.execute(null, 21);
+  }
+
+  // test that execute functions
+  @Test
+  public void testMoveExecute() {
+    ICommand command = new Move(bob, 10, 20, new Point2D(10, 10),
+            new Point2D(20, 20));
+    IShape shape = command.execute(bob, 15);
+    System.out.println(shape.toString());
+    assertEquals("Name: bob\n"
+            + "Type: oval\n"
+            + "Center: (15.0,15.0), X radius: 50.0, Y radius: 50.0, Color: (255, 255, 255)\n"
+            + "Appears at t=10\n"
+            + "Disappears at t=20", shape.toString());
+  }
+
+  // test that execute throws IllegalArg if invalid time (Scale)
+  @Test (expected = IllegalArgumentException.class)
+  public void testInvalidTimeScale2() {
+    ICommand command = new Scale(bob, 10, 20, 10, 10, 20, 20);
+    command.execute(bob, 8);
+  }
+
+  // test that execute throws IllegalArg if invalid time (Scale)
+  @Test (expected = IllegalArgumentException.class)
+  public void testInvalidTimeScale3() {
+    ICommand command = new Scale(bob, 10, 20, 10, 10, 20, 20);
+    command.execute(bob, 21);
+  }
+
+  // test that execute throws NullPointer if shape is null (Scale)
+  @Test (expected = NullPointerException.class)
+  public void testNullPointerScale() {
+    ICommand command = new Scale(bob, 10, 20, 10, 10, 20, 20);
+    command.execute(null, 21);
+  }
+
+  // test that execute functions
+  @Test
+  public void testScaleExecute() {
+    ICommand command = new Scale(bob, 10, 20, 10, 10, 20, 20);
+
+    IShape shape = command.execute(bob, 15);
+    System.out.println(shape.toString());
+    assertEquals("Name: bob\n"
+            + "Type: oval\n"
+            + "Center: (100.0,100.0), X radius: 15.0, Y radius: 15.0, Color: (255, 255, 255)\n"
+            + "Appears at t=10\n"
+            + "Disappears at t=20", shape.toString());
+  }
+
+  // test that execute throws IllegalArg if invalid time (ChangeColor)
+  @Test (expected = IllegalArgumentException.class)
+  public void testInvalidTimeChangeColor2() {
+    ICommand command = new ChangeColor(bob, 10, 20, new Color (Color.RED.getRGB()), new Color (Color.BLUE.getRGB()));
+    command.execute(bob, 8);
+  }
+
+  // test that execute throws IllegalArg if invalid time (ChangeColor)
+  @Test (expected = IllegalArgumentException.class)
+  public void testInvalidTimeChangeColor3() {
+    ICommand command = new ChangeColor(bob, 10, 20, new Color (Color.RED.getRGB()), new Color (Color.BLUE.getRGB()));
+    command.execute(bob, 21);
+  }
+
+  // test that execute throws NullPointer if shape is null (ChangeColor)
+  @Test (expected = NullPointerException.class)
+  public void testNullPointerChangeColor() {
+    ICommand command = new ChangeColor(bob, 10, 20, new Color (Color.RED.getRGB()), new Color (Color.BLUE.getRGB()));
+    command.execute(null, 21);
+  }
+
+  // test that execute functions
+  @Test
+  public void testChangeColorExecute() {
+    ICommand command = new ChangeColor(bob, 10, 20, new Color (0, 0, 0), new Color (10, 10, 10));
+
+    IShape shape = command.execute(bob, 15);
+    System.out.println(shape.toString());
+    assertEquals("Name: bob\n"
+            + "Type: oval\n"
+            + "Center: (100.0,100.0), X radius: 50.0, Y radius: 50.0, Color: (5, 5, 5)\n"
+            + "Appears at t=10\n"
+            + "Disappears at t=20", shape.toString());
+  }
+  
   // test equals
   @Test
   public void testEqualsIdenticalObjectsMove() {

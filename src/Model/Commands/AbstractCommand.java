@@ -27,7 +27,7 @@ public abstract class AbstractCommand implements ICommand {
           throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(shape);
     // check to make sure that time entry is valid
-    if (endTime == startTime || startTime > endTime) {
+    if (startTime < 0 || endTime < 0 || endTime == startTime || startTime > endTime) {
       throw new IllegalArgumentException("Invalid time entry.");
     }
     this.shape = shape;

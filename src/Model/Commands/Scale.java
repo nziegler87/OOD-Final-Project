@@ -24,12 +24,17 @@ public class Scale extends AbstractCommand {
    * @param endWidth    end width of the object
    * @param endHeight   end height of the object
    * @throws NullPointerException     if shape is null
-   * @throws IllegalArgumentException if animation time is 0
+   * @throws IllegalArgumentException if animation time is 0 or if start/end cords = 0
    */
   public Scale(IShape shape, double startTime, double endTime, double startWidth,
                double startHeight, double endWidth, double endHeight)
           throws NullPointerException, IllegalArgumentException {
     super(shape, startTime, endTime);
+
+    if (startHeight <= 0 || startWidth <= 0 || endWidth <= 0 || endHeight <= 0) {
+      throw new IllegalArgumentException("Starting and ending coords must be greater than 0");
+    }
+
     this.startWidth = startWidth;
     this.startHeight = startHeight;
     this.endWidth = endWidth;
