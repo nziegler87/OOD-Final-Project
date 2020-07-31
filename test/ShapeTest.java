@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 
 /**
- * A JUnit test class for the Oval class.
+ * A JUnit test class for the shape classes
  */
 public class ShapeTest {
   IShape nateOval;
@@ -79,6 +79,7 @@ public class ShapeTest {
     assertNotSame(originalPoint2D, returnedPoint2D);
   }
 
+
   // test setCoordinates
   @Test
   public void testSetCoordinates() {
@@ -114,8 +115,35 @@ public class ShapeTest {
             testShapeRectangle.toString());
   }
 
+  // test that setCoordinates throws NullPointer
+  @Test (expected = NullPointerException.class)
+  public void testSetCoordinatesNullPointer() {
+    nateOval.setCoordinates(null);
+    danielleRectangle.setCoordinates(null);
+  }
+
+  // test scale
+  @Test
+  public void testScale() {
+    nateOval.scale(2);
+    danielleRectangle.scale(2);
+
+    assertEquals("Name: Nate\n" +
+            "Type: oval\n" +
+            "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)\n" +
+            "Appears at t=10\n" +
+            "Disappears at t=20", nateOval.toString());
+
+    assertEquals("Name: Danielle\n" +
+            "Type: rectangle\n" +
+            "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)\n" +
+            "Appears at t=10\n" +
+            "Disappears at t=20", danielleRectangle.toString());
+  }
+
+
   // test scale throws IllegalArg if factor is 0
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testScaleIllegalArg() {
     nateOval.scale(0);
   }
@@ -164,13 +192,13 @@ public class ShapeTest {
   }
 
   // test setColor throws IllegalArg
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void testSetColorOvalIllegalArg() {
     nateOval.setColor(null);
   }
 
   // test setColor throws IllegalArg
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void testSetColorRectangleIllegalArg() {
     danielleRectangle.setColor(null);
   }
@@ -257,6 +285,7 @@ public class ShapeTest {
     danielleRectangle.setHeight(0);
   }
 
+  // test copy
   @Test
   public void testCopy() {
     IShape newOval = nateOval.copy();
@@ -264,6 +293,67 @@ public class ShapeTest {
 
     IShape newRect = danielleRectangle.copy();
     assertEquals(danielleRectangle.toString(), newRect.toString());
+  }
+
+  // test setAppearTime() {
+  @Test
+  public void testAppearTime() {
+    nateOval.setAppearTime(20);
+    danielleRectangle.setAppearTime((12));
+    assertEquals("Name: Nate\n"
+                    + "Type: oval\n"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=20\nDisappears at t=20",
+            nateOval.toString());
+    assertEquals("Name: Danielle\n"
+                    + "Type: rectangle\n"
+                    + "Min corner: (11.2,12.1), Width: 20.0, Height: 50.0, Color: (29, 255, 229)"
+                    + "\nAppears at t=12\nDisappears at t=20",
+            danielleRectangle.toString());
+  }
+
+  // test setAppearTimeIllegalArg
+  @Test (expected = IllegalArgumentException.class)
+  public void testAppearTimeIllegalArg() {
+    nateOval.setAppearTime(-1);
+    assertEquals("Name: Nate\n"
+                    + "Type: oval\n"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=20\nDisappears at t=20",
+            nateOval.toString());
+  }
+
+  // test setDisappearTime
+  @Test
+  public void testDisappearTime() {
+    nateOval.setDisappearTime(30);
+    assertEquals("Name: Nate\n"
+                    + "Type: oval\n"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=10\nDisappears at t=30",
+            nateOval.toString());
+  }
+
+  // test setDisappearTimeIllegalArg Negative
+  @Test (expected = IllegalArgumentException.class)
+  public void testDisappearTimeIllegalArg() {
+    nateOval.setDisappearTime(-2);
+    assertEquals("Name: Nate\n"
+                    + "Type: oval\n"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=10\nDisappears at t=-2",
+            nateOval.toString());
+  }
+
+  // test setDisappearTimeIllegalArg disappear overlaps start
+  @Test (expected = IllegalArgumentException.class)
+  public void testDisappearTimeIllegalArg2() {
+    nateOval.setDisappearTime(8);
+    assertEquals("Name: Nate\n"
+                    + "Type: oval\n"
+                    + "Center: (10.3,-5.2), X radius: 12.2, Y radius: 14.2, Color: (255, 0, 233)"
+                    + "\nAppears at t=10\nDisappears at t=8",
+            nateOval.toString());
   }
 
   // test equals
@@ -361,4 +451,103 @@ public class ShapeTest {
 
     assertNotEquals(rectangle1, oval1);
   }
+
+  // test rectangle constructor throws NullPointer for null coordinates
+  @Test (expected = NullPointerException.class)
+  public void testRectangleConstructorNullPointer() {
+    IShape testRectangle = new Rectangle("Danielle", null,
+            new Color(29, 255, 229), 20, 50, 10, 20);
+  }
+
+  // test rectangle constructor throws NullPointer for color
+  @Test (expected = NullPointerException.class)
+  public void testRectangleConstructorNullPointer2() {
+    IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
+            null, 20, 50, 10, 20);
+  }
+
+  // test rectangle constructor throws IllegalArg when appear time is negative
+  @Test (expected = IllegalArgumentException.class)
+  public void testRectangleConstructorIllegalArg() {
+    IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 50, -2, 20);
+  }
+
+  // test rectangle constructor throws IllegalArg when disappear time is negative
+  @Test (expected = IllegalArgumentException.class)
+  public void testRectangleConstructorIllegalArg2() {
+    IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 50, 10, -3);
+  }
+
+  // test rectangle constructor throws Illegal arg when appear time comes after disappear time
+  @Test (expected = IllegalArgumentException.class)
+  public void testRectangleConstructorIllegalArg3() {
+    IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 50, 10, 10);
+  }
+
+  // test rectangle constructor throws IllegalArg when width is 0
+  @Test (expected = IllegalArgumentException.class)
+  public void testRectangleConstructorIllegalArg4() {
+    IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 0, 50, 10, 20);
+  }
+
+  // test that rectangle constructor throws Illegal Arg when height is 0
+  @Test (expected = IllegalArgumentException.class)
+  public void testRectangleConstructorIllegalArg5() {
+    IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 0, 10, 20);
+  }
+  
+  // test oval constructor throws NullPointer for null coordinates
+  @Test (expected = NullPointerException.class)
+  public void testOvalConstructorNullPointer() {
+    IShape testOval = new Oval("Danielle", null,
+            new Color(29, 255, 229), 20, 50, 10, 20);
+  }
+
+  // test oval constructor throws NullPointer for color
+  @Test (expected = NullPointerException.class)
+  public void testOvalConstructorNullPointer2() {
+    IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
+            null, 20, 50, 10, 20);
+  }
+
+  // test oval constructor throws IllegalArg when appear time is negative
+  @Test (expected = IllegalArgumentException.class)
+  public void testOvalConstructorIllegalArg() {
+    IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 50, -2, 20);
+  }
+
+  // test oval constructor throws IllegalArg when disappear time is negative
+  @Test (expected = IllegalArgumentException.class)
+  public void testOvalConstructorIllegalArg2() {
+    IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 50, 10, -3);
+  }
+
+  // test oval constructor throws Illegal arg when appear time comes after disappear time
+  @Test (expected = IllegalArgumentException.class)
+  public void testOvalConstructorIllegalArg3() {
+    IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 50, 10, 10);
+  }
+
+  // test oval constructor throws IllegalArg when x radius is 0
+  @Test (expected = IllegalArgumentException.class)
+  public void testOvalConstructorIllegalArg4() {
+    IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 0, 50, 10, 20);
+  }
+
+  // test that oval constructor throws Illegal Arg when y radius is 0
+  @Test (expected = IllegalArgumentException.class)
+  public void testOvalConstructorIllegalArg5() {
+    IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
+            new Color(29, 255, 229), 20, 0, 10, 20);
+  }
+
 }

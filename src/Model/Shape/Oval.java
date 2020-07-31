@@ -90,9 +90,10 @@ public class Oval extends AbstractShape {
    *
    * @param factor a factor used in resizing, a double
    * @return a shape of the same kind as this one, just resized using the provided factor.
+   *    * @throws IllegalArgumentException if scale results in dimensions equal to or less than zero
    */
   @Override
-  public IShape scale(double factor) {
+  public IShape scale(double factor) throws IllegalArgumentException {
     double sqrtFactor = Math.sqrt(factor);
     return new Oval(this.label, this.coordinates, this.color, this.xRadius * sqrtFactor,
             this.yRadius * sqrtFactor, this.appearTime, this.disappearTime);
