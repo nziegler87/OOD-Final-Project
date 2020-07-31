@@ -19,13 +19,20 @@ abstract class to factor out any common functionality between concrete classes. 
     all listed in the regular interface. Methods included in the read-only interface are getSnapshot 
     and getAnimationStatus, as they produce text outputs and do not modify anything in the model.
     - In the concrete class, AnimatorModelImpl, the model creates the basis for the animation: the
-    inventory, a HashMap<String, IShape>, and commandHistory, an ArrayList<ICommand>. 
+    inventory, a HashMap<String, IShape>, and commandHistory, an ArrayList<ICommand>.
+    - We used a HashMap to store shapes as it allows one to associate an easy-to-remember string 
+    label with a shape object.
+    - We used an ArrayList of commands to store all commands that have been added to the model.
+    Using an array list allows us to easily iterate through the commands for output and for
+    determining which commands need to be executed on the respective shapes
     - Every time the user adds or removes an animation, the command list is sorted with a helper 
     comparator function. This ensures the command list is always in chronological order and ready 
     for output. 
     - Since we had put the commands into classes we were able to shorten the number of methods 
     in our model referencing the commands to just one: commandOnShape. This takes in a command 
     class and shape, and uses the command.execute() function to actually execute the command.
+    One can easily add a new command by adding a new class and would not have to edit the
+    model code.
 
 - Shapes bucket:
     - We created an IShape interface, an AbstractShape class and two concrete classes: Oval and 
@@ -51,8 +58,8 @@ abstract class to factor out any common functionality between concrete classes. 
     scale, and change color.
     - To reduce duplicate code, we placed getters in the Abstract class which enables us to pull 
     information and perform granular comparisons between command types. 
-    - Additionally, each command has three functions: execute(), toString() and equals(). These 
-    functions allow us to modify the code specific to the ICommand class.
+    - Additionally, each command has four functions: execute(), toString(), equals(), and 
+    hashCode(). These functions allow us to modify the code specific to the ICommand class.
     - Similar to the Shape classes, we decided to do it this way so that we can simply add any
     additional commands as needed by extending the Abstract class and modifying the independent 
     methods.
