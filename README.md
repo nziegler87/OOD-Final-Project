@@ -63,5 +63,7 @@ abstract class to factor out any common functionality between concrete classes. 
     - The Point2D class contains methods that get and set coordinates, as well as outputting a
     string. Additionally, we overrode the .equals() method, so we could do an equal comparison of 
     two coordinates.
+    
+Below is a UML of our model:
 
-[UML diagram for this project](A9 Model UML.jpg)
+![alt text](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20Model%20UML.jpg)
