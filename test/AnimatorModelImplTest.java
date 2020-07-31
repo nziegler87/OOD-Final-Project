@@ -5,17 +5,16 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.AnimatorModel;
-import Model.AnimatorModelImpl;
-import Model.Commands.ChangeColor;
-import Model.Commands.ICommand;
-import Model.Commands.Move;
-import Model.Commands.Scale;
-import Model.Point2D.Point2D;
-import Model.Shape.AbstractShape;
-import Model.Shape.IShape;
-import Model.Shape.Oval;
-import Model.Shape.Rectangle;
+import model.AnimatorModel;
+import model.AnimatorModelImpl;
+import model.commands.ChangeColor;
+import model.commands.ICommand;
+import model.commands.Move;
+import model.commands.Scale;
+import model.point2d.Point2D;
+import model.shape.IShape;
+import model.shape.Oval;
+import model.shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 
@@ -185,8 +184,10 @@ public class AnimatorModelImplTest {
             "Disappears at t=100\n" +
             "\n" +
             "chairman-meow moves from (40.0,50.0) to (100.0,100.0) from time t=10 to t=50\n" +
-            "chairman-meow changes color from (255, 175, 175) to (0, 0, 255) from time t=10 to t=50\n" +
-            "chairman-meow changes width from 10.0 to 50.0 and height from 10.0 to 50.0 from time t=10 to t=50\n", model.getAnimationStatus());
+            "chairman-meow changes color from (255, 175, 175) to (0, 0, 255) from time t=10 to " +
+            "t=50\n" +
+            "chairman-meow changes width from 10.0 to 50.0 and height from 10.0 to 50.0 from " +
+            "time t=10 to t=50\n", model.getAnimationStatus());
   }
 
   // adding in an animation with a conflict with another
@@ -205,18 +206,22 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
-                    "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) from t=10 to t=50\n" +
-                    "Shape chairman-meow moves from (100.0,100.0) to (150.0,150.0) from t=50 to t=75",
+                    "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) " +
+                    "from t=10 to t=50\n" +
+                    "Shape chairman-meow moves from (100.0,100.0) to (150.0,150.0) " +
+                    "from t=50 to t=75",
             model.getAnimationStatus());
   }
 
@@ -250,8 +255,10 @@ public class AnimatorModelImplTest {
             "Disappears at t=100\n" +
             "\n" +
             "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) from t=10 to t=50\n" +
-            "Shape chairman-meow changes color from (1.0,0.7,0.7) to (0.0,0.0,1.0) from t=10 to t=50\n" +
-            "Shape chairman-meow scales from Width: 10.0, Height: 10.0 to Width: 50.0, Height: 50.0 from t=10 to t=50", model.getAnimationStatus());
+            "Shape chairman-meow changes color from (1.0,0.7,0.7) to (0.0,0.0,1.0) " +
+            "from t=10 to t=50\n" +
+            "Shape chairman-meow scales from Width: 10.0, Height: 10.0 to Width: 50.0, " +
+            "Height: 50.0 from t=10 to t=50", model.getAnimationStatus());
   }
 
   // adding in multiple animations
@@ -268,7 +275,8 @@ public class AnimatorModelImplTest {
     ICommand colorDoggo = new ChangeColor(doggo, 60, 100, Color.YELLOW, Color.RED);
     ICommand scaleDoggo = new Scale(doggo, 15, 75, 5, 5, 10, 55);
 
-    ICommand moveTrashPanda = new Move(trashPanda, 10, 40, new Point2D(40, 50), new Point2D(200, 400));
+    ICommand moveTrashPanda = new Move(trashPanda, 10, 40, new Point2D(40, 50),
+            new Point2D(200, 400));
     ICommand colorTrashPanda = new ChangeColor(trashPanda, 90, 100, Color.PINK, Color.ORANGE);
     ICommand scaleTrashPanda = new Scale(trashPanda, 10, 25, 70, 35, 40, 50);
 
@@ -287,31 +295,42 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: trash-panda\n" +
                     "Type: rectangle\n" +
-                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, " +
+                    "Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Shape doggo moves from (40.0,50.0) to (300.0,200.0) from t=5 to t=50\n" +
-                    "Shape trash-panda moves from (40.0,50.0) to (200.0,400.0) from t=10 to t=40\n" +
-                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, Height: 50.0 from t=10 to t=25\n" +
-                    "Shape doggo scales from Width: 5.0, Height: 5.0 to Width: 10.0, Height: 55.0 from t=15 to t=75\n" +
-                    "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) from t=30 to t=50\n" +
-                    "Shape chairman-meow scales from Width: 50.0, Height: 50.0 to Width: 100.0, Height: 100.0 from t=30 to t=60\n" +
-                    "Shape chairman-meow changes color from (1.0,0.0,1.0) to (0.0,0.0,1.0) from t=55 to t=80\n" +
-                    "Shape doggo changes color from (1.0,1.0,0.0) to (1.0,0.0,0.0) from t=60 to t=100\n" +
-                    "Shape trash-panda changes color from (1.0,0.7,0.7) to (1.0,0.8,0.0) from t=90 to t=100",
+                    "Shape trash-panda moves from (40.0,50.0) to (200.0,400.0) from t=10 " +
+                    "to t=40\n" +
+                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, " +
+                    "Height: 50.0 from t=10 to t=25\n" +
+                    "Shape doggo scales from Width: 5.0, Height: 5.0 to Width: 10.0, " +
+                    "Height: 55.0 from t=15 to t=75\n" +
+                    "Shape chairman-meow moves from (40.0,50.0) to (100.0,100.0) " +
+                    "from t=30 to t=50\n" +
+                    "Shape chairman-meow scales from Width: 50.0, Height: 50.0 to Width: 100.0, " +
+                    "Height: 100.0 from t=30 to t=60\n" +
+                    "Shape chairman-meow changes color from (1.0,0.0,1.0) to (0.0,0.0,1.0) " +
+                    "from t=55 to t=80\n" +
+                    "Shape doggo changes color from (1.0,1.0,0.0) to (1.0,0.0,0.0) from t=60 " +
+                    "to t=100\n" +
+                    "Shape trash-panda changes color from (1.0,0.7,0.7) to (1.0,0.8,0.0) " +
+                    "from t=90 to t=100",
             model.getAnimationStatus());
   }
 
@@ -350,24 +369,29 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: trash-panda\n" +
                     "Type: rectangle\n" +
-                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, " +
+                    "Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
-                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, Height: 50.0 from t=10 to t=25\n" +
-                    "Shape chairman-meow changes color from (1.0,0.0,1.0) to (0.0,0.0,1.0) from t=55 to t=80",
+                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, " +
+                    "Height: 50.0 from t=10 to t=25\n" +
+                    "Shape chairman-meow changes color from (1.0,0.0,1.0) to (0.0,0.0,1.0) " +
+                    "from t=55 to t=80",
             model.getAnimationStatus());
 
     model.removeAnimation(colorMeow);
@@ -375,23 +399,27 @@ public class AnimatorModelImplTest {
     assertEquals("Shapes:\n" +
                     "Name: doggo\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,0.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: trash-panda\n" +
                     "Type: rectangle\n" +
-                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, Color: (0.0,0.0,0.0)\n" +
+                    "Min corner: (100.0,100.0), Width: 10.0, Height: 10.0, " +
+                    "Color: (0.0,0.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
                     "Name: chairman-meow\n" +
                     "Type: oval\n" +
-                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, Color: (0.0,1.0,0.0)\n" +
+                    "Center: (200.0,200.0), X radius: 50.0, Y radius: 50.0, " +
+                    "Color: (0.0,1.0,0.0)\n" +
                     "Appears at t=1\n" +
                     "Disappears at t=100\n" +
                     "\n" +
-                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, Height: 50.0 from t=10 to t=25",
+                    "Shape trash-panda scales from Width: 70.0, Height: 35.0 to Width: 40.0, " +
+                    "Height: 50.0 from t=10 to t=25",
             model.getAnimationStatus());
   }
 
@@ -797,10 +825,14 @@ public class AnimatorModelImplTest {
     model.addShape(rectangle, oval);
 
     // add commands
-    ICommand rCommand1 = new Move(rectangle, 10, 50, new Point2D(200, 200), new Point2D (300, 300));
-    ICommand oCommand1 = new Move(oval, 20, 70, new Point2D(500, 100), new Point2D (500, 400));
-    ICommand oCommmand2 = new ChangeColor(oval, 50, 80, new Color(Color.BLUE.getRGB()), new Color(Color.GREEN.getRGB()));
-    ICommand rCommand2 = new Move(rectangle, 70, 100, new Point2D(300, 300), new Point2D (200, 200));
+    ICommand rCommand1 = new Move(rectangle, 10, 50, new Point2D(200, 200),
+            new Point2D(300, 300));
+    ICommand oCommand1 = new Move(oval, 20, 70, new Point2D(500, 100),
+            new Point2D(500, 400));
+    ICommand oCommmand2 = new ChangeColor(oval, 50, 80, new Color(Color.BLUE.getRGB()),
+            new Color(Color.GREEN.getRGB()));
+    ICommand rCommand2 = new Move(rectangle, 70, 100, new Point2D(300, 300),
+            new Point2D(200, 200));
     ICommand rCommand3 = new Scale(rectangle, 51, 70, 50, 100, 25, 100);
 
 
@@ -822,8 +854,10 @@ public class AnimatorModelImplTest {
             "Shape R moves from (200.0,200.0) to (300.0,300.0) from t=10 to t=50\n" +
             "Shape C moves from (500.0,100.0) to (500.0,400.0) from t=20 to t=70\n" +
             "Shape C changes color from (0.0,0.0,1.0) to (0.0,1.0,0.0) from t=50 to t=80\n" +
-            "Shape R scales from Width: 50.0, Height: 100.0 to Width: 25.0, Height: 100.0 from t=51 to t=70\n" +
-            "Shape R moves from (300.0,300.0) to (200.0,200.0) from t=70 to t=100", model.getAnimationStatus());
+            "Shape R scales from Width: 50.0, Height: 100.0 to Width: 25.0, Height: 100.0 " +
+            "from t=51 to t=70\n" +
+            "Shape R moves from (300.0,300.0) to (200.0,200.0) from t=70 to t=100",
+            model.getAnimationStatus());
 
 
 

@@ -3,19 +3,18 @@ import org.junit.Test;
 
 import java.awt.Color;
 
-import Model.Point2D.IPoint2D;
-import Model.Point2D.Point2D;
-import Model.Shape.IShape;
-import Model.Shape.Oval;
-import Model.Shape.Rectangle;
+import model.point2d.IPoint2D;
+import model.point2d.Point2D;
+import model.shape.IShape;
+import model.shape.Oval;
+import model.shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
 
 /**
- * A JUnit test class for the shape classes
+ * A JUnit test class for the shape classes.
  */
 public class ShapeTest {
   IShape nateOval;
@@ -402,8 +401,10 @@ public class ShapeTest {
 
   @Test
   public void testEqualsIdenticalObjectsRectangle() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle2 = new Rectangle("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle2 = new Rectangle("vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
     assertEquals(rectangle1, rectangle2);
     assertEquals(rectangle1, rectangle2);
@@ -412,7 +413,8 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsSameReferenceRectangle() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
     IShape rectangle2 = rectangle1;
 
     assertEquals(rectangle1, rectangle2);
@@ -422,12 +424,17 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsNotIdenticalObjectsRectangle() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle2 = new Rectangle("Vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle2 = new Rectangle("Vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
-    IShape rectangle4 = new Rectangle("vido" ,new Point2D(8, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle5 = new Rectangle("vido" ,new Point2D(10, 10), new Color(90, 100, 100), 10, 10, 5, 10);
-    IShape rectangle3 = new Rectangle("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 6, 10);
+    IShape rectangle4 = new Rectangle("vido" ,new Point2D(8, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle5 = new Rectangle("vido" ,new Point2D(10, 10),
+            new Color(90, 100, 100), 10, 10, 5, 10);
+    IShape rectangle3 = new Rectangle("vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 6, 10);
 
 
     assertNotEquals(rectangle1, rectangle2);
@@ -446,8 +453,10 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsDifferentShapeObjects() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape oval1 = new Oval("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido" ,new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
     assertNotEquals(rectangle1, oval1);
   }

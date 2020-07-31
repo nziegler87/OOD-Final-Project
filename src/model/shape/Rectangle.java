@@ -1,9 +1,9 @@
-package Model.Shape;
+package model.shape;
 
 import java.awt.Color;
 import java.util.Objects;
 
-import Model.Point2D.IPoint2D;
+import model.point2d.IPoint2D;
 
 /**
  * A class that represents a rectangle object. The coordinates of a rectangle represent the
@@ -111,7 +111,7 @@ public class Rectangle extends AbstractShape {
     // convert RGB to percentages
     double red = (double) this.color.getRed() / 255;
     double green = (double) this.color.getGreen() / 255;
-    double blue= (double) this.color.getBlue() / 255;
+    double blue = (double) this.color.getBlue() / 255;
 
     return String.format("Name: %s\nType: %s\nMin corner: %s, Width: %.1f, Height: %.1f, Color: "
                     + "(%.1f,%.1f,%.1f)\nAppears at t=%.0f\nDisappears at t=%.0f", this.label,

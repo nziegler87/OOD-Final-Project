@@ -1,8 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import Model.Point2D.IPoint2D;
-import Model.Point2D.Point2D;
+import model.point2d.IPoint2D;
+import model.point2d.Point2D;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

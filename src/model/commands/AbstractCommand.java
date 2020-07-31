@@ -1,8 +1,8 @@
-package Model.Commands;
+package model.commands;
 
 import java.util.Objects;
 
-import Model.Shape.IShape;
+import model.shape.IShape;
 
 /**
  * Abstract class for classes that implement ICommand.

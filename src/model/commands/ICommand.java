@@ -1,6 +1,6 @@
-package Model.Commands;
+package model.commands;
 
-import Model.Shape.IShape;
+import model.shape.IShape;
 
 /**
  * An interface that contains the commands that all command classes should implement.
@@ -21,7 +21,7 @@ public interface ICommand {
 
   // tested
   /**
-   * Returns the command type
+   * Returns the command type.
    *
    * @return the type of command, as a string
    */

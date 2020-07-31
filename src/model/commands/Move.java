@@ -1,10 +1,10 @@
-package Model.Commands;
+package model.commands;
 
 import java.util.Objects;
 
-import Model.Point2D.IPoint2D;
-import Model.Point2D.Point2D;
-import Model.Shape.IShape;
+import model.point2d.IPoint2D;
+import model.point2d.Point2D;
+import model.shape.IShape;
 
 /**
  * Create an object that will be used to "move" an IShape object across the screen.

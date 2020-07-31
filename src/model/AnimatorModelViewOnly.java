@@ -1,8 +1,8 @@
-package Model;
+package model;
 
 import java.util.List;
 
-import Model.Shape.IShape;
+import model.shape.IShape;
 
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from
@@ -16,7 +16,7 @@ public interface AnimatorModelViewOnly {
    *
    * @param tick a tick in the animation where you want to return the state of all objects visible
    *             on the screen
-   * @return List<IShape> with the summary of shapes and their state
+   * @return {@code List<IShape>} with the summary of shapes and their state
    * @throws IllegalArgumentException if tick is not greater or equal to 0
    */
   List<IShape> getSnapshot(double tick) throws IllegalArgumentException;

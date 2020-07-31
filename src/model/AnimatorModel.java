@@ -1,7 +1,7 @@
-package Model;
+package model;
 
-import Model.Commands.ICommand;
-import Model.Shape.IShape;
+import model.commands.ICommand;
+import model.shape.IShape;
 
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from

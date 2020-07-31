@@ -1,9 +1,9 @@
-package Model.Commands;
+package model.commands;
 
 import java.awt.Color;
 import java.util.Objects;
 
-import Model.Shape.IShape;
+import model.shape.IShape;
 
 /**
  * Create an object that will be used to change the color of an IShape object.
@@ -80,12 +80,12 @@ public class ChangeColor extends AbstractCommand {
     // convert start RGB to percentages
     double startRed = (double) startColor.getRed() / 255;
     double startGreen = (double) startColor.getGreen() / 255;
-    double startBlue= (double) startColor.getBlue() / 255;
+    double startBlue = (double) startColor.getBlue() / 255;
 
     // convert endRGB to percentages
     double endRed = (double) endColor.getRed() / 255;
     double endGreen = (double) endColor.getGreen() / 255;
-    double endBlue= (double) endColor.getBlue() / 255;
+    double endBlue = (double) endColor.getBlue() / 255;
 
     return String.format("Shape %s changes color from (%.1f,%.1f,%.1f) to (%.1f,%.1f,%.1f) from "
                     + "t=%.0f to t=%.0f\n",

@@ -1,4 +1,4 @@
-package Model.Point2D;
+package model.point2d;
 
 import java.util.Objects;
 

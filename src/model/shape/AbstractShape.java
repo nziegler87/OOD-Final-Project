@@ -1,10 +1,10 @@
-package Model.Shape;
+package model.shape;
 
 import java.awt.Color;
 import java.util.Objects;
 
-import Model.Point2D.IPoint2D;
-import Model.Point2D.Point2D;
+import model.point2d.IPoint2D;
+import model.point2d.Point2D;
 
 
 /**
@@ -31,7 +31,8 @@ public abstract class AbstractShape implements IShape {
    *                                  appear time comes after or equal to the disappear time
    */
   public AbstractShape(String label, IPoint2D coordinates, Color color,
-                       double appearTime, double disappearTime) throws NullPointerException, IllegalArgumentException {
+                       double appearTime, double disappearTime) throws NullPointerException,
+          IllegalArgumentException {
     Objects.requireNonNull(coordinates, "Coordinates cannot be null.");
     Objects.requireNonNull(color, "Color cannot be null.");
     this.label = label;

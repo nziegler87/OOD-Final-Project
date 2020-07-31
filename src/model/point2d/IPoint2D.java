@@ -1,4 +1,4 @@
-package Model.Point2D;
+package model.point2d;
 
 /**
  * Interface that contains all the methods that Point2D classes should support.

@@ -1,18 +1,17 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Color;
 
-import Model.Commands.AbstractCommand;
-import Model.Commands.ChangeColor;
-import Model.Commands.ICommand;
-import Model.Commands.Move;
-import Model.Commands.Scale;
-import Model.Point2D.IPoint2D;
-import Model.Point2D.Point2D;
-import Model.Shape.IShape;
-import Model.Shape.Oval;
-import Model.Shape.Rectangle;
+import model.commands.ChangeColor;
+import model.commands.ICommand;
+import model.commands.Move;
+import model.commands.Scale;
+import model.point2d.IPoint2D;
+import model.point2d.Point2D;
+import model.shape.IShape;
+import model.shape.Oval;
+import model.shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -88,7 +87,7 @@ public class CommandTest {
 
   // test where start time == end time
   @Test(expected = IllegalArgumentException.class)
-  public void corruptScale2 () {
+  public void corruptScale2() {
     new Scale(bob, 20, 20, 50, 50, 100, 100);
   }
 
@@ -282,28 +281,32 @@ public class CommandTest {
   // test that execute throws IllegalArg if invalid time (ChangeColor)
   @Test (expected = IllegalArgumentException.class)
   public void testInvalidTimeChangeColor2() {
-    ICommand command = new ChangeColor(bob, 10, 20, new Color (Color.RED.getRGB()), new Color (Color.BLUE.getRGB()));
+    ICommand command = new ChangeColor(bob, 10, 20, new Color(Color.RED.getRGB()),
+            new Color(Color.BLUE.getRGB()));
     command.execute(bob, 8);
   }
 
   // test that execute throws IllegalArg if invalid time (ChangeColor)
   @Test (expected = IllegalArgumentException.class)
   public void testInvalidTimeChangeColor3() {
-    ICommand command = new ChangeColor(bob, 10, 20, new Color (Color.RED.getRGB()), new Color (Color.BLUE.getRGB()));
+    ICommand command = new ChangeColor(bob, 10, 20, new Color(Color.RED.getRGB()),
+            new Color(Color.BLUE.getRGB()));
     command.execute(bob, 21);
   }
 
   // test that execute throws NullPointer if shape is null (ChangeColor)
   @Test (expected = NullPointerException.class)
   public void testNullPointerChangeColor() {
-    ICommand command = new ChangeColor(bob, 10, 20, new Color (Color.RED.getRGB()), new Color (Color.BLUE.getRGB()));
+    ICommand command = new ChangeColor(bob, 10, 20, new Color(Color.RED.getRGB()),
+            new Color(Color.BLUE.getRGB()));
     command.execute(null, 21);
   }
 
   // test that execute functions
   @Test
   public void testChangeColorExecute() {
-    ICommand command = new ChangeColor(bob, 10, 20, new Color (0, 0, 0), new Color (10, 10, 10));
+    ICommand command = new ChangeColor(bob, 10, 20, new Color(0, 0, 0),
+            new Color(10, 10, 10));
 
     IShape shape = command.execute(bob, 15);
     System.out.println(shape.toString());
@@ -317,10 +320,13 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsIdenticalObjectsMove() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
-    ICommand command1 = new Move(oval1, 0, 10, new Point2D(0, 0), new Point2D(10, 10));
-    ICommand command2 = new Move(oval1, 0, 10, new Point2D(0, 0), new Point2D(10, 10));
+    ICommand command1 = new Move(oval1, 0, 10, new Point2D(0, 0),
+            new Point2D(10, 10));
+    ICommand command2 = new Move(oval1, 0, 10, new Point2D(0, 0),
+            new Point2D(10, 10));
 
     assertEquals(command1, command2);
     assertEquals(command2, command1);
@@ -329,9 +335,11 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsSameReferenceMove() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
-    ICommand command1 = new Move(oval1, 0, 10, new Point2D(0, 0), new Point2D(10, 10));
+    ICommand command1 = new Move(oval1, 0, 10, new Point2D(0, 0),
+            new Point2D(10, 10));
     ICommand command2 = command1;
 
     assertEquals(command1, command2);
@@ -341,17 +349,26 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsNotIdenticalObjectsMove() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
-    ICommand command1 = new Move(oval1, 0, 10, new Point2D(0, 0), new Point2D(10, 10));
-    ICommand command2 = new Move(oval1, 0, 10, new Point2D(0, 0), new Point2D(10, 10));
+    ICommand command1 = new Move(oval1, 0, 10, new Point2D(0, 0),
+            new Point2D(10, 10));
+    ICommand command2 = new Move(oval1, 0, 10, new Point2D(0, 0),
+            new Point2D(10, 10));
 
-    ICommand command3 = new Move(rectangle1, 0, 10, new Point2D(0, 0), new Point2D(10, 10));
-    ICommand command4 = new Move(oval1, 1, 10, new Point2D(0, 0), new Point2D(10, 10));
-    ICommand command5 = new Move(oval1, 0, 11, new Point2D(0, 0), new Point2D(10, 10));
-    ICommand command6 = new Move(oval1, 0, 10, new Point2D(0, 2), new Point2D(10, 10));
-    ICommand command7 = new Move(oval1, 0, 10, new Point2D(0, 0), new Point2D(13, 10));
+    ICommand command3 = new Move(rectangle1, 0, 10, new Point2D(0, 0),
+            new Point2D(10, 10));
+    ICommand command4 = new Move(oval1, 1, 10, new Point2D(0, 0),
+            new Point2D(10, 10));
+    ICommand command5 = new Move(oval1, 0, 11, new Point2D(0, 0),
+            new Point2D(10, 10));
+    ICommand command6 = new Move(oval1, 0, 10, new Point2D(0, 2),
+            new Point2D(10, 10));
+    ICommand command7 = new Move(oval1, 0, 10, new Point2D(0, 0),
+            new Point2D(13, 10));
 
     assertEquals(command1, command2);
     assertEquals(command2, command1);
@@ -375,7 +392,8 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsIdenticalObjectsScale() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
     ICommand command1 = new Scale(oval1, 0, 10, 5, 5, 10, 10);
     ICommand command2 = new Scale(oval1, 0, 10, 5, 5, 10, 10);
@@ -387,7 +405,8 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsSameReferenceScale() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
     ICommand command1 = new Scale(oval1, 0, 10, 5, 5, 10, 10);
     ICommand command2 = command1;
@@ -399,8 +418,10 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsNotIdenticalObjectsScale() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
     ICommand command1 = new Scale(oval1, 0, 10, 5, 5, 10, 10);
     ICommand command2 = new Scale(oval1, 0, 10, 5, 5, 10, 10);
@@ -441,10 +462,13 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsIdenticalObjectsChangeColor() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
-    ICommand command1 = new ChangeColor(oval1, 0, 10, new Color(100, 100, 100), new Color(50, 50, 50));
-    ICommand command2 = new ChangeColor(oval1, 0, 10, new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command1 = new ChangeColor(oval1, 0, 10,
+            new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command2 = new ChangeColor(oval1, 0, 10,
+            new Color(100, 100, 100), new Color(50, 50, 50));
 
     assertEquals(command1, command2);
     assertEquals(command2, command1);
@@ -453,9 +477,11 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsSameReferenceChangeColor() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
-    ICommand command1 = new ChangeColor(oval1, 0, 10, new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command1 = new ChangeColor(oval1, 0, 10,
+            new Color(100, 100, 100), new Color(50, 50, 50));
     ICommand command2 = command1;
 
     assertEquals(command1, command2);
@@ -465,17 +491,26 @@ public class CommandTest {
   // test equals
   @Test
   public void testEqualsNotIdenticalObjectsChangeColor() {
-    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10),
+            new Color(100, 100, 100), 10, 10, 5, 10);
 
-    ICommand command1 = new ChangeColor(oval1, 0, 10, new Color(100, 100, 100), new Color(50, 50, 50));
-    ICommand command2 = new ChangeColor(oval1, 0, 10, new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command1 = new ChangeColor(oval1, 0, 10,
+            new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command2 = new ChangeColor(oval1, 0, 10,
+            new Color(100, 100, 100), new Color(50, 50, 50));
 
-    ICommand command3 = new ChangeColor(rectangle1, 0, 10, new Color(100, 100, 100), new Color(50, 50, 50));
-    ICommand command4 = new ChangeColor(oval1, 1, 10, new Color(100, 100, 100), new Color(50, 50, 50));
-    ICommand command5 = new ChangeColor(oval1, 0, 11, new Color(100, 100, 100), new Color(50, 50, 50));
-    ICommand command6 = new ChangeColor(oval1, 0, 10, new Color(100, 120, 100), new Color(50, 50, 50));
-    ICommand command7 = new ChangeColor(oval1, 0, 10, new Color(100, 100, 100), new Color(50, 53, 50));
+    ICommand command3 = new ChangeColor(rectangle1, 0, 10,
+            new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command4 = new ChangeColor(oval1, 1, 10,
+            new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command5 = new ChangeColor(oval1, 0, 11,
+            new Color(100, 100, 100), new Color(50, 50, 50));
+    ICommand command6 = new ChangeColor(oval1, 0, 10,
+            new Color(100, 120, 100), new Color(50, 50, 50));
+    ICommand command7 = new ChangeColor(oval1, 0, 10,
+            new Color(100, 100, 100), new Color(50, 53, 50));
 
 
     assertEquals(command1, command2);

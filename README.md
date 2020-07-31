@@ -9,7 +9,7 @@ we divided up the model's functions into different buckets (these are physically
 packages). Within each "bucket" we included an interface and multiple classes - relying on an
 abstract class to factor out any common functionality between concrete classes. More specifically:
 
-- Model bucket:
+- model bucket:
     - In our model we prioritized clean, non-repetitive code, with an emphasis on adaptability. 
     - Our model bucket has two interfaces, AnimatorModel and AnimatorModelIViewOnly, along with one
     concrete class: AnimationModelImpl. We decided to use two interfaces to divide up 
@@ -72,4 +72,4 @@ abstract class to factor out any common functionality between concrete classes. 
     two coordinates.
     
 Below is a UML of our model:
-![UML Model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)
+![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)

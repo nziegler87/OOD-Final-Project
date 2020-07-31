@@ -1,9 +1,9 @@
-package Model.Shape;
+package model.shape;
 
 import java.awt.Color;
 import java.util.Objects;
 
-import Model.Point2D.IPoint2D;
+import model.point2d.IPoint2D;
 
 /**
  * A class that represents an Oval object. The coordinates of an oval represent the object's center
@@ -28,7 +28,7 @@ public class Oval extends AbstractShape {
    */
   public Oval(String label, IPoint2D coordinates, Color color, double xRadius, double yRadius,
               double appearTime, double disappearTime)
-          throws NullPointerException, IllegalArgumentException{
+          throws NullPointerException, IllegalArgumentException {
     super(label, coordinates, color, appearTime, disappearTime);
     if (xRadius <= 0 || yRadius <= 0) {
       throw new IllegalArgumentException("xRadius or yRadius must be greater than 0.");
@@ -90,7 +90,7 @@ public class Oval extends AbstractShape {
    *
    * @param factor a factor used in resizing, a double
    * @return a shape of the same kind as this one, just resized using the provided factor.
-   *    * @throws IllegalArgumentException if scale results in dimensions equal to or less than zero
+   * @throws IllegalArgumentException if scale results in dimensions equal to or less than zero
    */
   @Override
   public IShape scale(double factor) throws IllegalArgumentException {
@@ -111,7 +111,7 @@ public class Oval extends AbstractShape {
     // convert RGB to percentages
     double red = (double) this.color.getRed() / 255;
     double green = (double) this.color.getGreen() / 255;
-    double blue= (double) this.color.getBlue() / 255;
+    double blue = (double) this.color.getBlue() / 255;
 
     return String.format("Name: %s\nType: %s\nCenter: %s, X radius: %.1f, Y radius: %.1f, Color: "
                     + "(%.1f,%.1f,%.1f)\nAppears at t=%.0f\nDisappears at t=%.0f", this.label,

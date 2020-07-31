@@ -1,12 +1,12 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import Model.Commands.ICommand;
-import Model.Shape.IShape;
+import model.commands.ICommand;
+import model.shape.IShape;
 
 /**
  * This class is the model (MVC architecture) in an application that helps one to create simple but
@@ -140,7 +140,7 @@ public class AnimatorModelImpl implements AnimatorModel {
    *
    * @param tick a tick in the animation where you want to return the state of all objects visible
    *             on the screen
-   * @return List<IShape> with the summary of shapes and their state
+   * @return {@code List<IShape>} with the summary of shapes and their state
    * @throws IllegalArgumentException if tick is not greater or equal to 0
    */
   @Override
@@ -163,10 +163,10 @@ public class AnimatorModelImpl implements AnimatorModel {
                   && tick >= command.getStartTime()) {
             try {
               temporaryShape = command.execute(temporaryShape, tick);
-                /*
-                If tick is past command time, it will throw an exception, so get the state of the
-                objects at the end of the command
-                 */
+              /*
+              If tick is past command time, it will throw an exception, so get the state of the
+              objects at the end of the command
+              */
             } catch (IllegalArgumentException iae) {
               temporaryShape = command.execute(temporaryShape, command.getEndTime());
             }
@@ -199,7 +199,7 @@ public class AnimatorModelImpl implements AnimatorModel {
       status.append(shape.toString()).append("\n\n");
     }
 
-    if (!(this.commandHistory.size() == 0)) {
+    if ((this.commandHistory.size() != 0)) {
       for (ICommand command : this.commandHistory) {
         status.append(command.toString());
       }
@@ -212,7 +212,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   }
 
   /**
-   * Method to return an array list of the shapes in the inventory sorted by appear time
+   * Method to return an array list of the shapes in the inventory sorted by appear time.
    *
    * @return a sorted list of shapes, sorted by appear time
    */

@@ -1,8 +1,8 @@
-package Model.Shape;
+package model.shape;
 
 import java.awt.Color;
 
-import Model.Point2D.IPoint2D;
+import model.point2d.IPoint2D;
 
 /**
  * A class that contains the methods that all shapes should support.
@@ -37,6 +37,14 @@ public interface IShape {
    * @param y the y coordinate of the object, a double.
    */
   void setCoordinates(double x, double y);
+
+  /**
+   * Method to set the new coordinates of the object when passed a IPoint2D class.
+   *
+   * @param endCords the new coordinates of the object
+   * @throws IllegalArgumentException if endCords is null
+   */
+  void setCoordinates(IPoint2D endCords);
 
   /**
    * Create and return a shape of the same kind as this one, just resized using the provided
@@ -77,14 +85,6 @@ public interface IShape {
    * @throws IllegalArgumentException if height is not greater than 0
    */
   void setHeight(double height) throws IllegalArgumentException;
-
-  /**
-   * Method to set the new coordinates of the object when passed a IPoint2D class.
-   *
-   * @param endCords the new coordinates of the object
-   * @throws IllegalArgumentException if endCords is null
-   */
-  void setCoordinates(IPoint2D endCords);
 
   /**
    * Method to create a copy of the object with the same attributes.
