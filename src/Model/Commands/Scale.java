@@ -94,13 +94,13 @@ public class Scale extends AbstractCommand {
   @Override
   public String toString() {
     if (endWidth > 0 && endHeight > 0) {
-      return String.format("%s changes width from %.1f to %.1f and height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
-              shape.getLabel(), this.startWidth, endWidth, this.startHeight, endHeight, startTime, endTime);
+      return String.format("Shape %s scales from Width: %.1f, Height: %.1f to Width: %.1f, Height: %.1f from t=%.0f to t=%.0f\n",
+              shape.getLabel(), this.startWidth, this.startHeight, this.endWidth, endHeight, startTime, endTime);
     } else if (endWidth > 0) {
-      return String.format("%s changes width from %.1f to %.1f from time t=%.0f to t=%.0f\n",
+      return String.format("Shape %s scales from Width: %.1f to Width: %.1f from t=%.0f to t=%.0f\n",
               shape.getLabel(), this.startWidth, endWidth, startTime, endTime);
     } else {
-      return String.format("%s changes height from %.1f to %.1f from time t=%.0f to t=%.0f\n",
+      return String.format("Shape %s scales from Height: %.1f to Height: %.1f from t=%.0f to t=%.0f\n",
               shape.getLabel(), this.startHeight, endHeight, startTime, endTime);
     }
   }

@@ -74,7 +74,7 @@ public class Move extends AbstractCommand {
    */
   @Override
   public String toString() {
-    return String.format("%s moves from %s to %s from time t=%.0f to t=%.0f\n",
+    return String.format("Shape %s moves from %s to %s from t=%.0f to t=%.0f\n",
             shape.getLabel(), startCords.toString(), endCords.toString(), startTime, endTime);
   }
 

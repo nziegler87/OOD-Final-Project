@@ -76,10 +76,21 @@ public class ChangeColor extends AbstractCommand {
    */
   @Override
   public String toString() {
-    return String.format("%s changes color from (%d, %d, %d) to (%d, %d, %d) from "
-                    + "time t=%.0f to t=%.0f\n",
-            shape.getLabel(), startColor.getRed(), startColor.getGreen(), startColor.getBlue(),
-            endColor.getRed(), endColor.getGreen(), endColor.getBlue(), startTime, endTime);
+
+    // convert start RGB to percentages
+    double startRed = (double) startColor.getRed() / 255;
+    double startGreen = (double) startColor.getGreen() / 255;
+    double startBlue= (double) startColor.getBlue() / 255;
+
+    // convert endRGB to percentages
+    double endRed = (double) endColor.getRed() / 255;
+    double endGreen = (double) endColor.getGreen() / 255;
+    double endBlue= (double) endColor.getBlue() / 255;
+
+    return String.format("Shape %s changes color from (%.1f,%.1f,%.1f) to (%.1f,%.1f,%.1f) from "
+                    + "t=%.0f to t=%.0f\n",
+            shape.getLabel(), startRed, startGreen, startBlue, endRed, endGreen, endBlue,
+            startTime, endTime);
   }
 
   /**

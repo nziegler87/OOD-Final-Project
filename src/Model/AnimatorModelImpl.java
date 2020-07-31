@@ -206,7 +206,9 @@ public class AnimatorModelImpl implements AnimatorModel {
     } else {
       status.append("Command list is empty.");
     }
-    return status.toString();
+
+    String draft = status.toString();
+    return draft.substring(0, draft.length() - 1);
   }
 
   /**
