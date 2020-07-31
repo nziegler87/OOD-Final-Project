@@ -1,8 +1,8 @@
 # CS5004_EasyAnimator
 
-Per the assignment, we have designed our model with the following specifications: the model needs 
+Per the assignment, we designed our model with the following specifications: the model needs 
 to be scalable and support various kinds of 2D shapes and various kinds of animations to shapes, 
-including moving, changing color, and changing shape.
+including moving, changing color, and changing size.
 
 Since we figured this assignment would later require us to expand on the original set of functions,
 we divided up the model's functions into different buckets (these are physically represented by 
@@ -12,22 +12,20 @@ abstract class to factor out any common functionality between concrete classes. 
 - Model bucket:
     - In our model we prioritized clean, non-repetitive code, with an emphasis on adaptability. 
     - Our model bucket has two interfaces, AnimatorModel and AnimatorModelIViewOnly, along with one
-    concrete classes: AnimationModelImpl. We decided to use two interfaces to divide up 
+    concrete class: AnimationModelImpl. We decided to use two interfaces to divide up 
     functionality between the methods that are read-only and other. 
     - To make a working animation software, we decided to include several basic methods such as 
     addShape, removeShape, addAnimation, and removeAnimation; as these modify the model, they are 
-    all listed in the regular interface. Methods included in the read-only interface include
-    getSnapshot and getAnimationStatus, as they produce text outputs and do not modify anything 
-    in the model.
-    - Speaking of the model, in the concrete class, AnimatorModelImpl, the model creates the basis 
-    for the animation: the inventory, a HashMap<String, IShape>, and commandHistory, 
-    an ArrayList<ICommand>. 
+    all listed in the regular interface. Methods included in the read-only interface are getSnapshot 
+    and getAnimationStatus, as they produce text outputs and do not modify anything in the model.
+    - In the concrete class, AnimatorModelImpl, the model creates the basis for the animation: the
+    inventory, a HashMap<String, IShape>, and commandHistory, an ArrayList<ICommand>. 
     - Every time the user adds or removes an animation, the command list is sorted with a helper 
     comparator function. This ensures the command list is always in chronological order and ready 
     for output. 
     - Since we had put the commands into classes we were able to shorten the number of methods 
     in our model referencing the commands to just one: commandOnShape. This takes in a command 
-    class and shape, and uses the command.execute(shape) function to actually take the command.
+    class and shape, and uses the command.execute() function to actually execute the command.
 
 - Shapes bucket:
     - We created an IShape interface, an AbstractShape class and two concrete classes: Oval and 
@@ -51,14 +49,13 @@ abstract class to factor out any common functionality between concrete classes. 
  - Command bucket:
     - We created an ICommand interface, an AbstractCommand class and three concrete classes: move, 
     scale, and change color.
-    - To reduce duplicate code, we put getters in the Abstract class which would allow us to do 
-    pull information and do granular comparisons between command types. 
+    - To reduce duplicate code, we placed getters in the Abstract class which enables us to pull 
+    information and perform granular comparisons between command types. 
     - Additionally, each command has three functions: execute(), toString() and equals(). These 
-    functions allow us to modify the code specific to the ICommand class, without affecting the 
-    Abstract class or other concrete classes. 
+    functions allow us to modify the code specific to the ICommand class.
     - Similar to the Shape classes, we decided to do it this way so that we can simply add any
-    additional commands as needed by extending the Abstract class and modifying the three 
-    independent methods.
+    additional commands as needed by extending the Abstract class and modifying the independent 
+    methods.
     
  - Coordinate bucket: 
     - We created a IPoint2D interface and Point2D class to store location information as x, y 
