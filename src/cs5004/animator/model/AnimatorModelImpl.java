@@ -7,6 +7,8 @@ import java.util.Objects;
 
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
+import cs5004.animator.model.shape.Oval;
+import cs5004.animator.model.shape.Rectangle;
 import cs5004.animator.util.AnimationBuilder;
 import cs5004.animator.util.AnimationReader;
 
@@ -235,7 +237,7 @@ public class AnimatorModelImpl implements AnimatorModel {
      */
     @Override
     public AnimatorModel build() {
-      return null;
+      return new AnimatorModelImpl();
     }
 
     /**
@@ -263,8 +265,14 @@ public class AnimatorModelImpl implements AnimatorModel {
      * @return This {@link AnimationBuilder}
      */
     @Override
-    public AnimationBuilder<AnimatorModel> declareShape(String name, String type) {
-      return null;
+    public AnimationBuilder<AnimatorModel> declareShape(String name, String type) throws IllegalArgumentException {
+      if (type.equals("ellipse")) {
+        return AnimatorModel.addShape(new Oval(name));
+      } else if (type.equals("rectangle")) {
+        return AnimatorModel.addShape(new Rectangle(name));
+      } else {
+        throw new IllegalArgumentException("The type is invalid.");
+      }
     }
 
     /**

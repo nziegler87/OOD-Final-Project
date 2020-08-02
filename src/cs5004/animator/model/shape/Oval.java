@@ -15,6 +15,15 @@ public class Oval extends AbstractShape {
   private double yRadius;
 
   /**
+   * Create an Oval shape object when passed object label.
+   *
+   * @param label a label for the object, a string.
+   */
+  public Oval(String label) {
+    super(label);
+  }
+
+  /**
    * Create an Oval object when passed object label, coordinates, color, xRadius, and yRadius.
    *
    * @param label       a label for the object, a string.

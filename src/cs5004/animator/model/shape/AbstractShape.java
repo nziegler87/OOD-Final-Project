@@ -22,6 +22,18 @@ public abstract class AbstractShape implements IShape {
    * Create an abstract shape object when passed object label, coordinates, and color.
    *
    * @param label         a label for the object, a string.
+   * @throws NullPointerException     if the coordinates or color are null
+   * @throws IllegalArgumentException if the appear time or disappear time is negative or if the
+   *                                  appear time comes after or equal to the disappear time
+   */
+  public AbstractShape(String label) {
+    this.label = label;
+  }
+
+  /**
+   * Create an abstract shape object when passed object label, coordinates, and color.
+   *
+   * @param label         a label for the object, a string.
    * @param coordinates   the coordinates for the object, a IPoint2D object
    * @param color         the color of the object, a Color object
    * @param appearTime    the time after which the object is visible on the screen
