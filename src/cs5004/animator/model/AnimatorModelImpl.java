@@ -238,7 +238,7 @@ public class AnimatorModelImpl implements AnimatorModel {
      */
     @Override
     public AnimatorModel build() {
-      return new AnimatorModelImpl();
+      return model;
     }
 
     /**
