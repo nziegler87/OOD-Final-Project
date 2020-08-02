@@ -229,6 +229,7 @@ public class AnimatorModelImpl implements AnimatorModel {
 
   
   public static final class Builder implements AnimationBuilder<AnimatorModel> {
+    AnimatorModel model = new AnimatorModelImpl();
 
     /**
      * Constructs a final document.
@@ -237,7 +238,7 @@ public class AnimatorModelImpl implements AnimatorModel {
      */
     @Override
     public AnimatorModel build() {
-      return new AnimatorModelImpl();
+      return model;
     }
 
     /**
@@ -267,9 +268,9 @@ public class AnimatorModelImpl implements AnimatorModel {
     @Override
     public AnimationBuilder<AnimatorModel> declareShape(String name, String type) throws IllegalArgumentException {
       if (type.equals("ellipse")) {
-        return AnimatorModel.addShape(new Oval(name));
+        model.addShape(new Oval(name));
       } else if (type.equals("rectangle")) {
-        return AnimatorModel.addShape(new Rectangle(name));
+        model.addShape(new Rectangle(name));
       } else {
         throw new IllegalArgumentException("The type is invalid.");
       }
