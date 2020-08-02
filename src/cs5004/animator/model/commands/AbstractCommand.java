@@ -1,8 +1,8 @@
-package model.commands;
+package cs5004.animator.model.commands;
 
 import java.util.Objects;
 
-import model.shape.IShape;
+import cs5004.animator.model.shape.IShape;
 
 /**
  * Abstract class for classes that implement ICommand.

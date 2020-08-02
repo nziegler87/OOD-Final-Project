@@ -1,6 +1,6 @@
-package model.commands;
+package cs5004.animator.model.commands;
 
-import model.shape.IShape;
+import cs5004.animator.model.shape.IShape;
 
 /**
  * An interface that contains the commands that all command classes should implement.

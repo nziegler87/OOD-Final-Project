@@ -1,9 +1,9 @@
-package model.commands;
+package cs5004.animator.model.commands;
 
 import java.awt.Color;
 import java.util.Objects;
 
-import model.shape.IShape;
+import cs5004.animator.model.shape.IShape;
 
 /**
  * Create an object that will be used to change the color of an IShape object.

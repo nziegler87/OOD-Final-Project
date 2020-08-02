@@ -1,4 +1,4 @@
-package model.point2d;
+package cs5004.animator.model.point2d;
 
 import java.util.Objects;
 

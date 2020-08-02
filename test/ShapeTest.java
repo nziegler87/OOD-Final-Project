@@ -3,11 +3,11 @@ import org.junit.Test;
 
 import java.awt.Color;
 
-import model.point2d.IPoint2D;
-import model.point2d.Point2D;
-import model.shape.IShape;
-import model.shape.Oval;
-import model.shape.Rectangle;
+import cs5004.animator.model.point2d.IPoint2D;
+import cs5004.animator.model.point2d.Point2D;
+import cs5004.animator.model.shape.IShape;
+import cs5004.animator.model.shape.Oval;
+import cs5004.animator.model.shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

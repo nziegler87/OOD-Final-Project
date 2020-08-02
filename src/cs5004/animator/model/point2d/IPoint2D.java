@@ -1,4 +1,4 @@
-package model.point2d;
+package cs5004.animator.model.point2d;
 
 /**
  * Interface that contains all the methods that Point2D classes should support.

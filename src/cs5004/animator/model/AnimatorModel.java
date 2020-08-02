@@ -1,7 +1,7 @@
-package model;
+package cs5004.animator.model;
 
-import model.commands.ICommand;
-import model.shape.IShape;
+import cs5004.animator.model.commands.ICommand;
+import cs5004.animator.model.shape.IShape;
 
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from
@@ -17,7 +17,7 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws NullPointerException     when the shape is null
    * @throws IllegalArgumentException when the shape is not found
    */
-  void addShape(IShape ... shapes) throws NullPointerException, IllegalArgumentException;
+  void addShape(IShape... shapes) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Removes a shape from the model inventory map.
@@ -35,7 +35,7 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws NullPointerException     if the command being passed through is null
    * @throws IllegalArgumentException if the command has conflict with another command in the list
    */
-  void addAnimation(ICommand ... commands) throws NullPointerException, IllegalArgumentException;
+  void addAnimation(ICommand... commands) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Removes a command from the animation list.

@@ -1,12 +1,12 @@
-package model;
+package cs5004.animator.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import model.commands.ICommand;
-import model.shape.IShape;
+import cs5004.animator.model.commands.ICommand;
+import cs5004.animator.model.shape.IShape;
 
 /**
  * This class is the model (MVC architecture) in an application that helps one to create simple but

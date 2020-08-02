@@ -1,9 +1,9 @@
-package model.shape;
+package cs5004.animator.model.shape;
 
 import java.awt.Color;
 import java.util.Objects;
 
-import model.point2d.IPoint2D;
+import cs5004.animator.model.point2d.IPoint2D;
 
 /**
  * A class that represents an Oval object. The coordinates of an oval represent the object's center
