@@ -7,6 +7,9 @@ import java.util.Objects;
 
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
+import cs5004.animator.util.AnimationBuilder;
+import cs5004.animator.util.AnimationReader;
+
 
 /**
  * This class is the model (MVC architecture) in an application that helps one to create simple but
