@@ -6,7 +6,6 @@ import java.util.Objects;
 import cs5004.animator.model.point2d.IPoint2D;
 import cs5004.animator.model.point2d.Point2D;
 
-
 /**
  * An abstract class that contains all common fields and methods objects that implement IShape.
  */

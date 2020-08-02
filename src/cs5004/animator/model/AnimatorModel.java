@@ -29,6 +29,15 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
   void removeShape(IShape ... shapes) throws NullPointerException, IllegalArgumentException;
 
   /**
+   * Adds a shape to the model inventory hashmap.
+   *
+   * @param label the name of the shape to find
+   * @throws NullPointerException     when the label is null
+   * @throws IllegalArgumentException if the shape does not exists
+   */
+  IShape getShape(String label) throws NullPointerException, IllegalArgumentException;
+
+  /**
    * Adds a command to the animation list.
    *
    * @param commands the command(s) being passed through
