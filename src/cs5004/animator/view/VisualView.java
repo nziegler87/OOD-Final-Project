@@ -17,7 +17,6 @@ public class VisualView extends JFrame implements IView {
     this.setTitle("Easy Animator Visual Display");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
     // create a CanvasDrawingPanel object
     drawingCanvas = new CanvasDrawingPanel();
 
