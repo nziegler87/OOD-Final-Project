@@ -15,7 +15,7 @@ import cs5004.animator.model.shape.Oval;
 import cs5004.animator.model.shape.Rectangle;
 import cs5004.animator.view.VisualView;
 
-public class testMain {
+public class MainTest {
 
   public static void main(String [] Args) {
     AnimatorModel model = new AnimatorModelImpl();

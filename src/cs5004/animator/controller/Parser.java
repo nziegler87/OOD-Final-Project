@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public Parser(String input) {
         scanner = new Scanner(input);
@@ -24,6 +24,7 @@ public class Parser {
         while (scanner.hasNext()) {
 
             String animation = scanner.next();
+
             while (scanner.hasNext()) {
                 String nextTerm = scanner.next();
                 if (nextTerm.equals("-in")) {
@@ -44,6 +45,8 @@ public class Parser {
         if (animationFile.isBlank() || typeOfView.isBlank() || outputLocation.isBlank()) {
             throw new IllegalArgumentException("Not enough commands to start the animator");
         }
+
+        //TODO: this needs work based on the feedback; view factory?
 
         // if the type is text, return the controller with a text view
         if (typeOfView.equals("text")) {

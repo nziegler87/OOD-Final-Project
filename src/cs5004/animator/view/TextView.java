@@ -1,23 +1,15 @@
 package cs5004.animator.view;
 
-import cs5004.animator.model.AnimatorModel;
-import cs5004.animator.model.AnimatorModelViewOnly;
 import cs5004.animator.model.shape.IShape;
 
-import java.io.IOException;
-import java.util.Objects;
+import java.util.List;
 
 public class TextView implements IView {
 
-    private Appendable out;
+    //private Appendable out;
 
     @Override
     public void render(List<IShape> shapes) {
-        Objects.requireNonNull(model, "Model cannot be null.");
-        try {
-            out.append(model.getAnimationStatus());
-        } catch (IOException e) {
-            throw new IllegalArgumentException("Could not produce output.");
-        }
+        //maybe we just make this not do anything?
     }
 }

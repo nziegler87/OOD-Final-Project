@@ -9,9 +9,9 @@ import cs5004.animator.model.shape.IShape;
 import cs5004.animator.view.VisualView;
 
 public class VisualController implements IController {
-  private VisualView view;
-  private AnimatorModel model;
-  private int speed;
+  private final VisualView view;
+  private final AnimatorModel model;
+  private final int speed;
 
   /**
    *
@@ -38,7 +38,7 @@ public class VisualController implements IController {
   @Override
   public void animate() {
     while (true) {
-      for (int i = 1; i <= 100; i++) {
+      for (int i = 1; i <= 100; i++) { //TODO: calculate the length of the animation using the model
         try {
           TimeUnit.MILLISECONDS.sleep(this.speed);
         } catch (InterruptedException e) {

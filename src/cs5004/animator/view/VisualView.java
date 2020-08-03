@@ -2,7 +2,8 @@ package cs5004.animator.view;
 
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 import cs5004.animator.model.shape.IShape;
 
@@ -21,9 +22,8 @@ public class VisualView extends JFrame implements IView {
     drawingCanvas = new CanvasDrawingPanel();
 
     // create scroll bars on panel and add to frame
-    JScrollPane drawingCanvasScrolling = new JScrollPane(this.drawingCanvas,
-            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    this.add(drawingCanvasScrolling);
+    this.add(new JScrollPane(this.drawingCanvas,
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
 
     // pack window and make visible
     this.pack();
