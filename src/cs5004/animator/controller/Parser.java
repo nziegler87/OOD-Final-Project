@@ -1,6 +1,8 @@
 package cs5004.animator.controller;
 
 import cs5004.animator.model.AnimatorModelImpl;
+import cs5004.animator.view.InteractiveView;
+import cs5004.animator.view.TextView;
 
 import java.util.Scanner;
 
@@ -12,12 +14,7 @@ public class Parser {
         scanner = new Scanner(input);
     }
 
-    /**
-     * The findBoard type method gets the board type from the inputs.
-     *
-     * @return the model for the controller to use
-     */
-    public AnimatorModelImpl getDetails() {
+    public AnimatorControllerImpl parse() {
 
         String animationFile = "";
         String typeOfView = "";
@@ -48,8 +45,12 @@ public class Parser {
             throw new IllegalArgumentException("Not enough commands to start the animator");
         }
 
-        // and if there are no items to iterate on...
-        return new AnimatorModelImpl();
+        // if the type is text, return the model and a text view
+        if (typeOfView.equals("text")) {
+            return new AnimatorControllerImpl(new AnimatorModelImpl(), new TextView(), outputLocation, speed);
+        }
+        // else return the model and an interactive view
+        return new AnimatorControllerImpl(new AnimatorModelImpl(), new InteractiveView(), speed);
     }
 
 }
