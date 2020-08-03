@@ -2,10 +2,6 @@ package cs5004.animator.controller;
 
 public interface IController {
 
-    void setBounds();
-
-    void getBounds();
-
     void play();
 
     void pause();
