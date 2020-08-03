@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import cs5004.animator.model.shape.IShape;
 
-public class VisualView extends JFrame {
+public class VisualView extends JFrame implements IView {
   CanvasDrawingPanel drawingCanvas;
 
   public VisualView() {

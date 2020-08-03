@@ -1,8 +1,8 @@
 package cs5004.animator.controller;
 
 import cs5004.animator.model.AnimatorModelImpl;
-import cs5004.animator.view.InteractiveView;
 import cs5004.animator.view.TextView;
+import cs5004.animator.view.VisualView;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class Parser {
         scanner = new Scanner(input);
     }
 
-    public AnimatorControllerImpl parse() {
+    public IController parse() {
 
         String animationFile = "";
         String typeOfView = "";
@@ -45,12 +45,13 @@ public class Parser {
             throw new IllegalArgumentException("Not enough commands to start the animator");
         }
 
-        // if the type is text, return the model and a text view
+        // if the type is text, return the controller with a text view
         if (typeOfView.equals("text")) {
-            return new AnimatorControllerImpl(new AnimatorModelImpl(), new TextView(), outputLocation, speed);
+            return new TextController(new AnimatorModelImpl(), new TextView(), speed, System.out);
         }
-        // else return the model and an interactive view
-        return new AnimatorControllerImpl(new AnimatorModelImpl(), new InteractiveView(), speed);
+
+        // else return the controller with a visual view
+        return new VisualController(new AnimatorModelImpl(), new VisualView(), speed);
     }
 
 }

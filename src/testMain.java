@@ -1,6 +1,8 @@
 import java.awt.*;
 
-import cs5004.animator.controller.NateTestController;
+import cs5004.animator.controller.IController;
+import cs5004.animator.controller.TextController;
+import cs5004.animator.controller.VisualController;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.model.AnimatorModelImpl;
 import cs5004.animator.model.commands.ChangeColor;
@@ -48,8 +50,9 @@ public class testMain {
 
     VisualView view = new VisualView();
 
-    NateTestController controller = new NateTestController(view, model);
-    controller.go();
+    IController visualController = new VisualController(model, view, 50);
+    IController textController = new TextController(model, view, 50, System.out);
+    visualController.animate();
 
   }
 }

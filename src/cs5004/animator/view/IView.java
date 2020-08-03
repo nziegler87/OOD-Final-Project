@@ -1,9 +1,11 @@
 package cs5004.animator.view;
 
-import cs5004.animator.model.AnimatorModel;
+import java.util.List;
+
+import cs5004.animator.model.shape.IShape;
 
 public interface IView {
 
-    void display(AnimatorModel model);
+    void render(List<IShape> shapes);
 
 }
