@@ -3,6 +3,7 @@ package cs5004.animator.util;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.model.AnimatorModelImpl;
 import cs5004.animator.model.commands.ChangeColor;
+import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.commands.Move;
 import cs5004.animator.model.commands.Scale;
 import cs5004.animator.model.point2d.Point2D;
@@ -11,10 +12,15 @@ import cs5004.animator.model.shape.Oval;
 import cs5004.animator.model.shape.Rectangle;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
     private final AnimatorModel model = new AnimatorModelImpl();
+    private HashMap<String, IShape> shapes;
+    private ArrayList<ICommand> commands;
+    private ArrayList<Integer> screenDetails;
     private int canvasRightBound;
     private int canvasTopBound;
 
@@ -25,7 +31,8 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
      */
     @Override
     public AnimatorModel build() {
-        return this.model;
+        model.setCanvas(screenDetails);
+        return model;
     }
 
     /**
@@ -39,9 +46,14 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
      */
     @Override
     public AnimationBuilder<AnimatorModel> setBounds(int x, int y, int width, int height) {
+        screenDetails.add(x);
+        screenDetails.add(y);
+        screenDetails.add(width);
+        screenDetails.add(height);
+
         this.canvasRightBound = x + width;
         this.canvasTopBound = y + height;
-        return null;
+        return this;
     }
 
     /**
@@ -58,13 +70,13 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
     public AnimationBuilder<AnimatorModel> declareShape(String name, String type) throws IllegalArgumentException {
         // where do we get the list of shapes?
         if (type.equals("ellipse")) {
-            model.addShape(new Oval(name));
+            shapes.put(name, new Oval(name));
         } else if (type.equals("rectangle")) {
-            model.addShape(new Rectangle(name));
+            shapes.put(name, new Rectangle(name));
         } else {
             throw new IllegalArgumentException("The type is invalid.");
         }
-        return null;
+        return this;
     }
 
     /**
@@ -92,19 +104,38 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
     @Override
     public AnimationBuilder<AnimatorModel> addMotion(String name, int t1, int x1, int y1, int w1, int h1, int r1,
                                                      int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2,
-                                                     int g2, int b2) {
-        IShape shape = model.getShape(name);
+                                                     int g2, int b2) throws IllegalArgumentException {
+
+        // check if shape settings have been saved and update accordingly
+        if (shapes.containsKey(name)) {
+            if ((shapes.get(name).getDisappearTime() == -1 && shapes.get(name).getAppearTime() == -1)
+                || (shapes.get(name).getAppearTime() < t1)) {
+                shapes.get(name).setAppearTime(t1);
+                shapes.get(name).setDisappearTime(t2);
+                shapes.get(name).setCoordinates(x1, y1);
+                shapes.get(name).setWidth(w1);
+                shapes.get(name).setHeight(h1);
+                shapes.get(name).setColor(new Color(r1, g1, b1));
+            }
+        }
+
+        // check if disappear time is greater than saved record
+        if (shapes.get(name).getDisappearTime() < t2) {
+            shapes.get(name).setDisappearTime(t2);
+        }
+
+        // stuff for commands
         if (x1 != x2 || y1 != y2) {
             if (x2 < canvasRightBound && y2 < canvasTopBound) {
-                new Move(shape, t1, t2, new Point2D(x1, y1), new Point2D(x2, y2));
+                commands.add(new Move(shapes.get(name), t1, t2, new Point2D(x1, y1), new Point2D(x2, y2)));
             } else throw new IllegalArgumentException("New coordinates must be within the canvas bounds.");
         }
         if (w1 != w2 || h1 != h2) {
-            new Scale(shape, t1, t2, w1, h1, w2, h2);
+            commands.add(new Scale(shapes.get(name), t1, t2, w1, h1, w2, h2));
         }
         if (!new Color(r1, g1, b1).equals(new Color(r2, g2, b2))) {
-            new ChangeColor(shape, t1, t2, new Color(r1, g1, b1), new Color(r2, g2, b2));
+            commands.(new ChangeColor(shapes.get(name), t1, t2, new Color(r1, g1, b1), new Color(r2, g2, b2))));
         }
-        return null;
+        return this;
     }
 }

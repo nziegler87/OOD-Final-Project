@@ -35,6 +35,12 @@ public class ShapeTest {
   }
 
   @Test
+  public void getShapeInfo() {
+    IShape test = new Oval("nate");
+    assertEquals("",test.getAppearTime());
+  }
+
+  @Test
   public void getAppearTime() {
     assertEquals(10, nateOval.getAppearTime(), 0.01);
     assertEquals(30, ovalFromHomework.getAppearTime(), 0.01);

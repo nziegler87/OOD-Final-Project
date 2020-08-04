@@ -1,3 +1,4 @@
+/*
 import java.awt.*;
 
 import cs5004.animator.controller.IController;
@@ -56,3 +57,4 @@ public class MainTest {
 
   }
 }
+*/
