@@ -1,7 +1,6 @@
 package cs5004.animator.controller;
 
 import cs5004.animator.model.AnimatorModelImpl;
-import cs5004.animator.view.IView;
 import cs5004.animator.view.TextView;
 import cs5004.animator.view.VisualView;
 
@@ -12,7 +11,6 @@ import java.util.Scanner;
 public class Parser {
 
     private final Scanner scanner;
-    private IView view;
 
     public Parser(String input) {
         scanner = new Scanner(input);
@@ -60,10 +58,7 @@ public class Parser {
 
         // if the view is text, return controller with a text view
         if (typeOfView.equals("text")) {
-            view = new TextView();
-                return new TextController(new AnimatorModelImpl(), new TextView(), speed, out);
-        } else {
-
+            return new TextController(new AnimatorModelImpl(), new TextView(), speed, out);
         }
 
         // else return the controller with a visual view

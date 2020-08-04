@@ -30,10 +30,22 @@ public class AnimatorModelImpl implements AnimatorModel {
         this.commandHistory = new ArrayList<>();
     }
 
+    /**
+     * Sets the screen details (x, y, width, height) into a list.
+     *
+     * @param screenSettings an arrayList
+     */
     public void setCanvas(ArrayList<Integer> screenSettings) {
-        for (Integer settings : screenSettings)  {
-            screenDetails.add(settings);
-        }
+        screenDetails = screenSettings;
+    }
+
+    /**
+     * Returns the screenDetails.
+     *
+     * @return screenDetails, a list holding the screen x, y, width and height
+     */
+    public ArrayList<Integer> getCanvas() {
+        return screenDetails;
     }
 
     /**
