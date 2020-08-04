@@ -23,10 +23,17 @@ import cs5004.animator.util.AnimationReader;
 public class AnimatorModelImpl implements AnimatorModel {
     private final HashMap<String, IShape> inventory;
     private final ArrayList<ICommand> commandHistory;
+    private ArrayList<Integer> screenDetails;
 
     public AnimatorModelImpl() {
         this.inventory = new HashMap<>();
         this.commandHistory = new ArrayList<>();
+    }
+
+    public void setCanvas(ArrayList<Integer> screenSettings) {
+        for (Integer settings : screenSettings)  {
+            screenDetails.add(settings);
+        }
     }
 
     /**

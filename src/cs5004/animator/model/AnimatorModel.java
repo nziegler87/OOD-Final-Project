@@ -3,12 +3,16 @@ package cs5004.animator.model;
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
 
+import java.util.ArrayList;
+
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from
  * shapes. This interface is for the model of the program. It contains all commands that directly
  * modify the model object.
  */
 public interface AnimatorModel extends AnimatorModelViewOnly {
+
+  void setCanvas(ArrayList<Integer> screenSettings);
 
   /**
    * Adds a shape to the model inventory hashmap.

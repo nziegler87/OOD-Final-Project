@@ -31,7 +31,19 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
      */
     @Override
     public AnimatorModel build() {
+        // set up the screen details
         model.setCanvas(screenDetails);
+
+        // add in all the shapes
+        for (IShape shape : shapes.values()) {
+            model.addShape(shape);
+        }
+
+        // add in all the commands
+        for (ICommand command : commands) {
+            model.addAnimation(command);
+        }
+
         return model;
     }
 
@@ -134,7 +146,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
             commands.add(new Scale(shapes.get(name), t1, t2, w1, h1, w2, h2));
         }
         if (!new Color(r1, g1, b1).equals(new Color(r2, g2, b2))) {
-            commands.(new ChangeColor(shapes.get(name), t1, t2, new Color(r1, g1, b1), new Color(r2, g2, b2))));
+            commands.add(new ChangeColor(shapes.get(name), t1, t2, new Color(r1, g1, b1), new Color(r2, g2, b2)));
         }
         return this;
     }
