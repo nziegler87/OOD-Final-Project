@@ -28,7 +28,8 @@ public class Parser {
     public IController parse(String[] input) throws IllegalArgumentException, IOException {
 
         for (int i = 0; i < input.length; i++) {
-            switch (input[i]) {
+            String word = input[i];
+            switch (word) {
                 case "-in":
                     file = input[i + 1];
                     break;
@@ -36,7 +37,7 @@ public class Parser {
                     view = input[i + 1];
                     break;
                 case "-speed":
-                    speed = Integer.getInteger(input[i + 1]);
+                    speed = Integer.parseInt(input[i + 1]);
                     break;
                 case "-out":
                     try {
@@ -64,7 +65,7 @@ public class Parser {
 
         // if the view is text, return controller with a text view
         if (view.equals("text")) {
-            return new TextController(model, new TextView(), speed, out);
+            return new TextController(model, new TextView(), out);
         }
 
         // else return the controller with a visual view

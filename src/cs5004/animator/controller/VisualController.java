@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
@@ -41,25 +40,27 @@ public class VisualController implements IController {
 
         this.view = view;
         this.model = model;
-        this.delay = 1000/speed;           //TODO: HALP with this conversion
-        this.timer = new Timer(this.delay, new ActionListener() {
-            int currentFrame = 0;
-            /**
-             * Invoked when an action occurs.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (currentFrame > model.findDuration()) {
-                    currentFrame = 0;
-                }
-                List<IShape> shapes = model.getSnapshot(currentFrame);
-                view.render(shapes);
-                currentFrame++;
-            }
-        });
+        this.delay = 1000 / speed;           //TODO: HALP with this conversion
+        this.timer = new Timer(this.delay,
+                new ActionListener() {
+                    int currentFrame = 0;
 
+                    /**
+                     * Invoked when an action occurs.
+                     *
+                     * @param e the event to be processed
+                     */
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (currentFrame > model.findDuration()) {
+                            currentFrame = 0;
+                        }
+                        List<IShape> shapes = model.getSnapshot(currentFrame);
+                        view.render(shapes);
+                        currentFrame++;
+                    }
+                }
+        );
     }
 
     /**

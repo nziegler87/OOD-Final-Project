@@ -17,17 +17,14 @@ public class TextController implements IController {
     /**
      * @param model the model for the animation
      * @param view  the view for the animation
-     * @param speed the speed of the animation
      * @throws IllegalArgumentException if speed is less than or equal to 0
      * @throws NullPointerException     if model or view is null
      */
-    public TextController(AnimatorModel model, IView view, int speed, String out)
+    public TextController(AnimatorModel model, IView view, String out)
             throws IllegalArgumentException, NullPointerException, IOException {
         Objects.requireNonNull(model, "Model cannot be null.");
         Objects.requireNonNull(view, "View cannot be null.");
-        if (speed <= 0) {
-            throw new IllegalArgumentException("Speed must be greater than 0");
-        }
+
         this.model = model;
         this.out = out;
     }
