@@ -26,6 +26,7 @@ public class CanvasDrawingPanel extends JPanel {
   }
 
   public void paintComponent(Graphics g) {
+    super.paintComponent(g);
     if (shapes.size() != 0) {
       Graphics2D graphic2d = (Graphics2D) g;
       for (IShape shape : shapes) {
