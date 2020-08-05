@@ -1,6 +1,6 @@
 package cs5004.animator.controller;
 
-import cs5004.animator.model.AnimatorModelImpl;
+import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.view.TextView;
 import cs5004.animator.view.VisualView;
 
@@ -11,9 +11,12 @@ import java.util.Scanner;
 public class Parser {
 
     private final Scanner scanner;
+    private final AnimatorModel model;
 
-    public Parser(String input) {
-        scanner = new Scanner(input);
+
+    public Parser(String[] input, AnimatorModel model) {
+        scanner = new Scanner(String.valueOf(input));
+        this.model = model;
     }
 
     public IController parse() throws IOException {
@@ -58,10 +61,10 @@ public class Parser {
 
         // if the view is text, return controller with a text view
         if (typeOfView.equals("text")) {
-            return new TextController(new AnimatorModelImpl(), new TextView(), speed, out);
+            return new TextController(model, new TextView(), speed, out);
         }
 
         // else return the controller with a visual view
-        return new VisualController(new AnimatorModelImpl(), new VisualView(), speed);
+        return new VisualController(model, new VisualView(), speed);
     }
 }
