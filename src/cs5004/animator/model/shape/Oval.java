@@ -1,6 +1,7 @@
 package cs5004.animator.model.shape;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
@@ -179,7 +180,7 @@ public class Oval extends AbstractShape {
   @Override
   public void drawShape(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
-    g2d.fill(new Rectangle2D.Double(this.getCoordinates().getX(), this.getCoordinates().getY(),
+    g2d.fill(new Ellipse2D.Double(this.getCoordinates().getX(), this.getCoordinates().getY(),
             this.xRadius, this.yRadius));
   }
 }
