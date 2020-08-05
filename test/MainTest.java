@@ -57,7 +57,7 @@ public class MainTest {
     AnimationBuilder builder = new AnimationBuilderImpl();
     AnimationReader reader = new AnimationReader();
     try {
-      model2 = (AnimatorModel) reader.parseFile(new FileReader("./buildings.txt"), builder);      //TODO: Why do I have to cast it to AnimatorModel?
+      model2 = (AnimatorModel) reader.parseFile(new FileReader("./toh-3.txt"), builder);      //TODO: Why do I have to cast it to AnimatorModel?
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File not found.");
     }

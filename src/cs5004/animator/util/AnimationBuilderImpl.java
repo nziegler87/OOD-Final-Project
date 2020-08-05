@@ -129,8 +129,8 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
         // check if shape settings have been saved and update accordingly
         if (shapes.containsKey(name)) {
-            if ((shapes.get(name).getDisappearTime() == -1 && shapes.get(name).getAppearTime() == -1)
-                || (shapes.get(name).getAppearTime() < t1)) {
+            if ((shapes.get(name).getAppearTime() == -1 && shapes.get(name).getDisappearTime() == -1)
+                || (shapes.get(name).getAppearTime() > t1)) {
                 shapes.get(name).setAppearTime(t1);
                 shapes.get(name).setDisappearTime(t2);
                 shapes.get(name).setCoordinates(x1, y1);
@@ -138,12 +138,13 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
                 shapes.get(name).setHeight(h1);
                 shapes.get(name).setColor(new Color(r1, g1, b1));
             }
+
+            // check if disappear time is greater than saved record
+            if (shapes.get(name).getDisappearTime() < t2) {
+                shapes.get(name).setDisappearTime(t2);
+            }
         }
 
-        // check if disappear time is greater than saved record
-        if (shapes.get(name).getDisappearTime() < t2) {
-            shapes.get(name).setDisappearTime(t2);
-        }
 
         // stuff for commands
         if (x1 != x2 || y1 != y2) {

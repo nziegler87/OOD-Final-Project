@@ -24,8 +24,8 @@ public abstract class AbstractShape implements IShape {
      */
     public AbstractShape(String label) {
         this.label = label;
-        this.appearTime = 0;
-        this.disappearTime = 0;
+        this.appearTime = -1;
+        this.disappearTime = -1;
     }
 
     /**
