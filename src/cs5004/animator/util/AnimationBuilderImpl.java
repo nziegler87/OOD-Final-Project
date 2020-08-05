@@ -42,8 +42,16 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
         // set up the screen details
         model.setCanvas(screenDetails);
 
+        //TODO: REMOVE DEBUG
+        System.out.println("Shape Inventory being called in build:\n");
+        for (IShape shape2 : shapes.values()) {
+            System.out.println(shape2.toString());
+        }
+
+
         // add in all the shapes
         for (IShape shape : shapes.values()) {
+            System.out.println("\nShape added in Builder. Name: " + shape.getLabel() + " Type: " + shape.getType() + "\n");       //TODO:REMOVE DEBUG
             model.addShape(shape);
         }
 
@@ -88,6 +96,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
      */
     @Override
     public AnimationBuilder<AnimatorModel> declareShape(String name, String type) throws IllegalArgumentException {
+        System.out.println("Shape added. Name: " + name + " Type: " + type + "\n\n");       //TODO:REMOVE DEBUG
         // where do we get the list of shapes?
         if (type.equals("ellipse")) {
             shapes.put(name, new Oval(name));

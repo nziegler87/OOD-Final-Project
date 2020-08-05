@@ -7,10 +7,6 @@ import java.util.Objects;
 
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
-import cs5004.animator.model.shape.Oval;
-import cs5004.animator.model.shape.Rectangle;
-import cs5004.animator.util.AnimationBuilder;
-import cs5004.animator.util.AnimationReader;
 
 
 /**
@@ -79,6 +75,7 @@ public class AnimatorModelImpl implements AnimatorModel {
                 throw new IllegalArgumentException("This object has already been added.");
             }
             this.inventory.put(shape.getLabel(), shape);
+            System.out.println("\n\nCurrent Inventory of Shapes: " + this.inventory.toString());
         }
     }
 
@@ -231,6 +228,7 @@ public class AnimatorModelImpl implements AnimatorModel {
                 snapshotList.add(temporaryShape);
             }
         }
+        System.out.println(snapshotList.toString()); //TODO: Remove this debug line
         return snapshotList;
     }
 

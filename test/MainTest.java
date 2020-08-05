@@ -18,14 +18,14 @@ public class MainTest {
     AnimationBuilder<AnimatorModel> builder = new AnimationBuilderImpl();
     AnimationReader reader = new AnimationReader();
     try {
-      model = reader.parseFile(new FileReader("./hanoi.txt"), builder);
+      model = reader.parseFile(new FileReader("./buildings.txt"), builder);
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File not found.");
     }
 
-    VisualView view = new VisualView(500, 500);
+    VisualView view = new VisualView(800, 800);
 
-    IController visualController = new VisualController(model, view, 5);
+    IController visualController = new VisualController(model, view, 2000);
     visualController.animate();
 
   }
