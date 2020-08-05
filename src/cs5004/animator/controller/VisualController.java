@@ -54,7 +54,6 @@ public class VisualController implements IController {
                 if (currentFrame > model.findDuration()) {
                     currentFrame = 0;
                 }
-                System.out.println("\n\nRendering tick: " + currentFrame);
                 List<IShape> shapes = model.getSnapshot(currentFrame);
                 view.render(shapes);
                 currentFrame++;

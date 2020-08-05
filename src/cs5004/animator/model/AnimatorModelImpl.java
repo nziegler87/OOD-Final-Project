@@ -2,6 +2,7 @@ package cs5004.animator.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,12 +18,12 @@ import cs5004.animator.model.shape.IShape;
  * time at the current animation state and visibility.
  */
 public class AnimatorModelImpl implements AnimatorModel {
-    private final HashMap<String, IShape> inventory;
+    private final LinkedHashMap<String, IShape> inventory;
     private final ArrayList<ICommand> commandHistory;
     private ArrayList<Integer> screenDetails;
 
     public AnimatorModelImpl() {
-        this.inventory = new HashMap<>();
+        this.inventory = new LinkedHashMap<>();
         this.commandHistory = new ArrayList<>();
     }
 
@@ -75,7 +76,6 @@ public class AnimatorModelImpl implements AnimatorModel {
                 throw new IllegalArgumentException("This object has already been added.");
             }
             this.inventory.put(shape.getLabel(), shape);
-            System.out.println("\n\nCurrent Inventory of Shapes: " + this.inventory.toString());
         }
     }
 
@@ -228,7 +228,6 @@ public class AnimatorModelImpl implements AnimatorModel {
                 snapshotList.add(temporaryShape);
             }
         }
-        System.out.println(snapshotList.toString()); //TODO: Remove this debug line
         return snapshotList;
     }
 

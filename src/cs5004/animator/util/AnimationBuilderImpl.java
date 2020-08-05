@@ -14,11 +14,12 @@ import cs5004.animator.model.shape.Rectangle;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
     private final AnimatorModel model;
-    private HashMap<String, IShape> shapes;
+    private LinkedHashMap<String, IShape> shapes;
     private ArrayList<ICommand> commands;
     private ArrayList<Integer> screenDetails;
     private int canvasRightBound;
@@ -26,7 +27,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
     public AnimationBuilderImpl(){
         this.model = new AnimatorModelImpl();
-        this.shapes = new HashMap();
+        this.shapes = new LinkedHashMap<>();
         this.commands = new ArrayList<>();
         this.screenDetails = new ArrayList<>();
 
@@ -42,16 +43,8 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
         // set up the screen details
         model.setCanvas(screenDetails);
 
-        //TODO: REMOVE DEBUG
-        System.out.println("Shape Inventory being called in build:\n");
-        for (IShape shape2 : shapes.values()) {
-            System.out.println(shape2.toString());
-        }
-
-
         // add in all the shapes
         for (IShape shape : shapes.values()) {
-            System.out.println("\nShape added in Builder. Name: " + shape.getLabel() + " Type: " + shape.getType() + "\n");       //TODO:REMOVE DEBUG
             model.addShape(shape);
         }
 
@@ -96,8 +89,6 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
      */
     @Override
     public AnimationBuilder<AnimatorModel> declareShape(String name, String type) throws IllegalArgumentException {
-        System.out.println("Shape added. Name: " + name + " Type: " + type + "\n\n");       //TODO:REMOVE DEBUG
-        // where do we get the list of shapes?
         if (type.equals("ellipse")) {
             shapes.put(name, new Oval(name));
         } else if (type.equals("rectangle")) {
