@@ -3,22 +3,23 @@ package cs5004.animator.controller;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.view.IView;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The text controller class. This implements IController and contains the method animate().
+ */
 public class TextController implements IController {
     private final AnimatorModel model;
     private final String out;
 
     /**
-     * The constructor for the controller class.
-     *
      * @param model the model for the animation
      * @param view  the view for the animation
+     * @param speed the speed of the animation
      * @throws IllegalArgumentException if speed is less than or equal to 0
-     * @throws NullPointerException if model or view is null
+     * @throws NullPointerException     if model or view is null
      */
     public TextController(AnimatorModel model, IView view, int speed, String out)
             throws IllegalArgumentException, NullPointerException, IOException {
@@ -31,6 +32,9 @@ public class TextController implements IController {
         this.out = out;
     }
 
+    /**
+     * The animation method which produces the result to pass into the view.
+     */
     @Override
     public void animate() {
         if (!out.isBlank()) {

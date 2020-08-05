@@ -31,6 +31,21 @@ public class AnimatorModelImpl implements AnimatorModel {
     }
 
     /**
+     * A helper function to find the duration of the animation.
+     *
+     * @return duration
+     */
+    public double findDuration() {
+        double duration = 0;
+        for (ICommand command : commandHistory) {
+            if (command.getEndTime() > duration) {
+                duration = command.getEndTime();
+            }
+        }
+        return duration;
+    }
+
+    /**
      * Sets the screen details (x, y, width, height) into a list.
      *
      * @param screenSettings an arrayList

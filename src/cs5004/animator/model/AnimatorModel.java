@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public interface AnimatorModel extends AnimatorModelViewOnly {
 
+  double findDuration();
+
   void setCanvas(ArrayList<Integer> screenSettings);
 
   /**

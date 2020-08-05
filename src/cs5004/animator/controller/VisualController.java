@@ -8,46 +8,51 @@ import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.model.shape.IShape;
 import cs5004.animator.view.VisualView;
 
+/**
+ * The visual controller class. This implements IController and contains the method animate().
+ */
 public class VisualController implements IController {
-  private final VisualView view;
-  private final AnimatorModel model;
-  private final int speed;
+    private final VisualView view;
+    private final AnimatorModel model;
+    private final int speed;
 
-  /**
-   *
-   * @param model
-   * @param view
-   * @param speed
-   * @throws IllegalArgumentException if speed is less than or equal to 0
-   * @throws NullPointerException if model, view, or appendable is null
-   */
-  public VisualController(AnimatorModel model, VisualView view, int speed)
-          throws IllegalArgumentException, NullPointerException{
-    Objects.requireNonNull(model, "Model cannot be null");
-    Objects.requireNonNull(view, "View cannot be null.");
+    /**
+     * The constructor for the visual controller class.
+     *
+     * @param model the model for the animation
+     * @param view  the view for the animation
+     * @param speed the speed of the animation
+     * @throws IllegalArgumentException if speed is less than or equal to 0
+     * @throws NullPointerException     if model, view, or appendable is null
+     */
+    public VisualController(AnimatorModel model, VisualView view, int speed)
+            throws IllegalArgumentException, NullPointerException {
+        Objects.requireNonNull(model, "Model cannot be null");
+        Objects.requireNonNull(view, "View cannot be null.");
 
-    if (speed <= 0) {
-      throw new IllegalArgumentException("Speed must be greater than 0");
-    }
-
-    this.view = view;
-    this.model = model;
-    this.speed = speed;
-  }
-
-  @Override
-  public void animate() {
-    while (true) {
-      for (int i = 1; i <= 100; i++) { //TODO: calculate the length of the animation using the model
-        try {
-          TimeUnit.MILLISECONDS.sleep(this.speed);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
+        if (speed <= 0) {
+            throw new IllegalArgumentException("Speed must be greater than 0");
         }
-        System.out.println("Rendering tick: " + i);
-        List<IShape> shapes = model.getSnapshot(i);
-        view.render(shapes);
-      }
+
+        this.view = view;
+        this.model = model;
+        this.speed = speed;
     }
-  }
+
+    /**
+     * The animation method which produces the result to pass into the view.
+     */
+    @Override
+    public void animate() {
+        for (int i = 1; i <= model.findDuration(); i++) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(this.speed);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Rendering tick: " + i);
+            List<IShape> shapes = model.getSnapshot(i);
+            view.render(shapes);
+        }
+    }
 }

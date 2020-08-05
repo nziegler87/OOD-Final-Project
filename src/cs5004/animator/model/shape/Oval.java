@@ -76,7 +76,6 @@ public class Oval extends AbstractShape {
     if (xRadius <= 0) {
       throw new IllegalArgumentException("Width cannot be less than 0.");
     }
-
     this.xRadius = xRadius;
   }
 
