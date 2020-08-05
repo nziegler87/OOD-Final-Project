@@ -1,8 +1,6 @@
 import cs5004.animator.controller.IController;
 import cs5004.animator.controller.Parser;
 
-import java.io.IOException;
-
 public class Main {
 
     /**
@@ -13,12 +11,8 @@ public class Main {
      * @throws IllegalArgumentException when there's an IOException building the controller
      */
     public static void main(String[] args) throws IllegalArgumentException {
-        try {
-            Parser parser = new Parser();
-            IController controller = parser.parse(args);
-            controller.animate();
-        } catch (IOException e) {
-            throw new IllegalArgumentException("File not found.");
-        }
+        Parser parser = new Parser();
+        IController controller = parser.parse(args);
+        controller.animate();
     }
 }

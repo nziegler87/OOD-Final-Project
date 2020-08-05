@@ -13,9 +13,11 @@ import cs5004.animator.model.shape.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+/**
+ *
+ */
 public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
     private final AnimatorModel model;
@@ -25,7 +27,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
     private int canvasRightBound;
     private int canvasTopBound;
 
-    public AnimationBuilderImpl(){
+    public AnimationBuilderImpl() {
         this.model = new AnimatorModelImpl();
         this.shapes = new LinkedHashMap<>();
         this.commands = new ArrayList<>();
@@ -130,7 +132,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
         // check if shape settings have been saved and update accordingly
         if (shapes.containsKey(name)) {
             if ((shapes.get(name).getAppearTime() == -1 && shapes.get(name).getDisappearTime() == -1)
-                || (shapes.get(name).getAppearTime() > t1)) {
+                    || (shapes.get(name).getAppearTime() > t1)) {
                 shapes.get(name).setAppearTime(t1);
                 shapes.get(name).setDisappearTime(t2);
                 shapes.get(name).setCoordinates(x1, y1);
@@ -144,8 +146,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
                 shapes.get(name).setDisappearTime(t2);
             }
         }
-
-
+        
         // stuff for commands
         if (x1 != x2 || y1 != y2) {
             if (x2 < canvasRightBound && y2 < canvasTopBound) {

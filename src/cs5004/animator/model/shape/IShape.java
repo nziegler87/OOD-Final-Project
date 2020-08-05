@@ -1,6 +1,6 @@
 package cs5004.animator.model.shape;
 
-import java.awt.Color;
+import java.awt.*;
 
 import cs5004.animator.model.point2d.IPoint2D;
 
@@ -135,4 +135,6 @@ public interface IShape {
    * @throws NullPointerException if the color is null
    */
   void setColor(Color color) throws NullPointerException;
+
+  void drawShape(Graphics g);
 }

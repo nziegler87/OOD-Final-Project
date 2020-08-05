@@ -6,10 +6,8 @@ import java.util.List;
 
 public class TextView implements IView {
 
-    //private Appendable out;
-
     @Override
     public void render(List<IShape> shapes) {
-        //maybe we just make this not do anything?
+        // this does not render anything, so the method does nothing
     }
 }

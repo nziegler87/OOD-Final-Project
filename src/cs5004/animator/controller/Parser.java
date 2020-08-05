@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -25,7 +26,7 @@ public class Parser {
         speed = 1;
     }
 
-    public IController parse(String[] input) throws IllegalArgumentException, IOException {
+    public IController parse(String[] input) throws IllegalArgumentException {
 
         for (int i = 0; i < input.length; i++) {
             String word = input[i];
@@ -54,8 +55,6 @@ public class Parser {
             }
         }
 
-        System.out.println("file is: " + file + "\nview is: " + view + "\nspeed is: " + speed);
-
         AnimatorModel model;
         try {
             model = AnimationReader.parseFile(new FileReader("./" + file), new AnimationBuilderImpl());
@@ -65,10 +64,15 @@ public class Parser {
 
         // if the view is text, return controller with a text view
         if (view.equals("text")) {
-            return new TextController(model, new TextView(), out);
+            if (out.isBlank()) {
+                return new TextController(model, new TextView(), System.out);
+            } else {
+                return new TextController(model, new TextView(), out);
+            }
         }
 
+        ArrayList<Integer> canvasDetails = model.getCanvas();
         // else return the controller with a visual view
-        return new VisualController(model, new VisualView(800, 800), speed);            //TODO: Vido recommended passing in the panel width and height, which we read from the canvas. Better way to do it?
+        return new VisualController(model, new VisualView(canvasDetails.get(2), canvasDetails.get(3)), speed);
     }
 }

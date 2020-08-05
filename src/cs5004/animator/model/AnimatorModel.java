@@ -14,6 +14,8 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
 
   double findDuration();
 
+  ArrayList<Integer> getCanvas();
+
   void setCanvas(ArrayList<Integer> screenSettings);
 
   /**

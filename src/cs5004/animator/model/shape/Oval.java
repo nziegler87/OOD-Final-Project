@@ -1,6 +1,7 @@
 package cs5004.animator.model.shape;
 
-import java.awt.Color;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
 import cs5004.animator.model.point2d.IPoint2D;
@@ -173,6 +174,13 @@ public class Oval extends AbstractShape {
   @Override
   public int hashCode() {
     return Objects.hash(label, coordinates, color, xRadius, yRadius, appearTime, disappearTime);
+  }
+
+  @Override
+  public void drawShape(Graphics g) {
+    Graphics2D g2d = (Graphics2D) g;
+    g2d.fill(new Rectangle2D.Double(this.getCoordinates().getX(), this.getCoordinates().getY(),
+            this.xRadius, this.yRadius));
   }
 }
 
