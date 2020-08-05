@@ -17,12 +17,20 @@ import java.util.HashMap;
 
 public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
-    private final AnimatorModel model = new AnimatorModelImpl();
+    private final AnimatorModel model;
     private HashMap<String, IShape> shapes;
     private ArrayList<ICommand> commands;
     private ArrayList<Integer> screenDetails;
     private int canvasRightBound;
     private int canvasTopBound;
+
+    public AnimationBuilderImpl(){
+        this.model = new AnimatorModelImpl();
+        this.shapes = new HashMap();
+        this.commands = new ArrayList<>();
+        this.screenDetails = new ArrayList<>();
+
+    }
 
     /**
      * Constructs a final document.
@@ -117,6 +125,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
     public AnimationBuilder<AnimatorModel> addMotion(String name, int t1, int x1, int y1, int w1, int h1, int r1,
                                                      int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2,
                                                      int g2, int b2) throws IllegalArgumentException {
+
 
         // check if shape settings have been saved and update accordingly
         if (shapes.containsKey(name)) {

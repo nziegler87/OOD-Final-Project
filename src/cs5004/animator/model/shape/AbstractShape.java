@@ -131,7 +131,7 @@ public abstract class AbstractShape implements IShape {
      */
     @Override
     public void setDisappearTime(double disappearTime) throws IllegalArgumentException {
-        if (disappearTime < 0 || disappearTime <= appearTime) {
+        if (disappearTime < 0 || disappearTime < appearTime) {                                          //TODO: Changed this to get animation builder to work
             throw new IllegalArgumentException("Time must be positive and greater than appear time.");
         }
         this.disappearTime = disappearTime;

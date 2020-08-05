@@ -16,14 +16,16 @@ import cs5004.animator.model.shape.IShape;
  * A panel class that is a blank canvas on which to draw shapes.
  */
 public class CanvasDrawingPanel extends JPanel {
-  private List<IShape> shapes = new ArrayList<>();
+  private List<IShape> shapes;
 
-  public CanvasDrawingPanel() {
+  public CanvasDrawingPanel(int width, int height) {
     super();
-    setBackground(Color.BLACK);
+    setPreferredSize(new Dimension(width, height));
+    setBackground(Color.WHITE);
+    this.shapes = new ArrayList<>();
   }
 
-  public void paintComponent(Graphics g) {
+  public void paintComponent(Graphics g) {          //TODO: We could copy the shapes classes that we have, remove any setter methods, and add a draw(Graphics g) method to each
     super.paintComponent(g);
     if (shapes.size() != 0) {
       Graphics2D graphic2d = (Graphics2D) g;

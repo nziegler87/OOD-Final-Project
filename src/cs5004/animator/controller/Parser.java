@@ -65,6 +65,6 @@ public class Parser {
         }
 
         // else return the controller with a visual view
-        return new VisualController(model, new VisualView(), speed);
+        return new VisualController(model, new VisualView(500, 500), speed);            //TODO: Vido recommended passing in the panel width and height, which we read from the canvas. Better way to do it?
     }
 }

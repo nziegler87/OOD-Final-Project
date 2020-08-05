@@ -1,8 +1,9 @@
-/*
+
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 import cs5004.animator.controller.IController;
-import cs5004.animator.controller.TextController;
 import cs5004.animator.controller.VisualController;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.model.AnimatorModelImpl;
@@ -14,6 +15,9 @@ import cs5004.animator.model.point2d.Point2D;
 import cs5004.animator.model.shape.IShape;
 import cs5004.animator.model.shape.Oval;
 import cs5004.animator.model.shape.Rectangle;
+import cs5004.animator.util.AnimationBuilder;
+import cs5004.animator.util.AnimationBuilderImpl;
+import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.VisualView;
 
 public class MainTest {
@@ -49,12 +53,20 @@ public class MainTest {
 
     model.addAnimation(rCommand1, oCommand1, oCommmand2, rCommand2, rCommand3, tCommand1, tCommand2, tCommand3, tCommand4);
 
-    VisualView view = new VisualView();
+    AnimatorModel model2;
+    AnimationBuilder builder = new AnimationBuilderImpl();
+    AnimationReader reader = new AnimationReader();
+    try {
+      model2 = (AnimatorModel) reader.parseFile(new FileReader("./buildings.txt"), builder);      //TODO: Why do I have to cast it to AnimatorModel?
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File not found.");
+    }
 
-    IController visualController = new VisualController(model, view, 50);
-    IController textController = new TextController(model, view, 50, System.out);
+    VisualView view = new VisualView(500, 500);
+
+    IController visualController = new VisualController(model2, view, 50);
     visualController.animate();
 
   }
 }
-*/
+

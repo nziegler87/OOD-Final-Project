@@ -1,8 +1,12 @@
 package cs5004.animator.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.*;
 
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.model.shape.IShape;
@@ -14,7 +18,8 @@ import cs5004.animator.view.VisualView;
 public class VisualController implements IController {
     private final VisualView view;
     private final AnimatorModel model;
-    private final int speed;
+    private final int delay;
+    private final Timer timer;
 
     /**
      * The constructor for the visual controller class.
@@ -36,7 +41,26 @@ public class VisualController implements IController {
 
         this.view = view;
         this.model = model;
-        this.speed = speed;
+        this.delay = speed;           //TODO: HALP with this conversion
+        this.timer = new Timer(this.delay, new ActionListener() {
+            int currentFrame = 0;
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currentFrame > model.findDuration()) {
+                    currentFrame = 0;
+                }
+                System.out.println("Rendering tick: " + currentFrame);
+                List<IShape> shapes = model.getSnapshot(currentFrame);
+                view.render(shapes);
+                currentFrame++;
+            }
+        });
+
     }
 
     /**
@@ -44,15 +68,6 @@ public class VisualController implements IController {
      */
     @Override
     public void animate() {
-        for (int i = 1; i <= model.findDuration(); i++) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(this.speed);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Rendering tick: " + i);
-            List<IShape> shapes = model.getSnapshot(i);
-            view.render(shapes);
-        }
+        this.timer.start();
     }
 }
