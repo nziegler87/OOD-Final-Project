@@ -25,7 +25,7 @@ public class MainTest {
 
     VisualView view = new VisualView(800, 800);
 
-    IController visualController = new VisualController(model, view, 50);
+    IController visualController = new VisualController(model, view, 24);
     visualController.animate();
 
   }

@@ -41,7 +41,7 @@ public class VisualController implements IController {
 
         this.view = view;
         this.model = model;
-        this.delay = speed;           //TODO: HALP with this conversion
+        this.delay = 1000/speed;           //TODO: HALP with this conversion
         this.timer = new Timer(this.delay, new ActionListener() {
             int currentFrame = 0;
             /**
