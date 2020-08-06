@@ -8,7 +8,7 @@ public interface IController {
      *
      * @return a string description of the animation.
      */
-    String animate();
+    void animate();
 }
 
 //TODO: I watched the end of the video and Vido is saying that the view should get the raw data and

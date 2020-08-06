@@ -1,5 +1,6 @@
 package cs5004.animator.view;
 
+import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
 
 import java.io.ByteArrayOutputStream;
@@ -14,35 +15,21 @@ import java.util.List;
  */
 public class TextView implements IView {
 
-    private final Appendable appendable;
-
     /**
      * The visual view constructor.
-     *
-     * @param outfile the outfile to create and write in
-     * @param shapes  the shapes to output from the model
      */
-    public TextView(String outfile, List<IShape> shapes) {
+    public TextView() {
+        // constructor is empty because nothing to initialize
+    }
 
-        this.appendable = System.out;
-
-        // if there is not outfile, send to System.out
-        if (outfile.isBlank()) {
-            try {
-                appendable.append(//shapes stuff);
-            } catch (IOException e) {
-                throw new IllegalArgumentException("An error occurred when appending the output.");
-            }
-        } else {
-            try {
-                // else try to write to the outfile
-                FileWriter myWriter = new FileWriter(outfile);
-                myWriter.write(//shapes stuff to string);
-                myWriter.close();
-            } catch (IOException e) {
-                throw new IllegalArgumentException("An error occurred while making and/or writing to the new file.");
-            }
-        }
+    /**
+     * A method to render the shapes at their current state of animation.
+     *
+     * @param shapes a list of IShapes.
+     */
+    @Override
+    public void render(List<IShape> shapes) throws IllegalArgumentException {
+        throw new IllegalArgumentException("Method invalid for text view.");
     }
 
     /**
@@ -51,23 +38,27 @@ public class TextView implements IView {
      * @param shapes but in this case these are not utilized for anything
      */
     @Override
-    public void render(List<IShape> shapes) {
-        // this does not do anything because the text view does not render any animations
+    public String textRender(List<IShape> shapes, List<ICommand> commands) {
+
+        if (shapes.size() == 0) {
+            return "No shapes have been added to the inventory, so no animations can be displayed";
+        }
+
+        StringBuilder status = new StringBuilder();
+        status.append("Shapes:\n");
+
+        for (IShape shape : shapes) {
+            status.append(shape.toString()).append("\n\n");
+        }
+
+        if ((commands.size() != 0)) {
+            for (ICommand command : commands) {
+                status.append(command.toString());
+            }
+        } else {
+            status.append("Command list is empty.");
+        }
+
+        return status.substring(0, status.length() - 1);
     }
-
-    //TODO: if the default is system.out how do we test? Should we convert to string? (started that process below)
-
-/*    *//**
-     * The toString method overwrites the original toString to produce the relevant string for output. This is either
-     * put into a newly created file or passed into System.out (the default).
-     *
-     * @return a string with the entire animation status for output
-     *//*
-    @Override
-    public String toString() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream output = new PrintStream(baos);
-        System.setOut(System.out);
-        return baos.toString();
-    }*/
 }

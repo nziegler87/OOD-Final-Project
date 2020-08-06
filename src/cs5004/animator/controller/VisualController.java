@@ -68,8 +68,7 @@ public class VisualController implements IController {
      * @return null
      */
     @Override
-    public String animate() {
+    public void animate() {
         this.timer.start();
-        return null;
     }
 }

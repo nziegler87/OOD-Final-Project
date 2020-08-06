@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
 
 /**
@@ -47,5 +48,17 @@ public class VisualView extends JFrame implements IView {
      */
     public void render(List<IShape> shapes) {
         this.drawingCanvas.updateDrawing(shapes);
+    }
+
+    /**
+     * A method to render the shapes in the animation and their respective commands.
+     *
+     * @param shapes   a list of IShapes.
+     * @param commands
+     */
+    @Override
+    public String textRender(List<IShape> shapes, List<ICommand> commands)
+            throws IllegalArgumentException {
+        throw new IllegalArgumentException("Method invalid for visual view");
     }
 }

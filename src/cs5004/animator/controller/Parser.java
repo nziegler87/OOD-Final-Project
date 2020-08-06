@@ -47,7 +47,7 @@ public class Parser {
      */
     public IController getController() {
         if (view.equals("text")) {
-                return new TextController(model, new TextView(out, model.getShapeList()), out);
+                return new TextController(model, new TextView(), out);
         } else {
             return new VisualController(model, speed);
         }
@@ -68,23 +68,11 @@ public class Parser {
                     break;
                 case "-out":
                     out = input[i + 1];
-                    createOutfile();
                     break;
             }
         }
     }
 
-    private void createOutfile() throws IllegalArgumentException {
-        try {
-            File newFile = new File(out);
-            while (!newFile.createNewFile()) {
-                out = JOptionPane.showInputDialog("An error occurred because the outfile already exists. Try again: ");
-                new File(out);
-            }
-        } catch (IOException e) {
-            throw new IllegalArgumentException("An error occurred while making the new file.");
-        }
-    }
 
     private AnimatorModel getModel() throws IllegalArgumentException {
         try {
