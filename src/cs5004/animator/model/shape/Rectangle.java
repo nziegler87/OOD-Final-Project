@@ -22,6 +22,7 @@ public class Rectangle extends AbstractShape {
      */
     public Rectangle(String label) {
         super(label);
+        this.type = "rectangle";
     }
 
     /**

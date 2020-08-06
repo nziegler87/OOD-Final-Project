@@ -23,6 +23,7 @@ public class Oval extends AbstractShape {
    */
   public Oval(String label) {
     super(label);
+    this.type = "oval";
   }
 
   /**
