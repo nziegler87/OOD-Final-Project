@@ -37,7 +37,7 @@ public class TextView implements IView {
             try {
                 // else try to write to the outfile
                 FileWriter myWriter = new FileWriter(outfile);
-                myWriter.write(//shapres stuff to string);
+                myWriter.write(//shapes stuff to string);
                 myWriter.close();
             } catch (IOException e) {
                 throw new IllegalArgumentException("An error occurred while making and/or writing to the new file.");
