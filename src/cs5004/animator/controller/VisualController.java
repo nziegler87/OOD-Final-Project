@@ -24,22 +24,22 @@ public class VisualController implements IController {
      * The constructor for the visual controller class.
      *
      * @param model the model for the animation
-     * @param speed the speed of the animation
-     * @throws IllegalArgumentException if speed is less than or equal to 0
+     * @param framesPerSecond the framesPerSecond of the animation
+     * @throws IllegalArgumentException if framesPerSecond is less than or equal to 0
      * @throws NullPointerException     if model, view, or appendable is null
      */
-    public VisualController(AnimatorModel model, int speed)
+    public VisualController(AnimatorModel model, int framesPerSecond)
             throws IllegalArgumentException, NullPointerException {
         Objects.requireNonNull(model, "Model cannot be null");
 
-        if (speed <= 0) {
+        if (framesPerSecond <= 0) {
             throw new IllegalArgumentException("Speed must be greater than 0");
         }
 
         ArrayList<Integer> canvasDetails = model.getCanvas();
         this.view = new VisualView(canvasDetails.get(2), canvasDetails.get(3));
 
-        int delay = 1000 / speed;
+        int delay = 1000 / framesPerSecond;
         this.timer = new Timer(delay,
                 new ActionListener() {
                     int currentFrame = 0;
