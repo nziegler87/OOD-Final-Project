@@ -47,7 +47,7 @@ public class Parser {
      */
     public IController getController() {
         if (view.equals("text")) {
-                return new TextController(model, new TextView(out, model.getShapes()), out);
+                return new TextController(model, new TextView(out, model.getShapeList()), out);
         } else {
             return new VisualController(model, speed);
         }

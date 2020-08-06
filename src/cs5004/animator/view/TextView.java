@@ -22,7 +22,7 @@ public class TextView implements IView {
      * @param outfile the outfile to create and write in
      * @param shapes  the shapes to output from the model
      */
-    public TextView(String outfile, ArrayList<IShape> shapes) {
+    public TextView(String outfile, List<IShape> shapes) {
 
         this.appendable = System.out;
 
