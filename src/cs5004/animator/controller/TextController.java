@@ -4,6 +4,8 @@ import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.view.IView;
 import cs5004.animator.view.TextView;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -36,6 +38,22 @@ public class TextController implements IController {
      */
     @Override
     public String animate() throws IllegalArgumentException {
-        return view.toString();
+        // if there is not outfile, send to System.out
+        if (out.isBlank()) {
+            try {
+                System.out.append(//shapes stuff);
+            } catch (IOException e) {
+                throw new IllegalArgumentException("An error occurred when appending the output.");
+            }
+        } else {
+            try {
+                // else try to write to the outfile
+                FileWriter myWriter = new FileWriter(out);
+                myWriter.write(//shapes stuff to string);
+                        myWriter.close();
+            } catch (IOException e) {
+                throw new IllegalArgumentException("An error occurred while making and/or writing to the new file.");
+            }
+        }
     }
 }

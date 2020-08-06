@@ -32,7 +32,7 @@ public class ControllerAndViewTest {
     @Test
     public void testSmallDemoTextOnly() {
         AnimatorModel model = animationReaderHelper("./smalldemo.txt");
-        controller = new TextController(model);
+        controller = new TextController(model, new TextView("", model.getSnapshot(15)));
         assertEquals("Shapes:\n" +
                 "Name: R\n" +
                 "Type: null\n" +
