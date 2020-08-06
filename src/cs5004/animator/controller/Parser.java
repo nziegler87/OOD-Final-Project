@@ -4,6 +4,7 @@ import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilderImpl;
 import cs5004.animator.util.AnimationReader;
 
+import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,6 +15,7 @@ import java.io.IOException;
  * the type of view, the output location, and the speed of the render.
  */
 public class Parser {
+    private final AnimatorModel model;
     private String file;
     private String view;
     private String out;
@@ -22,25 +24,39 @@ public class Parser {
     /**
      * Creates an instance of a Parser class and initializes default values.
      */
-    public Parser() {
+    public Parser(String[] input) {
         file = "";
         view = "visual";
         out = "";
         speed = 1;
+
+        getValues(input);
+        while (file.isBlank()) {
+            String[] newInput = JOptionPane.showInputDialog
+                    ("An error occurred because the file does not exist. Try again: ").split(" ");
+            getValues(newInput);
+        }
+        this.model = getModel();
     }
 
     /**
-     * Method to actually parse the text and return an IController object, either a visual or text
-     * controller.
+     * Returns either a text or visual controller based on the values stored in the Parser class.
      *
-     * @param input a string of text arguments.
-     *
-     * @return an IController object
-     *
-     * @throws IllegalArgumentException if an error occurs when creating the output file.
+     * @return the controller for the Animator
      */
-    public IController parse(String[] input) throws IllegalArgumentException {
+    public IController getController() {
+        if (view.equals("text")) {
+            if (out.isBlank()) {
+                return new TextController(model);
+            } else {
+                return new TextController(model, out);
+            }
+        } else {
+            return new VisualController(model, speed);
+        }
+    }
 
+    private void getValues(String[] input) throws IllegalArgumentException {
         for (int i = 0; i < input.length; i++) {
             String word = input[i];
             switch (word) {
@@ -54,36 +70,30 @@ public class Parser {
                     speed = Integer.parseInt(input[i + 1]);
                     break;
                 case "-out":
-                    try {
-                        out = input[i + 1];
-                        File newFile = new File(out);
-                        if (!newFile.createNewFile()) {
-                            throw new IllegalArgumentException("An error occurred because the file already exists.");
-                        }
-                    } catch (IOException e) {
-                        throw new IllegalArgumentException("An error occurred while making the new file.");
-                    }
+                    out = input[i + 1];
+                    createOutfile();
                     break;
             }
         }
+    }
 
-        AnimatorModel model;
+    private void createOutfile() throws IllegalArgumentException {
         try {
-            model = AnimationReader.parseFile(new FileReader("./" + file), new AnimationBuilderImpl());
+            File newFile = new File(out);
+            while (!newFile.createNewFile()) {
+                out = JOptionPane.showInputDialog("An error occurred because the outfile already exists. Try again: ");
+                new File(out);
+            }
+        } catch (IOException e) {
+            throw new IllegalArgumentException("An error occurred while making the new file.");
+        }
+    }
+
+    private AnimatorModel getModel() throws IllegalArgumentException {
+        try {
+            return AnimationReader.parseFile(new FileReader("./" + file), new AnimationBuilderImpl());
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException("File not found.");
         }
-
-        // if the view is text, return controller with a text view
-        if (view.equals("text")) {
-            if (out.isBlank()) {
-                return new TextController(model);
-            } else {
-                return new TextController(model, out);
-            }
-        }
-
-        // else return the controller with a visual view
-        return new VisualController(model, speed);
     }
 }

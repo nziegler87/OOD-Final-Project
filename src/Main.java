@@ -11,8 +11,8 @@ public class Main {
      * @throws IllegalArgumentException when there's an IOException building the controller
      */
     public static void main(String[] args) throws IllegalArgumentException {
-        Parser parser = new Parser();
-        IController controller = parser.parse(args);
+        Parser parser = new Parser(args);
+        IController controller = parser.getController();
         controller.animate();
     }
 }
