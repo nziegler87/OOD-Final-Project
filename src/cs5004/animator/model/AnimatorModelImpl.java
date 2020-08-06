@@ -268,6 +268,26 @@ public class AnimatorModelImpl implements AnimatorModel {
      *
      * @return a sorted list of shapes, sorted by appear time
      */
+    @Override
+    public List<IShape> getShapeList() {
+        return this.getSortedShapeList();
+    }
+
+    /**
+     * Return a list of all commands that have been added to the model.
+     *
+     * @return a list of all commands that have been added to the model.
+     */
+    @Override
+    public List<ICommand> getCommandList() {
+        return this.commandHistory;
+    }
+
+    /**
+     * A helper method to return an array list of the shapes in the inventory sorted by appear time.
+     *
+     * @return a sorted list of shapes, sorted by appear time
+     */
     private List<IShape> getSortedShapeList() {
         List<IShape> shapeList = new ArrayList<>(this.inventory.values());
         shapeList.sort((o1, o2) -> (int) (o1.getAppearTime() - o2.getAppearTime()));

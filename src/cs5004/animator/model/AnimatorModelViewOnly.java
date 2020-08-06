@@ -2,6 +2,7 @@ package cs5004.animator.model;
 
 import java.util.List;
 
+import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
 
 /**
@@ -28,4 +29,19 @@ public interface AnimatorModelViewOnly {
    * @return a string of the summary
    */
   String getAnimationStatus();
+
+  //TODO: Test these newly made public methods
+  /**
+   * Method to return an array list of the shapes in the inventory sorted by appear time.
+   *
+   * @return a sorted list of shapes, sorted by appear time
+   */
+  List<IShape> getShapeList();
+
+  /**
+   * Return a list of all commands that have been added to the model.
+   *
+   * @return a list of all commands that have been added to the model.
+   */
+  List<ICommand> getCommandList();
 }
