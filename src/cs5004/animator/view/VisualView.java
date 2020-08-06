@@ -40,6 +40,11 @@ public class VisualView extends JFrame implements IView {
         this.setVisible(true);
     }
 
+    /**
+     * A method to render the shapes at their current state of animation.
+     *
+     * @param shapes a list of IShapes.
+     */
     public void render(List<IShape> shapes) {
         this.drawingCanvas.updateDrawing(shapes);
     }

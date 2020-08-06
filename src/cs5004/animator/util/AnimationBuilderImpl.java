@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
- *
+ * A builder class that is used by the AnimationReader class to build a model object with the
+ * correct shapes, animations, and canvas details. This class serves as a link between our
+ * implementation of the AnimatorModel and a standard method of reading and parsing a text file
+ * that describes how the method should be setup.
  */
 public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
@@ -27,6 +30,9 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
     private int canvasRightBound;
     private int canvasTopBound;
 
+    /**
+     * Creates an instance of the AnimatorBuilderImpl class.
+     */
     public AnimationBuilderImpl() {
         this.model = new AnimatorModelImpl();
         this.shapes = new LinkedHashMap<>();

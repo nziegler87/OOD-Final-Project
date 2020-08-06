@@ -9,13 +9,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * A parser class that is used to read a text string of arguments and determine the input file,
+ * the type of view, the output location, and the speed of the render.
+ */
 public class Parser {
-
     private String file;
     private String view;
     private String out;
     private int speed;
 
+    /**
+     * Creates an instance of a Parser class and initializes default values.
+     */
     public Parser() {
         file = "";
         view = "visual";
@@ -23,6 +29,16 @@ public class Parser {
         speed = 1;
     }
 
+    /**
+     * Method to actually parse the text and return an IController object, either a visual or text
+     * controller.
+     *
+     * @param input a string of text arguments.
+     *
+     * @return an IController object
+     *
+     * @throws IllegalArgumentException if an error occurs when creating the output file.
+     */
     public IController parse(String[] input) throws IllegalArgumentException {
 
         for (int i = 0; i < input.length; i++) {

@@ -54,7 +54,7 @@ public class TextView implements IView {
         // this does not do anything because the text view does not render any animations
     }
 
-    //TODO: if the default is system.out how do we test? Shoud we convert to string? (started that process below)
+    //TODO: if the default is system.out how do we test? Should we convert to string? (started that process below)
     /**
      * The toString method overwrites the original toString to produce the relevant string for output. This is either
      * put into a newly created file or passed into System.out (the default).

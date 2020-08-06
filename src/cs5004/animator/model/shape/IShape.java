@@ -136,5 +136,11 @@ public interface IShape {
    */
   void setColor(Color color) throws NullPointerException;
 
+  /**
+   * A method for each concrete shape class that contains instructions so that the shape knows
+   * how to draw itself for the paintComponent() method.
+   *
+   * @param g a Graphics object.
+   */
   void drawShape(Graphics g);
 }

@@ -13,6 +13,8 @@ public class TextController implements IController {
     private final IView view;
 
     /**
+     * Create an instance of a TextController when passed only the model.  //TODO: Why is this not passed the view?
+     *
      * @param model the model for the animation
      * @throws IllegalArgumentException if speed is less than or equal to 0
      * @throws NullPointerException     if model or view is null
@@ -23,6 +25,8 @@ public class TextController implements IController {
     }
 
     /**
+     * Create an instance of a TextController when passed a model and a string out.
+     *
      * @param model the model for the animation
      * @throws IllegalArgumentException if speed is less than or equal to 0
      * @throws NullPointerException     if model or view is null
