@@ -11,18 +11,7 @@ import java.util.Objects;
  */
 public class TextController implements IController {
     private final IView view;
-
-    /**
-     * Create an instance of a TextController when passed only the model.  //TODO: Why is this not passed the view?
-     *
-     * @param model the model for the animation
-     * @throws IllegalArgumentException if speed is less than or equal to 0
-     * @throws NullPointerException     if model or view is null
-     */
-    public TextController(AnimatorModel model)
-            throws IllegalArgumentException, NullPointerException {
-        this(model, "");
-    }
+    private final String out;
 
     /**
      * Create an instance of a TextController when passed a model and a string out.
@@ -31,11 +20,12 @@ public class TextController implements IController {
      * @throws IllegalArgumentException if speed is less than or equal to 0
      * @throws NullPointerException     if model or view is null
      */
-    public TextController(AnimatorModel model, String out)
+    public TextController(AnimatorModel model, IView view, String out)
             throws IllegalArgumentException, NullPointerException {
         Objects.requireNonNull(model, "Model cannot be null.");
         Objects.requireNonNull(out, "Outfile cannot be null.");
-        this.view = new TextView(out, model.getAnimationStatus());
+        this.view = view;
+        this.out = out;
     }
 
     /**

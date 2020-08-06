@@ -3,6 +3,7 @@ package cs5004.animator.controller;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilderImpl;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.TextView;
 
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -46,11 +47,7 @@ public class Parser {
      */
     public IController getController() {
         if (view.equals("text")) {
-            if (out.isBlank()) {
-                return new TextController(model);
-            } else {
-                return new TextController(model, out);
-            }
+                return new TextController(model, new TextView(out, model.getShapes()), out);
         } else {
             return new VisualController(model, speed);
         }

@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,17 +19,17 @@ public class TextView implements IView {
     /**
      * The visual view constructor.
      *
-     * @param outfile         the outfile to create and write in
-     * @param animationStatus the text output from the model
+     * @param outfile the outfile to create and write in
+     * @param shapes  the shapes to output from the model
      */
-    public TextView(String outfile, String animationStatus) {
+    public TextView(String outfile, ArrayList<IShape> shapes) {
 
         this.appendable = System.out;
 
         // if there is not outfile, send to System.out
         if (outfile.isBlank()) {
             try {
-                appendable.append(animationStatus);
+                appendable.append(//shapes stuff);
             } catch (IOException e) {
                 throw new IllegalArgumentException("An error occurred when appending the output.");
             }
@@ -36,7 +37,7 @@ public class TextView implements IView {
             try {
                 // else try to write to the outfile
                 FileWriter myWriter = new FileWriter(outfile);
-                myWriter.write(animationStatus);
+                myWriter.write(//shapres stuff to string);
                 myWriter.close();
             } catch (IOException e) {
                 throw new IllegalArgumentException("An error occurred while making and/or writing to the new file.");
@@ -55,17 +56,18 @@ public class TextView implements IView {
     }
 
     //TODO: if the default is system.out how do we test? Should we convert to string? (started that process below)
-    /**
+
+/*    *//**
      * The toString method overwrites the original toString to produce the relevant string for output. This is either
      * put into a newly created file or passed into System.out (the default).
      *
      * @return a string with the entire animation status for output
-     */
+     *//*
     @Override
     public String toString() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream output = new PrintStream(baos);
         System.setOut(System.out);
         return baos.toString();
-    }
+    }*/
 }
