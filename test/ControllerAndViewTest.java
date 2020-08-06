@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ControllerAndViewTest {
     private TextController controller;
@@ -28,6 +28,7 @@ public class ControllerAndViewTest {
         }
     }
 
+    // TODO: issue because it's not pulling a string, it's pulling the System.out which is default.
     @Test
     public void testSmallDemoTextOnly() {
         AnimatorModel model = animationReaderHelper("./smalldemo.txt");

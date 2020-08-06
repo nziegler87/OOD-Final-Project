@@ -16,8 +16,8 @@ public class VisualView extends JFrame implements IView {
     /**
      * The visual view constructor.
      *
-     * @param width
-     * @param height
+     * @param width the width of the canvas
+     * @param height the height of the canvas
      */
     public VisualView(int width, int height) {
         // call JFrame constructor

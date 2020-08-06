@@ -3,13 +3,11 @@ package cs5004.animator.controller;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilderImpl;
 import cs5004.animator.util.AnimationReader;
-import cs5004.animator.view.VisualView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Parser {
 
@@ -42,7 +40,6 @@ public class Parser {
                 case "-out":
                     try {
                         out = input[i + 1];
-                        System.out.println("-out is " + out);
                         File newFile = new File(out);
                         if (!newFile.createNewFile()) {
                             throw new IllegalArgumentException("An error occurred because the file already exists.");
@@ -70,8 +67,7 @@ public class Parser {
             }
         }
 
-        ArrayList<Integer> canvasDetails = model.getCanvas();
         // else return the controller with a visual view
-        return new VisualController(model, new VisualView(canvasDetails.get(2), canvasDetails.get(3)), speed);
+        return new VisualController(model, speed);
     }
 }
