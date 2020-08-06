@@ -3,7 +3,6 @@ package cs5004.animator.controller;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilderImpl;
 import cs5004.animator.util.AnimationReader;
-import cs5004.animator.view.TextView;
 import cs5004.animator.view.VisualView;
 
 import java.io.File;
@@ -65,9 +64,9 @@ public class Parser {
         // if the view is text, return controller with a text view
         if (view.equals("text")) {
             if (out.isBlank()) {
-                return new TextController(model, new TextView(), System.out);
+                return new TextController(model);
             } else {
-                return new TextController(model, new TextView(), out);
+                return new TextController(model, out);
             }
         }
 

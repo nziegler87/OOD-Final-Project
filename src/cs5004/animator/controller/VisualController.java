@@ -15,9 +15,6 @@ import cs5004.animator.view.VisualView;
  * The visual controller class. This implements IController and contains the method animate().
  */
 public class VisualController implements IController {
-    private final VisualView view;
-    private final AnimatorModel model;
-    private final int delay;
     private final Timer timer;
 
     /**
@@ -38,10 +35,8 @@ public class VisualController implements IController {
             throw new IllegalArgumentException("Speed must be greater than 0");
         }
 
-        this.view = view;
-        this.model = model;
-        this.delay = 1000 / speed;
-        this.timer = new Timer(this.delay,
+        int delay = 1000 / speed;
+        this.timer = new Timer(delay,
                 new ActionListener() {
                     int currentFrame = 0;
 
@@ -68,7 +63,7 @@ public class VisualController implements IController {
      * @return
      */
     @Override
-    public Appendable animate() {
+    public String animate() {
         this.timer.start();
         return null;
     }
