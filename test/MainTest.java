@@ -10,13 +10,22 @@ import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.IView;
 import cs5004.animator.view.VisualView;
 
+/**
+ * A test main class.
+ */
 public class MainTest {
 
-  public static void main(String[] Args) {
+  /**
+   * Create a main object when passed String[] Args.
+   *
+   * @param args an array of string arguments.
+   */
+  public static void main(String [] args) {
     AnimatorModel model;
     IView view;
     try {
-      model = AnimationReader.parseFile(new FileReader("./smalldemo.txt"), new AnimationBuilderImpl());
+      model = AnimationReader.parseFile(new FileReader("./smalldemo.txt"),
+              new AnimationBuilderImpl());
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File not found.");
     }

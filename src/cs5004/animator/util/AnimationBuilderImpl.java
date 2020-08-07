@@ -24,22 +24,22 @@ import java.util.Map;
  * describes how the method should be setup.
  */
 public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
-    private final AnimatorModel model;
-    private Map<String, IShape> shapes;
-    private List<ICommand> commands;
-    private List<Integer> screenDetails;
-    private int canvasRightBound;
-    private int canvasTopBound;
+  private final AnimatorModel model;
+  private Map<String, IShape> shapes;
+  private List<ICommand> commands;
+  private List<Integer> screenDetails;
+  private int canvasRightBound;
+  private int canvasTopBound;
 
-    /**
-     * Creates an instance of the AnimatorBuilderImpl class.
-     */
-    public AnimationBuilderImpl() {
-      this.model = new AnimatorModelImpl();
-      this.shapes = new LinkedHashMap<>();
-      this.commands = new ArrayList<>();
-      this.screenDetails = new ArrayList<>();
-    }
+  /**
+  * Creates an instance of the AnimatorBuilderImpl class.
+  */
+  public AnimationBuilderImpl() {
+    this.model = new AnimatorModelImpl();
+    this.shapes = new LinkedHashMap<>();
+    this.commands = new ArrayList<>();
+    this.screenDetails = new ArrayList<>();
+  }
 
 
   /**
@@ -161,8 +161,9 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
         commands.add(new Move(shapes.get(name), t1, t2,
                 new Point2D(x1 - screenDetails.get(0), y1 - screenDetails.get(1)),
                 new Point2D(x2 - screenDetails.get(0), y2 - screenDetails.get(1))));
-      } else
+      } else {
         throw new IllegalArgumentException("New coordinates must be within the canvas bounds.");
+      }
     }
     if (w1 != w2 || h1 != h2) {
       commands.add(new Scale(shapes.get(name), t1, t2, w1, h1, w2, h2));

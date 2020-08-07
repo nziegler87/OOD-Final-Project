@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -70,8 +71,10 @@ public class ControllerAndViewTest {
                     "Shape R moves from (0.0,130.0) to (100.0,230.0) from t=10 to t=50\n" +
                     "Shape C moves from (240.0,0.0) to (240.0,180.0) from t=20 to t=50\n" +
                     "Shape C moves from (240.0,180.0) to (240.0,300.0) from t=50 to t=70\n" +
-                    "Shape C changes color from (0.0,0.0,1.0) to (0.0,0.7,0.3) from t=50 to t=70\n" +
-                    "Shape R scales from Width: 50.0, Height: 100.0 to Width: 25.0, Height: 100.0 " +
+                    "Shape C changes color from (0.0,0.0,1.0) to (0.0,0.7,0.3) from" +
+                    " t=50 to t=70\n" +
+                    "Shape R scales from Width: 50.0, Height: 100.0 to Width: 25.0, " +
+                    "Height: 100.0 " +
                     "from t=51 to t=70\n" +
                     "Shape R moves from (100.0,230.0) to (0.0,130.0) from t=70 to t=100\n" +
                     "Shape C changes color from (0.0,0.7,0.3) to (0.0,1.0,0.0) from t=70 to t=80",
@@ -82,7 +85,7 @@ public class ControllerAndViewTest {
   @Test
   public void testParser() {
     String[] args = {"-in", "smalldemo.txt", "-view", "text", "-out",
-            "parserTest.txt", "-speed", "2"};
+                     "parserTest.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
@@ -95,20 +98,21 @@ public class ControllerAndViewTest {
   @Test
   public void testParserInMissing() {
     String[] args = {"-in", "", "-view", "text", "-out",
-            "noIn.txt", "-speed", "2"};
+                     "noIn.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
-    assertEquals("", "");
+    assertNotEquals("", args);
   }
 
   // test that parser triggers pop up when View is missing
   @Test
   public void testParserViewMissing() {
     String[] args = {"-in", "smalldemo.txt", "-view", "", "-out",
-            "noView.txt", "-speed", "2"};
+                     "noView.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
+    assertNotEquals("", args);
   }
 }

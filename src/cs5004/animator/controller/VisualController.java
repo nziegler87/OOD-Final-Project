@@ -35,24 +35,22 @@ public class VisualController implements IController {
     int delay = 1000 / framesPerSecond;
     this.timer = new Timer(delay,
             new ActionListener() {
-              int currentFrame = 0;
-
-              /**
-               * Invoked when an action occurs.
-               *
-               * @param e the event to be processed
-               */
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                if (currentFrame > model.findDuration()) {
-                  currentFrame = 0;
-                }
-                List<IShape> shapes = model.getSnapshot(currentFrame);
-                view.render(shapes);
-                currentFrame++;
-              }
+        int currentFrame = 0;
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (currentFrame > model.findDuration()) {
+              currentFrame = 0;
             }
-    );
+            List<IShape> shapes = model.getSnapshot(currentFrame);
+            view.render(shapes);
+            currentFrame++;
+        }
+      });
   }
 
   /**
