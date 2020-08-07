@@ -20,7 +20,7 @@ public class CanvasDrawingPanel extends JPanel {
   /**
    * This is the constructor for CanvasDrawingPanel. It takes in a width and height for the canvas.
    *
-   * @param width the width of the canvas
+   * @param width  the width of the canvas
    * @param height the height of the canvas
    */
   public CanvasDrawingPanel(int width, int height) {

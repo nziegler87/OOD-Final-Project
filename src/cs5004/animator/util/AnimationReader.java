@@ -8,9 +8,10 @@ import java.util.regex.Pattern;
  * A helper to read animation data and construct an animation from it.
  */
 public class AnimationReader {
+
   /**
-   * A factory for producing new animations, given a source of shapes and a
-   * builder for constructing animations.
+   * A factory for producing new animations, given a source of shapes and a builder for constructing
+   * animations.
    *
    * <p>
    * The input file format consists of two types of lines:
@@ -29,7 +30,7 @@ public class AnimationReader {
    * @param readable The source of data for the animation
    * @param builder  A builder for helping to construct a new animation
    * @param <Doc>    The main model interface type describing animations
-   * @return
+   * @return returns
    */
   public static <Doc> Doc parseFile(Readable readable, AnimationBuilder<Doc> builder) {
     Objects.requireNonNull(readable, "Must have non-null readable source");
@@ -103,7 +104,7 @@ public class AnimationReader {
       vals[i] = getInt(s, "Motion", fieldNames[i]);
     }
     builder.addMotion(name,
-            vals[0], vals[1], vals[2 ], vals[3 ], vals[4 ], vals[5 ], vals[6 ], vals[7 ],
+            vals[0], vals[1], vals[2], vals[3], vals[4], vals[5], vals[6], vals[7],
             vals[8], vals[9], vals[10], vals[11], vals[12], vals[13], vals[14], vals[15]);
   }
 

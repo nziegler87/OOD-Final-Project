@@ -3,7 +3,6 @@ package cs5004.animator.model;
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +35,7 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws NullPointerException     when the shape is null
    * @throws IllegalArgumentException when the shape is not found
    */
-  void removeShape(IShape ... shapes) throws NullPointerException, IllegalArgumentException;
+  void removeShape(IShape... shapes) throws NullPointerException, IllegalArgumentException;
 
   /**
    * Adds a shape to the model inventory hashmap.
@@ -64,5 +63,5 @@ public interface AnimatorModel extends AnimatorModelViewOnly {
    * @throws IllegalArgumentException if the shape associated with command does not exist with in
    *                                  the model inventory
    */
-  void removeAnimation(ICommand ... commands) throws NullPointerException, IllegalArgumentException;
+  void removeAnimation(ICommand... commands) throws NullPointerException, IllegalArgumentException;
 }

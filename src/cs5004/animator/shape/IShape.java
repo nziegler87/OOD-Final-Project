@@ -1,10 +1,9 @@
 package cs5004.animator.shape;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 import cs5004.animator.model.point2d.IPoint2D;
-
-//TODO: I moved the Shape package out of the model area. Okay with that?
 
 /**
  * A class that contains the methods that all shapes should support.

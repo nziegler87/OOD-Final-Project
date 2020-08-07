@@ -6,9 +6,9 @@ package cs5004.animator.controller;
  */
 public interface IController {
 
-    /**
-     * Method to start the animation.
-     **/
-    void animate();
+  /**
+   * Method to start the animation.
+   **/
+  void animate();
 }
 

@@ -3,16 +3,17 @@ package cs5004.animator.util;
 public interface AnimationBuilder<Doc> {
   /**
    * Constructs a final document.
+   *
    * @return the newly constructed document
    */
   Doc build();
 
-
   /**
    * Specify the bounding box to be used for the animation.
-   * @param x The leftmost x value
-   * @param y The topmost y value
-   * @param width The width of the bounding box
+   *
+   * @param x      The leftmost x value
+   * @param y      The topmost y value
+   * @param width  The width of the bounding box
    * @param height The height of the bounding box
    * @return This {@link AnimationBuilder}
    */
@@ -21,11 +22,10 @@ public interface AnimationBuilder<Doc> {
   /**
    * Adds a new shape to the growing document.
    *
-   * @param name The unique name of the shape to be added.
-   *             No shape with this name should already exist.
-   * @param type The type of shape (e.g. "ellipse", "rectangle") to be added.
-   *             The set of supported shapes is unspecified, but should
-   *             include "ellipse" and "rectangle" as a minimum.
+   * @param name The unique name of the shape to be added. No shape with this name should already
+   *             exist.
+   * @param type The type of shape (e.g. "ellipse", "rectangle") to be added. The set of supported
+   *             shapes is unspecified, but should include "ellipse" and "rectangle" as a minimum.
    * @return This {@link AnimationBuilder}
    */
   AnimationBuilder<Doc> declareShape(String name, String type);
