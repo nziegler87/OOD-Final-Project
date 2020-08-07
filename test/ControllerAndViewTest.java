@@ -19,11 +19,6 @@ import static org.junit.Assert.assertTrue;
 public class ControllerAndViewTest {
     private TextController controller;
 
-
-    @Before
-    public void setUp() throws IllegalArgumentException {
-    }
-
     private AnimatorModel animationReaderHelper(String file) {
         try {
             return AnimationReader.parseFile(new FileReader(file), new AnimationBuilderImpl());
@@ -39,6 +34,14 @@ public class ControllerAndViewTest {
         controller.animate();
         File checkFile = new File("output.txt");
         assertTrue(checkFile.exists());
+    }
+
+    @Test (expected = IllegalStateException.class)
+    public void testAppendableThatReturnsNull() {
+        MyAppendable appendable = new MyAppendable();
+        AnimatorModel model = animationReaderHelper("./smalldemo.txt");
+        controller = new TextController(model, new TextView(), appendable);
+        controller.animate();
     }
 
     @Test
@@ -98,7 +101,7 @@ public class ControllerAndViewTest {
     // test that parser triggers pop up when View is missing
     @Test
     public void testParserViewMissing() {
-        String [] args = {"-in", "smalldemo.txt", "-view", "", "-out",
+        String[] args = {"-in", "smalldemo.txt", "-view", "", "-out",
                 "noView.txt", "-speed", "2"};
         Parser parser = new Parser(args);
         IController controller = parser.getController();

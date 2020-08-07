@@ -36,15 +36,15 @@ public class TextController implements IController {
     /**
      * The animation method which produces the result to pass into the view.
      *
-     * @throws IllegalArgumentException when the text output was unable to write to a new file
+     * @throws IllegalStateException when the text output was unable to write to a new file
      */
     @Override
-    public void animate() throws IllegalArgumentException {
+    public void animate() throws IllegalStateException {
         String output = view.textRender(model.getShapeList(), model.getCommandList());
         try {
             appendable.append(output);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Could not append to the output.");
+            throw new IllegalStateException("Could not append to the output.");
         }
     }
 }
