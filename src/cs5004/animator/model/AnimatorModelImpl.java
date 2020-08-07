@@ -9,9 +9,6 @@ import java.util.Objects;
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
 
-//TODO: I updated our ArrayLists and LinkedHashMap to initialize using the interface and then declare using the class
-
-
 /**
  * This class is the model (MVC architecture) in an application that helps one to create simple but
  * effective 2D animations from shapes. It includes operations to add and remove shapes to the model
@@ -81,7 +78,7 @@ public class AnimatorModelImpl implements AnimatorModel {
       if (this.inventory.containsKey(shape)) {
         throw new IllegalArgumentException("This object has already been added.");
       }
-      this.inventory.put(shape, new ArrayList<ICommand>());
+      this.inventory.put(shape, new ArrayList<>());
     }
   }
 

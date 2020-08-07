@@ -12,18 +12,18 @@ import cs5004.animator.view.VisualView;
 
 public class MainTest {
 
-    public static void main(String[] Args) {
-        AnimatorModel model;
-        IView view;
-        try {
-            model = AnimationReader.parseFile(new FileReader("./smalldemo.txt"), new AnimationBuilderImpl());
-        } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("File not found.");
-        }
-
-        view = new VisualView(model.getCanvas().get(2), model.getCanvas().get(2));
-        IController visualController = new VisualController(model, view,24);
-        visualController.animate();
+  public static void main(String[] Args) {
+    AnimatorModel model;
+    IView view;
+    try {
+      model = AnimationReader.parseFile(new FileReader("./smalldemo.txt"), new AnimationBuilderImpl());
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File not found.");
     }
+
+    view = new VisualView(model.getCanvas().get(2), model.getCanvas().get(2));
+    IController visualController = new VisualController(model, view, 24);
+    visualController.animate();
+  }
 }
 

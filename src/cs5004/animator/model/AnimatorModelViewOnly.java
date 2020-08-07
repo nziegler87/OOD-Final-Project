@@ -30,8 +30,6 @@ public interface AnimatorModelViewOnly {
    */
   String getAnimationStatus();
 
-  //TODO: Test these newly made public methods
-
   /**
    * Method that returns an ArrayList of four integers that contains the bounds of the canvas.
    *

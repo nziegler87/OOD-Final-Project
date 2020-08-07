@@ -27,7 +27,6 @@ public class VisualController implements IController {
    */
   public VisualController(AnimatorModel model, IView view, int framesPerSecond)
           throws IllegalArgumentException, NullPointerException {
-
     Objects.requireNonNull(model, "Model cannot be null");
     if (framesPerSecond <= 0) {
       throw new IllegalArgumentException("Speed must be greater than 0");

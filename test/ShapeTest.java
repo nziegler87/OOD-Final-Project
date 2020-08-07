@@ -37,7 +37,7 @@ public class ShapeTest {
   @Test
   public void getShapeInfo() {
     IShape test = new Oval("nate");
-    assertEquals("",test.getAppearTime());
+    assertEquals("", test.getAppearTime());
   }
 
   @Test
@@ -121,7 +121,7 @@ public class ShapeTest {
   }
 
   // test that setCoordinates throws NullPointer
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testSetCoordinatesNullPointer() {
     nateOval.setCoordinates(null);
     danielleRectangle.setCoordinates(null);
@@ -148,7 +148,7 @@ public class ShapeTest {
 
 
   // test scale throws IllegalArg if factor is 0
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testScaleIllegalArg() {
     nateOval.scale(0);
   }
@@ -245,9 +245,9 @@ public class ShapeTest {
     nateOval.setWidth(10.0);
     assertEquals(10.0, nateOval.getWidth(), .01);
 
-    assertEquals(20.0, danielleRectangle.getWidth(),.01);
+    assertEquals(20.0, danielleRectangle.getWidth(), .01);
     danielleRectangle.setWidth(10.0);
-    assertEquals(10.0, danielleRectangle.getWidth(),.01);
+    assertEquals(10.0, danielleRectangle.getWidth(), .01);
   }
 
   // test setWidth IllegalArg
@@ -258,9 +258,9 @@ public class ShapeTest {
   }
 
   // test setWidth IllegalArg
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testSetWidthRectangleIllegalArg() {
-    assertEquals(20.00, danielleRectangle.getWidth(),.01);
+    assertEquals(20.00, danielleRectangle.getWidth(), .01);
     danielleRectangle.setWidth(0);
   }
 
@@ -271,9 +271,9 @@ public class ShapeTest {
     nateOval.setHeight(10.0);
     assertEquals(10.0, nateOval.getHeight(), .01);
 
-    assertEquals(50.0, danielleRectangle.getHeight(),.01);
+    assertEquals(50.0, danielleRectangle.getHeight(), .01);
     danielleRectangle.setHeight(10.0);
-    assertEquals(10.0, danielleRectangle.getHeight(),.01);
+    assertEquals(10.0, danielleRectangle.getHeight(), .01);
   }
 
   // test setHeight IllegalArg
@@ -284,9 +284,9 @@ public class ShapeTest {
   }
 
   // test setHeight IllegalArg
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testSetHeightRectangleIllegalArg() {
-    assertEquals(50.0, danielleRectangle.getHeight(),.01);
+    assertEquals(50.0, danielleRectangle.getHeight(), .01);
     danielleRectangle.setHeight(0);
   }
 
@@ -318,7 +318,7 @@ public class ShapeTest {
   }
 
   // test setAppearTimeIllegalArg
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testAppearTimeIllegalArg() {
     nateOval.setAppearTime(-1);
     assertEquals("Name: Nate\n"
@@ -340,7 +340,7 @@ public class ShapeTest {
   }
 
   // test setDisappearTimeIllegalArg Negative
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testDisappearTimeIllegalArg() {
     nateOval.setDisappearTime(-2);
     assertEquals("Name: Nate\n"
@@ -351,7 +351,7 @@ public class ShapeTest {
   }
 
   // test setDisappearTimeIllegalArg disappear overlaps start
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testDisappearTimeIllegalArg2() {
     nateOval.setDisappearTime(8);
     assertEquals("Name: Nate\n"
@@ -364,8 +364,8 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsIdenticalObjectsOval() {
-    IShape oval1 = new Oval("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape oval2 = new Oval("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval2 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
 
     assertEquals(oval1, oval2);
     assertEquals(oval1, oval2);
@@ -374,7 +374,7 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsSameReferenceOval() {
-    IShape oval1 = new Oval("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
     IShape oval2 = oval1;
 
     assertEquals(oval1, oval2);
@@ -384,12 +384,12 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsNotIdenticalObjectsOval() {
-    IShape oval1 = new Oval("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape oval2 = new Oval("Vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval1 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval2 = new Oval("Vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 5, 10);
 
-    IShape oval4 = new Oval("vido" ,new Point2D(8, 10), new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape oval5 = new Oval("vido" ,new Point2D(10, 10), new Color(90, 100, 100), 10, 10, 5, 10);
-    IShape oval3 = new Oval("vido" ,new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 6, 10);
+    IShape oval4 = new Oval("vido", new Point2D(8, 10), new Color(100, 100, 100), 10, 10, 5, 10);
+    IShape oval5 = new Oval("vido", new Point2D(10, 10), new Color(90, 100, 100), 10, 10, 5, 10);
+    IShape oval3 = new Oval("vido", new Point2D(10, 10), new Color(100, 100, 100), 10, 10, 6, 10);
 
 
     assertNotEquals(oval1, oval2);
@@ -407,9 +407,9 @@ public class ShapeTest {
 
   @Test
   public void testEqualsIdenticalObjectsRectangle() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle2 = new Rectangle("vido" ,new Point2D(10, 10),
+    IShape rectangle2 = new Rectangle("vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
 
     assertEquals(rectangle1, rectangle2);
@@ -419,7 +419,7 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsSameReferenceRectangle() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
     IShape rectangle2 = rectangle1;
 
@@ -430,16 +430,16 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsNotIdenticalObjectsRectangle() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle2 = new Rectangle("Vido" ,new Point2D(10, 10),
+    IShape rectangle2 = new Rectangle("Vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
 
-    IShape rectangle4 = new Rectangle("vido" ,new Point2D(8, 10),
+    IShape rectangle4 = new Rectangle("vido", new Point2D(8, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape rectangle5 = new Rectangle("vido" ,new Point2D(10, 10),
+    IShape rectangle5 = new Rectangle("vido", new Point2D(10, 10),
             new Color(90, 100, 100), 10, 10, 5, 10);
-    IShape rectangle3 = new Rectangle("vido" ,new Point2D(10, 10),
+    IShape rectangle3 = new Rectangle("vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 6, 10);
 
 
@@ -459,107 +459,107 @@ public class ShapeTest {
   // test equals
   @Test
   public void testEqualsDifferentShapeObjects() {
-    IShape rectangle1 = new Rectangle("vido" ,new Point2D(10, 10),
+    IShape rectangle1 = new Rectangle("vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
-    IShape oval1 = new Oval("vido" ,new Point2D(10, 10),
+    IShape oval1 = new Oval("vido", new Point2D(10, 10),
             new Color(100, 100, 100), 10, 10, 5, 10);
 
     assertNotEquals(rectangle1, oval1);
   }
 
   // test rectangle constructor throws NullPointer for null coordinates
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testRectangleConstructorNullPointer() {
     IShape testRectangle = new Rectangle("Danielle", null,
             new Color(29, 255, 229), 20, 50, 10, 20);
   }
 
   // test rectangle constructor throws NullPointer for color
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testRectangleConstructorNullPointer2() {
     IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
             null, 20, 50, 10, 20);
   }
 
   // test rectangle constructor throws IllegalArg when appear time is negative
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testRectangleConstructorIllegalArg() {
     IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 50, -2, 20);
   }
 
   // test rectangle constructor throws IllegalArg when disappear time is negative
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testRectangleConstructorIllegalArg2() {
     IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 50, 10, -3);
   }
 
   // test rectangle constructor throws Illegal arg when appear time comes after disappear time
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testRectangleConstructorIllegalArg3() {
     IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 50, 10, 10);
   }
 
   // test rectangle constructor throws IllegalArg when width is 0
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testRectangleConstructorIllegalArg4() {
     IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 0, 50, 10, 20);
   }
 
   // test that rectangle constructor throws Illegal Arg when height is 0
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testRectangleConstructorIllegalArg5() {
     IShape testRectangle = new Rectangle("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 0, 10, 20);
   }
-  
+
   // test oval constructor throws NullPointer for null coordinates
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testOvalConstructorNullPointer() {
     IShape testOval = new Oval("Danielle", null,
             new Color(29, 255, 229), 20, 50, 10, 20);
   }
 
   // test oval constructor throws NullPointer for color
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testOvalConstructorNullPointer2() {
     IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
             null, 20, 50, 10, 20);
   }
 
   // test oval constructor throws IllegalArg when appear time is negative
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testOvalConstructorIllegalArg() {
     IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 50, -2, 20);
   }
 
   // test oval constructor throws IllegalArg when disappear time is negative
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testOvalConstructorIllegalArg2() {
     IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 50, 10, -3);
   }
 
   // test oval constructor throws Illegal arg when appear time comes after disappear time
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testOvalConstructorIllegalArg3() {
     IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 50, 10, 10);
   }
 
   // test oval constructor throws IllegalArg when x radius is 0
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testOvalConstructorIllegalArg4() {
     IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 0, 50, 10, 20);
   }
 
   // test that oval constructor throws Illegal Arg when y radius is 0
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testOvalConstructorIllegalArg5() {
     IShape testOval = new Oval("Danielle", new Point2D(11.23, 12.11),
             new Color(29, 255, 229), 20, 0, 10, 20);

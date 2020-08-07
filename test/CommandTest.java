@@ -50,19 +50,19 @@ public class CommandTest {
   }
 
   // test that null pointer is thrown when shape passed to constructor is null
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void nullShapeMove() {
     new Move(null, 50, 70, coords1, coords2);
   }
 
   // test that null pointer is thrown when shape passed to constructor is null
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void nullShapeScale() {
     new Scale(null, 50, 20, 50, 50, 100, 100);
   }
 
   // test that null pointer is thrown when shape passed to constructor is null
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void nullShapeChangeColor() {
     new ChangeColor(null, 50, 20, Color.RED, Color.BLUE);
   }
@@ -102,7 +102,7 @@ public class CommandTest {
   public void corruptScaleZeroWidth2() {
     new Scale(bob, 10, 20, 0, 50, 100, 100);
   }
-  
+
   // test where scale is zero height
   @Test(expected = IllegalArgumentException.class)
   public void corruptScaleZeroHeight() {
@@ -140,13 +140,13 @@ public class CommandTest {
   }
 
   // test where start cord is null
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void nullShapeMove2() {
     new Move(bob, 50, 70, null, coords2);
   }
 
   // test where end cord is null
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void nullShapeMove3() {
     new Move(bob, 50, 70, coords1, null);
   }
@@ -197,16 +197,16 @@ public class CommandTest {
     assertEquals("Shape pearl moves from (50.0,50.0) to (100.0,100.0) "
             + "from t=0 to t=15\n", move2.toString());
   }
-  
+
   // test that move throws IllegalArg if invalid time (Move)
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidTimeMove() {
     ICommand command = new Move(bob, -10, 20, new Point2D(10, 10),
             new Point2D(20, 20));
   }
 
   // test that execute throws IllegalArg if invalid time (Move)
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidTimeMove2() {
     ICommand command = new Move(bob, 10, 20, new Point2D(10, 10),
             new Point2D(20, 20));
@@ -214,15 +214,15 @@ public class CommandTest {
   }
 
   // test that execute throws IllegalArg if invalid time (Move)
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidTimeMove3() {
     ICommand command = new Move(bob, 10, 20, new Point2D(10, 10),
             new Point2D(20, 20));
     command.execute(bob, 21);
   }
-  
+
   // test that execute throws NullPointer if shape is null (Move)
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testNullPointerMove() {
     ICommand command = new Move(bob, 10, 20, new Point2D(10, 10),
             new Point2D(20, 20));
@@ -244,21 +244,21 @@ public class CommandTest {
   }
 
   // test that execute throws IllegalArg if invalid time (Scale)
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidTimeScale2() {
     ICommand command = new Scale(bob, 10, 20, 10, 10, 20, 20);
     command.execute(bob, 8);
   }
 
   // test that execute throws IllegalArg if invalid time (Scale)
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidTimeScale3() {
     ICommand command = new Scale(bob, 10, 20, 10, 10, 20, 20);
     command.execute(bob, 21);
   }
 
   // test that execute throws NullPointer if shape is null (Scale)
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testNullPointerScale() {
     ICommand command = new Scale(bob, 10, 20, 10, 10, 20, 20);
     command.execute(null, 21);
@@ -279,7 +279,7 @@ public class CommandTest {
   }
 
   // test that execute throws IllegalArg if invalid time (ChangeColor)
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidTimeChangeColor2() {
     ICommand command = new ChangeColor(bob, 10, 20, new Color(Color.RED.getRGB()),
             new Color(Color.BLUE.getRGB()));
@@ -287,7 +287,7 @@ public class CommandTest {
   }
 
   // test that execute throws IllegalArg if invalid time (ChangeColor)
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidTimeChangeColor3() {
     ICommand command = new ChangeColor(bob, 10, 20, new Color(Color.RED.getRGB()),
             new Color(Color.BLUE.getRGB()));
@@ -295,7 +295,7 @@ public class CommandTest {
   }
 
   // test that execute throws NullPointer if shape is null (ChangeColor)
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testNullPointerChangeColor() {
     ICommand command = new ChangeColor(bob, 10, 20, new Color(Color.RED.getRGB()),
             new Color(Color.BLUE.getRGB()));
