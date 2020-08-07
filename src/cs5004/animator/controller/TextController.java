@@ -2,22 +2,18 @@ package cs5004.animator.controller;
 
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.view.IView;
-import cs5004.animator.view.TextView;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
-
-import javax.swing.*;
 
 /**
  * The text controller class. This implements IController and contains the method animate().
  */
 public class TextController implements IController {
-    private final IView view;
-    private String out;
+
     private final AnimatorModel model;
+    private final IView view;
+    private final Appendable appendable;
 
     /**
      * Create an instance of a TextController when passed a model and a string out.
@@ -26,13 +22,14 @@ public class TextController implements IController {
      * @throws IllegalArgumentException if speed is less than or equal to 0
      * @throws NullPointerException     if model or view is null
      */
-    public TextController(AnimatorModel model, IView view, String out)
+    public TextController(AnimatorModel model, IView view, Appendable appendable)
             throws IllegalArgumentException, NullPointerException {
         Objects.requireNonNull(model, "Model cannot be null.");
-        Objects.requireNonNull(out, "Outfile cannot be null.");
-        this.view = view;
-        this.out = out;
+        Objects.requireNonNull(view, "Outfile cannot be null.");
+        Objects.requireNonNull(appendable, "Outfile cannot be null.");
         this.model = model;
+        this.view = view;
+        this.appendable = appendable;
     }
 
     /**
@@ -44,31 +41,10 @@ public class TextController implements IController {
     @Override
     public void animate() throws IllegalArgumentException {
         String output = view.textRender(model.getShapeList(), model.getCommandList());
-        // if there is not outfile, send to System.out
-        if (out.isBlank()) {
-                System.out.append(output);
-        } else {
-            createOutfile();
-            try {
-                // else try to write to the outfile
-                FileWriter myWriter = new FileWriter(out);
-                myWriter.write(output);
-                        myWriter.close();
-            } catch (IOException e) {
-                throw new IllegalArgumentException("An error occurred while making and/or writing to the new file.");
-            }
-        }
-    }
-
-    private void createOutfile() throws IllegalArgumentException {
         try {
-            File newFile = new File(out);
-            while (!newFile.createNewFile()) {
-                this.out = JOptionPane.showInputDialog("An error occurred because the outfile already exists. Try again: ");
-                newFile = new File(out);
-            }
+            appendable.append(output);
         } catch (IOException e) {
-            throw new IllegalArgumentException("An error occurred while making the new file.");
+            throw new IllegalArgumentException("Could not append to the output.");
         }
     }
 }

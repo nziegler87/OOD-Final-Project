@@ -6,10 +6,7 @@ import cs5004.animator.view.TextView;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
-import static org.junit.Assert.assertEquals;
+import java.io.*;
 
 public class ControllerAndViewTest {
     private TextController controller;
@@ -28,11 +25,10 @@ public class ControllerAndViewTest {
         }
     }
 
-    // TODO: issue because it's not pulling a string, it's pulling the System.out which is default.
     @Test
-    public void testSmallDemoTextOnly() {
+    public void testSmallDemoTextOnly() throws IOException {
         AnimatorModel model = animationReaderHelper("./smalldemo.txt");
-        controller = new TextController(model, new TextView(), "test2.txt");
+        controller = new TextController(model, new TextView(), new PrintStream(new File("pickles")));
         controller.animate();
     }
 }

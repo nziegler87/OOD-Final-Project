@@ -6,10 +6,7 @@ import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.TextView;
 
 import javax.swing.JOptionPane;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * A parser class that is used to read a text string of arguments and determine the input file,
@@ -45,9 +42,17 @@ public class Parser {
      *
      * @return the controller for the Animator
      */
-    public IController getController() {
+    public IController getController() throws IllegalArgumentException {
         if (view.equals("text")) {
-                return new TextController(model, new TextView(), out);
+            if (out.isBlank()) {
+                return new TextController(model, new TextView(), System.out);
+            } else {
+                try {
+                    return new TextController(model, new TextView(), new PrintStream(new File(out)));
+                } catch (FileNotFoundException fnf) {
+                    throw new IllegalArgumentException("There is no file.");
+                }
+            }
         } else {
             return new VisualController(model, speed);
         }
@@ -73,7 +78,6 @@ public class Parser {
         }
     }
 
-
     private AnimatorModel getModel() throws IllegalArgumentException {
         try {
             return AnimationReader.parseFile(new FileReader("./" + file), new AnimationBuilderImpl());
@@ -82,3 +86,8 @@ public class Parser {
         }
     }
 }
+
+
+
+
+
