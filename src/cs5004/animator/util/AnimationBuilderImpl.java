@@ -14,6 +14,8 @@ import cs5004.animator.shape.Rectangle;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A builder class that is used by the AnimationReader class to build a model object with the
@@ -24,9 +26,9 @@ import java.util.LinkedHashMap;
 public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
 
     private final AnimatorModel model;
-    private LinkedHashMap<String, IShape> shapes;
-    private ArrayList<ICommand> commands;
-    private ArrayList<Integer> screenDetails;
+    private Map<String, IShape> shapes;
+    private List<ICommand> commands;
+    private List<Integer> screenDetails;
     private int canvasRightBound;
     private int canvasTopBound;
 
