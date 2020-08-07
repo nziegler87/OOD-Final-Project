@@ -3,7 +3,9 @@ package cs5004.animator.controller;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilderImpl;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.IView;
 import cs5004.animator.view.TextView;
+import cs5004.animator.view.VisualView;
 
 import javax.swing.JOptionPane;
 import java.io.*;
@@ -29,11 +31,19 @@ public class Parser {
         speed = 1;
 
         getValues(input);
-        while (file.isBlank()) {
-            String[] newInput = JOptionPane.showInputDialog
-                    ("An error occurred because the file does not exist. Try again: ").split(" ");
-            getValues(newInput);
+
+        //TODO: Changed these to only take in what is needed and to force that is a valid file or either text or visual
+        while (!checkValidFile()) {
+            this.file = JOptionPane.showInputDialog
+                    ("An error occurred because the file does not exist. Try again: ");
         }
+
+
+        while (!(this.view.equals("text") || this.view.equals("visual"))){
+            this.view = JOptionPane.showInputDialog
+                    ("An error occurred because the view type was not specified. Try again: ");
+        }
+
         this.model = getModel();
     }
 
@@ -54,7 +64,8 @@ public class Parser {
                 }
             }
         } else {
-            return new VisualController(model, speed);
+            IView view = new VisualView(model.getCanvas().get(2), model.getCanvas().get(2));        //TODO: Because the controller now takes in a view, I had to update this
+            return new VisualController(model, view, speed);
         }
     }
 
@@ -70,13 +81,13 @@ public class Parser {
             String word = input[i];
             switch (word) {
                 case "-in":
-                    file = input[i + 1] + ".txt";           //TODO: I added this because when just putting the file name with no txt in terminal, this wasn't on the file name. That is why the file icon looked blank
+                    file = input[i + 1];
                     break;
                 case "-view":
                     view = input[i + 1];
                     break;
                 case "-speed":
-                    try {       //TODO: I added in this try/catch. Should it be a JOptionPanel?
+                    try {
                         speed = Integer.parseInt(input[i + 1]);
                         break;
                     }
@@ -87,7 +98,6 @@ public class Parser {
                     out = input[i + 1];
                     break;
             }
-            //TODO: a -view and -input are necessary. Can we update your error message above to include -view?
         }
     }
 
@@ -104,6 +114,16 @@ public class Parser {
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException("File not found.");
         }
+    }
+
+    /**
+     * A method to check that a file with the specified name and extension exists.
+     *
+     * @return true if the file exists otherwise false
+     */
+    private boolean checkValidFile() {
+        File file = new File(this.file);
+        return file.exists();
     }
 }
 

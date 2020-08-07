@@ -3,10 +3,13 @@ package cs5004.animator.model;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
+
+//TODO: I updated our ArrayLists and LinkedHashMap to initialize using the interface and then declare using the class
 
 
 /**
@@ -17,9 +20,9 @@ import cs5004.animator.shape.IShape;
  * time at the current animation state and visibility.
  */
 public class AnimatorModelImpl implements AnimatorModel {
-    private final LinkedHashMap<IShape, ArrayList<ICommand>> inventory;
-    private final ArrayList<ICommand> commandHistory;
-    private ArrayList<Integer> screenDetails;
+    private final Map<IShape, ArrayList<ICommand>> inventory;
+    private final List<ICommand> commandHistory;
+    private List<Integer> screenDetails;
 
 
     public AnimatorModelImpl() {
@@ -32,6 +35,7 @@ public class AnimatorModelImpl implements AnimatorModel {
      *
      * @return the command with the greatest end value, which is how long the animation should run.
      */
+    @Override
     public double findDuration() {
         double duration = 0;
         for (ICommand command : commandHistory) {
@@ -47,7 +51,8 @@ public class AnimatorModelImpl implements AnimatorModel {
      *
      * @param screenSettings an arrayList
      */
-    public void setCanvas(ArrayList<Integer> screenSettings) {
+    @Override
+    public void setCanvas(List<Integer> screenSettings) {
         screenDetails = screenSettings;
     }
 
@@ -56,7 +61,8 @@ public class AnimatorModelImpl implements AnimatorModel {
      *
      * @return screenDetails, a list holding the screen x, y, width and height
      */
-    public ArrayList<Integer> getCanvas() {
+    @Override
+    public List<Integer> getCanvas() {
         return screenDetails;
     }
 

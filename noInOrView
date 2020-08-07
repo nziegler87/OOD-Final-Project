@@ -1,0 +1,20 @@
+Shapes:
+Name: R
+Type: rectangle
+Min corner: (0.0,130.0), Width: 50.0, Height: 100.0, Color: (1.0,0.0,0.0)
+Appears at t=1
+Disappears at t=100
+
+Name: C
+Type: oval
+Center: (240.0,0.0), X radius: 120.0, Y radius: 60.0, Color: (0.0,0.0,1.0)
+Appears at t=6
+Disappears at t=100
+
+Shape R moves from (0.0,130.0) to (100.0,230.0) from t=10 to t=50
+Shape C moves from (240.0,0.0) to (240.0,180.0) from t=20 to t=50
+Shape C moves from (240.0,180.0) to (240.0,300.0) from t=50 to t=70
+Shape C changes color from (0.0,0.0,1.0) to (0.0,0.7,0.3) from t=50 to t=70
+Shape R scales from Width: 50.0, Height: 100.0 to Width: 25.0, Height: 100.0 from t=51 to t=70
+Shape R moves from (100.0,230.0) to (0.0,130.0) from t=70 to t=100
+Shape C changes color from (0.0,0.7,0.3) to (0.0,1.0,0.0) from t=70 to t=80

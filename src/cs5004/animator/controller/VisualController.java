@@ -18,8 +18,8 @@ import cs5004.animator.view.VisualView;
  */
 public class VisualController implements IController {
     private final Timer timer;
-    protected IView view; //TODO: This should be private final, right?
-    //TODO: Do we want to pass in a view, similar to what we did for text view? I can change this and update the parser but want to make sure you are okay with it first
+    private final IView view; //TODO: Changed this to private final
+    private final AnimatorModel model; //TODO: I changed this controller to take in a model. Similar to the text controller. Had to update the parser.
 
     /**
      * The constructor for the visual controller class.
@@ -29,16 +29,16 @@ public class VisualController implements IController {
      * @throws IllegalArgumentException if framesPerSecond is less than or equal to 0
      * @throws NullPointerException     if model is null
      */
-    public VisualController(AnimatorModel model, int framesPerSecond)
+    public VisualController(AnimatorModel model, IView view, int framesPerSecond)
             throws IllegalArgumentException, NullPointerException {
-        Objects.requireNonNull(model, "Model cannot be null");
 
+        Objects.requireNonNull(model, "Model cannot be null");
         if (framesPerSecond <= 0) {
             throw new IllegalArgumentException("Speed must be greater than 0");
         }
 
-        ArrayList<Integer> canvasDetails = model.getCanvas();
-        this.view = new VisualView(canvasDetails.get(2), canvasDetails.get(3));
+        this.model = model;
+        this.view = view;
 
         int delay = 1000 / framesPerSecond;
         this.timer = new Timer(delay,

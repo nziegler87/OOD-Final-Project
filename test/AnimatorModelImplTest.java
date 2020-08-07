@@ -17,6 +17,8 @@ import cs5004.animator.shape.Oval;
 import cs5004.animator.shape.Rectangle;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * A JUnit test class for the Animator Model.
@@ -858,10 +860,110 @@ public class AnimatorModelImplTest {
             "from t=51 to t=70\n" +
             "Shape R moves from (300.0,300.0) to (200.0,200.0) from t=70 to t=100",
             model.getAnimationStatus());
-
-
-
-
   }
 
+  // test getShapes
+  @Test
+  public void testGetShape() {
+    AnimatorModel model = new AnimatorModelImpl();
+    List<IShape> shapes = new ArrayList<>();
+
+    // no shapes added so should be blank
+    assertEquals(shapes, model.getShapeList());
+
+    // add shape
+    IShape nolanRectangle = new Rectangle("Nolan", new Point2D(0, 0), Color.BLACK, 10, 10, 5, 50);
+    model.addShape(nolanRectangle);
+    shapes.add(nolanRectangle);
+    assertEquals(shapes, model.getShapeList());
+
+    // add another shape that appears before this shape.
+    // The shape list should be sorted so the lists should no longer match
+    IShape akashOval = new Oval("Akash", new Point2D(0, 0), Color.BLACK, 10, 10, 1, 50);
+    model.addShape(akashOval);
+    shapes.add(akashOval);
+    assertNotEquals(shapes, model.getShapeList());
+
+    // create a new shapes list and put them in order in which they should be listed
+    List<IShape> shapes2 = new ArrayList<>();
+    shapes2.add(akashOval);
+    shapes2.add(nolanRectangle);
+    assertEquals(shapes2, model.getShapeList());
+  }
+
+  // test find duration
+  @Test
+  public void testFindDuration() {
+    model2 = new AnimatorModelImpl();
+
+    // no animations so duration should be 0
+    assertEquals(0, model2.findDuration(), .01);
+
+    model2.addShape(penguin);
+    model2.addAnimation(new Move(penguin, 30, 40, new Point2D(20, 20),
+            new Point2D(30, 30)));
+    model2.addAnimation(new Move(penguin, 10, 20, new Point2D(10, 10),
+            new Point2D(20, 20)));
+    model2.addAnimation(new Scale(penguin, 15, 25, 10, 10,
+            20, 20));
+
+    // duration should be the greatest end time of the animation
+    assertEquals(40, model2.findDuration(), .01);
+  }
+
+  // test set/get canvas
+  @Test
+  public void testCanvasSettings() {
+    model2 = new AnimatorModelImpl();
+
+    // parameters have not been set, so should be null
+    assertNull(model2.getCanvas());
+
+    // create mock settings
+    List<Integer> canvasSettings = new ArrayList<>();
+    canvasSettings.add(200);
+    canvasSettings.add(300);
+    canvasSettings.add(400);
+    canvasSettings.add(500);
+
+    // set canvas settings
+    model2.setCanvas(canvasSettings);
+    assertEquals(canvasSettings, model2.getCanvas());
+  }
+
+  // test get commands
+  @Test
+  public void testGetCommands() {
+    model2 = new AnimatorModelImpl();
+
+    List<ICommand> commands = new ArrayList<>();
+
+    assertEquals(commands, model2.getCommandList());
+
+    model2.addShape(penguin);
+
+    ICommand command1 = new Move(penguin, 30, 40, new Point2D(20, 20),
+            new Point2D(30, 30));
+    ICommand command2 = new Move(penguin, 10, 20, new Point2D(10, 10),
+            new Point2D(20, 20));
+    ICommand command3 = new Scale(penguin, 15, 25, 10, 10,
+            20, 20);
+
+    model2.addAnimation(command1);
+    commands.add(command1);
+    model2.addAnimation(command2);
+    commands.add(command2);
+    model2.addAnimation(command3);
+    commands.add(command3);
+
+    // should be not be equal because command list is sorted by start time
+    assertNotEquals(commands, model2.getCommandList());
+
+    // create new command list manually sorted by order
+    List<ICommand> commands2 = new ArrayList<>();
+    commands2.add(command2);
+    commands2.add(command3);
+    commands2.add(command1);
+    assertEquals(commands2, model2.getCommandList());
+  }
 }

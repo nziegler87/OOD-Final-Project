@@ -1,5 +1,6 @@
 package cs5004.animator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cs5004.animator.model.commands.ICommand;
@@ -31,6 +32,20 @@ public interface AnimatorModelViewOnly {
   String getAnimationStatus();
 
   //TODO: Test these newly made public methods
+  /**
+   * Method that returns an ArrayList of four integers that contains the bounds of the canvas.
+   *
+   * @return an array list of four integers containing the bounds of the canvas.
+   */
+  List<Integer> getCanvas();
+
+  /**
+   * Method that looks through all of the animation commands and finds the greatest end value.
+   *
+   * @return the command with the greatest end value, which is how long the animation should run.
+   */
+  double findDuration();
+
   /**
    * Method to return an array list of the shapes in the inventory sorted by appear time.
    *
