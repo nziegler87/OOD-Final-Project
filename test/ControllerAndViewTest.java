@@ -35,7 +35,18 @@ public class ControllerAndViewTest {
   @Test
   public void testSmallDemoTextOnlyWriteFile() throws IOException {
     AnimatorModel model = animationReaderHelper("./smalldemo.txt");
-    controller = new TextController(model, new TextView(), new PrintStream(new File("output.txt")));
+    controller = new TextController(model, new TextView(),
+            new PrintStream(new File("output.txt")));
+    controller.animate();
+    File checkFile = new File("output.txt");
+    assertTrue(checkFile.exists());
+  }
+
+  @Test
+  public void testSmallDemoTextOnlyWriteFile2() throws IOException {
+    AnimatorModel model = animationReaderHelper("./toh-3.txt");
+    controller = new TextController(model, new TextView(),
+            new PrintStream(new File("text-transcript.txt")));
     controller.animate();
     File checkFile = new File("output.txt");
     assertTrue(checkFile.exists());
