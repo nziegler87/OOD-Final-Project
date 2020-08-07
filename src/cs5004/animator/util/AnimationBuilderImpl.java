@@ -141,7 +141,7 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
                     || (shapes.get(name).getAppearTime() > t1)) {
                 shapes.get(name).setAppearTime(t1);
                 shapes.get(name).setDisappearTime(t2);
-                shapes.get(name).setCoordinates(x1, y1);
+                shapes.get(name).setCoordinates(x1 - screenDetails.get(0), y1 - screenDetails.get(1));
                 shapes.get(name).setWidth(w1);
                 shapes.get(name).setHeight(h1);
                 shapes.get(name).setColor(new Color(r1, g1, b1));
@@ -156,7 +156,9 @@ public class AnimationBuilderImpl implements AnimationBuilder<AnimatorModel> {
         // stuff for commands
         if (x1 != x2 || y1 != y2) {
             if (x2 < canvasRightBound && y2 < canvasTopBound) {
-                commands.add(new Move(shapes.get(name), t1, t2, new Point2D(x1, y1), new Point2D(x2, y2)));
+                commands.add(new Move(shapes.get(name), t1, t2,
+                        new Point2D(x1 - screenDetails.get(0), y1 - screenDetails.get(1)),
+                        new Point2D(x2 - screenDetails.get(0), y2 - screenDetails.get(1))));
             } else throw new IllegalArgumentException("New coordinates must be within the canvas bounds.");
         }
         if (w1 != w2 || h1 != h2) {

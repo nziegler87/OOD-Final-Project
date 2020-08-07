@@ -17,9 +17,10 @@ import cs5004.animator.model.shape.IShape;
  * time at the current animation state and visibility.
  */
 public class AnimatorModelImpl implements AnimatorModel {
-    private final LinkedHashMap<String, IShape> inventory;
+    private final LinkedHashMap<IShape, ArrayList<ICommand>> inventory;
     private final ArrayList<ICommand> commandHistory;
     private ArrayList<Integer> screenDetails;
+
 
     public AnimatorModelImpl() {
         this.inventory = new LinkedHashMap<>();
@@ -74,7 +75,7 @@ public class AnimatorModelImpl implements AnimatorModel {
             if (this.inventory.containsKey(shape.getLabel())) {
                 throw new IllegalArgumentException("This object has already been added.");
             }
-            this.inventory.put(shape.getLabel(), shape);
+            this.inventory.put(shape, new ArrayList<ICommand>());
         }
     }
 
@@ -93,7 +94,7 @@ public class AnimatorModelImpl implements AnimatorModel {
             if (!this.inventory.containsKey(shape.getLabel())) {
                 throw new IllegalArgumentException("Cannot remove object that does not exist.");
             }
-            this.inventory.remove(shape.getLabel());
+            this.inventory.remove(shape);
         }
     }
 
@@ -108,8 +109,11 @@ public class AnimatorModelImpl implements AnimatorModel {
     public IShape getShape(String label)
             throws NullPointerException, IllegalArgumentException {
         Objects.requireNonNull(label, "Label must not be null.");
-        if (this.inventory.containsKey(label)) {
-            return this.inventory.get(label);
+
+        for (IShape shape : this.inventory.keySet()) {
+            if (shape.getLabel().equals(label)) {
+                return shape;
+            }
         }
         throw new IllegalArgumentException("This object does not exist.");
     }
@@ -148,12 +152,15 @@ public class AnimatorModelImpl implements AnimatorModel {
             throws NullPointerException, IllegalArgumentException {
         Objects.requireNonNull(commands, "Command object cannot be null");
         for (ICommand command : commands) {
-            if (!this.inventory.containsKey(command.getShape().getLabel())) {
+            if (!this.inventory.containsKey(command.getShape())) {
                 throw new IllegalArgumentException("Shape object must be stored in model "
                         + "in order to add command");
             }
+
+            List<ICommand> commandsOnShape = inventory.get(command.getShape());
+
             // look through all of the commands for a conflict; if so, throw exception
-            for (ICommand historicalCommand : this.commandHistory) {
+            for (ICommand historicalCommand : commandsOnShape) {
                 if (commandConflict(historicalCommand, command)) {
                     throw new IllegalArgumentException("Cannot assign the same animation to happen on " +
                             "the same object at the same time");
@@ -161,7 +168,9 @@ public class AnimatorModelImpl implements AnimatorModel {
             }
             // if no arguments are thrown, add new command to commandHistory and sort
             this.commandHistory.add(command);
+            commandsOnShape.add(command);
             commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
+            commandsOnShape.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
         }
     }
 
@@ -177,12 +186,14 @@ public class AnimatorModelImpl implements AnimatorModel {
             throws NullPointerException, IllegalArgumentException {
         Objects.requireNonNull(commands, "Command object cannot be null");
         for (ICommand command : commands) {
-            if (!this.inventory.containsKey(command.getShape().getLabel())) {
+            if (!this.inventory.containsKey(command.getShape())) {
                 throw new IllegalArgumentException("Shape object must be stored in model "
                         + "in order to remove command");
             }
             // if no arguments are thrown, add new command to commandHistory and sort
             this.commandHistory.remove(command);
+            ArrayList<ICommand> commandsOnShape = this.inventory.get(command.getShape());
+            commandsOnShape.remove(command);
             commandHistory.sort((o1, o2) -> (int) (o1.getStartTime() - o2.getStartTime()));
         }
     }
@@ -203,15 +214,14 @@ public class AnimatorModelImpl implements AnimatorModel {
 
         List<IShape> snapshotList = new ArrayList<>();
         // go through each shape in the inventory and see what commands are associated with the shape
-        for (IShape shape : this.inventory.values()) {
+        for (IShape shape : this.inventory.keySet()) {
             // if the shape is on the screen, use animation commands to get its current state
             if (shape.getAppearTime() <= tick && shape.getDisappearTime() >= tick) {
                 IShape temporaryShape = shape.copy();
                 // iterate through commands
-                for (ICommand command : this.commandHistory) {
+                for (ICommand command : this.inventory.get(shape)) {
                     // if command is associated with shape && tick is greater or equal to command start time,
-                    if (command.getShape().getLabel().equals(shape.getLabel())
-                            && tick >= command.getShape().getAppearTime()
+                    if (tick >= command.getShape().getAppearTime()
                             && tick >= command.getStartTime()) {
                         try {
                             temporaryShape = command.execute(temporaryShape, tick);
@@ -289,7 +299,7 @@ public class AnimatorModelImpl implements AnimatorModel {
      * @return a sorted list of shapes, sorted by appear time
      */
     private List<IShape> getSortedShapeList() {
-        List<IShape> shapeList = new ArrayList<>(this.inventory.values());
+        List<IShape> shapeList = new ArrayList<>(this.inventory.keySet());
         shapeList.sort((o1, o2) -> (int) (o1.getAppearTime() - o2.getAppearTime()));
         return shapeList;
     }
