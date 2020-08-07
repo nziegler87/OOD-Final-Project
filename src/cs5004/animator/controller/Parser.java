@@ -36,8 +36,8 @@ public class Parser {
     getValues(input);
 
     while (!checkValidFile()) {
-      this.file = JOptionPane.showInputDialog("An error occurred because the file does " +
-              "not exist. Try again: ");
+      this.file = JOptionPane.showInputDialog("An error occurred because the animation source " +
+              "file does not exist. Try again: ");
     }
 
 
