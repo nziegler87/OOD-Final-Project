@@ -22,11 +22,11 @@ public class TextView implements IView {
      *
      * @param shapes a list of IShapes.
      *
-     * @throws IllegalArgumentException if called in the TextView
+     * @throws UnsupportedOperationException if called in the TextView
      */
     @Override
-    public void render(List<IShape> shapes) throws IllegalArgumentException {
-        throw new IllegalArgumentException("Method invalid for text view.");
+    public void render(List<IShape> shapes) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Method invalid for text view.");
     }
 
     /**

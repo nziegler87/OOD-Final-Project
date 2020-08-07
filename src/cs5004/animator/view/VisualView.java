@@ -56,11 +56,11 @@ public class VisualView extends JFrame implements IView {
      * @param shapes    list of all shapes in the model
      * @param commands  list of all commands in the model
      *
-     * @throws IllegalArgumentException if called in the VisualView
+     * @throws UnsupportedOperationException if called in the VisualView
      */
     @Override
     public String textRender(List<IShape> shapes, List<ICommand> commands)
-            throws IllegalArgumentException {
-        throw new IllegalArgumentException("Method invalid for visual view");
+            throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Method invalid for visual view");
     }
 }
