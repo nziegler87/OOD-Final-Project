@@ -18,7 +18,8 @@ import cs5004.animator.view.VisualView;
  */
 public class VisualController implements IController {
     private final Timer timer;
-    protected IView view;
+    protected IView view; //TODO: This should be private final, right?
+    //TODO: Do we want to pass in a view, similar to what we did for text view?
 
     /**
      * The constructor for the visual controller class.
