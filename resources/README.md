@@ -74,6 +74,7 @@ abstract class to factor out any common functionality between concrete classes. 
     two coordinates.
 
 Below is a UML of our model before updates:
+
 ![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)
    
 ## Updates to our project
@@ -108,4 +109,5 @@ Below is a UML of our model before updates:
  
  
 Below is a UML of our model after updates:
-![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/master/A10%20UML.png)
+
+![UML model updates](https://raw.github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/master/A10%20UML.png?token=AAABYMETP7IQB5HI2LNL6JS7G4BQU)
