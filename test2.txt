@@ -1,0 +1,740 @@
+Shapes:
+Name: background
+Type: rectangle
+Min corner: (0.0,0.0), Width: 800.0, Height: 800.0, Color: (0.1,0.4,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: B0
+Type: rectangle
+Min corner: (80.0,424.0), Width: 100.0, Height: 326.0, Color: (0.0,0.0,0.0)
+Appears at t=1
+Disappears at t=200
+
+Name: B1
+Type: rectangle
+Min corner: (260.0,365.0), Width: 100.0, Height: 385.0, Color: (0.0,0.0,0.0)
+Appears at t=1
+Disappears at t=200
+
+Name: B2
+Type: rectangle
+Min corner: (440.0,375.0), Width: 100.0, Height: 375.0, Color: (0.0,0.0,0.0)
+Appears at t=1
+Disappears at t=200
+
+Name: B3
+Type: rectangle
+Min corner: (620.0,445.0), Width: 100.0, Height: 305.0, Color: (0.0,0.0,0.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window000
+Type: rectangle
+Min corner: (100.0,850.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window001
+Type: rectangle
+Min corner: (140.0,850.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window010
+Type: rectangle
+Min corner: (100.0,890.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window011
+Type: rectangle
+Min corner: (140.0,890.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window020
+Type: rectangle
+Min corner: (100.0,930.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window021
+Type: rectangle
+Min corner: (140.0,930.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window030
+Type: rectangle
+Min corner: (100.0,970.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window031
+Type: rectangle
+Min corner: (140.0,970.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window040
+Type: rectangle
+Min corner: (100.0,1010.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window041
+Type: rectangle
+Min corner: (140.0,1010.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window050
+Type: rectangle
+Min corner: (100.0,1050.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window051
+Type: rectangle
+Min corner: (140.0,1050.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window060
+Type: rectangle
+Min corner: (100.0,1090.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window061
+Type: rectangle
+Min corner: (140.0,1090.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window100
+Type: rectangle
+Min corner: (280.0,-750.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window101
+Type: rectangle
+Min corner: (320.0,-750.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window110
+Type: rectangle
+Min corner: (280.0,-710.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window111
+Type: rectangle
+Min corner: (320.0,-710.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window120
+Type: rectangle
+Min corner: (280.0,-670.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window121
+Type: rectangle
+Min corner: (320.0,-670.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window130
+Type: rectangle
+Min corner: (280.0,-630.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window131
+Type: rectangle
+Min corner: (320.0,-630.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window140
+Type: rectangle
+Min corner: (280.0,-590.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window141
+Type: rectangle
+Min corner: (320.0,-590.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window150
+Type: rectangle
+Min corner: (280.0,-550.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window151
+Type: rectangle
+Min corner: (320.0,-550.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window160
+Type: rectangle
+Min corner: (280.0,-510.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window161
+Type: rectangle
+Min corner: (320.0,-510.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window170
+Type: rectangle
+Min corner: (280.0,-470.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window171
+Type: rectangle
+Min corner: (320.0,-470.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window180
+Type: rectangle
+Min corner: (280.0,-430.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window181
+Type: rectangle
+Min corner: (320.0,-430.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window200
+Type: rectangle
+Min corner: (460.0,850.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window201
+Type: rectangle
+Min corner: (500.0,850.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window210
+Type: rectangle
+Min corner: (460.0,890.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window211
+Type: rectangle
+Min corner: (500.0,890.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window220
+Type: rectangle
+Min corner: (460.0,930.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window221
+Type: rectangle
+Min corner: (500.0,930.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window230
+Type: rectangle
+Min corner: (460.0,970.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window231
+Type: rectangle
+Min corner: (500.0,970.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window240
+Type: rectangle
+Min corner: (460.0,1010.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window241
+Type: rectangle
+Min corner: (500.0,1010.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window250
+Type: rectangle
+Min corner: (460.0,1050.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window251
+Type: rectangle
+Min corner: (500.0,1050.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window260
+Type: rectangle
+Min corner: (460.0,1090.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window261
+Type: rectangle
+Min corner: (500.0,1090.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window270
+Type: rectangle
+Min corner: (460.0,1130.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window271
+Type: rectangle
+Min corner: (500.0,1130.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window300
+Type: rectangle
+Min corner: (640.0,-750.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window301
+Type: rectangle
+Min corner: (680.0,-750.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window310
+Type: rectangle
+Min corner: (640.0,-710.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window311
+Type: rectangle
+Min corner: (680.0,-710.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window320
+Type: rectangle
+Min corner: (640.0,-670.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window321
+Type: rectangle
+Min corner: (680.0,-670.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window330
+Type: rectangle
+Min corner: (640.0,-630.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window331
+Type: rectangle
+Min corner: (680.0,-630.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window340
+Type: rectangle
+Min corner: (640.0,-590.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window341
+Type: rectangle
+Min corner: (680.0,-590.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window350
+Type: rectangle
+Min corner: (640.0,-550.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window351
+Type: rectangle
+Min corner: (680.0,-550.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window360
+Type: rectangle
+Min corner: (640.0,-510.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: window361
+Type: rectangle
+Min corner: (680.0,-510.0), Width: 20.0, Height: 20.0, Color: (1.0,1.0,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: moon
+Type: oval
+Center: (200.0,200.0), X radius: 100.0, Y radius: 100.0, Color: (0.9,0.9,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: eclipse
+Type: oval
+Center: (400.0,0.0), X radius: 100.0, Y radius: 100.0, Color: (0.1,0.4,1.0)
+Appears at t=1
+Disappears at t=200
+
+Name: star4
+Type: oval
+Center: (708.0,281.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=83
+Disappears at t=200
+
+Name: star34
+Type: oval
+Center: (283.0,111.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=84
+Disappears at t=200
+
+Name: star8
+Type: oval
+Center: (311.0,147.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=86
+Disappears at t=200
+
+Name: star12
+Type: oval
+Center: (768.0,194.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=86
+Disappears at t=200
+
+Name: star9
+Type: oval
+Center: (170.0,281.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=88
+Disappears at t=200
+
+Name: star17
+Type: oval
+Center: (405.0,63.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=89
+Disappears at t=200
+
+Name: star22
+Type: oval
+Center: (184.0,125.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=89
+Disappears at t=200
+
+Name: star10
+Type: oval
+Center: (719.0,102.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=90
+Disappears at t=200
+
+Name: star6
+Type: oval
+Center: (529.0,70.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=92
+Disappears at t=200
+
+Name: star35
+Type: oval
+Center: (649.0,326.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=92
+Disappears at t=200
+
+Name: star3
+Type: oval
+Center: (374.0,286.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=93
+Disappears at t=200
+
+Name: star19
+Type: oval
+Center: (108.0,197.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=94
+Disappears at t=200
+
+Name: star33
+Type: oval
+Center: (656.0,101.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=94
+Disappears at t=200
+
+Name: star23
+Type: oval
+Center: (134.0,230.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=96
+Disappears at t=200
+
+Name: star29
+Type: oval
+Center: (46.0,246.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=96
+Disappears at t=200
+
+Name: star5
+Type: oval
+Center: (508.0,260.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=97
+Disappears at t=200
+
+Name: star14
+Type: oval
+Center: (510.0,78.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=98
+Disappears at t=200
+
+Name: star37
+Type: oval
+Center: (113.0,276.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=99
+Disappears at t=200
+
+Name: star38
+Type: oval
+Center: (604.0,302.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=99
+Disappears at t=200
+
+Name: star20
+Type: oval
+Center: (737.0,78.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=103
+Disappears at t=200
+
+Name: star16
+Type: oval
+Center: (491.0,252.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=106
+Disappears at t=200
+
+Name: star26
+Type: oval
+Center: (322.0,269.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=106
+Disappears at t=200
+
+Name: star0
+Type: oval
+Center: (223.0,66.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=108
+Disappears at t=200
+
+Name: star32
+Type: oval
+Center: (550.0,232.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=109
+Disappears at t=200
+
+Name: star2
+Type: oval
+Center: (489.0,77.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=110
+Disappears at t=200
+
+Name: star25
+Type: oval
+Center: (259.0,119.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=112
+Disappears at t=200
+
+Name: star13
+Type: oval
+Center: (766.0,179.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=113
+Disappears at t=200
+
+Name: star18
+Type: oval
+Center: (550.0,267.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=113
+Disappears at t=200
+
+Name: star15
+Type: oval
+Center: (621.0,149.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=114
+Disappears at t=200
+
+Name: star36
+Type: oval
+Center: (691.0,267.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=115
+Disappears at t=200
+
+Name: star7
+Type: oval
+Center: (332.0,65.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=117
+Disappears at t=200
+
+Name: star27
+Type: oval
+Center: (412.0,182.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=117
+Disappears at t=200
+
+Name: star28
+Type: oval
+Center: (674.0,137.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=119
+Disappears at t=200
+
+Name: star1
+Type: oval
+Center: (585.0,211.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=120
+Disappears at t=200
+
+Name: star24
+Type: oval
+Center: (244.0,153.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=120
+Disappears at t=200
+
+Name: star31
+Type: oval
+Center: (185.0,236.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=121
+Disappears at t=200
+
+Name: star30
+Type: oval
+Center: (388.0,315.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=123
+Disappears at t=200
+
+Name: star21
+Type: oval
+Center: (795.0,137.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=126
+Disappears at t=200
+
+Name: star39
+Type: oval
+Center: (462.0,162.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=127
+Disappears at t=200
+
+Name: star11
+Type: oval
+Center: (524.0,264.0), X radius: 6.0, Y radius: 6.0, Color: (1.0,1.0,1.0)
+Appears at t=129
+Disappears at t=200
+
+Shape window000 moves from (100.0,850.0) to (100.0,710.0) from t=20 to t=60
+Shape window001 moves from (140.0,850.0) to (140.0,710.0) from t=20 to t=60
+Shape window010 moves from (100.0,890.0) to (100.0,670.0) from t=20 to t=60
+Shape window011 moves from (140.0,890.0) to (140.0,670.0) from t=20 to t=60
+Shape window020 moves from (100.0,930.0) to (100.0,630.0) from t=20 to t=60
+Shape window021 moves from (140.0,930.0) to (140.0,630.0) from t=20 to t=60
+Shape window030 moves from (100.0,970.0) to (100.0,590.0) from t=20 to t=60
+Shape window031 moves from (140.0,970.0) to (140.0,590.0) from t=20 to t=60
+Shape window040 moves from (100.0,1010.0) to (100.0,550.0) from t=20 to t=60
+Shape window041 moves from (140.0,1010.0) to (140.0,550.0) from t=20 to t=60
+Shape window050 moves from (100.0,1050.0) to (100.0,510.0) from t=20 to t=60
+Shape window051 moves from (140.0,1050.0) to (140.0,510.0) from t=20 to t=60
+Shape window060 moves from (100.0,1090.0) to (100.0,470.0) from t=20 to t=60
+Shape window061 moves from (140.0,1090.0) to (140.0,470.0) from t=20 to t=60
+Shape window100 moves from (280.0,-750.0) to (280.0,710.0) from t=20 to t=60
+Shape window101 moves from (320.0,-750.0) to (320.0,710.0) from t=20 to t=60
+Shape window110 moves from (280.0,-710.0) to (280.0,670.0) from t=20 to t=60
+Shape window111 moves from (320.0,-710.0) to (320.0,670.0) from t=20 to t=60
+Shape window120 moves from (280.0,-670.0) to (280.0,630.0) from t=20 to t=60
+Shape window121 moves from (320.0,-670.0) to (320.0,630.0) from t=20 to t=60
+Shape window130 moves from (280.0,-630.0) to (280.0,590.0) from t=20 to t=60
+Shape window131 moves from (320.0,-630.0) to (320.0,590.0) from t=20 to t=60
+Shape window140 moves from (280.0,-590.0) to (280.0,550.0) from t=20 to t=60
+Shape window141 moves from (320.0,-590.0) to (320.0,550.0) from t=20 to t=60
+Shape window150 moves from (280.0,-550.0) to (280.0,510.0) from t=20 to t=60
+Shape window151 moves from (320.0,-550.0) to (320.0,510.0) from t=20 to t=60
+Shape window160 moves from (280.0,-510.0) to (280.0,470.0) from t=20 to t=60
+Shape window161 moves from (320.0,-510.0) to (320.0,470.0) from t=20 to t=60
+Shape window170 moves from (280.0,-470.0) to (280.0,430.0) from t=20 to t=60
+Shape window171 moves from (320.0,-470.0) to (320.0,430.0) from t=20 to t=60
+Shape window180 moves from (280.0,-430.0) to (280.0,390.0) from t=20 to t=60
+Shape window181 moves from (320.0,-430.0) to (320.0,390.0) from t=20 to t=60
+Shape window200 moves from (460.0,850.0) to (460.0,710.0) from t=20 to t=60
+Shape window201 moves from (500.0,850.0) to (500.0,710.0) from t=20 to t=60
+Shape window210 moves from (460.0,890.0) to (460.0,670.0) from t=20 to t=60
+Shape window211 moves from (500.0,890.0) to (500.0,670.0) from t=20 to t=60
+Shape window220 moves from (460.0,930.0) to (460.0,630.0) from t=20 to t=60
+Shape window221 moves from (500.0,930.0) to (500.0,630.0) from t=20 to t=60
+Shape window230 moves from (460.0,970.0) to (460.0,590.0) from t=20 to t=60
+Shape window231 moves from (500.0,970.0) to (500.0,590.0) from t=20 to t=60
+Shape window240 moves from (460.0,1010.0) to (460.0,550.0) from t=20 to t=60
+Shape window241 moves from (500.0,1010.0) to (500.0,550.0) from t=20 to t=60
+Shape window250 moves from (460.0,1050.0) to (460.0,510.0) from t=20 to t=60
+Shape window251 moves from (500.0,1050.0) to (500.0,510.0) from t=20 to t=60
+Shape window260 moves from (460.0,1090.0) to (460.0,470.0) from t=20 to t=60
+Shape window261 moves from (500.0,1090.0) to (500.0,470.0) from t=20 to t=60
+Shape window270 moves from (460.0,1130.0) to (460.0,430.0) from t=20 to t=60
+Shape window271 moves from (500.0,1130.0) to (500.0,430.0) from t=20 to t=60
+Shape window300 moves from (640.0,-750.0) to (640.0,710.0) from t=20 to t=60
+Shape window301 moves from (680.0,-750.0) to (680.0,710.0) from t=20 to t=60
+Shape window310 moves from (640.0,-710.0) to (640.0,670.0) from t=20 to t=60
+Shape window311 moves from (680.0,-710.0) to (680.0,670.0) from t=20 to t=60
+Shape window320 moves from (640.0,-670.0) to (640.0,630.0) from t=20 to t=60
+Shape window321 moves from (680.0,-670.0) to (680.0,630.0) from t=20 to t=60
+Shape window330 moves from (640.0,-630.0) to (640.0,590.0) from t=20 to t=60
+Shape window331 moves from (680.0,-630.0) to (680.0,590.0) from t=20 to t=60
+Shape window340 moves from (640.0,-590.0) to (640.0,550.0) from t=20 to t=60
+Shape window341 moves from (680.0,-590.0) to (680.0,550.0) from t=20 to t=60
+Shape window350 moves from (640.0,-550.0) to (640.0,510.0) from t=20 to t=60
+Shape window351 moves from (680.0,-550.0) to (680.0,510.0) from t=20 to t=60
+Shape window360 moves from (640.0,-510.0) to (640.0,470.0) from t=20 to t=60
+Shape window361 moves from (680.0,-510.0) to (680.0,470.0) from t=20 to t=60
+Shape background changes color from (0.1,0.4,1.0) to (0.1,0.2,1.0) from t=50 to t=90
+Shape eclipse moves from (400.0,0.0) to (230.0,180.0) from t=50 to t=90
+Shape eclipse changes color from (0.1,0.4,1.0) to (0.1,0.2,1.0) from t=50 to t=90
+Shape window330 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=81 to t=86
+Shape window021 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=82 to t=87
+Shape window210 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=83 to t=88
+Shape window061 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=93 to t=98
+Shape window110 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=95 to t=100
+Shape window261 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=96 to t=101
+Shape window151 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=99 to t=104
+Shape window360 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=99 to t=104
+Shape window361 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=99 to t=104
+Shape window351 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=100 to t=105
+Shape window310 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=103 to t=108
+Shape window101 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=108 to t=113
+Shape window241 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=112 to t=117
+Shape window331 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=119 to t=124
+Shape window200 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=127 to t=132
+Shape window250 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=128 to t=133
+Shape window301 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=135 to t=140
+Shape window041 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=147 to t=152
+Shape window060 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=147 to t=152
+Shape window131 changes color from (1.0,1.0,1.0) to (1.0,1.0,0.0) from t=148 to t=153

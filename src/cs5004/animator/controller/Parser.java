@@ -36,19 +36,19 @@ public class Parser {
     getValues(input);
 
     while (!checkValidFile()) {
-      this.file = JOptionPane.showInputDialog
-              ("An error occurred because the file does not exist. Try again: ");
+      this.file = JOptionPane.showInputDialog("An error occurred because the file does " +
+              "not exist. Try again: ");
     }
 
 
     while (!(this.view.equals("text") || this.view.equals("visual"))) {
-      this.view = JOptionPane.showInputDialog
-              ("An error occurred because the view type was not specified. Try again: ");
+      this.view = JOptionPane.showInputDialog("An error occurred because the view type was not " +
+              "specified. Try again: ");
     }
 
     while (this.out.isBlank()) {
-      this.out = JOptionPane.showInputDialog
-              ("An error occurred because the out file is not specified. Try again: ");
+      this.out = JOptionPane.showInputDialog("An error occurred because the out file is not " +
+              "specified. Try again: ");
     }
 
     this.model = getModel();
@@ -71,8 +71,8 @@ public class Parser {
         }
       }
     } else {
-      return new VisualController(model, new VisualView(model.getCanvas().get(2), model.getCanvas().get(2)),
-              speed);
+      return new VisualController(model, new VisualView(model.getCanvas().get(2),
+              model.getCanvas().get(2)), speed);
     }
   }
 
@@ -101,6 +101,9 @@ public class Parser {
           }
         case "-out":
           out = input[i + 1];
+          break;
+        default :
+          // do not intend on getting to the default
           break;
       }
     }

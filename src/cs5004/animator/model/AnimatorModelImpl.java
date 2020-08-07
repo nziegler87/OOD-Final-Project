@@ -228,10 +228,10 @@ public class AnimatorModelImpl implements AnimatorModel {
                   && tick >= command.getStartTime()) {
             try {
               temporaryShape = command.execute(temporaryShape, tick);
-                            /*
-                            If tick is past command time, it will throw an exception, so get the
-                            state of the objects at the end of the command
-                            */
+              /*
+              If tick is past command time, it will throw an exception, so get the
+              state of the objects at the end of the command
+              */
             } catch (IllegalArgumentException iae) {
               temporaryShape = command.execute(temporaryShape, command.getEndTime());
             }
