@@ -3,11 +3,6 @@ package cs5004.animator.view;
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.shape.IShape;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
