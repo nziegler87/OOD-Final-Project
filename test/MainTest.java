@@ -15,7 +15,7 @@ public class MainTest {
     public static void main(String[] Args) {
         AnimatorModel model;
         try {
-            model = AnimationReader.parseFile(new FileReader("./smalldemo.txt"), new AnimationBuilderImpl());
+            model = AnimationReader.parseFile(new FileReader("./big-bang-big-crunch.txt"), new AnimationBuilderImpl());
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException("File not found.");
         }
