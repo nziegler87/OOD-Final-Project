@@ -35,8 +35,7 @@ public class ControllerAndViewTest {
   @Test
   public void testSmallDemoTextOnlyWriteFile() throws IOException {
     AnimatorModel model = animationReaderHelper("./smalldemo.txt");
-    controller = new TextController(model, new TextView(),
-            new PrintStream(new File("text_files/output.txt")));
+    controller = new TextController(model, new TextView(), new PrintStream(new File("output.txt")));
     controller.animate();
     File checkFile = new File("text_files/output.txt");
     assertTrue(checkFile.exists());
