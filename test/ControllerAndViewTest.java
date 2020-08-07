@@ -95,7 +95,7 @@ public class ControllerAndViewTest {
   @Test
   public void testParser() {
     String[] args = {"-in", "smalldemo.txt", "-view", "text", "-out",
-            "text_files/parserTest.txt", "-speed", "2"};
+                     "text_files/parserTest.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
@@ -108,7 +108,7 @@ public class ControllerAndViewTest {
   @Test
   public void testParserInMissing() {
     String[] args = {"-in", "", "-view", "text", "-out",
-            "text_files/noIn.txt", "-speed", "2"};
+                     "text_files/noIn.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
@@ -119,7 +119,7 @@ public class ControllerAndViewTest {
   @Test
   public void testParserViewMissing() {
     String[] args = {"-in", "smalldemo.txt", "-view", "", "-out",
-            "text_files/noView.txt", "-speed", "2"};
+                     "text_files/noView.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
