@@ -84,15 +84,17 @@ Below is a UML of our model before updates:
  visual output. 
   - Using this design ensured that the commands for each shape stored through a reference 
   to the shape. Adding the linked hash map was key, as it ensured the shapes rendered in 
-  the correct order on screen.
+  the correct order on screen based on the order they were added to the model.
  - We updated the oval and rectangle classes to have a simplified constructor that only takes in 
  the label and sets the default appear and disappear times to -1, and null objects for the color 
  and coordinates. We did this to keep track of which object details have been initialized through 
  the addMotion method.
  - Although we tied the shapes and commands together, we kept the list of commands from before to 
  easily call the list from a getCommandList() method.
- - Because we returned a copy of the shapes, and not the actual shape, we did not create a 
- view-only shape interface.
+ - Because we returned a copy of the shapes, and not the actual shape to the view, we did not 
+ create a view-only shape interface.
+ - Added a drawShape(Graphics g) method to both concrete shape classes to eliminate the need of a
+ switch statement when the view calls repaint();
  
  - Additions: 
    - In our model we added an ArrayList<Integer> to store canvas details needed to display the 
@@ -102,10 +104,26 @@ Below is a UML of our model before updates:
    from the motion, to save and signal the end of the animation.
    - Created an IController interface with one method, animate(), which is implemented by both the
    visual and text controller classes. These take in a model, view and outfile name. 
-     - When we were building out the controllers, we made sure to utilize the appendable class to 
-     guarantee our design would hold up to additions to view outputs. 
+     - When we were building out the controllers, we made sure to utilize the appendable class for 
+     the text controller to guarantee our design can be matched with other sources to read the
+     output.
    - Added a drawShape() method to the IShape interface and concrete shape classes, so the shapes 
    know how to draw themselves on the screen.
+   - We created an IView interface that has two methods render and textRender.
+   - We create a TextView class that implements the textRender method. To render the animation,
+   this method needs the list of shapes and the list of commands from the model. Rather than
+   passing this lists in the constructor, we pass them to the method. This allows us to receive
+   an updated list of commands and shapes, should any changes be made to the model. The render
+   method in the TextView throws an UnsupportedOperationException if called.
+   - We created a VisualView interface which implements the render method. If the textRender
+   method is called, an UnsupportedOperationException is thrown. The Visual view creates a
+   CanvasDrawingPanel object, which is a new class that we made, that serves as the cavnas on which
+   to render the animation. This class has two methods: 
+   paintComponent(Graphics g) and updateDrawing(List<IShape> shapes). The Visual calls the
+   updateDrawing() method of the panel, which takes in the list of shapes at a given tick (provided
+   from the model) and calls repaint(), rendering the shapes on the screen. A time object, via
+   an anonymous class in the VisualController calls the model's getSnapShot method and then passes
+   the resutling list of shapes to the view's render method.
  
  
 Below is a UML of our model after updates:
