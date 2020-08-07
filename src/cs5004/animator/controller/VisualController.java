@@ -21,6 +21,7 @@ public class VisualController implements IController {
    * The constructor for the visual controller class.
    *
    * @param model           the model for the animation
+   * @param view            the view for the animation
    * @param framesPerSecond the framesPerSecond of the animation
    * @throws IllegalArgumentException if framesPerSecond is less than or equal to 0
    * @throws NullPointerException     if model is null

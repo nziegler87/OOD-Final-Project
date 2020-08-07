@@ -9,7 +9,7 @@ we divided up the model's functions into different buckets (these are physically
 packages). Within each "bucket" we included an interface and multiple classes - relying on an
 abstract class to factor out any common functionality between concrete classes. More specifically:
 
-- model bucket:
+- Model bucket:
     - In our model we prioritized clean, non-repetitive code, with an emphasis on adaptability. 
     - Our model bucket has two interfaces, AnimatorModel and AnimatorModelIViewOnly, along with one
     concrete class: AnimationModelImpl. We decided to use two interfaces to divide up 
@@ -24,8 +24,8 @@ abstract class to factor out any common functionality between concrete classes. 
     label with a shape object.
     - We used an ArrayList of commands to store all commands that have been added to the model.
     Using an array list allows us to easily iterate through the commands for output and for
-    determining which commands need to be executed on the respective shapes
-    - Every time the user adds or removes an animation, the command list is sorted with a helper 
+    determining which commands need to be executed on the respective shapes.
+    - Every time the user adds or removes an animation, the command list gets sorted with a helper 
     comparator function. This ensures the command list is always in chronological order and ready 
     for output. 
     - Since we had put the commands into classes we were able to shorten the number of methods 
@@ -51,7 +51,7 @@ abstract class to factor out any common functionality between concrete classes. 
     - Other note: we decided to utilize Java's built-in Color class to store each shape's color. As
     part of this, we did not override the getRed, getGreen, getBlue toString() methods as they take
     in and are stored as ints. We made an executive decision not to format those as doubles for the
-    output, so you will find them different than the example provided in the assignment.
+    output, so you will find them different from the example provided in the assignment.
     
  - Command bucket:
     - We created an ICommand interface, an AbstractCommand class and three concrete classes: move, 
@@ -71,5 +71,37 @@ abstract class to factor out any common functionality between concrete classes. 
     string. Additionally, we overrode the .equals() method, so we could do an equal comparison of 
     two coordinates.
     
+Updates to our project:
+  - In our model we added an ArrayList<Integer> to store canvas details needed to display the 
+  window properly. Along with this, we included two new methods, setBounds() and getBounds().
+  - We updated the oval and rectangle classes to have a simplified constructor that only takes in 
+  the label and sets the default appear and disappear times to -1, and null objects for the color 
+  and coordinates. We did this to keep track of which object details have been initialized through 
+  the addMotion method.
+  - Created an IController interface with one method, animate(), which is implemented by both the
+  visual and text controller classes.
+  - Added a drawShape() method to the IShape interface and concrete shape classes, so the shapes 
+  know how to draw themselves on the screen.
+  - Updated the model storage from the HashMap<IShape> inventory and list of commands to one 
+  LinkedHashMap<IShape, ArrayList<ICommand>> to decrease processing time and produce a smoother
+   visual output. 
+   - Using this design ensured that the commands for each shape stored through a reference 
+   to the shape.
+   - Additionally, adding the linked hash map was key, as it ensured the shapes rendered in 
+   the correct order on screen.
+ - Although we tied the shapes and commands together, we kept another list of commands separate,
+ so we could easily call a getCommandList() method.
+ - We added in a setCanvas(ArrayList<Integer>) method and getCanvas method to set the parameters of
+ the screen after parsing the data from the file.
+ - We added a findDuration() method which pulled the largest end time from the motion, to save and
+ signal the end of the animation.
+ - Because we returned a copy of the shapes, and not the actual shape, we did not create a 
+ view-only shape interface.
+ - Additionally, when we were building out the controller, we made sure to utilize the appendable 
+ class to guarantee our design would hold up to additions to view outputs. 
+ 
+  
+
+
 Below is a UML of our model:
 ![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)
