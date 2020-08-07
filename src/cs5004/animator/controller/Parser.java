@@ -44,6 +44,12 @@ public class Parser {
                     ("An error occurred because the view type was not specified. Try again: ");
         }
 
+        //TODO: Added in this
+        while (this.out.isBlank()){
+            this.view = JOptionPane.showInputDialog
+                    ("An error occurred because the out file is not specified. Try again: ");
+        }
+
         this.model = getModel();
     }
 
