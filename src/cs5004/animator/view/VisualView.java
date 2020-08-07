@@ -12,55 +12,54 @@ import cs5004.animator.shape.IShape;
  * The visual view class. This implements IView and contains the method render().
  */
 public class VisualView extends JFrame implements IView {
-    private final CanvasDrawingPanel drawingCanvas;
+  private final CanvasDrawingPanel drawingCanvas;
 
-    /**
-     * The visual view constructor.
-     *
-     * @param width the width of the canvas
-     * @param height the height of the canvas
-     */
-    public VisualView(int width, int height) {
-        // call JFrame constructor
-        super();
+  /**
+   * The visual view constructor.
+   *
+   * @param width  the width of the canvas
+   * @param height the height of the canvas
+   */
+  public VisualView(int width, int height) {
+    // call JFrame constructor
+    super();
 
-        // set default state of window
-        this.setTitle("Easy Animator Visual Display");
-        this.setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // set default state of window
+    this.setTitle("Easy Animator Visual Display");
+    this.setSize(500, 500);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // create a CanvasDrawingPanel object
-        drawingCanvas = new CanvasDrawingPanel(width, height);
+    // create a CanvasDrawingPanel object
+    drawingCanvas = new CanvasDrawingPanel(width, height);
 
-        // create scroll bars on panel and add to frame
-        JScrollPane scrollPane = new JScrollPane(drawingCanvas);
-        this.add(scrollPane);
+    // create scroll bars on panel and add to frame
+    JScrollPane scrollPane = new JScrollPane(drawingCanvas);
+    this.add(scrollPane);
 
-        // pack window and make visible
-        this.pack();
-        this.setVisible(true);
-    }
+    // pack window and make visible
+    this.pack();
+    this.setVisible(true);
+  }
 
-    /**
-     * A method to render the shapes at their current state of animation.
-     *
-     * @param shapes a list of IShapes.
-     */
-    public void render(List<IShape> shapes) {
-        this.drawingCanvas.updateDrawing(shapes);
-    }
+  /**
+   * A method to render the shapes at their current state of animation.
+   *
+   * @param shapes a list of IShapes.
+   */
+  public void render(List<IShape> shapes) {
+    this.drawingCanvas.updateDrawing(shapes);
+  }
 
-    /**
-     * A method to render the shapes in the animation and their respective commands.
-     *
-     * @param shapes    list of all shapes in the model
-     * @param commands  list of all commands in the model
-     *
-     * @throws UnsupportedOperationException if called in the VisualView
-     */
-    @Override
-    public String textRender(List<IShape> shapes, List<ICommand> commands)
-            throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Method invalid for visual view");
-    }
+  /**
+   * A method to render the shapes in the animation and their respective commands.
+   *
+   * @param shapes   list of all shapes in the model
+   * @param commands list of all commands in the model
+   * @throws UnsupportedOperationException if called in the VisualView
+   */
+  @Override
+  public String textRender(List<IShape> shapes, List<ICommand> commands)
+          throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("Method invalid for visual view");
+  }
 }

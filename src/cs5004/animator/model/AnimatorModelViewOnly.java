@@ -1,6 +1,5 @@
 package cs5004.animator.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cs5004.animator.model.commands.ICommand;
@@ -32,6 +31,7 @@ public interface AnimatorModelViewOnly {
   String getAnimationStatus();
 
   //TODO: Test these newly made public methods
+
   /**
    * Method that returns an ArrayList of four integers that contains the bounds of the canvas.
    *
