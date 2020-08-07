@@ -3,7 +3,7 @@ package cs5004.animator.view;
 import java.util.List;
 
 import cs5004.animator.model.commands.ICommand;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 /**
  * An interface that contains all of the common methods that all implementing classes should

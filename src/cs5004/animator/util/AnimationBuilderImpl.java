@@ -7,9 +7,9 @@ import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.model.commands.Move;
 import cs5004.animator.model.commands.Scale;
 import cs5004.animator.model.point2d.Point2D;
-import cs5004.animator.model.shape.IShape;
-import cs5004.animator.model.shape.Oval;
-import cs5004.animator.model.shape.Rectangle;
+import cs5004.animator.shape.IShape;
+import cs5004.animator.shape.Oval;
+import cs5004.animator.shape.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;

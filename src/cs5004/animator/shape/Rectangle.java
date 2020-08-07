@@ -1,4 +1,4 @@
-package cs5004.animator.model.shape;
+package cs5004.animator.shape;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -56,6 +56,7 @@ public class Rectangle extends AbstractShape {
      *
      * @return the width of the object, a double.
      */
+    @Override
     public double getWidth() {
         return this.width;
     }
@@ -66,6 +67,7 @@ public class Rectangle extends AbstractShape {
      * @param width the width of the object, a double.
      * @throws IllegalArgumentException if width is not greater than 0
      */
+    @Override
     public void setWidth(double width) throws IllegalArgumentException {
         if (width <= 0) {
             throw new IllegalArgumentException("Width cannot be less than 0.");
@@ -78,6 +80,7 @@ public class Rectangle extends AbstractShape {
      *
      * @return the height of the object, a double.
      */
+    @Override
     public double getHeight() {
         return this.height;
     }
@@ -88,6 +91,7 @@ public class Rectangle extends AbstractShape {
      * @param height the height of the object, a double.
      * @throws IllegalArgumentException if height is not greater than 0
      */
+    @Override
     public void setHeight(double height) throws IllegalArgumentException {
         if (height <= 0) {
             throw new IllegalArgumentException("Height cannot be less than 0.");
@@ -178,6 +182,11 @@ public class Rectangle extends AbstractShape {
         return Objects.hash(label, coordinates, color, width, height, appearTime, disappearTime);
     }
 
+    /**
+     * Method so that an rectangle knows how to draw itself for the paintComponent() method.
+     *
+     * @param g a Graphics object.
+     */
     @Override
     public void drawShape(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;

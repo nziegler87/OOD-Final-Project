@@ -10,17 +10,18 @@ import java.util.Objects;
  * The text controller class. This implements IController and contains the method animate().
  */
 public class TextController implements IController {
-
     private final AnimatorModel model;
     private final IView view;
     private final Appendable appendable;
 
     /**
-     * Create an instance of a TextController when passed a model and a string out.
+     * Create an instance of a TextController when passed a model, a view, and an appendable.
      *
      * @param model the model for the animation
-     * @throws IllegalArgumentException if speed is less than or equal to 0
-     * @throws NullPointerException     if model or view is null
+     * @param view the view, where output information will be displayed
+     * @param appendable an object to which to write output
+     *
+     * @throws NullPointerException     if model, view, or appendable are null
      */
     public TextController(AnimatorModel model, IView view, Appendable appendable)
             throws IllegalArgumentException, NullPointerException {
@@ -35,7 +36,6 @@ public class TextController implements IController {
     /**
      * The animation method which produces the result to pass into the view.
      *
-     * @return appendable when appropriate, otherwise write to outfile and return null
      * @throws IllegalArgumentException when the text output was unable to write to a new file
      */
     @Override

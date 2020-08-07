@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 /**
  * A panel class that is a blank canvas on which to draw shapes. This class extends JPanel.

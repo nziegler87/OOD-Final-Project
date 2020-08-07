@@ -1,4 +1,4 @@
-package cs5004.animator.model.shape;
+package cs5004.animator.shape;
 
 import java.awt.Color;
 import java.util.Objects;

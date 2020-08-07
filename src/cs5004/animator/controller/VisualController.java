@@ -9,7 +9,7 @@ import java.util.Objects;
 import javax.swing.*;
 
 import cs5004.animator.model.AnimatorModel;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 import cs5004.animator.view.IView;
 import cs5004.animator.view.VisualView;
 
@@ -19,7 +19,7 @@ import cs5004.animator.view.VisualView;
 public class VisualController implements IController {
     private final Timer timer;
     protected IView view; //TODO: This should be private final, right?
-    //TODO: Do we want to pass in a view, similar to what we did for text view?
+    //TODO: Do we want to pass in a view, similar to what we did for text view? I can change this and update the parser but want to make sure you are okay with it first
 
     /**
      * The constructor for the visual controller class.
@@ -27,7 +27,7 @@ public class VisualController implements IController {
      * @param model the model for the animation
      * @param framesPerSecond the framesPerSecond of the animation
      * @throws IllegalArgumentException if framesPerSecond is less than or equal to 0
-     * @throws NullPointerException     if model, view, or appendable is null
+     * @throws NullPointerException     if model is null
      */
     public VisualController(AnimatorModel model, int framesPerSecond)
             throws IllegalArgumentException, NullPointerException {
@@ -64,9 +64,8 @@ public class VisualController implements IController {
     }
 
     /**
-     * The animation method which produces the result to pass into the view.
-     *
-     * @return null
+     * The animation method which produces the result to pass into the view. In this case, it
+     * starts the timer.
      */
     @Override
     public void animate() {

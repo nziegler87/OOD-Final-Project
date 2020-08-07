@@ -1,7 +1,7 @@
 package cs5004.animator.view;
 
 import cs5004.animator.model.commands.ICommand;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ public class TextView implements IView {
      * A method to render the shapes at their current state of animation.
      *
      * @param shapes a list of IShapes.
+     *
+     * @throws IllegalArgumentException if called in the TextView
      */
     @Override
     public void render(List<IShape> shapes) throws IllegalArgumentException {

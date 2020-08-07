@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import cs5004.animator.model.commands.ICommand;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 
 /**
@@ -28,9 +28,9 @@ public class AnimatorModelImpl implements AnimatorModel {
     }
 
     /**
-     * A helper function to find the duration of the animation.
+     * Method that looks through all of the animation commands and finds the greatest end value.
      *
-     * @return duration
+     * @return the command with the greatest end value, which is how long the animation should run.
      */
     public double findDuration() {
         double duration = 0;
@@ -72,7 +72,7 @@ public class AnimatorModelImpl implements AnimatorModel {
             throws NullPointerException, IllegalArgumentException {
         Objects.requireNonNull(shapes, "Shape must not be null.");
         for (IShape shape : shapes) {
-            if (this.inventory.containsKey(shape.getLabel())) {
+            if (this.inventory.containsKey(shape)) {
                 throw new IllegalArgumentException("This object has already been added.");
             }
             this.inventory.put(shape, new ArrayList<ICommand>());
@@ -91,7 +91,7 @@ public class AnimatorModelImpl implements AnimatorModel {
             throws NullPointerException, IllegalArgumentException {
         Objects.requireNonNull(shapes, "Shape must not be null.");
         for (IShape shape : shapes) {
-            if (!this.inventory.containsKey(shape.getLabel())) {
+            if (!this.inventory.containsKey(shape)) {
                 throw new IllegalArgumentException("Cannot remove object that does not exist.");
             }
             this.inventory.remove(shape);
@@ -225,10 +225,10 @@ public class AnimatorModelImpl implements AnimatorModel {
                             && tick >= command.getStartTime()) {
                         try {
                             temporaryShape = command.execute(temporaryShape, tick);
-              /*
-              If tick is past command time, it will throw an exception, so get the state of the
-              objects at the end of the command
-              */
+                            /*
+                            If tick is past command time, it will throw an exception, so get the
+                            state of the objects at the end of the command
+                            */
                         } catch (IllegalArgumentException iae) {
                             temporaryShape = command.execute(temporaryShape, command.getEndTime());
                         }

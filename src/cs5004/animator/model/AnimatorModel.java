@@ -1,7 +1,7 @@
 package cs5004.animator.model;
 
 import cs5004.animator.model.commands.ICommand;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 import java.util.ArrayList;
 
@@ -12,10 +12,25 @@ import java.util.ArrayList;
  */
 public interface AnimatorModel extends AnimatorModelViewOnly {
 
+  /**
+   * Method that looks through all of the animation commands and finds the greatest end value.
+   *
+   * @return the command with the greatest end value, which is how long the animation should run.
+   */
   double findDuration();
 
+  /**
+   * Method that returns an ArrayList of four integers that contains the bounds of the canvas.
+   *
+   * @return an array list of four integers containing the buounds of the canvas.
+   */
   ArrayList<Integer> getCanvas();
 
+  /**
+   * Method that sets an array list of four integers, the bounds of the canvas.
+   *
+   * @param screenSettings an array list of four integers that contains the bounds of the canvas
+   */
   void setCanvas(ArrayList<Integer> screenSettings);
 
   /**

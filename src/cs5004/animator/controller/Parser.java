@@ -58,26 +58,46 @@ public class Parser {
         }
     }
 
+    /**
+     * Iterates through the string and updates the file, view, speed, and out values.
+     *
+     * @param input an array of strings
+     *
+     * @throws IllegalArgumentException if the speed value is not an integer
+     */
     private void getValues(String[] input) throws IllegalArgumentException {
         for (int i = 0; i < input.length; i++) {
             String word = input[i];
             switch (word) {
                 case "-in":
-                    file = input[i + 1];
+                    file = input[i + 1] + ".txt";           //TODO: I added this because when just putting the file name with no txt in terminal, this wasn't on the file name. That is why the file icon looked blank
                     break;
                 case "-view":
                     view = input[i + 1];
                     break;
                 case "-speed":
-                    speed = Integer.parseInt(input[i + 1]);
-                    break;
+                    try {       //TODO: I added in this try/catch. Should it be a JOptionPanel?
+                        speed = Integer.parseInt(input[i + 1]);
+                        break;
+                    }
+                    catch (NumberFormatException nfe) {
+                        throw new IllegalArgumentException("Speed value is not an integer.");
+                    }
                 case "-out":
                     out = input[i + 1];
                     break;
             }
+            //TODO: a -view and -input are necessary. Can we update your error message above to include -view?
         }
     }
 
+    /**
+     * Returns the AnimatorModel.
+     *
+     * @return an instance of an AnimatorModel.
+     *
+     * @throws IllegalArgumentException if the file is not found.
+     */
     private AnimatorModel getModel() throws IllegalArgumentException {
         try {
             return AnimationReader.parseFile(new FileReader("./" + file), new AnimationBuilderImpl());

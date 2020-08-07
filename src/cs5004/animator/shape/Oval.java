@@ -1,8 +1,7 @@
-package cs5004.animator.model.shape;
+package cs5004.animator.shape;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
 import cs5004.animator.model.point2d.IPoint2D;
@@ -178,6 +177,11 @@ public class Oval extends AbstractShape {
     return Objects.hash(label, coordinates, color, xRadius, yRadius, appearTime, disappearTime);
   }
 
+  /**
+   * Method so that an oval knows how to draw itself for the paintComponent() method.
+   *
+   * @param g a Graphics object.
+   */
   @Override
   public void drawShape(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;

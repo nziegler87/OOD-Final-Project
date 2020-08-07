@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import cs5004.animator.model.point2d.IPoint2D;
 import cs5004.animator.model.point2d.Point2D;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 /**
  * Create an object that will be used to "move" an IShape object across the screen.

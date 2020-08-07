@@ -3,7 +3,7 @@ package cs5004.animator.model;
 import java.util.List;
 
 import cs5004.animator.model.commands.ICommand;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 /**
  * Interface is for an application that helps to create simple but effective 2D animations from

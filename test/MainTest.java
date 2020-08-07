@@ -5,10 +5,8 @@ import java.io.FileReader;
 import cs5004.animator.controller.IController;
 import cs5004.animator.controller.VisualController;
 import cs5004.animator.model.AnimatorModel;
-import cs5004.animator.util.AnimationBuilder;
 import cs5004.animator.util.AnimationBuilderImpl;
 import cs5004.animator.util.AnimationReader;
-import cs5004.animator.view.VisualView;
 
 public class MainTest {
 

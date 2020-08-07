@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import cs5004.animator.model.commands.ICommand;
-import cs5004.animator.model.shape.IShape;
+import cs5004.animator.shape.IShape;
 
 /**
  * The visual view class. This implements IView and contains the method render().
@@ -53,8 +53,10 @@ public class VisualView extends JFrame implements IView {
     /**
      * A method to render the shapes in the animation and their respective commands.
      *
-     * @param shapes   a list of IShapes.
-     * @param commands
+     * @param shapes    list of all shapes in the model
+     * @param commands  list of all commands in the model
+     *
+     * @throws IllegalArgumentException if called in the VisualView
      */
     @Override
     public String textRender(List<IShape> shapes, List<ICommand> commands)
