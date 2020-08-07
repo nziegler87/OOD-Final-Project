@@ -36,9 +36,9 @@ public class ControllerAndViewTest {
   public void testSmallDemoTextOnlyWriteFile() throws IOException {
     AnimatorModel model = animationReaderHelper("./smalldemo.txt");
     controller = new TextController(model, new TextView(),
-            new PrintStream(new File("output.txt")));
+            new PrintStream(new File("text_files/output.txt")));
     controller.animate();
-    File checkFile = new File("output.txt");
+    File checkFile = new File("text_files/output.txt");
     assertTrue(checkFile.exists());
   }
 
@@ -48,7 +48,7 @@ public class ControllerAndViewTest {
     controller = new TextController(model, new TextView(),
             new PrintStream(new File("text-transcript.txt")));
     controller.animate();
-    File checkFile = new File("output.txt");
+    File checkFile = new File("text_files/output.txt");
     assertTrue(checkFile.exists());
   }
 
@@ -96,11 +96,11 @@ public class ControllerAndViewTest {
   @Test
   public void testParser() {
     String[] args = {"-in", "smalldemo.txt", "-view", "text", "-out",
-                     "parserTest.txt", "-speed", "2"};
+            "text_files/parserTest.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
-    File checkFile = new File("parserTest.txt");
+    File checkFile = new File("text_files/parserTest.txt");
 
     assertTrue(checkFile.exists());
   }
@@ -109,7 +109,7 @@ public class ControllerAndViewTest {
   @Test
   public void testParserInMissing() {
     String[] args = {"-in", "", "-view", "text", "-out",
-                     "noIn.txt", "-speed", "2"};
+            "text_files/noIn.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();
@@ -120,7 +120,7 @@ public class ControllerAndViewTest {
   @Test
   public void testParserViewMissing() {
     String[] args = {"-in", "smalldemo.txt", "-view", "", "-out",
-                     "noView.txt", "-speed", "2"};
+            "text_files/noView.txt", "-speed", "2"};
     Parser parser = new Parser(args);
     IController controller = parser.getController();
     controller.animate();

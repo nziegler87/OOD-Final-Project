@@ -9,6 +9,8 @@ we divided up the model's functions into different buckets (these are physically
 packages). Within each "bucket" we included an interface and multiple classes - relying on an
 abstract class to factor out any common functionality between concrete classes. More specifically:
 
+## Original design
+
 - Model bucket:
     - In our model we prioritized clean, non-repetitive code, with an emphasis on adaptability. 
     - Our model bucket has two interfaces, AnimatorModel and AnimatorModelIViewOnly, along with one
@@ -70,38 +72,40 @@ abstract class to factor out any common functionality between concrete classes. 
     - The Point2D class contains methods that get and set coordinates, as well as outputting a
     string. Additionally, we overrode the .equals() method, so we could do an equal comparison of 
     two coordinates.
-    
-Updates to our project:
-  - In our model we added an ArrayList<Integer> to store canvas details needed to display the 
-  window properly. Along with this, we included two new methods, setBounds() and getBounds().
-  - We updated the oval and rectangle classes to have a simplified constructor that only takes in 
-  the label and sets the default appear and disappear times to -1, and null objects for the color 
-  and coordinates. We did this to keep track of which object details have been initialized through 
-  the addMotion method.
-  - Created an IController interface with one method, animate(), which is implemented by both the
-  visual and text controller classes.
-  - Added a drawShape() method to the IShape interface and concrete shape classes, so the shapes 
-  know how to draw themselves on the screen.
-  - Updated the model storage from the HashMap<IShape> inventory and list of commands to one 
-  LinkedHashMap<IShape, ArrayList<ICommand>> to decrease processing time and produce a smoother
-   visual output. 
-   - Using this design ensured that the commands for each shape stored through a reference 
-   to the shape.
-   - Additionally, adding the linked hash map was key, as it ensured the shapes rendered in 
-   the correct order on screen.
- - Although we tied the shapes and commands together, we kept another list of commands separate,
- so we could easily call a getCommandList() method.
- - We added in a setCanvas(ArrayList<Integer>) method and getCanvas method to set the parameters of
- the screen after parsing the data from the file.
- - We added a findDuration() method which pulled the largest end time from the motion, to save and
- signal the end of the animation.
+
+Below is a UML of our model before updates:
+![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)
+   
+## Updates to our project
+ 
+ - Updated the model storage from the HashMap<IShape> inventory and list of commands to one 
+ LinkedHashMap<IShape, ArrayList<ICommand>> to decrease processing time and produce a smoother
+ visual output. 
+  - Using this design ensured that the commands for each shape stored through a reference 
+  to the shape. Adding the linked hash map was key, as it ensured the shapes rendered in 
+  the correct order on screen.
+ - We updated the oval and rectangle classes to have a simplified constructor that only takes in 
+ the label and sets the default appear and disappear times to -1, and null objects for the color 
+ and coordinates. We did this to keep track of which object details have been initialized through 
+ the addMotion method.
+ - Although we tied the shapes and commands together, we kept the list of commands from before to 
+ easily call the list from a getCommandList() method.
  - Because we returned a copy of the shapes, and not the actual shape, we did not create a 
  view-only shape interface.
- - Additionally, when we were building out the controller, we made sure to utilize the appendable 
- class to guarantee our design would hold up to additions to view outputs. 
  
-  
-
-
-Below is a UML of our model:
+ - Additions: 
+   - In our model we added an ArrayList<Integer> to store canvas details needed to display the 
+   window properly. Along with this, we added in a setCanvas(ArrayList<Integer>) method and 
+   getCanvas method to set the parameters of the screen after parsing the data from the file and a 
+   getCanvas() method. Lastly, we added a findDuration() method which pulled the largest end time 
+   from the motion, to save and signal the end of the animation.
+   - Created an IController interface with one method, animate(), which is implemented by both the
+   visual and text controller classes. These take in a model, view and outfile name. 
+     - When we were building out the controllers, we made sure to utilize the appendable class to 
+     guarantee our design would hold up to additions to view outputs. 
+   - Added a drawShape() method to the IShape interface and concrete shape classes, so the shapes 
+   know how to draw themselves on the screen.
+ 
+ 
+Below is a UML of our model after updates:
 ![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)
