@@ -108,4 +108,4 @@ Below is a UML of our model before updates:
  
  
 Below is a UML of our model after updates:
-![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/blob/master/A9%20UML.png)
+![UML model](https://github.ccs.neu.edu/tolliverdanielle/CS5004_EasyAnimator/master/A10%20UML.png)
