@@ -11,12 +11,13 @@ import org.junit.Test;
 import java.io.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * A JUnit test class for the controllers and views.
+ */
 public class ControllerAndViewTest {
     private TextController controller;
-    private TextView textView;
 
 
     @Before
