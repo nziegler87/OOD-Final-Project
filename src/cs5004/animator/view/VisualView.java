@@ -70,7 +70,7 @@ public class VisualView extends JFrame implements IView {
     menuBar.add(restart);
     menuBar.add(save);
 
-    frame.add(menuBar, BorderLayout.PAGE_END);
+    frame.add(menuBar, BorderLayout.PAGE_START);
 
     // for this, add a method that is get shape list and then update the the list
 
