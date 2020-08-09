@@ -2,10 +2,13 @@ package cs5004.animator.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.Timer;
+import javax.swing.*;
 
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.shape.IShape;
@@ -14,8 +17,11 @@ import cs5004.animator.view.IView;
 /**
  * The visual controller class. This implements IController and contains the method animate().
  */
-public class VisualController implements IController {
+public class VisualController implements IController, ActionListener {
   private final Timer timer;
+  private final IView view;
+  private final AnimatorModel model;
+  private int currentFrame;
 
   /**
    * The constructor for the visual controller class.
@@ -33,25 +39,13 @@ public class VisualController implements IController {
       throw new IllegalArgumentException("Speed must be greater than 0");
     }
 
+    this.currentFrame = 1;
+    this.view = view;
+    this.model = model;
+    view.setListener(this);
+
     int delay = 1000 / framesPerSecond;
-    this.timer = new Timer(delay,
-            new ActionListener() {
-        int currentFrame = 0;
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e the event to be processed
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (currentFrame > model.findDuration()) {
-              currentFrame = 0;
-            }
-            List<IShape> shapes = model.getSnapshot(currentFrame);
-            view.render(shapes);
-            currentFrame++;
-        }
-      });
+    this.timer = new Timer(delay, new Play());
   }
 
   /**
@@ -60,6 +54,60 @@ public class VisualController implements IController {
    */
   @Override
   public void animate() {
-    this.timer.start();
+    List<IShape> shapes = model.getSnapshot(currentFrame);
+    view.render(shapes);
+  }
+
+  /**
+   * Invoked when an action occurs.
+   *
+   * @param e the event to be processed
+   */
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    switch (e.getActionCommand()) {
+      case "Play":
+        timer.start();
+        break;
+      case "Pause":
+        timer.stop();
+        break;
+      case "Restart":
+        timer.stop();
+        this.currentFrame = 1;
+        this.view.render(model.getSnapshot(currentFrame));
+        break;
+      case "Save":
+        String outText = view.textRender(this.model.getShapeList(), this.model.getCommandList());
+        String outFile = JOptionPane.showInputDialog("Name your file. Do not put an extension");
+        outFile = outFile + ".txt";
+        try {
+          FileWriter fileWriter = new FileWriter(outFile);
+          fileWriter.write(outText);
+          fileWriter.close();
+        } catch (IOException ioException) {
+          ioException.printStackTrace();
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  public class Play implements ActionListener {
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      if (currentFrame > model.findDuration()) {
+        currentFrame = 1;
+      }
+      List<IShape> shapes = model.getSnapshot(currentFrame);
+      view.render(shapes);
+      currentFrame++;
+    }
   }
 }

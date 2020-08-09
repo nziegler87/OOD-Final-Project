@@ -1,6 +1,8 @@
 package cs5004.animator.view;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -13,6 +15,13 @@ import cs5004.animator.shape.IShape;
  */
 public class VisualView extends JFrame implements IView {
   private final CanvasDrawingPanel drawingCanvas;
+  private final JButton play;
+  private final JButton pause;
+  private final JButton restart;
+  private final JButton save;
+  private JMenuBar menuBar;
+  private JMenu menu, submenu;
+  JMenuItem menuSave;
 
   /**
    * The visual view constructor.
@@ -26,14 +35,20 @@ public class VisualView extends JFrame implements IView {
 
     Container frame = this.getContentPane();
 
-    MenuBar menuBar = new MenuBar();
-
-
     // set default state of window
     this.setTitle("Easy Animator Visual Display");
     this.setSize(500, 500);
     this.setBackground(Color.lightGray);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    // create menu bar
+    menuBar = new JMenuBar();
+    menu = new JMenu("File");
+    menuBar.add(menu);
+    JMenuItem saveFile = new JMenuItem("Save Text Version");
+    menu.add(saveFile);
+
+    this.setJMenuBar(menuBar);
 
     // create a CanvasDrawingPanel object
     drawingCanvas = new CanvasDrawingPanel(width, height);
@@ -42,14 +57,20 @@ public class VisualView extends JFrame implements IView {
     JScrollPane scrollPane = new JScrollPane(drawingCanvas);
     frame.add(scrollPane, BorderLayout.CENTER);
 
-    // add top menu bar
-    frame.add(menuBar, BorderLayout.PAGE_START);
+    // add top menu bar with buttons. Should this be a class?
+    JPanel menuBar = new JPanel();
+    GridLayout experimentLayout = new GridLayout(0,4);
+    menuBar.setLayout(experimentLayout);
+    this.play = new JButton("Play");
+    this.pause = new JButton("Pause");
+    this.restart = new JButton("Restart");
+    this.save = new JButton("Save");
+    menuBar.add(play);
+    menuBar.add(pause);
+    menuBar.add(restart);
+    menuBar.add(save);
 
-    // add dropdown menu bar
-    String[] petStrings = { " ", "Bird", "Cat", "Dog", "Rabbit", "Pig" };
-    JComboBox<String> petList = new JComboBox(petStrings);
-    petList.setSelectedIndex(0);
-    frame.add(petList, BorderLayout.PAGE_END);
+    frame.add(menuBar, BorderLayout.PAGE_END);
 
     // for this, add a method that is get shape list and then update the the list
 
@@ -57,6 +78,14 @@ public class VisualView extends JFrame implements IView {
     // pack window and make visible
     this.pack();
     this.setVisible(true);
+  }
+
+  @Override
+  public void setListener(ActionListener listener) {
+    this.play.addActionListener(listener);
+    this.pause.addActionListener(listener);
+    this.restart.addActionListener(listener);
+    this.save.addActionListener(listener);
   }
 
   /**
@@ -73,11 +102,28 @@ public class VisualView extends JFrame implements IView {
    *
    * @param shapes   list of all shapes in the model
    * @param commands list of all commands in the model
-   * @throws UnsupportedOperationException if called in the VisualView
    */
   @Override
-  public String textRender(List<IShape> shapes, List<ICommand> commands)
-          throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("Method invalid for visual view");
+  public String textRender(List<IShape> shapes, List<ICommand> commands) {
+    if (shapes.size() == 0) {
+      return "No shapes have been added to the inventory, so no animations can be displayed";
+    }
+
+    StringBuilder status = new StringBuilder();
+    status.append("Shapes:\n");
+
+    for (IShape shape : shapes) {
+      status.append(shape.toString()).append("\n\n");
+    }
+
+    if ((commands.size() != 0)) {
+      for (ICommand command : commands) {
+        status.append(command.toString());
+      }
+    } else {
+      status.append("Command list is empty.");
+    }
+
+    return status.substring(0, status.length() - 1);
   }
 }

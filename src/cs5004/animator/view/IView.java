@@ -1,7 +1,9 @@
 package cs5004.animator.view;
 
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import cs5004.animator.controller.VisualController;
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
 
@@ -25,4 +27,6 @@ public interface IView {
    */
   String textRender(List<IShape> shapes, List<ICommand> commands);
 
+  //TODO: Add doc if this works
+  void setListener(ActionListener listener);
 }

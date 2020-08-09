@@ -1,8 +1,10 @@
 package cs5004.animator.view;
 
+import cs5004.animator.controller.VisualController;
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
 
+import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
@@ -56,5 +58,10 @@ public class TextView implements IView {
     }
 
     return status.substring(0, status.length() - 1);
+  }
+
+  @Override
+  public void setListener(ActionListener listener) {
+    throw new UnsupportedOperationException("Method cannot be called in text view");
   }
 }

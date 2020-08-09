@@ -11,10 +11,10 @@ public class MenuBar extends JPanel {
     this.setLayout(experimentLayout);
     JButton play = new JButton("Play");
     JButton pause = new JButton("Pause");
-    JButton open = new JButton("Open");
+    JButton restart = new JButton("Restart");
     this.add(play);
     this.add(pause);
-    this.add(open);
+    this.add(restart);
 
   }
 }
