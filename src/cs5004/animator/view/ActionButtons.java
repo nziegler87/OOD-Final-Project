@@ -2,26 +2,30 @@ package cs5004.animator.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.swing.*;
 
-import cs5004.animator.model.commands.ICommand;
-import cs5004.animator.shape.IShape;
+public class ActionButtons extends JPanel {
+  JButton play;
+  JButton pause;
+  JButton restart;
 
-public class MenuBar extends JPanel {
-
-  public MenuBar() {
+  public ActionButtons() {
+    super();
     GridLayout experimentLayout = new GridLayout(0, 3);
     this.setLayout(experimentLayout);
-    JButton play = new JButton("Play");
-    JButton pause = new JButton("Pause");
-    JButton restart = new JButton("Restart");
+    this.play = new JButton("Play");
+    this.pause = new JButton("Pause");
+    this.restart = new JButton("Restart");
     this.add(play);
     this.add(pause);
     this.add(restart);
+  }
 
+  public void setListener(ActionListener listener) {
+    this.play.addActionListener(listener);
+    this.pause.addActionListener(listener);
+    this.restart.addActionListener(listener);
   }
 }
 
@@ -93,7 +97,7 @@ public class VisualView extends JFrame implements IView {
     drawingCanvas = new CanvasDrawingPanel(width, height);
 
     // create menu bar
-    JMenuBar bar = new JMenuBar();
+    AnimationMenuBar bar = new AnimationMenuBar();
     JMenu menu = new JMenu("File");
     bar.add(menu);
     JMenuItem menuSave = new JMenuItem("Save Text Version");

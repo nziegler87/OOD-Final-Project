@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.JMenuBar;
 
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
@@ -17,16 +18,17 @@ public class VisualView extends JFrame implements IView {
 
   private final CanvasDrawingPanel drawingCanvas;
 
+//  private final ActionButtons controlButtons;
   private final JButton play;
   private final JButton pause;
   private final JButton restart;
-  private final JButton save;
-  private final JComboBox<String> animationList;
+  private JMenuBar bar;
+  private JMenu menu;
+  private JMenuItem menuSave;
+//  private final JComboBox<String> animationList;
   //private final JComboBox<String> removeShapes;
 
-  private JMenuBar bar;
-  private JMenu menu, submenu;
-  private JMenuItem menuSave;
+
 
   private List<IShape> modifyShapes;
   private HashMap<String, IShape> removedShapes;
@@ -55,29 +57,22 @@ public class VisualView extends JFrame implements IView {
     setBackground(Color.lightGray);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    // create a save menu option
-    JMenu menu = new JMenu("File");
-    JMenuItem saveFile = new JMenuItem("Save Text Version");
-    menu.add(saveFile);
-
-    // create menu bar
-    JMenuBar bar = new JMenuBar();
-    bar.add(menu);
-    setJMenuBar(bar);
+    this.createMenuBar();
 
     String[] textFiles = {"buildings.txt", "big-bang-big-crunch.txt", "hanoi.txt", "smalldemo.txt",
             "toh-3.txt", "toh-5.txt", "toh-8.txt", "toh-12.txt"};
+
+//    this.controlButtons = new ActionButtons(); // TODO: If we use a class such as this, we can decouple editing the class from the view
 
     // add top menu bar with buttons
     JPanel menuBar = new JPanel();
     menuBar.setLayout(new GridLayout(0, 6));
 
     // add the buttons to the menu
-    this.play = new JButton("Play");
+    this.play = new JButton("Play"); //TODO: Comment out this if we use the class
     this.pause = new JButton("Pause");
     this.restart = new JButton("Restart");
-    this.save = new JButton("Save");
-    this.animationList = new JComboBox(textFiles);
+//    this.animationList = new JComboBox(textFiles);
 
     //this.removeShapes = new JComboBox(removedShapes.keySet());
     //List<IShape> remove = removedShapes.keySet();
@@ -86,11 +81,11 @@ public class VisualView extends JFrame implements IView {
     menuBar.add(play);
     menuBar.add(pause);
     menuBar.add(restart);
-    menuBar.add(save);
-    menuBar.add(animationList);
+//    menuBar.add(animationList); //TODO: Uncomment this but comment out the above if we use the class
     //menuBar.add(removeShapes);
 
     frame.add(menuBar, BorderLayout.PAGE_START);
+//    frame.add(controlButtons, BorderLayout.PAGE_START);
 
     // for this, add a method that is get shape list and then update the the list
     // save removed shapes in a list here... then use that list with removeShapes(shapes)
@@ -109,7 +104,8 @@ public class VisualView extends JFrame implements IView {
     this.play.addActionListener(listener);
     this.pause.addActionListener(listener);
     this.restart.addActionListener(listener);
-    this.save.addActionListener(listener);
+//    this.controlButtons.setListener(listener); //TODO: Uncomment this and comment above for the action buttons
+    this.menuSave.addActionListener(listener);
     //this.animationList.addActionListener(listener) {
       /*public void actionPerformed (ActionEvent e){ // TODO: how do you pass this?
         if (animationList.getSelectedIndex() != -1) {
@@ -171,5 +167,15 @@ public class VisualView extends JFrame implements IView {
     }
 
     return status.substring(0, status.length() - 1);
+  }
+
+  private void createMenuBar() {
+    // create a save menu option
+    this.menu = new JMenu("File");
+    this.menuSave = new JMenuItem("Save Text Version");
+    this.menu.add(this.menuSave);
+    this.bar = new javax.swing.JMenuBar();
+    this.bar.add(this.menu);
+    this.setJMenuBar(this.bar);
   }
 }

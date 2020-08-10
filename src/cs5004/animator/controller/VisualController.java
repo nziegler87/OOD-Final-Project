@@ -76,7 +76,7 @@ public class VisualController implements IController, ActionListener {
         this.currentFrame = 1;
         this.view.render(model.getSnapshot(currentFrame));
         break;
-      case "Save":
+      case "Save Text Version":
         String outText = view.textRender(this.model.getShapeList(), this.model.getCommandList());
         String outFile = JOptionPane.showInputDialog("Name your file. Do not put an extension");
         outFile = outFile + ".txt";
