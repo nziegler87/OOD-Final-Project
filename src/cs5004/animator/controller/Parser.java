@@ -3,6 +3,7 @@ package cs5004.animator.controller;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilderImpl;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.IView;
 import cs5004.animator.view.TextView;
 import cs5004.animator.view.VisualView;
 
@@ -71,8 +72,12 @@ public class Parser {
         }
       }
     } else {
-      return new VisualController(model, new VisualView(model.getCanvas().get(2),
-              model.getCanvas().get(2)), speed);
+      IView animationView = new VisualView(model.getCanvas().get(2),
+              model.getCanvas().get(2));
+      AnimatorModel animationModel = getModel();
+
+      //animationView. TODO: wah.
+      return new VisualController(model, animationView, speed);
     }
   }
 
@@ -117,7 +122,8 @@ public class Parser {
    */
   private AnimatorModel getModel() throws IllegalArgumentException {
     try {
-      return AnimationReader.parseFile(new FileReader("./" + file), new AnimationBuilderImpl());
+      return AnimationReader.parseFile(new FileReader("./" + file),
+              new AnimationBuilderImpl());
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File not found.");
     }

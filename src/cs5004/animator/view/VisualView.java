@@ -2,7 +2,7 @@ package cs5004.animator.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.*;
@@ -14,14 +14,22 @@ import cs5004.animator.shape.IShape;
  * The visual view class. This implements IView and contains the method render().
  */
 public class VisualView extends JFrame implements IView {
+
   private final CanvasDrawingPanel drawingCanvas;
+
   private final JButton play;
   private final JButton pause;
   private final JButton restart;
   private final JButton save;
-  private JMenuBar menuBar;
+  private final JComboBox<String> animationList;
+  //private final JComboBox<String> removeShapes;
+
+  private JMenuBar bar;
   private JMenu menu, submenu;
-  JMenuItem menuSave;
+  private JMenuItem menuSave;
+
+  private List<IShape> modifyShapes;
+  private HashMap<String, IShape> removedShapes;
 
   /**
    * The visual view constructor.
@@ -33,52 +41,68 @@ public class VisualView extends JFrame implements IView {
     // call JFrame constructor
     super();
 
-    Container frame = this.getContentPane();
-
-    // set default state of window
-    this.setTitle("Easy Animator Visual Display");
-    this.setSize(500, 500);
-    this.setBackground(Color.lightGray);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    // create menu bar
-    menuBar = new JMenuBar();
-    menu = new JMenu("File");
-    menuBar.add(menu);
-    JMenuItem saveFile = new JMenuItem("Save Text Version");
-    menu.add(saveFile);
-
-    this.setJMenuBar(menuBar);
-
     // create a CanvasDrawingPanel object
+    Container frame = this.getContentPane();
     drawingCanvas = new CanvasDrawingPanel(width, height);
 
     // create scroll bars on panel and add to frame
     JScrollPane scrollPane = new JScrollPane(drawingCanvas);
     frame.add(scrollPane, BorderLayout.CENTER);
 
-    // add top menu bar with buttons. Should this be a class?
+    // set default state of window
+    setTitle("Easy Animator Visual Display");
+    setSize(500, 500);
+    setBackground(Color.lightGray);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    // create a save menu option
+    JMenu menu = new JMenu("File");
+    JMenuItem saveFile = new JMenuItem("Save Text Version");
+    menu.add(saveFile);
+
+    // create menu bar
+    JMenuBar bar = new JMenuBar();
+    bar.add(menu);
+    setJMenuBar(bar);
+
+    String[] textFiles = {"buildings.txt", "big-bang-big-crunch.txt", "hanoi.txt", "smalldemo.txt",
+            "toh-3.txt", "toh-5.txt", "toh-8.txt", "toh-12.txt"};
+
+    // add top menu bar with buttons
     JPanel menuBar = new JPanel();
-    GridLayout experimentLayout = new GridLayout(0,4);
-    menuBar.setLayout(experimentLayout);
+    menuBar.setLayout(new GridLayout(0, 6));
+
+    // add the buttons to the menu
     this.play = new JButton("Play");
     this.pause = new JButton("Pause");
     this.restart = new JButton("Restart");
     this.save = new JButton("Save");
+    this.animationList = new JComboBox(textFiles);
+
+    //this.removeShapes = new JComboBox(removedShapes.keySet());
+    //List<IShape> remove = removedShapes.keySet();
+
+    // add the buttons and such
     menuBar.add(play);
     menuBar.add(pause);
     menuBar.add(restart);
     menuBar.add(save);
+    menuBar.add(animationList);
+    //menuBar.add(removeShapes);
 
     frame.add(menuBar, BorderLayout.PAGE_START);
 
     // for this, add a method that is get shape list and then update the the list
-
+    // save removed shapes in a list here... then use that list with removeShapes(shapes)
 
     // pack window and make visible
     this.pack();
     this.setVisible(true);
   }
+
+/*  public String getFile() {
+
+  }*/
 
   @Override
   public void setListener(ActionListener listener) {
@@ -86,6 +110,27 @@ public class VisualView extends JFrame implements IView {
     this.pause.addActionListener(listener);
     this.restart.addActionListener(listener);
     this.save.addActionListener(listener);
+    //this.animationList.addActionListener(listener) {
+      /*public void actionPerformed (ActionEvent e){ // TODO: how do you pass this?
+        if (animationList.getSelectedIndex() != -1) {
+          String file = animationList.getItemAt(animationList.getSelectedIndex());
+        }
+      }*/
+  }
+
+  /**
+   * Helper method to remove the designated shapes from the list.
+   *
+   * @param shapes the shapes to search through
+   * @return the list of modified shapes
+   */
+  private List<IShape> removeShapes(List<IShape> shapes) {
+    for (IShape shape : shapes) {
+      if (!this.removedShapes.containsKey(shape.getLabel())) {
+        modifyShapes.add(shape);
+      }
+    }
+    return modifyShapes;
   }
 
   /**
@@ -94,6 +139,7 @@ public class VisualView extends JFrame implements IView {
    * @param shapes a list of IShapes.
    */
   public void render(List<IShape> shapes) {
+    // TODO: eventually pass in removeShapes(shapes))
     this.drawingCanvas.updateDrawing(shapes);
   }
 

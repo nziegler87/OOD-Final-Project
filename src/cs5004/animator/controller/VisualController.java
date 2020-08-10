@@ -2,7 +2,6 @@ package cs5004.animator.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -90,6 +89,10 @@ public class VisualController implements IController, ActionListener {
         }
         break;
       default:
+        /*
+        if (animationList.getSelectedIndex() != -1) {
+          this.file = animationList.getItemAt(animationList.getSelectedIndex());
+        }*/
         break;
     }
   }
