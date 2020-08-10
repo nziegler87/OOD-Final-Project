@@ -20,8 +20,8 @@ public class VisualView extends JFrame implements IView {
 //  private final ActionButtons controlButtons;
   private final JButton play;
   private final JButton pause;
-  private final JButton restart;
-  private MenuBar bar;
+  private final JButton restart; //TODO: Comment this out and uncomment the ActionButtons class
+  private final MenuBar bar;
 //  private final JComboBox<String> animationList;
   //private final JComboBox<String> removeShapes;
 
