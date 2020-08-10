@@ -97,7 +97,7 @@ public class VisualView extends JFrame implements IView {
     drawingCanvas = new CanvasDrawingPanel(width, height);
 
     // create menu bar
-    AnimationMenuBar bar = new AnimationMenuBar();
+    MenuBar bar = new MenuBar();
     JMenu menu = new JMenu("File");
     bar.add(menu);
     JMenuItem menuSave = new JMenuItem("Save Text Version");
