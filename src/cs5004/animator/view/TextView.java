@@ -1,6 +1,5 @@
 package cs5004.animator.view;
 
-import cs5004.animator.controller.VisualController;
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
 

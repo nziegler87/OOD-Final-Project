@@ -17,18 +17,14 @@ public class VisualView extends JFrame implements IView {
 
   private final CanvasDrawingPanel drawingCanvas;
 
-//  private final ActionButtons controlButtons;
-  private final JButton play;
+  private final ActionButtons controlButtons;
+  /*private final JButton play;
   private final JButton pause;
-  private final JButton restart; //TODO: Comment this out and uncomment the ActionButtons class
+  private final JButton restart;*/ //TODO: Comment this out and uncomment the ActionButtons class
   private final MenuBar bar;
-//  private final JComboBox<String> animationList;
-  //private final JComboBox<String> removeShapes;
 
-
-
-  private List<IShape> modifyShapes;
-  private HashMap<String, IShape> removedShapes;
+  //private List<IShape> modifyShapes;
+  //private HashMap<String, IShape> removedShapes;
 
   /**
    * The visual view constructor.
@@ -54,37 +50,36 @@ public class VisualView extends JFrame implements IView {
     setBackground(Color.lightGray);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-//    this.createMenuBar();
+    //this.createMenuBar();
     this.bar = new MenuBar();
     this.setJMenuBar(this.bar);
 
     String[] textFiles = {"buildings.txt", "big-bang-big-crunch.txt", "hanoi.txt", "smalldemo.txt",
             "toh-3.txt", "toh-5.txt", "toh-8.txt", "toh-12.txt"};
 
-//    this.controlButtons = new ActionButtons(); // TODO: If we use a class such as this, we can decouple editing the class from the view
+    this.controlButtons = new ActionButtons(); // TODO: If we use a class such as this, we can decouple editing the class from the view
 
     // add top menu bar with buttons
     JPanel playbackControls = new JPanel();
     playbackControls.setLayout(new GridLayout(0, 6));
 
-    // add the buttons to the menu
+/*    // add the buttons to the menu
     this.play = new JButton("Play"); //TODO: Comment out this if we use the class
     this.pause = new JButton("Pause");
-    this.restart = new JButton("Restart");
-//    this.animationList = new JComboBox(textFiles);
-
-    //this.removeShapes = new JComboBox(removedShapes.keySet());
-    //List<IShape> remove = removedShapes.keySet();
-
-    // add the buttons and such
+    this.restart = new JButton("Restart");*/
+    /*    // add the buttons and such
     playbackControls.add(play);
     playbackControls.add(pause);
-    playbackControls.add(restart);
-//    menuBar.add(animationList); //TODO: Uncomment this but comment out the above if we use the class
-    //menuBar.add(removeShapes);
+    playbackControls.add(restart);*/
+
+    //JComboBox<String> animationList = new JComboBox<>(textFiles);
+    //JComboBox<String> removeShapes = new JComboBox<>(remove);
+
+    //bar.add(animationList); //TODO: Uncomment this but comment out the above if we use the class
+    //bar.add(removeShapes);
 
     frame.add(playbackControls, BorderLayout.PAGE_START);
-//    frame.add(controlButtons, BorderLayout.PAGE_START);
+    frame.add(controlButtons, BorderLayout.PAGE_START);
 
     // for this, add a method that is get shape list and then update the the list
     // save removed shapes in a list here... then use that list with removeShapes(shapes)
@@ -94,16 +89,17 @@ public class VisualView extends JFrame implements IView {
     this.setVisible(true);
   }
 
-/*  public String getFile() {
+  public void getAnimation() {
 
-  }*/
+  }
 
   @Override
   public void setListener(ActionListener listener) {
-    this.play.addActionListener(listener);
+/*  this.play.addActionListener(listener);
     this.pause.addActionListener(listener);
-    this.restart.addActionListener(listener);
-//    this.controlButtons.setListener(listener); //TODO: Uncomment this and comment above for the action buttons
+    this.restart.addActionListener(listener);*/
+
+    this.controlButtons.setListener(listener); //TODO: Uncomment this and comment above for the action buttons
     this.bar.setListener(listener);
     //this.animationList.addActionListener(listener) {
       /*public void actionPerformed (ActionEvent e){ // TODO: how do you pass this?
@@ -119,14 +115,14 @@ public class VisualView extends JFrame implements IView {
    * @param shapes the shapes to search through
    * @return the list of modified shapes
    */
-  private List<IShape> removeShapes(List<IShape> shapes) {
-    for (IShape shape : shapes) {
+  //private List<IShape> removeShapes(List<IShape> shapes) {
+/*    for (IShape shape : shapes) {
       if (!this.removedShapes.containsKey(shape.getLabel())) {
         modifyShapes.add(shape);
       }
-    }
-    return modifyShapes;
-  }
+    }*/
+    //return modifyShapes;
+  //}
 
   /**
    * A method to render the shapes at their current state of animation.

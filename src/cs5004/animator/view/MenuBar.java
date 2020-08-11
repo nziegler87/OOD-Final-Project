@@ -9,7 +9,7 @@ import javax.swing.*;
 public class MenuBar extends JMenuBar {
   private JMenu file, playbackControl;
   private JMenuItem menuSave, play, pause, restart;
-
+  private JComboBox<String> animationList, removeItems;
 
   public MenuBar() {
     super();
@@ -27,8 +27,20 @@ public class MenuBar extends JMenuBar {
     this.playbackControl.add(pause);
     this.restart = new JMenuItem("Restart");
     this.playbackControl.add(restart);
-    this.add(playbackControl);
+    //this.add(playbackControl);
 
+    String[] textFiles = {"buildings.txt", "big-bang-big-crunch.txt", "hanoi.txt", "smalldemo.txt",
+            "toh-3.txt", "toh-5.txt", "toh-8.txt", "toh-12.txt"};
+    animationList = new JComboBox<>(textFiles);
+    this.playbackControl.add(animationList);
+
+    //String[] shapes =
+
+    this.add(playbackControl);
+  }
+
+  public void getAnimation() {
+    System.out.println(this.animationList.getSelectedItem());
   }
 
   public void setListener(ActionListener listener) {
@@ -36,5 +48,6 @@ public class MenuBar extends JMenuBar {
     this.play.addActionListener(listener);
     this.pause.addActionListener(listener);
     this.restart.addActionListener(listener);
+    this.animationList.addActionListener(listener);
   }
 }
