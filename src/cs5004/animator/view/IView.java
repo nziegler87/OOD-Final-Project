@@ -29,4 +29,8 @@ public interface IView {
 
   //TODO: Add doc if this works
   void setListener(ActionListener listener);
+
+  void setShapeList(List<IShape> shapes);
+
+  String getShapeToRemove();
 }

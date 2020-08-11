@@ -1,11 +1,13 @@
 package cs5004.animator.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.event.AncestorListener;
 
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;
@@ -14,17 +16,13 @@ import cs5004.animator.shape.IShape;
  * The visual view class. This implements IView and contains the method render().
  */
 public class VisualView extends JFrame implements IView {
+  private List<IShape> shapeList;
 
   private final CanvasDrawingPanel drawingCanvas;
 
   private final ActionButtons controlButtons;
-  /*private final JButton play;
-  private final JButton pause;
-  private final JButton restart;*/ //TODO: Comment this out and uncomment the ActionButtons class
   private final MenuBar bar;
-
-  //private List<IShape> modifyShapes;
-  //private HashMap<String, IShape> removedShapes;
+  private final RemoveShapePanel removeShapePanel;
 
   /**
    * The visual view constructor.
@@ -35,6 +33,8 @@ public class VisualView extends JFrame implements IView {
   public VisualView(int width, int height) {
     // call JFrame constructor
     super();
+
+    this.shapeList = new ArrayList<>();
 
     // create a CanvasDrawingPanel object
     Container frame = this.getContentPane();
@@ -50,79 +50,35 @@ public class VisualView extends JFrame implements IView {
     setBackground(Color.lightGray);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    //this.createMenuBar();
+    // add menu bar
     this.bar = new MenuBar();
     this.setJMenuBar(this.bar);
 
-    String[] textFiles = {"buildings.txt", "big-bang-big-crunch.txt", "hanoi.txt", "smalldemo.txt",
-            "toh-3.txt", "toh-5.txt", "toh-8.txt", "toh-12.txt"};
-
-    this.controlButtons = new ActionButtons(); // TODO: If we use a class such as this, we can decouple editing the class from the view
-
-    // add top menu bar with buttons
-    JPanel playbackControls = new JPanel();
-    playbackControls.setLayout(new GridLayout(0, 6));
-
-/*    // add the buttons to the menu
-    this.play = new JButton("Play"); //TODO: Comment out this if we use the class
-    this.pause = new JButton("Pause");
-    this.restart = new JButton("Restart");*/
-    /*    // add the buttons and such
-    playbackControls.add(play);
-    playbackControls.add(pause);
-    playbackControls.add(restart);*/
-
-    //JComboBox<String> animationList = new JComboBox<>(textFiles);
-    //JComboBox<String> removeShapes = new JComboBox<>(remove);
-
-    //bar.add(animationList); //TODO: Uncomment this but comment out the above if we use the class
-    //bar.add(removeShapes);
-
-    frame.add(playbackControls, BorderLayout.PAGE_START);
+    // add play, pause, restart buttons
+    this.controlButtons = new ActionButtons();
     frame.add(controlButtons, BorderLayout.PAGE_START);
 
-    // for this, add a method that is get shape list and then update the the list
-    // save removed shapes in a list here... then use that list with removeShapes(shapes)
+    // add remove shape panel
+    this.removeShapePanel = new RemoveShapePanel();
+    JScrollPane removeShapeScrollPane = new JScrollPane(this.removeShapePanel);
+    frame.add(removeShapeScrollPane, BorderLayout.LINE_END);
 
     // pack window and make visible
     this.pack();
     this.setVisible(true);
   }
 
-  public void getAnimation() {
-
-  }
-
   @Override
   public void setListener(ActionListener listener) {
-/*  this.play.addActionListener(listener);
-    this.pause.addActionListener(listener);
-    this.restart.addActionListener(listener);*/
-
-    this.controlButtons.setListener(listener); //TODO: Uncomment this and comment above for the action buttons
+    this.controlButtons.setListener(listener);
     this.bar.setListener(listener);
-    //this.animationList.addActionListener(listener) {
-      /*public void actionPerformed (ActionEvent e){ // TODO: how do you pass this?
-        if (animationList.getSelectedIndex() != -1) {
-          String file = animationList.getItemAt(animationList.getSelectedIndex());
-        }
-      }*/
+    this.removeShapePanel.setListener(listener);
   }
 
-  /**
-   * Helper method to remove the designated shapes from the list.
-   *
-   * @param shapes the shapes to search through
-   * @return the list of modified shapes
-   */
-  //private List<IShape> removeShapes(List<IShape> shapes) {
-/*    for (IShape shape : shapes) {
-      if (!this.removedShapes.containsKey(shape.getLabel())) {
-        modifyShapes.add(shape);
-      }
-    }*/
-    //return modifyShapes;
-  //}
+  public void setShapeList(List<IShape> shapes) {
+    this.shapeList = shapes;
+    this.removeShapePanel.updateShapeComboBox(this.shapeList);
+  }
 
   /**
    * A method to render the shapes at their current state of animation.
@@ -130,7 +86,6 @@ public class VisualView extends JFrame implements IView {
    * @param shapes a list of IShapes.
    */
   public void render(List<IShape> shapes) {
-    // TODO: eventually pass in removeShapes(shapes))
     this.drawingCanvas.updateDrawing(shapes);
   }
 
@@ -162,5 +117,9 @@ public class VisualView extends JFrame implements IView {
     }
 
     return status.substring(0, status.length() - 1);
+  }
+
+  public String getShapeToRemove() {
+    return this.removeShapePanel.getComboBoxSelection();
   }
 }

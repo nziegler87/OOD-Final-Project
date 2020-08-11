@@ -1,13 +1,16 @@
 package cs5004.animator.controller;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.shape.IShape;
@@ -21,6 +24,7 @@ public class VisualController implements IController, ActionListener {
   private final IView view;
   private final AnimatorModel model;
   private int currentFrame;
+  private final JFrame fileWindow;
 
   /**
    * The constructor for the visual controller class.
@@ -41,6 +45,7 @@ public class VisualController implements IController, ActionListener {
     this.currentFrame = 1;
     this.view = view;
     this.model = model;
+    this.fileWindow = new JFrame();
     view.setListener(this);
 
     int delay = 1000 / framesPerSecond;
@@ -54,6 +59,7 @@ public class VisualController implements IController, ActionListener {
   @Override
   public void animate() {
     List<IShape> shapes = model.getSnapshot(currentFrame);
+    view.setShapeList(model.getShapeList());
     view.render(shapes);
   }
 
@@ -77,22 +83,29 @@ public class VisualController implements IController, ActionListener {
         this.view.render(model.getSnapshot(currentFrame));
         break;
       case "Save Text Version":
-        String outText = view.textRender(this.model.getShapeList(), this.model.getCommandList());
-        String outFile = JOptionPane.showInputDialog("Name your file. Do not put an extension");
-        outFile = outFile + ".txt";
-        try {
-          FileWriter fileWriter = new FileWriter(outFile);
-          fileWriter.write(outText);
-          fileWriter.close();
-        } catch (IOException ioException) {
-          ioException.printStackTrace();
-        }
+        this.saveFile();
         break;
+      case "Remove Shape":
+        if (this.view.getShapeToRemove().equals("Select Shape") && this.model.getShapeList().isEmpty()) {
+          JOptionPane.showMessageDialog(this.fileWindow, "There are no more shapes left to remove.");
+          break;
+        }
+
+        if (this.view.getShapeToRemove().equals("Select Shape")) {
+          JOptionPane.showMessageDialog(this.fileWindow, "Select a shape to remove.");
+          break;
+        }
+
+        try {
+          IShape shapeToRemove = model.getShape(this.view.getShapeToRemove());
+          model.removeShape(shapeToRemove);
+          view.setShapeList(model.getShapeList());
+          this.view.render(model.getSnapshot(currentFrame));
+          break;
+        } catch (IllegalArgumentException IAE) {
+          JOptionPane.showMessageDialog(this.fileWindow, "Error removing shape.");
+        }
       default:
-        /*
-        if (animationList.getSelectedIndex() != -1) {
-          this.file = animationList.getItemAt(animationList.getSelectedIndex());
-        }*/
         break;
     }
   }
@@ -111,6 +124,27 @@ public class VisualController implements IController, ActionListener {
       List<IShape> shapes = model.getSnapshot(currentFrame);
       view.render(shapes);
       currentFrame++;
+    }
+  }
+
+  private void saveFile() {
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
+    if (fileChooser.showSaveDialog(this.fileWindow) == JFileChooser.APPROVE_OPTION) {
+      String outText = view.textRender(this.model.getShapeList(), this.model.getCommandList());
+      try {
+        File outFile = fileChooser.getSelectedFile();
+        if (outFile.getName().endsWith(".txt")) {
+          // do nothing because file is all set
+        } else {
+          outFile = new File(outFile.toString() + ".txt");
+        }
+        FileWriter fileWriter = new FileWriter(outFile);
+        fileWriter.write(outText);
+        fileWriter.close();
+      } catch (IOException IOE) {
+        JOptionPane.showMessageDialog(this.fileWindow, "Unable to save file.");
+      }
     }
   }
 }

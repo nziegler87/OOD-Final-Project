@@ -63,4 +63,15 @@ public class TextView implements IView {
   public void setListener(ActionListener listener) {
     throw new UnsupportedOperationException("Method cannot be called in text view");
   }
+
+  @Override
+  public void setShapeList(List<IShape> shapes) {
+    throw new UnsupportedOperationException("Method cannot be called in text view");
+
+  }
+
+  @Override
+  public String getShapeToRemove() {
+    throw new UnsupportedOperationException("Method cannot be called in text view");
+  }
 }
