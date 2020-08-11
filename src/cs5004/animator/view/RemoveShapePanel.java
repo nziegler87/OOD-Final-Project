@@ -18,7 +18,7 @@ public class RemoveShapePanel extends JPanel {
     super();
     this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     this.setBackground(new Color(246, 246, 246));
-    this.setPreferredSize(new Dimension(200, 50));
+    this.setMaximumSize(new Dimension(0, 0));
     this.setAlignmentY(CENTER_ALIGNMENT);
     this.model = new DefaultListModel();
 

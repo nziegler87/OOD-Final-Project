@@ -1,5 +1,6 @@
 package cs5004.animator.controller;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -60,6 +61,7 @@ public class VisualController implements IController, ActionListener {
     view.setShapeList(model.getShapeList());
     List<IShape> shapes = model.getSnapshot(currentFrame);
     view.render(shapes);
+    view.setShapeList(model.getShapeList());
   }
 
   @Override
