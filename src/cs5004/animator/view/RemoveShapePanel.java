@@ -11,8 +11,8 @@ import cs5004.animator.shape.IShape;
 
 public class RemoveShapePanel extends JPanel {
   private final JButton removeButton;
-  private JList<String> shapeList;
-  private DefaultListModel<String> model = new DefaultListModel();
+  private final JList<String> shapeList;
+  private final DefaultListModel<String> model;
 
   public RemoveShapePanel() {
     super();
@@ -20,6 +20,7 @@ public class RemoveShapePanel extends JPanel {
     this.setBackground(new Color(246, 246, 246));
     this.setPreferredSize(new Dimension(200, 50));
     this.setAlignmentY(CENTER_ALIGNMENT);
+    this.model = new DefaultListModel();
 
     // add removeShape label
     JLabel removeShape = new JLabel("Remove Shapes:");

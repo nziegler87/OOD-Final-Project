@@ -1,13 +1,12 @@
 package cs5004.animator.view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
-import javax.swing.event.AncestorListener;
 
 import cs5004.animator.model.commands.ICommand;
 import cs5004.animator.shape.IShape;

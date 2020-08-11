@@ -1,19 +1,15 @@
 package cs5004.animator.controller;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.shape.IShape;
@@ -61,8 +57,8 @@ public class VisualController implements IController, ActionListener {
    */
   @Override
   public void animate() {
-    List<IShape> shapes = model.getSnapshot(currentFrame);
     view.setShapeList(model.getShapeList());
+    List<IShape> shapes = model.getSnapshot(currentFrame);
     view.render(shapes);
   }
 
