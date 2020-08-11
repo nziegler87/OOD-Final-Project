@@ -46,4 +46,24 @@ public class TextController implements IController {
       throw new IllegalArgumentException("Could not append to the output.");
     }
   }
+
+  @Override
+  public int getCurrentFrame() {
+    return 0;
+  }
+
+  @Override
+  public void setCurrentFrame(int frame) {
+
+  }
+
+  @Override
+  public void startTimer() {
+
+  }
+
+  @Override
+  public void stopTimer() {
+
+  }
 }

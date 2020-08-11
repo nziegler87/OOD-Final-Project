@@ -6,8 +6,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -63,6 +66,11 @@ public class VisualController implements IController, ActionListener {
     view.render(shapes);
   }
 
+  @Override
+  public int getCurrentFrame() {
+    return this.currentFrame;
+  }
+
   /**
    * Invoked when an action occurs.
    *
@@ -70,45 +78,21 @@ public class VisualController implements IController, ActionListener {
    */
   @Override
   public void actionPerformed(ActionEvent e) {
-    switch (e.getActionCommand()) {
-      case "Play":
-        timer.start();
-        break;
-      case "Pause":
-        timer.stop();
-        break;
-      case "Restart":
-        timer.stop();
-        this.currentFrame = 0;
-        this.view.render(model.getSnapshot(currentFrame));
-        break;
-      case "Save Text Version":
-        this.saveFile();
-        break;
-      case "Remove Shape":
-        if (this.view.getShapesToRemove().isEmpty() && this.model.getShapeList().isEmpty()) {
-          JOptionPane.showMessageDialog(this.fileWindow, "There are no more shapes left to remove.");
-          break;
-        }
+    Map<String, Function<ActionEvent, AnimationControllerCommands>> knownCommands = new HashMap<>();
+    knownCommands.put("Play", (ActionEvent event) -> { return new PlayAnimation(); });
+    knownCommands.put("Pause", (ActionEvent event) -> { return new Pause(); });
+    knownCommands.put("Restart", (ActionEvent event) -> { return new Restart(); });
+    knownCommands.put("Save Text Version", (ActionEvent event) -> {return new SaveTextVersion(); });
+    knownCommands.put("Remove Shape", (ActionEvent event) -> {return new RemoveShape(); });
 
-        if (this.view.getShapesToRemove().isEmpty()) {
-          JOptionPane.showMessageDialog(this.fileWindow, "Select a shape or shapes to remove.");
-          break;
-        }
+    AnimationControllerCommands c;
+    Function<ActionEvent, AnimationControllerCommands> cmd = knownCommands.getOrDefault(e.getActionCommand(),null);
 
-        try {
-          for (String shapeDescription : this.view.getShapesToRemove()) {
-            IShape shapeToRemove = model.getShape(shapeDescription);
-            model.removeShape(shapeToRemove);
-          }
-          view.setShapeList(model.getShapeList());
-          this.view.render(model.getSnapshot(currentFrame));
-          break;
-        } catch (IllegalArgumentException IAE) {
-          JOptionPane.showMessageDialog(this.fileWindow, "Error removing shape.");
-        }
-      default:
-        break;
+    if (cmd == null) {
+      JOptionPane.showMessageDialog(new JFrame(), "Unsupported Operation.");
+    } else {
+      c = cmd.apply(e);
+      c.go(model, view, this);
     }
   }
 
@@ -129,29 +113,16 @@ public class VisualController implements IController, ActionListener {
     }
   }
 
-  private void saveFile() {
-    JFileChooser fileChooser = new JFileChooser();
-    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
-    if (fileChooser.showSaveDialog(this.fileWindow) == JFileChooser.APPROVE_OPTION) {
-      String outText = view.textRender(this.model.getShapeList(), this.model.getCommandList());
-      try {
-        File outFile = fileChooser.getSelectedFile();
-        if (outFile.getName().endsWith(".txt")) {
-          // do nothing because file is all set
-        } else {
-          outFile = new File(outFile.toString() + ".txt");
-        }
-        FileWriter fileWriter = new FileWriter(outFile);
-        fileWriter.write(outText);
-        fileWriter.close();
-      } catch (IOException IOE) {
-        JOptionPane.showMessageDialog(this.fileWindow, "Unable to save file.");
-      }
-    }
-    else {
-      // do nothing
-      return;
-    }
+  public void setCurrentFrame(int frame) {
+    this.currentFrame = 0;
+  }
+
+  public void startTimer() {
+    this.timer.start();
+  }
+
+  public void stopTimer() {
+    this.timer.stop();
   }
 }
 
