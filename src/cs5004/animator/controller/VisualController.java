@@ -42,7 +42,7 @@ public class VisualController implements IController, ActionListener {
       throw new IllegalArgumentException("Speed must be greater than 0");
     }
 
-    this.currentFrame = 1;
+    this.currentFrame = 0;
     this.view = view;
     this.model = model;
     this.fileWindow = new JFrame();
@@ -79,26 +79,28 @@ public class VisualController implements IController, ActionListener {
         break;
       case "Restart":
         timer.stop();
-        this.currentFrame = 1;
+        this.currentFrame = 0;
         this.view.render(model.getSnapshot(currentFrame));
         break;
       case "Save Text Version":
         this.saveFile();
         break;
       case "Remove Shape":
-        if (this.view.getShapeToRemove().equals("Select Shape") && this.model.getShapeList().isEmpty()) {
+        if (this.view.getShapesToRemove().isEmpty() && this.model.getShapeList().isEmpty()) {
           JOptionPane.showMessageDialog(this.fileWindow, "There are no more shapes left to remove.");
           break;
         }
 
-        if (this.view.getShapeToRemove().equals("Select Shape")) {
-          JOptionPane.showMessageDialog(this.fileWindow, "Select a shape to remove.");
+        if (this.view.getShapesToRemove().isEmpty()) {
+          JOptionPane.showMessageDialog(this.fileWindow, "Select a shape or shapes to remove.");
           break;
         }
 
         try {
-          IShape shapeToRemove = model.getShape(this.view.getShapeToRemove());
-          model.removeShape(shapeToRemove);
+          for (String shapeDescription : this.view.getShapesToRemove()) {
+            IShape shapeToRemove = model.getShape(shapeDescription);
+            model.removeShape(shapeToRemove);
+          }
           view.setShapeList(model.getShapeList());
           this.view.render(model.getSnapshot(currentFrame));
           break;
@@ -119,7 +121,7 @@ public class VisualController implements IController, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
       if (currentFrame > model.findDuration()) {
-        currentFrame = 1;
+        currentFrame = 0;
       }
       List<IShape> shapes = model.getSnapshot(currentFrame);
       view.render(shapes);
@@ -146,5 +148,10 @@ public class VisualController implements IController, ActionListener {
         JOptionPane.showMessageDialog(this.fileWindow, "Unable to save file.");
       }
     }
+    else {
+      // do nothing
+      return;
+    }
   }
 }
+

@@ -119,7 +119,7 @@ public class VisualView extends JFrame implements IView {
     return status.substring(0, status.length() - 1);
   }
 
-  public String getShapeToRemove() {
+  public List<String> getShapesToRemove() {
     return this.removeShapePanel.getComboBoxSelection();
   }
 }
