@@ -25,8 +25,8 @@ public class CanvasDrawingPanel extends JPanel {
    */
   public CanvasDrawingPanel(int width, int height) {
     super();
-    setPreferredSize(new Dimension(width, height));
-    setBackground(Color.WHITE);
+//    this.setPreferredSize(new Dimension(width, height));
+    this.setBackground(Color.WHITE);
     this.shapes = new ArrayList<>();
   }
 

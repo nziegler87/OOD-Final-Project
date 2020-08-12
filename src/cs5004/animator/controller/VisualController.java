@@ -58,10 +58,10 @@ public class VisualController implements IController, ActionListener {
    */
   @Override
   public void animate() {
-    view.setShapeList(model.getShapeList());
-    List<IShape> shapes = model.getSnapshot(currentFrame);
-    view.render(shapes);
-    view.setShapeList(model.getShapeList());
+    List<IShape> shapesSnapshot = model.getSnapshot(currentFrame);
+    view.render(shapesSnapshot);
+    List<IShape> shapes = model.getShapeList();
+    view.setShapeList(shapes);
   }
 
   @Override

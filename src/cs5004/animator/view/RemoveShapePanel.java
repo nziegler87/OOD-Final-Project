@@ -2,7 +2,6 @@ package cs5004.animator.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -18,7 +17,6 @@ public class RemoveShapePanel extends JPanel {
     super();
     this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     this.setBackground(new Color(246, 246, 246));
-    this.setMaximumSize(new Dimension(0, 0));
     this.setAlignmentY(CENTER_ALIGNMENT);
     this.model = new DefaultListModel();
 
@@ -43,14 +41,15 @@ public class RemoveShapePanel extends JPanel {
     this.removeButton.addActionListener(listener);
   }
 
-  public void updateShapeComboBox(List<IShape> shapes) {
+  public void updateShapeList(List<IShape> shapes) {
     this.model.removeAllElements();
+
     for (IShape shape : shapes ) {
       this.model.addElement(shape.getLabel());
     }
   }
 
-  public List<String> getComboBoxSelection() {
+  public List<String> getShapeSelection() {
     return this.shapeList.getSelectedValuesList();
   }
 }

@@ -2,9 +2,7 @@ package cs5004.animator.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
@@ -15,7 +13,6 @@ import cs5004.animator.shape.IShape;
  * The visual view class. This implements IView and contains the method render().
  */
 public class VisualView extends JFrame implements IView {
-  private List<IShape> shapeList;
 
   private final CanvasDrawingPanel drawingCanvas;
 
@@ -33,21 +30,21 @@ public class VisualView extends JFrame implements IView {
     // call JFrame constructor
     super();
 
-    this.shapeList = new ArrayList<>();
+    // set default state of window
+    setTitle("Easy Animator Visual Display");
+    setSize(new Dimension(500,500));
+    setBackground(Color.lightGray);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
     // create a CanvasDrawingPanel object
     Container frame = this.getContentPane();
     drawingCanvas = new CanvasDrawingPanel(width, height);
+    drawingCanvas.setPreferredSize(new Dimension(width, height));
 
     // create scroll bars on panel and add to frame
     JScrollPane scrollPane = new JScrollPane(drawingCanvas);
     frame.add(scrollPane, BorderLayout.CENTER);
-
-    // set default state of window
-    setTitle("Easy Animator Visual Display");
-    setSize(500, 500);
-    setBackground(Color.lightGray);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // add menu bar
     this.bar = new MenuBar();
@@ -75,8 +72,7 @@ public class VisualView extends JFrame implements IView {
   }
 
   public void setShapeList(List<IShape> shapes) {
-    this.shapeList = shapes;
-    this.removeShapePanel.updateShapeComboBox(this.shapeList);
+    this.removeShapePanel.updateShapeList(shapes);
   }
 
   /**
@@ -119,6 +115,6 @@ public class VisualView extends JFrame implements IView {
   }
 
   public List<String> getShapesToRemove() {
-    return this.removeShapePanel.getComboBoxSelection();
+    return this.removeShapePanel.getShapeSelection();
   }
 }
