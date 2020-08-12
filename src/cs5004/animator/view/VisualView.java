@@ -114,7 +114,7 @@ public class VisualView extends JFrame implements IView {
     return status.substring(0, status.length() - 1);
   }
 
-  public List<String> getShapesToRemove() {
+  public String getShapesToRemove() {
     return this.removeShapePanel.getShapeSelection();
   }
 }

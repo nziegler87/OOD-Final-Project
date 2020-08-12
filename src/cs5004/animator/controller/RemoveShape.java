@@ -15,25 +15,23 @@ public class RemoveShape implements AnimationControllerCommands {
 
   @Override
   public void go(AnimatorModel model, IView view, IController controller) {
-    if (view.getShapesToRemove().isEmpty() && model.getShapeList().isEmpty()) {
+    if (model.getShapeList().isEmpty()) {
       JOptionPane.showMessageDialog(popUpWindow, "There are no more shapes left to remove.");
       return;
     }
 
-    if (view.getShapesToRemove().isEmpty()) {
-      JOptionPane.showMessageDialog(popUpWindow, "Select a shape or shapes to remove.");
+    if (view.getShapesToRemove().equals("Select Shape")) {
+      JOptionPane.showMessageDialog(popUpWindow, "Select a shape to remove.");
       return;
     }
 
     try {
-      for (String shapeDescription : view.getShapesToRemove()) {
-        IShape shapeToRemove = model.getShape(shapeDescription);
-        model.removeShape(shapeToRemove);
-      }
+      IShape shapeToRemove = model.getShape(view.getShapesToRemove());
+      model.removeShape(shapeToRemove);
       view.setShapeList(model.getShapeList());
       view.render(model.getSnapshot(controller.getCurrentFrame()));
-      return;
-    } catch (IllegalArgumentException IAE) {
+    }
+    catch (IllegalArgumentException IAE) {
       JOptionPane.showMessageDialog(popUpWindow, "Error removing shape.");
     }
   }

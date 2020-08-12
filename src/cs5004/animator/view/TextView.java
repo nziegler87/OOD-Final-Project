@@ -71,7 +71,7 @@ public class TextView implements IView {
   }
 
   @Override
-  public List<String> getShapesToRemove() {
+  public String getShapesToRemove() {
     throw new UnsupportedOperationException("Method cannot be called in text view");
   }
 }

@@ -32,5 +32,5 @@ public interface IView {
 
   void setShapeList(List<IShape> shapes);
 
-  List<String> getShapesToRemove();
+  String getShapesToRemove();
 }
