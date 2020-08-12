@@ -8,10 +8,16 @@ import javax.swing.*;
 
 import cs5004.animator.shape.IShape;
 
+/**
+ * A class that is the Remove Shape Panel for the animator GUI.
+ */
 public class RemoveShapePanel extends JPanel {
   private final JButton removeButton;
-  private final JComboBox<String> shapeList2;
+  private final JComboBox<String> shapeList;
 
+  /**
+   * Creates an instance of a remove shape panel for the GUI.
+   */
   public RemoveShapePanel() {
     super();
     this.setBackground(new Color(246, 246, 246));
@@ -22,28 +28,43 @@ public class RemoveShapePanel extends JPanel {
     this.add(removeShape, BorderLayout.PAGE_START);
 
     // add JComboBox
-    this.shapeList2 = new JComboBox();
-    this.add(shapeList2, BorderLayout.CENTER);
+    this.shapeList = new JComboBox();
+    this.add(shapeList, BorderLayout.CENTER);
 
     // add removeButton to panel
     this.removeButton = new JButton("Remove Shape");
     this.add(removeButton, BorderLayout.PAGE_END);
   }
 
+  /**
+   * Method to add ActionListener to components of screen and pass to the view.
+   *
+   * @param listener an ActionListener
+   */
   public void setListener(ActionListener listener) {
     this.removeButton.addActionListener(listener);
   }
 
+  /**
+   * Method to update the comobo box with a shape list.
+   *
+   * @param shapes a list of IShapes
+   */
   public void updateShapeList(List<IShape> shapes) {
-    this.shapeList2.removeAllItems();
-    this.shapeList2.addItem("Select Shape");
+    this.shapeList.removeAllItems();
+    this.shapeList.addItem("Select Shape");
 
     for (IShape shape : shapes ) {
-      this.shapeList2.addItem(shape.getLabel());
+      this.shapeList.addItem(shape.getLabel());
     }
   }
 
+  /**
+   * Method to return the selected item in the combo box.
+   *
+   * @return the selected item in the combo box, a string.
+   */
   public String getShapeSelection() {
-    return (String) this.shapeList2.getSelectedItem();
+    return (String) this.shapeList.getSelectedItem();
   }
 }

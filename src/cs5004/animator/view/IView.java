@@ -27,10 +27,25 @@ public interface IView {
    */
   String textRender(List<IShape> shapes, List<ICommand> commands);
 
-  //TODO: Add doc if this works
+  /**
+   * Method to make the controller the listener for objects and panels in the view.
+   *
+   * @param listener an ActionListener
+   */
   void setListener(ActionListener listener);
 
+  /**
+   * Method to pass a list of shapes to the view.
+   *
+   * @param shapes list of IShape objects.
+   */
   void setShapeList(List<IShape> shapes);
 
+
+  /**
+   * Method to return the name of a shape to be removed from the view to the controller.
+   *
+   * @return the name of a shape to be removed, a string.
+   */
   String getShapesToRemove();
 }

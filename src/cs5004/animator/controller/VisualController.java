@@ -1,17 +1,21 @@
 package cs5004.animator.controller;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import javax.swing.*;
 
+import cs5004.animator.controller.commands.AnimationControllerCommands;
+import cs5004.animator.controller.commands.Pause;
+import cs5004.animator.controller.commands.PlayAnimation;
+import cs5004.animator.controller.commands.RemoveShape;
+import cs5004.animator.controller.commands.Restart;
+import cs5004.animator.controller.commands.SaveTextVersion;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.shape.IShape;
 import cs5004.animator.view.IView;
@@ -64,10 +68,6 @@ public class VisualController implements IController, ActionListener {
     view.setShapeList(shapes);
   }
 
-  @Override
-  public int getCurrentFrame() {
-    return this.currentFrame;
-  }
 
   /**
    * Invoked when an action occurs.
@@ -94,6 +94,9 @@ public class VisualController implements IController, ActionListener {
     }
   }
 
+  /**
+   * A Play class that is passed when creating the timer object.
+   */
   public class Play implements ActionListener {
     /**
      * Invoked when an action occurs.
@@ -111,14 +114,36 @@ public class VisualController implements IController, ActionListener {
     }
   }
 
+
+  /**
+   * Returns the current tick, or frame, from the controller.
+   *
+   * @return the current tick, or frame.
+   */
+  @Override
+  public int getCurrentFrame() {
+    return this.currentFrame;
+  }
+
+  /**
+   * Sets the current tick, or frame, for the controller.
+   *
+   * @param frame the current tick, or frame.
+   */
   public void setCurrentFrame(int frame) {
     this.currentFrame = 0;
   }
 
+  /**
+   * Method to start the controller's timer.
+   */
   public void startTimer() {
     this.timer.start();
   }
 
+  /**
+   * Method to stop the controller's timer.
+   */
   public void stopTimer() {
     this.timer.stop();
   }

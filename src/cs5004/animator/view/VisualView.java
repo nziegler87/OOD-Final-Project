@@ -64,17 +64,6 @@ public class VisualView extends JFrame implements IView {
     this.setVisible(true);
   }
 
-  @Override
-  public void setListener(ActionListener listener) {
-    this.controlButtons.setListener(listener);
-    this.bar.setListener(listener);
-    this.removeShapePanel.setListener(listener);
-  }
-
-  public void setShapeList(List<IShape> shapes) {
-    this.removeShapePanel.updateShapeList(shapes);
-  }
-
   /**
    * A method to render the shapes at their current state of animation.
    *
@@ -114,7 +103,35 @@ public class VisualView extends JFrame implements IView {
     return status.substring(0, status.length() - 1);
   }
 
+  /**
+   * Method to return the name of a shape to be removed from the view to the controller.
+   *
+   * @return the name of a shape to be removed, a string.
+   */
   public String getShapesToRemove() {
     return this.removeShapePanel.getShapeSelection();
+  }
+
+  /**
+   * Method to pass a list of shapes to the view.
+   *
+   * @param shapes list of IShape objects.
+   */
+  @Override
+  public void setShapeList(List<IShape> shapes) {
+    this.removeShapePanel.updateShapeList(shapes);
+  }
+
+  /**
+   * Method to set the listener for items on the view or panels utilized by the view, to eventually
+   * set the controller as the listener.
+   *
+   * @param listener an ActionListener
+   */
+  @Override
+  public void setListener(ActionListener listener) {
+    this.controlButtons.setListener(listener);
+    this.bar.setListener(listener);
+    this.removeShapePanel.setListener(listener);
   }
 }
