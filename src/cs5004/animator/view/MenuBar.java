@@ -5,11 +5,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-//TODO: Cannot get this to work, so thinking of deleting
 
+/**
+ * A class that for the menu bar in our frame.
+ *
+ */
 public class MenuBar extends JMenuBar {
   private final JMenuItem menuSave, play, pause, restart;
 
+  /**
+   * Creates an instance of our menu bar.
+   */
   public MenuBar() {
     super();
     // create a save menu option
@@ -18,7 +24,6 @@ public class MenuBar extends JMenuBar {
     file.add(menuSave);
     this.add(file);
 
-    //TODO: We can get rid of this just thought it was fun to add duplicate controls
     JMenu playbackControl = new JMenu("Playback Controls");
     this.play = new JMenuItem("Play");
     playbackControl.add(play);
@@ -29,6 +34,11 @@ public class MenuBar extends JMenuBar {
     this.add(playbackControl);
   }
 
+  /**
+   * Method to set Controller as listener.
+   *
+   * @param listener an Action listener.
+   */
   public void setListener(ActionListener listener) {
     this.menuSave.addActionListener(listener);
     this.play.addActionListener(listener);
