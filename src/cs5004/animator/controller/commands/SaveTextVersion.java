@@ -55,7 +55,8 @@ public class SaveTextVersion implements AnimationControllerCommands {
         FileWriter fileWriter = new FileWriter(outFile);
         fileWriter.write(outText);
         fileWriter.close();
-      } catch (IOException IOE) {
+      }
+      catch (IOException IOE) {
         JOptionPane.showMessageDialog(popUpWindow, "Unable to save file.");
       }
     }

@@ -25,5 +25,6 @@ public class Restart implements AnimationControllerCommands {
   @Override
   public void go(AnimatorModel model, IView view, IController controller) {
     controller.setCurrentFrame(0);
+    view.render(model.getSnapshot(0));
   }
 }
