@@ -97,6 +97,11 @@ public class AnimatorModelImpl implements AnimatorModel {
       if (!this.inventory.containsKey(shape)) {
         throw new IllegalArgumentException("Cannot remove object that does not exist.");
       }
+      //TODO: Added in removing of the shape's commands when you remove the shape
+      List<ICommand> commands = this.inventory.get(shape);
+      for (ICommand command : commands) {
+          this.commandHistory.remove(command);
+      }
       this.inventory.remove(shape);
     }
   }

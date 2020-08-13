@@ -10,5 +10,13 @@ public interface IController {
    * Method to start the animation.
    **/
   void animate();
+
+  int getCurrentFrame();
+
+  void setCurrentFrame(int frame);
+
+  public void startTimer();
+
+  public void stopTimer();
 }
 

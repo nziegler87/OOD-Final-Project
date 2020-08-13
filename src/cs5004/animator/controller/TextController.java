@@ -46,4 +46,48 @@ public class TextController implements IController {
       throw new IllegalArgumentException("Could not append to the output.");
     }
   }
+
+  /**
+   * Returns the current tick, or frame, from the controller.
+   *
+   * @return the current tick, or frame.
+   * @throws UnsupportedOperationException if called in text controller
+   */
+  @Override
+  public int getCurrentFrame() throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("Operation not supported in text controller.");
+  }
+
+  /**
+   * Sets the current tick, or frame, for the controller.
+   *
+   * @param frame the current tick, or frame.
+   * @throws UnsupportedOperationException if called in text controller
+   */
+  @Override
+  public void setCurrentFrame(int frame) throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("Operation not supported in text controller.");
+  }
+
+  /**
+   * Method to start the controller's timer.
+   *
+   * @throws UnsupportedOperationException if called in text controller
+   */
+  @Override
+  public void startTimer() throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("Operation not supported in text controller.");
+  }
+
+  /**
+   * Method to stop the controller's timer.
+   *
+   * @throws UnsupportedOperationException if called in text controller
+   */
+  @Override
+  public void stopTimer() throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("Operation not supported in text controller.");
+
+
+  }
 }
