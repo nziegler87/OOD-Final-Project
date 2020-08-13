@@ -24,7 +24,7 @@ public class MainTest {
     AnimatorModel model;
     IView view;
     try {
-      model = AnimationReader.parseFile(new FileReader("./hanoi.txt"),
+      model = AnimationReader.parseFile(new FileReader("./buildings.txt"),
               new AnimationBuilderImpl());
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File not found.");

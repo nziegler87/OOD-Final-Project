@@ -43,6 +43,7 @@ public class SaveTextVersion implements AnimationControllerCommands {
 
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
+
     if (fileChooser.showSaveDialog(popUpWindow) == JFileChooser.APPROVE_OPTION) {
       String outText = view.textRender(model.getShapeList(), model.getCommandList());
       try {
